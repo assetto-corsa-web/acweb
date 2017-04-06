@@ -14,6 +14,9 @@ $highlight: #ea141e;
 $gray: #9E9E9E;
 $light_gray: #EEEEEE;
 $dark_gray: #212121;
+$green: #4CAF50;
+$yellow: #FFEB3B;
+$red: #F44336;
 
 $shadow_animation_speed: 0.3s;
 
@@ -40,6 +43,44 @@ html, body{
 	@extend .shadow-l1;
 
 	background: #fff;
+	margin: 0 0 20px 0;
+}
+
+// messages
+
+.msg{
+	padding: 20px;
+	margin: 20px 0 20px 0;
+	background: #fff;
+	border-style: solid;
+	border-width: 1px 1px 1px 5px;
+
+	.close{
+		float: right;
+		margin: 0 0 -10px 0;
+	}
+
+	.close:hover{
+		cursor: pointer;
+	}
+}
+
+.success{
+	@extend .msg;
+	
+	border-color: $green;
+}
+
+.warn{
+	@extend .msg;
+	
+	border-color: $yellow;
+}
+
+.error{
+	@extend .msg;
+
+	border-color: $red;
 }
 
 // login

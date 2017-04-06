@@ -4,9 +4,72 @@
 	<div class="main">
 		<div class="box">
 			<div class="wrapper">
+				<h2>Start New Instance</h2>
+
+				<msg :type="\'error\'" :msg="\'Error starting server instance: ...\'"></msg>
+
+				<table>
+					<tr>
+						<td class="w20">Name:</td>
+						<td><input type="text" name="name" class="full-width" /></td>
+					</tr>
+					<tr>
+						<td>Configuration:</td>
+						<td>
+							<select name="configuration">
+								<option>Config 1</option>
+								<option>...</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><input type="submit" value="Start" /></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+
+		<div class="box">
+			<div class="wrapper">
+				<h2>Stop Instance</h2>
+
+				<p>Do you really want to stop this server instance?</p>
+
+				<button>Yes, stop instance</button>
+				<button>Cancel</button>
+			</div>
+		</div>
+
+		<div class="box">
+			<div class="wrapper">
 				<h1>Status</h1>
 
-				...
+				<msg :type="\'success\'" :msg="\'The new server instance has been started.\'"></msg>
+
+				<button>Start New Instance</button>
+
+				<table>
+					<thead>
+						<tr>
+							<td class="w40">Instance</td>
+							<td class="w20">Configuration</td>
+							<td class="w20">Status</td>
+							<td></td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>1</td>
+							<td>2</td>
+							<td>3</td>
+							<td>
+								<i class="fa fa-terminal" aria-hidden="true" title="Show console output"></i>
+								<i class="fa fa-stop" aria-hidden="true" title="Stop instance"></i>
+							</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>

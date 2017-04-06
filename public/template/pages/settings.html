@@ -6,13 +6,16 @@
 			<div class="wrapper">
 				<h1>Settings</h1>
 
+				<msg :type="\'success\'" :msg="\'The settings have been saved.\'"></msg>
+				<msg :type="\'error\'" :msg="\'The AC folder and the command must be set.\'"></msg>
+
 				<table>
 					<tr>
 						<td class="w20">AC server folder:</td>
 						<td><input type="text" name="path" class="full-width" /></td>
 					</tr>
 					<tr>
-						<td class="w20">Command:</td>
+						<td>Command:</td>
 						<td><input type="text" name="cmd" class="full-width" /></td>
 					</tr>
 					<tr>

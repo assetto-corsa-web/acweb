@@ -4,9 +4,56 @@
 	<div class="main">
 		<div class="box">
 			<div class="wrapper">
+				<h2>Create/Edit User</h2>
+
+				<msg :type="\'error\'" :msg="\'Login, E-Mail and password must be set.\'"></msg>
+				<msg :type="\'error\'" :msg="\'The passwords must be equal.\'"></msg>
+				<msg :type="\'error\'" :msg="\'The Login and/or E-Mail are in use already.\'"></msg>
+
+				<table>
+					<tr>
+						<td class="w20">Login:</td>
+						<td><input type="text" name="login" class="full-width" /></td>
+					</tr>
+					<tr>
+						<td>E-Mail:</td>
+						<td><input type="email" name="email" class="full-width" /></td>
+					</tr>
+					<tr>
+						<td>Password:</td>
+						<td><input type="password" name="pwd1" class="full-width" /></td>
+					</tr>
+					<tr>
+						<td>Repeat password:</td>
+						<td><input type="password" name="pwd2" class="full-width" /></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><input type="submit" value="Save" /></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+
+		<div class="box">
+			<div class="wrapper">
+				<h2>Remove User</h2>
+
+				<p>Do you really want to remove this user?</p>
+
+				<button>Yes, remove user</button>
+				<button>Cancel</button>
+			</div>
+		</div>
+
+		<div class="box">
+			<div class="wrapper">
 				<h1>User</h1>
 
-				<button>Add user</button>
+				<msg :type="\'success\'" :msg="\'The user has been saved.\'"></msg>
+				<msg :type="\'success\'" :msg="\'The user has been removed.\'"></msg>
+
+				<button>Add User</button>
 
 				<table>
 					<thead>
@@ -22,7 +69,10 @@
 							<td>1</td>
 							<td>2</td>
 							<td>3</td>
-							<td>4</td>
+							<td>
+								<i class="fa fa-pencil" aria-hidden="true" title="Edit user"></i>
+								<i class="fa fa-trash" aria-hidden="true" title="Remove user"></i>
+							</td>
 						</tr>
 					</tbody>
 				</table>
