@@ -18,7 +18,7 @@ const (
 	public_dir  = "public"
 	robots_txt  = "robots.txt"
 
-	session_cookie_name     = "emvierp-session"
+	session_cookie_name     = "acweb-session"
 	session_cookie_lifetime = 60 * 60 * 24
 )
 
