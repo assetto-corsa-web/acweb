@@ -94,6 +94,21 @@ table{
 			width: 50%;
 		}
 	}
+
+	thead{
+		tr{
+			background: $dark_gray;
+			color: #fff;
+		}
+	}
+
+	tbody{
+		td{
+			border-style: solid;
+			border-color: $highlight;
+			border-width: 0 0 1px 0;
+		}
+	}
 }
 
 table.small{

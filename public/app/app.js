@@ -12,7 +12,7 @@ var router = new VueRouter({
 			component: Vue.component('Dashboard')
 		},
 		{
-			path: '/configurations',
+			path: '/configuration',
 			component: Vue.component('Configuration')
 		},
 		{
