@@ -2,7 +2,7 @@
 
 # Assetto Corsa server web interface
 
-This tool provides monitoring and management of your Assetto Corsa server instance. You can create multiple setting profiles, watch the status of your server and start and stop it.
+This tool provides monitoring and management for your Assetto Corsa server instances. You can create multiple configuration profiles, start/stop server instances and watch the status of them.
 
 **STATUS: DEVELOPMENT**
 
