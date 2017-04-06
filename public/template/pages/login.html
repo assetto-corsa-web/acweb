@@ -1,0 +1,39 @@
+<div class="box login">
+	<div class="logo"></div>
+
+	<msg type="error" msg="Der Mandant, Login oder die E-Mail Adresse und das Passwort waren nicht korrekt."></msg>
+
+	<form v-on:submit.prevent="perfomLogin()">
+		<table class="no-borders">
+			<tr>
+				<td colspan="2">
+					<input type="text" v-model="client" placeholder="Mandant" class="full-width" />
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<input type="text" v-model="login" placeholder="Login/E-Mail" class="full-width" />
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<input type="password" v-model="pwd" placeholder="Passwort" class="full-width" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<router-link to="/password">Passwort vergessen</router-link>
+				</td>
+				<td class="min">
+					<input type="submit" value="Login" />
+				</td>
+			</tr>
+		</table>
+	</form>
+
+	<hr />
+
+	<div class="small text-right">
+		{{copyright}} | Version {{erpversion}}
+	</div>
+</div>

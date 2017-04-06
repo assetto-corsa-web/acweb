@@ -1,0 +1,63 @@
+<div>
+	<hmenu admin="true"></hmenu>
+	<vmenu></vmenu>
+
+	<div class="main">
+		<div class="wrapper">
+			<div class="box">
+				<h1>Dashboard</h1>
+
+				<p>
+					Willkommen in deinem ERP!
+				</p>
+
+				<table class="no-borders dashboard">
+					<tr>
+						<td class="w10 center">
+							<router-link to="/user">
+								<i class="material-icons">people_outline</i><br />
+								Nutzer
+							</router-link>
+						</td>
+						<td class="w10 center">
+							<router-link to="/settings">
+								<i class="material-icons">build</i><br />
+								Einstellungen
+							</router-link>
+						</td>
+						<td class="w10 center">
+							<router-link to="/profile">
+								<i class="material-icons">perm_identity</i><br />
+								Profil
+							</router-link>
+						</td>
+						<td class="w10 center">
+							<a v-on:click="performLogout()">
+								<i class="material-icons">power_settings_new</i><br />
+								Logout
+							</router-link>
+						</td>
+					</tr>
+				</table>
+			</div>
+			
+			<div class="box">
+				<h2>Hilfe und Support</h2>
+
+				<table class="no-borders dashboard">
+					<tr>
+						<td class="w5"><i class="material-icons">help</i></td>
+						<td>
+							<a href="mailto:erp@emvi.com">Kontakt E-Mail</a><br />
+							<a href="http://erp.emvi.com/" target="_blank">erp.emvi.com</a>
+
+							<p class="small">
+								emvi ERP {{copyright}} | Version {{erpversion}}
+							</p>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

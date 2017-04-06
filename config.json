@@ -1,0 +1,9 @@
+{
+	"host": "localhost:1234",
+	"tls_private_key": "",
+	"tls_cert": "",
+	"dbuser": "root",
+	"dbpwd": "",
+	"dbhost": "",
+	"db": "acweb"
+}

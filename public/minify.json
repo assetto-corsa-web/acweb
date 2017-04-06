@@ -1,0 +1,16 @@
+{
+	"out": "app.js",
+	"files": [
+		"app/global.js",
+		"app/util/date.js",
+		"app/util/time.js",
+		"app/services/session.js",
+		"app/components/msg.js",
+		"app/components/hmenu.js",
+		"app/pages/dashboard.js",
+		"app/pages/login.js",
+		"app/pages/settings.js",
+		"app/pages/user.js",
+		"app/app.js"
+	]
+}

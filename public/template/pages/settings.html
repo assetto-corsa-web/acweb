@@ -1,0 +1,147 @@
+<div>
+	<hmenu admin="true"></hmenu>
+	<vmenu></vmenu>
+
+	<div class="main">
+		<div class="wrapper">
+			<tabs v-bind:tabs="tabs"></tabs>
+
+			<div class="box" v-if="tabs[0].show">
+				<h2>Allgemeine Einstellungen</h2>
+
+				<msg type="error" msg="Die Startseite muss gesetzt sein."></msg>
+				<msg type="success" msg="Die Einstellungen wurden erfolgreich gespeichert."></msg>
+				<msg type="error" msg="Du hast keine Berechtigung dies zu tun."></msg>
+
+				<form v-on:submit="saveGeneral()">
+					<table class="no-borders">
+						<tr>
+							<td class="w20">Seite online:</td>
+							<td><input type="checkbox" name="" /></td>
+						</tr>
+						<tr>
+							<td>Offline Seite:</td>
+							<td>
+								<select name="">
+									<option>{page.route}</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td>404 Fehlerseite:</td>
+							<td>
+								<select name="">
+									<option>{page.route}</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td>Favicon (URL):</td>
+							<td><input type="text" class="full-width" name="" /></td>
+						</tr>
+						<tr>
+							<td>Kontakt E-Mail:</td>
+							<td><input type="text" class="full-width" name="" /></td>
+						</tr>
+						<tr>
+							<td>Kontakt Name erforderlich:</td>
+							<td><input type="checkbox" name="" /></td>
+						</tr>
+						<tr>
+							<td>Google Analytics Tracking ID:</td>
+							<td><input type="text" class="full-width" name="" /></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><input type="submit" value="Speichern" /></td>
+						</tr>
+					</table>
+				</form>
+			</div>
+
+			<div class="box" v-if="tabs[1].show">
+				<h2>E-Mail Einstellungen</h2>
+
+				<msg type="success" msg="Die Einstellungen wurden erfolgreich gespeichert."></msg>
+				<msg type="error" msg="Du hast keine Berechtigung dies zu tun."></msg>
+
+				<form v-on:submit="saveEmail()">
+					<table class="no-borders">
+						<tr>
+							<td class="w20">Host:</td>
+							<td><input type="text" class="full-width" name="" /></td>
+						</tr>
+						<tr>
+							<td>Port:</td>
+							<td><input type="text" class="full-width" name="" /></td>
+						</tr>
+						<tr>
+							<td>Zertifikat ignorieren:</td>
+							<td><input type="checkbox" name="" /></td>
+						</tr>
+						<tr>
+							<td>Absender E-Mail:</td>
+							<td><input type="email" class="full-width" name="" /></td>
+						</tr>
+						<tr>
+							<td>Absender Name:</td>
+							<td><input type="text" class="full-width" name="" /></td>
+						</tr>
+						<tr>
+							<td>Absender Login:</td>
+							<td><input type="text" class="full-width" name="" /></td>
+						</tr>
+						<tr>
+							<td>Absender Passwort:</td>
+							<td><input type="password" name="" /></td>
+						</tr>
+						<tr>
+							<td>Passwort Wiederherstellung Betreff*:</td>
+							<td><input type="text" class="full-width" name="" /></td>
+						</tr>
+						<tr>
+							<td>
+								Passwort Wiederherstellung Nachricht*:<br />
+								<span class="small">(über {pwd} kann das neue Passwort in der Nachricht eingebunden werden)</span>
+							</td>
+							<td><textarea name=""></textarea></td>
+						</tr>
+						<tr>
+							<td>Newsletter Betreff*:</td>
+							<td><input type="text" name="" /></td>
+						</tr>
+						<tr>
+							<td>Newsletter Nachricht*:</td>
+							<td><textarea name=""></textarea></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><input type="submit" value="Speichern" /></td>
+						</tr>
+					</table>
+				</form>
+
+				* leer lassen für Standard (Englisch)
+			</div>
+
+			<div class="box" v-if="tabs[2].show">
+				<h2>Über emvi ERP</h2>
+
+				<table>
+					<tr>
+						<td class="w20">Version</td>
+						<td>{{erpversion}}</td>
+					</tr>
+					<tr>
+						<td>Autor</td>
+						<td>Marvin Blum</td>
+					</tr>
+					<tr>
+						<td>Copyright</td>
+						<td>{{copyright}}</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

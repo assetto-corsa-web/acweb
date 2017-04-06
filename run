@@ -1,0 +1,13 @@
+#!/bin/bash
+
+echo "Starting application..."
+DIR="`pwd`"
+export GOROOT=/usr/local/go
+export PATH=$PATH:$GOROOT/bin
+export GOPATH=$DIR
+
+go get github.com/DeKugelschieber/go-session
+go get github.com/DeKugelschieber/go-util
+go get github.com/go-sql-driver/mysql
+
+go run src/main/main.go

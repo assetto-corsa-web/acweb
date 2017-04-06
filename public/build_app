@@ -1,0 +1,3 @@
+#!/bin/bash
+
+./minvue -config=minify.json -watch -compress
