@@ -1,6 +1,10 @@
 Vue.component('hmenu', {
 	template: '{{include=template/components/hmenu.html}}',
-	props: ['admin'],
+	data: function(){
+		return {
+			version: VERSION
+		}
+	},
 	methods: {
 		performLogout: function(){
 			SessionService.logout(this.$router);

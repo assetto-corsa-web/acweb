@@ -1,13 +1,6 @@
 Vue.use(VueRouter);
 Vue.use(VueResource);
 
-// Configure vue-resource to parse response as JSON.
-Vue.http.interceptors.push(function(req, next){
-	next(function(resp){
-		resp.body = JSON.parse(resp.body);
-	});
-});
-
 var router = new VueRouter({
 	routes: [
 		{
@@ -19,20 +12,20 @@ var router = new VueRouter({
 			component: Vue.component('Dashboard')
 		},
 		{
-			path: '/user',
-			component: Vue.component('User')
+			path: '/configurations',
+			component: Vue.component('Configuration')
 		},
 		{
 			path: '/settings',
 			component: Vue.component('Settings')
 		},
 		{
-			path: '/profile',
-			component: Vue.component('Profile')
+			path: '/user',
+			component: Vue.component('User')
 		},
 		{
-			path: '/password',
-			component: Vue.component('Password')
+			path: '/about',
+			component: Vue.component('About')
 		},
 		{
 			path: '*',

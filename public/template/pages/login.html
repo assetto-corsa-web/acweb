@@ -1,39 +1,32 @@
-<div class="box login">
-	<div class="logo"></div>
+<div class="login">
+	<div class="box">
+		<div class="wrapper">
+			<div class="center">
+				<img src="img/aclogo.png" alt="" />
+			</div>
 
-	<msg type="error" msg="Der Mandant, Login oder die E-Mail Adresse und das Passwort waren nicht korrekt."></msg>
+			<h1>Login</h1>
 
-	<form v-on:submit.prevent="perfomLogin()">
-		<table class="no-borders">
-			<tr>
-				<td colspan="2">
-					<input type="text" v-model="client" placeholder="Mandant" class="full-width" />
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2">
-					<input type="text" v-model="login" placeholder="Login/E-Mail" class="full-width" />
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2">
-					<input type="password" v-model="pwd" placeholder="Passwort" class="full-width" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<router-link to="/password">Passwort vergessen</router-link>
-				</td>
-				<td class="min">
-					<input type="submit" value="Login" />
-				</td>
-			</tr>
-		</table>
-	</form>
+			<table>
+				<tr>
+					<td>Login:</td>
+					<td><input type="text" name="login" v-model="login" class="full-width" /></td>
+				</tr>
+				<tr>
+					<td>Password:</td>
+					<td><input type="password" name="pwd" v-model="pwd" class="full-width" /></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><input type="submit" value="Login" /></td>
+				</tr>
+			</table>
+		</div>
+	</div>
 
-	<hr />
-
-	<div class="small text-right">
-		{{copyright}} | Version {{erpversion}}
+	<div class="version">
+		<div class="wrapper">
+			Version {{version}} | <a href="https://github.com/DeKugelschieber/acweb" target="_blank">GitHub</a>
+		</div>
 	</div>
 </div>

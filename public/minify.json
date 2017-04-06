@@ -7,6 +7,8 @@
 		"app/services/session.js",
 		"app/components/msg.js",
 		"app/components/hmenu.js",
+		"app/pages/about.js",
+		"app/pages/configuration.js",
 		"app/pages/dashboard.js",
 		"app/pages/login.js",
 		"app/pages/settings.js",

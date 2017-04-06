@@ -3,12 +3,19 @@
 @import "shadow.scss";
 
 $font_family: "Roboto";
+$font_size_large: 20px;
 $font_size: 16px;
 $font_size_small: 12px;
 $font_color: #333;
 $line_height: 1.5;
 
-$bg_color: #fff;
+$bg_color: #FAFAFA;
+$highlight: #ea141e;
+$gray: #9E9E9E;
+$light_gray: #EEEEEE;
+$dark_gray: #212121;
+
+$shadow_animation_speed: 0.3s;
 
 .font{
 	font-family: $font_family;
@@ -24,3 +31,72 @@ html, body{
 	line-height: $line_height;
 	background: $bg_color;
 }
+
+.wrapper{
+	padding: 20px;
+}
+
+.box{
+	@extend .shadow-l1;
+
+	background: #fff;
+}
+
+// login
+
+.login{
+	max-width: 400px;
+	margin: 100px auto 20px auto;
+
+	.center{
+		text-align: center;
+	}
+
+	.version{
+		font-size: $font_size_small;
+		text-align: center;
+	}
+}
+
+// menu
+
+.menu{
+	@extend .shadow-l1;
+
+	height: 40px;
+	background: $dark_gray;
+	padding: 0 20px 0 20px;
+
+	.logo{
+		float: left;
+		width: 40px;
+		height: 40px;
+		margin: 0 20px 0 0;
+		background: url("../img/aclogo_small.png");
+	}
+
+	a{
+		display: block;
+		float: left;
+		padding: 8px 15px 8px 15px;
+		color: #fff;
+		font-weight: bold;
+	}
+
+	a:hover{
+		background: $light_gray;
+		color: $font_color;
+	}
+
+	.right{
+		float: right;
+	}
+}
+
+// main
+
+.main{
+	padding: 20px;
+}
+
+@import "html.scss";
