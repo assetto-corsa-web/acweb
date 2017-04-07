@@ -7,6 +7,7 @@
 				<h2>Start New Instance</h2>
 
 				<msg :type="\'error\'" :msg="\'Error starting server instance: ...\'"></msg>
+				<msg :type="\'error\'" :msg="\'Another instance is using these ports already.\'"></msg>
 
 				<table>
 					<tr>
@@ -45,7 +46,7 @@
 			<div class="wrapper">
 				<h1>Status</h1>
 
-				<msg :type="\'success\'" :msg="\'The new server instance has been started.\'"></msg>
+				<msg :type="\'success\'" :msg="\'The server instance has been started.\'"></msg>
 
 				<button>Start New Instance</button>
 

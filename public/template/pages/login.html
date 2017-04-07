@@ -1,11 +1,13 @@
 <div class="login">
+	<div class="center">
+		<img src="img/aclogo.png" alt="" />
+	</div>
+
 	<div class="box">
 		<div class="wrapper">
-			<div class="center">
-				<img src="img/aclogo.png" alt="" />
-			</div>
-
 			<h1>Login</h1>
+
+			<msg :type="\'error\'" :msg="\'The login and/or password was wrong.\'"></msg>
 
 			<table>
 				<tr>
@@ -26,7 +28,7 @@
 
 	<div class="version">
 		<div class="wrapper">
-			Version {{version}} | <a href="https://github.com/DeKugelschieber/acweb" target="_blank">GitHub</a>
+			Version {{version}} | &copy; 2017 Marvin Blum | <a href="https://github.com/DeKugelschieber/acweb" target="_blank">GitHub</a>
 		</div>
 	</div>
 </div>

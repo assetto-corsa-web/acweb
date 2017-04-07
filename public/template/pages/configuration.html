@@ -6,18 +6,386 @@
 			<div class="wrapper">
 				<h2>Create/Edit Configuration</h2>
 
-				<msg :type="\'error\'" :msg="\'...\'"></msg>
+				<msg :type="\'error\'" :msg="\'The configuration is invalid.\'"></msg>
 
 				<table>
+					<tr>
+						<td colspan="2"><h3>Basic Settings</h3></td>
+					</tr>
 					<tr>
 						<td class="w20">Name:</td>
 						<td><input type="text" name="name" class="full-width" /></td>
 					</tr>
 					<tr>
-						<td></td>
-						<td><input type="submit" value="Save" /></td>
+						<td>Password:</td>
+						<td><input type="password" name="pwd" class="full-width" /></td>
+					</tr>
+					<tr>
+						<td>Admin password:</td>
+						<td><input type="password" name="adminpwd" class="full-width" /></td>
+					</tr>
+					<tr>
+						<td>Pickup mode:</td>
+						<td><input type="checkbox" name="pickup" /></td>
+					</tr>
+					<tr>
+						<td>Race overtime:</td>
+						<td><input type="number" name="overtime" /></td>
+					</tr>
+					<tr>
+						<td>Max. slots:</td>
+						<td><input type="number" name="slots" /></td>
+					</tr>
+					<tr>
+						<td>Description:</td>
+						<td><textarea name="description"></textarea></td>
+					</tr>
+					<tr>
+						<td colspan="2"><h3>Advanced Settings</h3></td>
+					</tr>
+					<tr>
+						<td>UDP port:</td>
+						<td><input type="number" name="udp" /></td>
+					</tr>
+					<tr>
+						<td>TCP port:</td>
+						<td><input type="number" name="tcp" /></td>
+					</tr>
+					<tr>
+						<td>HTTP port:</td>
+						<td><input type="number" name="http" /></td>
+					</tr>
+					<tr>
+						<td>Packets Hz:</td>
+						<td><input type="number" name="packets" /></td>
+					</tr>
+					<tr>
+						<td>Loop mode:</td>
+						<td><input type="checkbox" name="loop" /></td>
+					</tr>
+					<tr>
+						<td>Show on lobby:</td>
+						<td><input type="checkbox" name="lobby" /></td>
+					</tr>
+					<tr>
+						<td colspan="2"><h3>Assists</h3></td>
+					</tr>
+					<tr>
+						<td>ABS:</td>
+						<td>
+							<select name="abs">
+								<option>Factory</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>TC:</td>
+						<td>
+							<select name="tc">
+								<option>Factory</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>Stability aid:</td>
+						<td><input type="checkbox" name="stability" /></td>
+					</tr>
+					<tr>
+						<td>Auto clutch:</td>
+						<td><input type="checkbox" name="clutch" /></td>
+					</tr>
+					<tr>
+						<td>Tyre blankets:</td>
+						<td><input type="checkbox" name="blankets" /></td>
+					</tr>
+					<tr>
+						<td>Force virtual mirror:</td>
+						<td><input type="checkbox" name="mirror" /></td>
+					</tr>
+					<tr>
+						<td colspan="2"><h3>Realism</h3></td>
+					</tr>
+					<tr>
+						<td>Fuel rate:</td>
+						<td><input type="number" name="fuel" /></td>
+					</tr>
+					<tr>
+						<td>Damage rate:</td>
+						<td><input type="number" name="damage" /></td>
+					</tr>
+					<tr>
+						<td>Tires wear rate:</td>
+						<td><input type="number" name="wear" /></td>
+					</tr>
+					<tr>
+						<td>Allowed tires out:</td>
+						<td>
+							<select name="tires">
+								<option>2</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>Max ballast:</td>
+						<td><input type="number" name="ballast" /></td>
+					</tr>
+					<tr>
+						<td colspan="2"><h3>Dynamic Track</h3></td>
+					</tr>
+					<tr>
+						<td>Dynamic track:</td>
+						<td><input type="checkbox" name="dynamictrack" /></td>
+					</tr>
+					<tr>
+						<td>Condition:</td>
+						<td>
+							<select name="condition">
+								<option>Optimum</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>Start value:</td>
+						<td><input type="number" name="start" /></td>
+					</tr>
+					<tr>
+						<td>Randomness:</td>
+						<td><input type="number" name="randomness" /></td>
+					</tr>
+					<tr>
+						<td>Transferred grip:</td>
+						<td><input type="number" name="transferred" /></td>
+					</tr>
+					<tr>
+						<td>Laps to improve grip:</td>
+						<td><input type="number" name="grip" /></td>
+					</tr>
+					<tr>
+						<td colspan="2"><h3>Voting</h3></td>
+					</tr>
+					<tr>
+						<td>Kick vote quorum:</td>
+						<td><input type="number" name="kick" /></td>
+					</tr>
+					<tr>
+						<td>Session vote quorum:</td>
+						<td><input type="number" name="session" /></td>
+					</tr>
+					<tr>
+						<td>Vote duration:</td>
+						<td><input type="number" name="duration" /></td>
+					</tr>
+					<tr>
+						<td>Blacklist:</td>
+						<td>
+							<select name="blacklist">
+								<option>Kick player</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2"><h3>Booking</h3></td>
+					</tr>
+					<tr>
+						<td>Booking:</td>
+						<td><input type="checkbox" name="booking" /></td>
+					</tr>
+					<tr>
+						<td>Booking time:</td>
+						<td><input type="number" name="booking_time" /></td>
+					</tr>
+					<tr>
+						<td colspan="2"><h3>Practice</h3></td>
+					</tr>
+					<tr>
+						<td>Practice:</td>
+						<td><input type="checkbox" name="practice" /></td>
+					</tr>
+					<tr>
+						<td>Practice time:</td>
+						<td><input type="number" name="practice_time" /></td>
+					</tr>
+					<tr>
+						<td>Can join:</td>
+						<td><input type="checkbox" name="practice_join" /></td>
+					</tr>
+					<tr>
+						<td colspan="2"><h3>Qualify</h3></td>
+					</tr>
+					<tr>
+						<td>Qualify:</td>
+						<td><input type="checkbox" name="qualify" /></td>
+					</tr>
+					<tr>
+						<td>Qualify time:</td>
+						<td><input type="number" name="qualify_time" /></td>
+					</tr>
+					<tr>
+						<td>Can join:</td>
+						<td><input type="checkbox" name="qualify_join" /></td>
+					</tr>
+					<tr>
+						<td colspan="2"><h3>Race</h3></td>
+					</tr>
+					<tr>
+						<td>Race:</td>
+						<td><input type="checkbox" name="race" /></td>
+					</tr>
+					<tr>
+						<td>Race time:</td>
+						<td><input type="number" name="race_time" /></td>
+					</tr>
+					<tr>
+						<td>Race wait time:</td>
+						<td><input type="number" name="race_wait" /></td>
+					</tr>
+					<tr>
+						<td>Join type:</td>
+						<td>
+							<select name="race_type">
+								<option>Open</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2"><h3>Time</h3></td>
+					</tr>
+					<tr>
+						<td>Time:</td>
+						<td><input type="time" name="time" /></td>
+					</tr>
+					<tr>
+						<td colspan="2"><h3>Weather</h3></td>
+					</tr>
+					<tr>
+						<td>Weather:</td>
+						<td>
+							<select name="weather">
+								<option>Clear</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>Base ambient temp:</td>
+						<td><input type="number" name="weather_base_temp" /></td>
+					</tr>
+					<tr>
+						<td>Realistic road temp:</td>
+						<td><input type="number" name="weather_road" /></td>
+					</tr>
+					<tr>
+						<td>Base road temp:</td>
+						<td><input type="number" name="weather_road_temp" /></td>
+					</tr>
+					<tr>
+						<td>Ambient variation:</td>
+						<td><input type="number" name="weather_ambient_variation" /></td>
+					</tr>
+					<tr>
+						<td>Road variation:</td>
+						<td><input type="number" name="weather_road_variation" /></td>
+					</tr>
+					<tr>
+						<td colspan="2"><button>Add Weather Panel</button></td>
+					</tr>
+					<tr>
+						<td colspan="2"><h3>Track</h3></td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<div class="select">
+								<div class="option">Name (max. slots)</div>
+								<div class="option selected">Name (max. slots)</div>
+								<div class="option">Name (max. slots)</div>
+								<div class="option">Name (max. slots)</div>
+								<div class="option">Name (max. slots)</div>
+								<div class="option">Name (max. slots)</div>
+								<div class="option">Name (max. slots)</div>
+								<div class="option">Name (max. slots)</div>
+								<div class="option">Name (max. slots)</div>
+								<div class="option">Name (max. slots)</div>
+								<div class="option">Name (max. slots)</div>
+								<div class="option">Name (max. slots)</div>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2"><h3>Cars/Entry List</h3></td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<table>
+								<tr>
+									<td class="w33">
+										<strong>Car</strong>
+
+										<div class="select">
+											<div class="option">Car</div>
+											<div class="option selected">Car</div>
+											<div class="option">Car</div>
+											<div class="option">Car</div>
+											<div class="option">Car</div>
+											<div class="option">Car</div>
+											<div class="option">Car</div>
+											<div class="option">Car</div>
+											<div class="option">Car</div>
+											<div class="option">Car</div>
+											<div class="option">Car</div>
+											<div class="option">Car</div>
+										</div>
+									</td>
+									<td class="w33">
+										<strong>Painting</strong>
+
+										<div class="select">
+											<div class="option">Painting</div>
+											<div class="option">Painting</div>
+											<div class="option">Painting</div>
+											<div class="option">Painting</div>
+											<div class="option selected">Painting</div>
+											<div class="option">Painting</div>
+											<div class="option">Painting</div>
+											<div class="option">Painting</div>
+											<div class="option">Painting</div>
+											<div class="option">Painting</div>
+											<div class="option">Painting</div>
+											<div class="option">Painting</div>
+										</div>
+									</td>
+									<td class="w33">
+										<button>Add</button>
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<table>
+								<thead>
+									<tr>
+										<td class="w20">Car</td>
+										<td class="w20">Painting</td>
+										<td></td>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>1</td>
+										<td>2</td>
+										<td>
+											<i class="fa fa-angle-up" aria-hidden="true" title="Move up"></i>
+											<i class="fa fa-angle-down" aria-hidden="true" title="Move down"></i>
+											<i class="fa fa-trash" aria-hidden="true" title="Remove car"></i>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</td>
 					</tr>
 				</table>
+
+				<input type="submit" value="Save" />
 			</div>
 		</div>
 
@@ -56,6 +424,7 @@
 							<td>3</td>
 							<td>
 								<i class="fa fa-pencil" aria-hidden="true" title="Edit configuration"></i>
+								<i class="fa fa-files-o" aria-hidden="true" title="Copy configuration"></i>
 								<i class="fa fa-trash" aria-hidden="true" title="Remove configuration"></i>
 							</td>
 						</tr>

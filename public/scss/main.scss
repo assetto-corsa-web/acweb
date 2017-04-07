@@ -104,9 +104,16 @@ html, body{
 .menu{
 	@extend .shadow-l1;
 
+	position: fixed;
+	width: 100%;
+	top: 0;
 	height: 40px;
 	background: $dark_gray;
 	padding: 0 20px 0 20px;
+
+	.wrapper{
+		padding: 0 20px 0 20px;
+	}
 
 	.logo{
 		float: left;
@@ -138,6 +145,34 @@ html, body{
 
 .main{
 	padding: 20px;
+	margin: 40px 0 0 0;
+}
+
+// util
+
+img.track{
+	float: left;
+	margin: 0 20px 0 0;
+}
+
+.select{
+	max-height: 200px;
+	overflow-y: scroll;
+	border: 1px solid $light_gray;
+	margin: 5px;
+
+	.option{
+		padding: 5px;
+	}
+
+	.option:hover{
+		background: $light_gray;
+	}
+
+	.selected{
+		background: $highlight;
+		color: #fff;
+	}
 }
 
 @import "html.scss";

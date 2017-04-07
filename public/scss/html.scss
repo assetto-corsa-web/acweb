@@ -86,6 +86,10 @@ table{
 			width: 30%;
 		}
 
+		td.w33{
+			width: 33.33%;
+		}
+
 		td.w40{
 			width: 40%;
 		}
@@ -133,7 +137,7 @@ input, select, textarea, button, a.button{
 	display: inline-block;
 	padding: 5px;
 	margin: 5px 0 5px 0;
-	border: 1px solid $light_gray;
+	border: 1px solid $gray;
 	border-width: 0 0 1px 0;
 	border-radius: 1px;
 	background: #fff;
