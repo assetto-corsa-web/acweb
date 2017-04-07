@@ -31,7 +31,10 @@
 						</tr>
 						<tr>
 							<td></td>
-							<td><input type="submit" value="Save" /></td>
+							<td>
+								<input type="submit" value="Save" />
+								<button v-on:click.prevent="addEditUser = false">Cancel</button>
+							</td>
 						</tr>
 					</table>
 				</form>
