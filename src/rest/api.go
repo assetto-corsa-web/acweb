@@ -7,6 +7,7 @@ import (
 	"github.com/DeKugelschieber/go-util"
 	"log"
 	"net/http"
+	"settings"
 	"strconv"
 	"user"
 )
@@ -164,11 +165,30 @@ func GetUser(w http.ResponseWriter, r *http.Request) {
 }
 
 func SaveSettings(w http.ResponseWriter, r *http.Request) {
+	var req saveSettingsReq
+	decoder := json.NewDecoder(r.Body)
 
+	if err := decoder.Decode(&req); err != nil {
+		log.Print(err)
+		resp.Error(w, 100, err.Error(), nil)
+		return
+	}
+
+	err := settings.SaveSettings(req.Folder, req.Cmd)
+
+	if err != nil {
+		operr, _ := err.(util.OpError)
+		resp.Error(w, operr.Code, operr.Msg, nil)
+		return
+	}
+
+	resp.Success(w, 0, "", nil)
 }
 
 func GetSettings(w http.ResponseWriter, r *http.Request) {
-
+	settings := settings.GetSettings()
+	resp, _ := json.Marshal(settings)
+	w.Write(resp)
 }
 
 func AddEditConfiguration(w http.ResponseWriter, r *http.Request) {

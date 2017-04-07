@@ -8,23 +8,25 @@
 			<div class="wrapper">
 				<h2>Server Settings</h2>
 
-				<msg :type="\'success\'" :msg="\'The settings have been saved.\'"></msg>
-				<msg :type="\'error\'" :msg="\'The AC folder and the command must be set.\'"></msg>
+				<msg :type="\'success\'" :msg="\'The settings have been saved.\'" v-if="saved"></msg>
+				<msg :type="\'error\'" :msg="\'The AC folder and the command must be set.\'" v-if="err == 1"></msg>
 
-				<table>
-					<tr>
-						<td class="w20">AC server folder:</td>
-						<td><input type="text" name="path" class="full-width" /></td>
-					</tr>
-					<tr>
-						<td>Command:</td>
-						<td><input type="text" name="cmd" class="full-width" /></td>
-					</tr>
-					<tr>
-						<td></td>
-						<td><input type="submit" value="Save" /></td>
-					</tr>
-				</table>
+				<form v-on:submit.prevent="performSave()">
+					<table>
+						<tr>
+							<td class="w10">AC server folder:</td>
+							<td><input type="text" name="path" class="full-width" v-model="folder" /></td>
+						</tr>
+						<tr>
+							<td>Command:</td>
+							<td><input type="text" name="cmd" class="full-width" v-model="cmd" /></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><input type="submit" value="Save" /></td>
+						</tr>
+					</table>
+				</form>
 			</div>
 		</div>
 	</div>
