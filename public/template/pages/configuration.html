@@ -2,7 +2,7 @@
 	<hmenu></hmenu>
 
 	<div class="main">
-		<div class="box">
+		<div class="box" v-if="addEditConfiguration">
 			<div class="wrapper">
 				<h2>Create/Edit Configuration</h2>
 
@@ -390,7 +390,7 @@
 			</div>
 		</div>
 
-		<div class="box">
+		<div class="box" v-if="removeConfiguration">
 			<div class="wrapper">
 				<h2>Remove Configuration</h2>
 
@@ -405,7 +405,7 @@
 			<div class="wrapper">
 				<h1>Configurations</h1>
 
-				<msg :type="\'success\'" :msg="\'The configuration has been saved.\'"></msg>
+				<msg :type="\'success\'" :msg="\'The configuration has been saved.\'" v-if="saved"></msg>
 
 				<button>Add Configuration</button>
 

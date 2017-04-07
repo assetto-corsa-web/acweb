@@ -2,7 +2,7 @@
 	<hmenu></hmenu>
 
 	<div class="main">
-		<div class="box">
+		<div class="box" v-if="startInstance">
 			<div class="wrapper">
 				<h2>Start New Instance</h2>
 
@@ -34,7 +34,7 @@
 			</div>
 		</div>
 
-		<div class="box">
+		<div class="box" v-if="stopInstance">
 			<div class="wrapper">
 				<h2>Stop Instance</h2>
 
@@ -49,7 +49,7 @@
 			<div class="wrapper">
 				<h1>Status</h1>
 
-				<msg :type="\'success\'" :msg="\'The server instance has been started.\'"></msg>
+				<msg :type="\'success\'" :msg="\'The server instance has been started.\'" v-if="started"></msg>
 
 				<button>Start New Instance</button>
 
