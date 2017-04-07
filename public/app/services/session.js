@@ -14,6 +14,15 @@ var SessionService = {
 		router.push('/dashboard');
 	},
 	logout: function(router){
-		
+		this.data.userId = 0;
+
+		Vue.http.put('/api/logout')
+		.then(function(resp){
+			if(resp.data.code){
+				console.log(resp.data.code+': '+resp.data.msg);
+			}
+			
+			router.push('/');
+		});
 	}
 };

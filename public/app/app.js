@@ -35,17 +35,17 @@ var router = new VueRouter({
 });
 
 // Simple login check with redirection when not logged in.
-/*router.beforeEach(function(to, from, next){
-	Vue.http.post('/api/checkLogin', {})
+router.beforeEach(function(to, from, next){
+	Vue.http.get('/api/checkLogin')
 	.then(function(resp){
-		// if not logged in and not on login/password page, redirect to login
-		if(resp.data.code && to.path != '/' && to.path != '/password'){
+		// if not logged in and not on login page, redirect to login
+		if(resp.data.code && to.path != '/'){
 			next('/');
 			return;
 		}
 
 		// if login or password page, but logged in, redirect to start page
-		if(!resp.data.code && (to.path == '/' || to.path == '/password')){
+		if(!resp.data.code && to.path == '/'){
 			next('/dashboard');
 			return;
 		}
@@ -53,7 +53,7 @@ var router = new VueRouter({
 		SessionService.init(resp.data.data);
 		next();
 	});
-});*/
+});
 
 window.onload = function(){
 	new Vue({el: '#app', router: router});

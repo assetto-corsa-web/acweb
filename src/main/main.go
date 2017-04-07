@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"rest"
 	"time"
 )
 
@@ -88,6 +89,27 @@ func startServer() {
 	mux.Handle("/robots.txt", http.HandlerFunc(returnRobotsTxt))
 	mux.Handle("/", http.FileServer(http.Dir(public_dir)))
 
+	mux.HandleFunc("/api/checkLogin", http.HandlerFunc(rest.CheckSessionHandler))
+	mux.HandleFunc("/api/login", http.HandlerFunc(rest.Login))
+	mux.HandleFunc("/api/logout", http.HandlerFunc(rest.Logout))
+	mux.Handle("/api/addEditUser", session.AccessMiddleware(http.HandlerFunc(rest.AddEditUser), returnSessionErr))
+	mux.Handle("/api/removeUser", session.AccessMiddleware(http.HandlerFunc(rest.RemoveUser), returnSessionErr))
+	mux.Handle("/api/getAllUsers", session.AccessMiddleware(http.HandlerFunc(rest.GetAllUser), returnSessionErr))
+	mux.Handle("/api/getUser", session.AccessMiddleware(http.HandlerFunc(rest.GetUser), returnSessionErr))
+
+	mux.Handle("/api/saveSettings", session.AccessMiddleware(http.HandlerFunc(rest.SaveSettings), returnSessionErr))
+	mux.Handle("/api/getSettings", session.AccessMiddleware(http.HandlerFunc(rest.GetSettings), returnSessionErr))
+
+	mux.Handle("/api/addEditConfiguration", session.AccessMiddleware(http.HandlerFunc(rest.AddEditConfiguration), returnSessionErr))
+	mux.Handle("/api/removeConfiguration", session.AccessMiddleware(http.HandlerFunc(rest.RemoveConfiguration), returnSessionErr))
+	mux.Handle("/api/getAllConfigurations", session.AccessMiddleware(http.HandlerFunc(rest.GetAllConfigurations), returnSessionErr))
+	mux.Handle("/api/getConfiguration", session.AccessMiddleware(http.HandlerFunc(rest.GetConfiguration), returnSessionErr))
+
+	mux.Handle("/api/startInstance", session.AccessMiddleware(http.HandlerFunc(rest.StartInstance), returnSessionErr))
+	mux.Handle("/api/stopInstance", session.AccessMiddleware(http.HandlerFunc(rest.StopInstance), returnSessionErr))
+	mux.Handle("/api/getAllInstances", session.AccessMiddleware(http.HandlerFunc(rest.GetAllInstances), returnSessionErr))
+	mux.Handle("/api/getInstanceLog", session.AccessMiddleware(http.HandlerFunc(rest.GetInstanceLog), returnSessionErr))
+
 	if cfg.TLSPrivateKey == "" || cfg.TLSCert == "" {
 		if err := http.ListenAndServe(cfg.Host, mux); err != nil {
 			panic(err)
@@ -108,8 +130,8 @@ func returnRobotsTxt(w http.ResponseWriter, r *http.Request) {
 
 // Returns an error to client on access to protected area when user session is not set.
 func returnSessionErr(w http.ResponseWriter, r *http.Request) bool {
-	//resp.Error(w, 1, "User session not set", nil)
-	return false
+	s, _ := session.GetCurrentSession(r)
+	return s.Active()
 }
 
 func main() {

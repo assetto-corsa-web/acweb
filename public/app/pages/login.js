@@ -9,8 +9,16 @@ Vue.component('Login', {
 		}
 	},
 	methods: {
-		perfomLogin: function(){
-			
+		performLogin: function(){
+			this.$http.post('/api/login', {login: this.login, pwd: this.pwd})
+			.then(function(resp){
+				if(resp.data.code){
+					this.err = resp.data.code;
+					return;
+				}
+
+				SessionService.login(this.$router, resp.data);
+			});
 		}
 	}
 });

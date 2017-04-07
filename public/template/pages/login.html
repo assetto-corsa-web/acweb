@@ -7,22 +7,24 @@
 		<div class="wrapper">
 			<h1>Login</h1>
 
-			<msg :type="\'error\'" :msg="\'The login and/or password was wrong.\'"></msg>
+			<msg :type="\'error\'" :msg="\'The login and/or password was wrong.\'" v-if="err != 0"></msg>
 
-			<table>
-				<tr>
-					<td class="w20">Login:</td>
-					<td><input type="text" name="login" v-model="login" class="full-width" /></td>
-				</tr>
-				<tr>
-					<td>Password:</td>
-					<td><input type="password" name="pwd" v-model="pwd" class="full-width" /></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td><input type="submit" value="Login" /></td>
-				</tr>
-			</table>
+			<form v-on:submit.prevent="performLogin()">
+				<table>
+					<tr>
+						<td class="w30">Login/E-Mail:</td>
+						<td><input type="text" name="login" v-model="login" class="full-width" /></td>
+					</tr>
+					<tr>
+						<td>Password:</td>
+						<td><input type="password" name="pwd" v-model="pwd" class="full-width" /></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><input type="submit" value="Login" /></td>
+					</tr>
+				</table>
+			</form>
 		</div>
 	</div>
 
