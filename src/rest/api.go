@@ -7,6 +7,7 @@ import (
 	"github.com/DeKugelschieber/go-util"
 	"log"
 	"net/http"
+	"strconv"
 	"user"
 )
 
@@ -37,7 +38,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 
 	if err := decoder.Decode(&req); err != nil {
 		log.Print(err)
-		resp.Error(w, 1, err.Error(), nil)
+		resp.Error(w, 100, err.Error(), nil)
 		return
 	}
 
@@ -88,19 +89,78 @@ func Logout(w http.ResponseWriter, r *http.Request) {
 }
 
 func AddEditUser(w http.ResponseWriter, r *http.Request) {
+	var req addEditUserReq
+	decoder := json.NewDecoder(r.Body)
 
+	if err := decoder.Decode(&req); err != nil {
+		log.Print(err)
+		resp.Error(w, 100, err.Error(), nil)
+		return
+	}
+
+	err := user.AddEditUser(req.Id, req.Login, req.Email, req.Pwd1, req.Pwd2)
+
+	if err != nil {
+		operr, _ := err.(util.OpError)
+		resp.Error(w, operr.Code, operr.Msg, nil)
+		return
+	}
+
+	resp.Success(w, 0, "", nil)
 }
 
 func RemoveUser(w http.ResponseWriter, r *http.Request) {
+	var req removeUserReq
+	decoder := json.NewDecoder(r.Body)
 
+	if err := decoder.Decode(&req); err != nil {
+		log.Print(err)
+		resp.Error(w, 100, err.Error(), nil)
+		return
+	}
+
+	err := user.RemoveUser(req.Id)
+
+	if err != nil {
+		operr, _ := err.(util.OpError)
+		resp.Error(w, operr.Code, operr.Msg, nil)
+		return
+	}
+
+	resp.Success(w, 0, "", nil)
 }
 
 func GetAllUser(w http.ResponseWriter, r *http.Request) {
+	user, err := user.GetAllUser()
 
+	if err != nil {
+		operr, _ := err.(util.OpError)
+		resp.Error(w, operr.Code, operr.Msg, nil)
+		return
+	}
+
+	resp, _ := json.Marshal(user)
+	w.Write(resp)
 }
 
 func GetUser(w http.ResponseWriter, r *http.Request) {
+	id, err := strconv.Atoi(r.URL.Query().Get("id"))
 
+	if err != nil {
+		resp.Error(w, 100, err.Error(), nil)
+		return
+	}
+
+	user, err := user.GetUser(int64(id))
+
+	if err != nil {
+		operr, _ := err.(util.OpError)
+		resp.Error(w, operr.Code, operr.Msg, nil)
+		return
+	}
+
+	resp, _ := json.Marshal(user)
+	w.Write(resp)
 }
 
 func SaveSettings(w http.ResponseWriter, r *http.Request) {

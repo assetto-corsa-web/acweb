@@ -94,7 +94,7 @@ func startServer() {
 	mux.HandleFunc("/api/logout", http.HandlerFunc(rest.Logout))
 	mux.Handle("/api/addEditUser", session.AccessMiddleware(http.HandlerFunc(rest.AddEditUser), returnSessionErr))
 	mux.Handle("/api/removeUser", session.AccessMiddleware(http.HandlerFunc(rest.RemoveUser), returnSessionErr))
-	mux.Handle("/api/getAllUsers", session.AccessMiddleware(http.HandlerFunc(rest.GetAllUser), returnSessionErr))
+	mux.Handle("/api/getAllUser", session.AccessMiddleware(http.HandlerFunc(rest.GetAllUser), returnSessionErr))
 	mux.Handle("/api/getUser", session.AccessMiddleware(http.HandlerFunc(rest.GetUser), returnSessionErr))
 
 	mux.Handle("/api/saveSettings", session.AccessMiddleware(http.HandlerFunc(rest.SaveSettings), returnSessionErr))
