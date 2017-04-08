@@ -87,7 +87,8 @@ CREATE TABLE `weather` (
 
 
 ALTER TABLE `cars`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `cars_config_fk` (`configuration`);
 
 ALTER TABLE `configurations`
   ADD PRIMARY KEY (`id`);
@@ -99,7 +100,8 @@ ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
 
 ALTER TABLE `weather`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `weather_config_fk` (`configuration`);
 
 
 ALTER TABLE `cars`
@@ -109,6 +111,12 @@ ALTER TABLE `configurations`
 ALTER TABLE `settings`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 ALTER TABLE `user`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 ALTER TABLE `weather`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `cars`
+  ADD CONSTRAINT `cars_config_fk` FOREIGN KEY (`configuration`) REFERENCES `configurations` (`id`);
+
+ALTER TABLE `weather`
+  ADD CONSTRAINT `weather_config_fk` FOREIGN KEY (`configuration`) REFERENCES `configurations` (`id`);

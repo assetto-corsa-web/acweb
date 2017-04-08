@@ -1,0 +1,12 @@
+[
+	{
+		"name": "imola",
+		"description": "Imola",
+		"max_slots": 24
+	},
+	{
+		"name": "ks_barcelona",
+		"description": "Circuito de Barcelona",
+		"max_slots": 32
+	}
+]

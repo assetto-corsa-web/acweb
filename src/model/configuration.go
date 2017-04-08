@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"db"
 	"errors"
+	"github.com/DeKugelschieber/go-util"
 )
 
 type Configuration struct {
@@ -77,6 +78,26 @@ type Car struct {
 	Car           string `json:"car"`
 	Painting      string `json:"painting"`
 	Position      int    `json:"position"`
+}
+
+// Joins weather and cars.
+func (m *Configuration) Join() error {
+	weather, err := GetWeatherByConfiguration(m.Id)
+
+	if err != nil {
+		return err
+	}
+
+	cars, err := GetCarsByConfiguration(m.Id)
+
+	if err != nil {
+		return err
+	}
+
+	m.Weather = weather
+	m.Cars = cars
+
+	return nil
 }
 
 func (m *Configuration) Save() error {
@@ -427,7 +448,7 @@ func (m *Configuration) Remove() error {
 		return err
 	}
 
-	_, err = tx.Exec("DELETE FROM configuration WHERE id = ?", m.Id)
+	_, err = tx.Exec("DELETE FROM configurations WHERE id = ?", m.Id)
 
 	if err != nil {
 		tx.Rollback()
@@ -435,4 +456,176 @@ func (m *Configuration) Remove() error {
 	}
 
 	return tx.Commit()
+}
+
+func GetWeatherByConfiguration(id int64) ([]Weather, error) {
+	rows, err := db.Get().Query("SELECT * FROM weather WHERE configuration = ?", id)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return scanWeather(rows)
+}
+
+func GetCarsByConfiguration(id int64) ([]Car, error) {
+	rows, err := db.Get().Query("SELECT * FROM cars WHERE configuration = ?", id)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return scanCars(rows)
+}
+
+func GetAllConfigurations() ([]Configuration, error) {
+	rows, err := db.Get().Query("SELECT * FROM configurations ORDER BY name ASC")
+
+	if err != nil {
+		return nil, err
+	}
+
+	return scanConfigurations(rows)
+}
+
+func GetConfigurationById(id int64) (*Configuration, error) {
+	row := db.Get().QueryRow("SELECT * FROM configurations WHERE id = ?", id)
+	return scanConfiguration(row)
+}
+
+func scanConfigurations(rows *sql.Rows) ([]Configuration, error) {
+	config := make([]Configuration, 0)
+
+	for rows.Next() {
+		c, err := scanConfiguration(rows)
+
+		if err != nil {
+			return nil, err
+		}
+
+		config = append(config, *c)
+	}
+
+	return config, nil
+}
+
+func scanConfiguration(row util.RowScanner) (*Configuration, error) {
+	config := Configuration{}
+
+	if err := row.Scan(&config.Id,
+		&config.Name,
+		&config.Pwd,
+		&config.AdminPwd,
+		&config.PickupMode,
+		&config.RaceOvertime,
+		&config.MaxSlots,
+		&config.Description,
+		&config.UDP,
+		&config.TCP,
+		&config.HTTP,
+		&config.PacketsHz,
+		&config.LoopMode,
+		&config.ShowInLobby,
+		&config.ABS,
+		&config.TC,
+		&config.StabilityAid,
+		&config.AutoClutch,
+		&config.TyreBlankets,
+		&config.ForceVirtualMirror,
+		&config.FuelRate,
+		&config.DamageRate,
+		&config.TiresWearRate,
+		&config.AllowedTiresOut,
+		&config.MaxBallast,
+		&config.DynamicTrack,
+		&config.Condition,
+		&config.StartValue,
+		&config.Randomness,
+		&config.TransferredGrip,
+		&config.LapsToImproveGrip,
+		&config.KickVoteQuorum,
+		&config.SessionVoteQuorum,
+		&config.VoteDuration,
+		&config.Blacklist,
+		&config.Booking,
+		&config.BookingTime,
+		&config.Practice,
+		&config.PracticeTime,
+		&config.CanJoinPractice,
+		&config.Qualify,
+		&config.QualifyTime,
+		&config.CanJoinQualify,
+		&config.Race,
+		&config.RaceTime,
+		&config.RaceWaitTime,
+		&config.JoinType,
+		&config.Time,
+		&config.Track); err != nil {
+		return nil, err
+	}
+
+	return &config, nil
+}
+
+func scanWeather(rows *sql.Rows) ([]Weather, error) {
+	weather := make([]Weather, 0)
+
+	for rows.Next() {
+		w, err := scanOneWeather(rows)
+
+		if err != nil {
+			return nil, err
+		}
+
+		weather = append(weather, *w)
+	}
+
+	return weather, nil
+}
+
+func scanOneWeather(row util.RowScanner) (*Weather, error) {
+	weather := Weather{}
+
+	if err := row.Scan(&weather.Id,
+		&weather.Configuration,
+		&weather.Weather,
+		&weather.BaseAmbientTemp,
+		&weather.RealisticRoadTemp,
+		&weather.BaseRoadTemp,
+		&weather.AmbientVariation,
+		&weather.RoadVariation); err != nil {
+		return nil, err
+	}
+
+	return &weather, nil
+}
+
+func scanCars(rows *sql.Rows) ([]Car, error) {
+	cars := make([]Car, 0)
+
+	for rows.Next() {
+		car, err := scanCar(rows)
+
+		if err != nil {
+			return nil, err
+		}
+
+		cars = append(cars, *car)
+	}
+
+	return cars, nil
+}
+
+func scanCar(row util.RowScanner) (*Car, error) {
+	car := Car{}
+
+	if err := row.Scan(&car.Id,
+		&car.Configuration,
+		&car.Car,
+		&car.Painting,
+		&car.Position); err != nil {
+		return nil, err
+	}
+
+	return &car, nil
 }

@@ -1,10 +1,10 @@
 package rest
 
 import (
+	"config"
 	"encoding/json"
 	"github.com/DeKugelschieber/go-resp"
 	"github.com/DeKugelschieber/go-session"
-	"github.com/DeKugelschieber/go-util"
 	"log"
 	"net/http"
 	"settings"
@@ -35,19 +35,14 @@ func CheckSessionHandler(w http.ResponseWriter, r *http.Request) {
 
 func Login(w http.ResponseWriter, r *http.Request) {
 	var req loginReq
-	decoder := json.NewDecoder(r.Body)
 
-	if err := decoder.Decode(&req); err != nil {
-		log.Print(err)
-		resp.Error(w, 100, err.Error(), nil)
+	if decode(w, r, &req) {
 		return
 	}
 
 	userId, err := user.Login(req.Login, req.Pwd)
 
-	if err != nil {
-		operr, _ := err.(util.OpError)
-		resp.Error(w, operr.Code, operr.Msg, nil)
+	if iserror(w, err) {
 		return
 	}
 
@@ -68,7 +63,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	resp.Success(w, 0, "", nil)
+	success(w)
 }
 
 func Logout(w http.ResponseWriter, r *http.Request) {
@@ -86,57 +81,45 @@ func Logout(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	resp.Success(w, 0, "", nil)
+	success(w)
 }
 
 func AddEditUser(w http.ResponseWriter, r *http.Request) {
 	var req addEditUserReq
-	decoder := json.NewDecoder(r.Body)
 
-	if err := decoder.Decode(&req); err != nil {
-		log.Print(err)
-		resp.Error(w, 100, err.Error(), nil)
+	if decode(w, r, &req) {
 		return
 	}
 
 	err := user.AddEditUser(req.Id, req.Login, req.Email, req.Pwd1, req.Pwd2)
 
-	if err != nil {
-		operr, _ := err.(util.OpError)
-		resp.Error(w, operr.Code, operr.Msg, nil)
+	if iserror(w, err) {
 		return
 	}
 
-	resp.Success(w, 0, "", nil)
+	success(w)
 }
 
 func RemoveUser(w http.ResponseWriter, r *http.Request) {
 	var req removeUserReq
-	decoder := json.NewDecoder(r.Body)
 
-	if err := decoder.Decode(&req); err != nil {
-		log.Print(err)
-		resp.Error(w, 100, err.Error(), nil)
+	if decode(w, r, &req) {
 		return
 	}
 
 	err := user.RemoveUser(req.Id)
 
-	if err != nil {
-		operr, _ := err.(util.OpError)
-		resp.Error(w, operr.Code, operr.Msg, nil)
+	if iserror(w, err) {
 		return
 	}
 
-	resp.Success(w, 0, "", nil)
+	success(w)
 }
 
 func GetAllUser(w http.ResponseWriter, r *http.Request) {
 	user, err := user.GetAllUser()
 
-	if err != nil {
-		operr, _ := err.(util.OpError)
-		resp.Error(w, operr.Code, operr.Msg, nil)
+	if iserror(w, err) {
 		return
 	}
 
@@ -154,9 +137,7 @@ func GetUser(w http.ResponseWriter, r *http.Request) {
 
 	user, err := user.GetUser(int64(id))
 
-	if err != nil {
-		operr, _ := err.(util.OpError)
-		resp.Error(w, operr.Code, operr.Msg, nil)
+	if iserror(w, err) {
 		return
 	}
 
@@ -166,23 +147,18 @@ func GetUser(w http.ResponseWriter, r *http.Request) {
 
 func SaveSettings(w http.ResponseWriter, r *http.Request) {
 	var req saveSettingsReq
-	decoder := json.NewDecoder(r.Body)
 
-	if err := decoder.Decode(&req); err != nil {
-		log.Print(err)
-		resp.Error(w, 100, err.Error(), nil)
+	if decode(w, r, &req) {
 		return
 	}
 
 	err := settings.SaveSettings(req.Folder, req.Cmd)
 
-	if err != nil {
-		operr, _ := err.(util.OpError)
-		resp.Error(w, operr.Code, operr.Msg, nil)
+	if iserror(w, err) {
 		return
 	}
 
-	resp.Success(w, 0, "", nil)
+	success(w)
 }
 
 func GetSettings(w http.ResponseWriter, r *http.Request) {
@@ -196,15 +172,70 @@ func AddEditConfiguration(w http.ResponseWriter, r *http.Request) {
 }
 
 func RemoveConfiguration(w http.ResponseWriter, r *http.Request) {
+	var req removeConfigReq
 
+	if decode(w, r, &req) {
+		return
+	}
+
+	err := config.RemoveConfiguration(req.Id)
+
+	if iserror(w, err) {
+		return
+	}
+
+	success(w)
 }
 
 func GetAllConfigurations(w http.ResponseWriter, r *http.Request) {
+	configs, err := config.GetAllConfigurations()
 
+	if iserror(w, err) {
+		return
+	}
+
+	resp, _ := json.Marshal(configs)
+	w.Write(resp)
 }
 
 func GetConfiguration(w http.ResponseWriter, r *http.Request) {
+	id, err := strconv.Atoi(r.URL.Query().Get("id"))
 
+	if err != nil {
+		resp.Error(w, 100, err.Error(), nil)
+		return
+	}
+
+	config, err := config.GetConfiguration(int64(id))
+
+	if iserror(w, err) {
+		return
+	}
+
+	resp, _ := json.Marshal(config)
+	w.Write(resp)
+}
+
+func GetAvailableTracks(w http.ResponseWriter, r *http.Request) {
+	tracks, err := config.GetAvailableTracks()
+
+	if iserror(w, err) {
+		return
+	}
+
+	resp, _ := json.Marshal(tracks)
+	w.Write(resp)
+}
+
+func GetAvailableCars(w http.ResponseWriter, r *http.Request) {
+	cars, err := config.GetAvailableCars()
+
+	if iserror(w, err) {
+		return
+	}
+
+	resp, _ := json.Marshal(cars)
+	w.Write(resp)
 }
 
 func StartInstance(w http.ResponseWriter, r *http.Request) {

@@ -104,6 +104,8 @@ func startServer() {
 	mux.Handle("/api/removeConfiguration", session.AccessMiddleware(http.HandlerFunc(rest.RemoveConfiguration), returnSessionErr))
 	mux.Handle("/api/getAllConfigurations", session.AccessMiddleware(http.HandlerFunc(rest.GetAllConfigurations), returnSessionErr))
 	mux.Handle("/api/getConfiguration", session.AccessMiddleware(http.HandlerFunc(rest.GetConfiguration), returnSessionErr))
+	mux.Handle("/api/getAvailableTracks", session.AccessMiddleware(http.HandlerFunc(rest.GetAvailableTracks), returnSessionErr))
+	mux.Handle("/api/getAvailableCars", session.AccessMiddleware(http.HandlerFunc(rest.GetAvailableCars), returnSessionErr))
 
 	mux.Handle("/api/startInstance", session.AccessMiddleware(http.HandlerFunc(rest.StartInstance), returnSessionErr))
 	mux.Handle("/api/stopInstance", session.AccessMiddleware(http.HandlerFunc(rest.StopInstance), returnSessionErr))
