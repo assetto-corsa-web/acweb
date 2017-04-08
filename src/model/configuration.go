@@ -469,7 +469,7 @@ func GetWeatherByConfiguration(id int64) ([]Weather, error) {
 }
 
 func GetCarsByConfiguration(id int64) ([]Car, error) {
-	rows, err := db.Get().Query("SELECT * FROM cars WHERE configuration = ?", id)
+	rows, err := db.Get().Query("SELECT * FROM cars WHERE configuration = ? ORDER BY position ASC", id)
 
 	if err != nil {
 		return nil, err

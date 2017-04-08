@@ -6,6 +6,7 @@ import (
 	"github.com/DeKugelschieber/go-resp"
 	"github.com/DeKugelschieber/go-session"
 	"log"
+	"model"
 	"net/http"
 	"settings"
 	"strconv"
@@ -168,7 +169,13 @@ func GetSettings(w http.ResponseWriter, r *http.Request) {
 }
 
 func AddEditConfiguration(w http.ResponseWriter, r *http.Request) {
+	var req model.Configuration
 
+	if decode(w, r, &req) {
+		return
+	}
+
+	log.Print(req)
 }
 
 func RemoveConfiguration(w http.ResponseWriter, r *http.Request) {

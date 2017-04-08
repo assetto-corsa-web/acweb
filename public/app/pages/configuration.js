@@ -5,8 +5,15 @@ Vue.component('Configuration', {
 			configs: [],
 			tracks: [],
 			cars: [],
-			_id: 0,
+			activePaintings: [],
+			selectedTrack: 0,
+			selectedCar: 0,
+			selectedPainting: 0,
 			// ---
+			selectedCars: [],
+			weather: [],
+			// ---
+			_id: 0,
 			name: '',
 			pwd: '',
 			admin_pwd: '',
@@ -96,6 +103,10 @@ Vue.component('Configuration', {
 				}
 
 				this.cars = resp.data;
+
+				if(this.cars.length){
+					this.activePaintings = this.cars[0].paintings;
+				}
 			});
 		},
 		_reset: function(){
@@ -141,9 +152,6 @@ Vue.component('Configuration', {
 
 		},
 		performAddEditConfig: function(){
-			var weather = [];
-			var cars = [];
-
 			var data = {
 				id: this._id,
 				name: this.name,
@@ -193,14 +201,12 @@ Vue.component('Configuration', {
 				race_wait_time: this.race_wait_time,
 				join_type: this.join_type,
 				time: this.time,
-				weather: weather,
-				track: this.track,
-				cars: cars
+				weather: this.weather,
+				track: this.track.name,
+				cars: this.selectedCars
 			};
 
-			console.log(data);
-
-			/*this.$http.post('/api/addEditConfiguration', data)
+			this.$http.post('/api/addEditConfiguration', data)
 			.then(function(resp){
 				if(resp.data.code){
 					console.log(resp.data.code+': '+resp.data.msg);
@@ -211,7 +217,7 @@ Vue.component('Configuration', {
 				this._reset();
 				this._load();
 				this.saved = true;
-			});*/
+			});
 		},
 		performRemoveConfig: function(){
 			this.$http.post('/api/removeConfiguration', {id: this._id})
@@ -225,6 +231,60 @@ Vue.component('Configuration', {
 				this._load();
 				this.removed = true;
 			});
+		},
+		addWeather: function(){
+			this.weather.push({
+				weather: 'Clear',
+				base_ambient_temp: 20,
+				realistic_road_temp: 1,
+				base_road_temp: 18,
+				ambient_variation: 1,
+				road_variation: 1
+			});
+		},
+		removeWeather: function(i){
+			this.weather.splice(i, 1);
+		},
+		selectTrack: function(i){
+			this.selectedTrack = i;
+			this.track = this.tracks[i];
+		},
+		selectCar: function(i){
+			this.selectedCar = i;
+			this.selectedPainting = 0;
+			this.activePaintings = this.cars[i].paintings;
+		},
+		selectPainting: function(i){
+			this.selectedPainting = i;
+		},
+		addCar: function(){
+			var car = this.cars[this.selectedCar];
+			this.selectedCars.push({
+				name: car.name,
+				painting: car.paintings[this.selectedPainting],
+				position: this.selectedCars.length
+			});
+		},
+		carUp: function(i){
+			if(i == 0){
+				return;
+			}
+
+			var car = this.selectedCars[i-1];
+			Vue.set(this.selectedCars, i-1, this.selectedCars[i]);
+			Vue.set(this.selectedCars, i, car);
+		},
+		carDown: function(i){
+			if(i == this.selectedCars.length-1){
+				return;
+			}
+
+			var car = this.selectedCars[i+1];
+			Vue.set(this.selectedCars, i+1, this.selectedCars[i]);
+			Vue.set(this.selectedCars, i, car);
+		},
+		removeCar: function(i){
+			this.selectedCars.splice(i, 1);
 		}
 	}
 });

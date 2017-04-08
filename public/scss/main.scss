@@ -166,7 +166,9 @@ img.track{
 	}
 
 	.option:hover{
+		cursor: pointer;
 		background: $light_gray;
+		color: $font_color;
 	}
 
 	.selected{
