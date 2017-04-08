@@ -6,7 +6,9 @@
 			<div class="wrapper">
 				<h2>Create/Edit Configuration</h2>
 
-				<msg :type="\'error\'" :msg="\'The configuration is invalid.\'" v-if="err != 0"></msg>
+				<msg :type="\'error\'" :msg="\'The name must be set.\'" v-if="err == 1"></msg>
+				<msg :type="\'error\'" :msg="\'At least one weather configuration must be added.\'" v-if="err == 2"></msg>
+				<msg :type="\'error\'" :msg="\'At least one car must be added.\'" v-if="err == 3"></msg>
 
 				<form v-on:submit.prevent="performAddEditConfig()">
 					<table>
@@ -19,11 +21,11 @@
 						</tr>
 						<tr>
 							<td>Password:</td>
-							<td><input type="password" name="pwd" class="full-width" v-model="pwd" /></td>
+							<td><input type="text" name="pwd" class="full-width" v-model="pwd" /></td>
 						</tr>
 						<tr>
 							<td>Admin password:</td>
-							<td><input type="password" name="admin_pwd" class="full-width" v-model="admin_pwd" /></td>
+							<td><input type="text" name="admin_pwd" class="full-width" v-model="admin_pwd" /></td>
 						</tr>
 						<tr>
 							<td>Pickup mode:</td>
@@ -362,7 +364,7 @@
 									</thead>
 									<tbody>
 										<tr v-for="(car, i) in selectedCars">
-											<td>{{car.name}}</td>
+											<td>{{car.car}}</td>
 											<td>{{car.painting}}</td>
 											<td>
 												<i class="fa fa-angle-up" aria-hidden="true" title="Move up" v-on:click.prevent="carUp(i)"></i>

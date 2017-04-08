@@ -175,7 +175,13 @@ func AddEditConfiguration(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	log.Print(req)
+	err := config.AddEditConfiguration(&req)
+
+	if iserror(w, err) {
+		return
+	}
+
+	success(w)
 }
 
 func RemoveConfiguration(w http.ResponseWriter, r *http.Request) {

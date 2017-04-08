@@ -201,6 +201,7 @@ func (m *Configuration) saveConfiguration(tx *sql.Tx) error {
 			m.TiresWearRate,
 			m.AllowedTiresOut,
 			m.MaxBallast,
+			m.DynamicTrack,
 			m.Condition,
 			m.StartValue,
 			m.Randomness,
@@ -312,6 +313,7 @@ func (m *Configuration) saveConfiguration(tx *sql.Tx) error {
 		m.TiresWearRate,
 		m.AllowedTiresOut,
 		m.MaxBallast,
+		m.DynamicTrack,
 		m.Condition,
 		m.StartValue,
 		m.Randomness,
@@ -378,7 +380,7 @@ func (m *Configuration) saveWeather(tx *sql.Tx) error {
 				weather.BaseRoadTemp,
 				weather.AmbientVariation,
 				weather.RoadVariation,
-				m.Id)
+				weather.Id)
 
 			if err != nil {
 				tx.Rollback()
@@ -411,7 +413,7 @@ func (m *Configuration) saveCars(tx *sql.Tx) error {
 				position = ? WHERE id = ?`, car.Car,
 				car.Painting,
 				car.Position,
-				m.Id)
+				car.Id)
 
 			if err != nil {
 				tx.Rollback()
@@ -456,6 +458,16 @@ func (m *Configuration) Remove() error {
 	}
 
 	return tx.Commit()
+}
+
+func (m *Weather) Remove() error {
+	_, err := db.Get().Exec("DELETE FROM weather WHERE id = ?", m.Id)
+	return err
+}
+
+func (m *Car) Remove() error {
+	_, err := db.Get().Exec("DELETE FROM cars WHERE id = ?", m.Id)
+	return err
 }
 
 func GetWeatherByConfiguration(id int64) ([]Weather, error) {
