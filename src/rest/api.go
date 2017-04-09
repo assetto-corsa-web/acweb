@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"github.com/DeKugelschieber/go-resp"
 	"github.com/DeKugelschieber/go-session"
+	"instance"
 	"log"
 	"model"
 	"net/http"
@@ -252,17 +253,43 @@ func GetAvailableCars(w http.ResponseWriter, r *http.Request) {
 }
 
 func StartInstance(w http.ResponseWriter, r *http.Request) {
+	var req startInstanceReq
 
+	if decode(w, r, &req) {
+		return
+	}
+
+	err := instance.StartInstance(req.Name, req.Configuration)
+
+	if iserror(w, err) {
+		return
+	}
+
+	success(w)
 }
 
 func StopInstance(w http.ResponseWriter, r *http.Request) {
+	var req stopInstanceReq
 
+	if decode(w, r, &req) {
+		return
+	}
+
+	err := instance.StopInstance(req.PID)
+
+	if iserror(w, err) {
+		return
+	}
+
+	success(w)
 }
 
 func GetAllInstances(w http.ResponseWriter, r *http.Request) {
-
+	instances := instance.GetAllInstances()
+	resp, _ := json.Marshal(instances)
+	w.Write(resp)
 }
 
 func GetInstanceLog(w http.ResponseWriter, r *http.Request) {
-
+	// TODO
 }
