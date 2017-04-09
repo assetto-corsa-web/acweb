@@ -22,6 +22,8 @@ func AddEditConfiguration(config *model.Configuration) error {
 		return util.OpError{3, "There must be at least one car defined"}
 	}
 
+	setDynamicTrack(config)
+
 	// create/edit
 	if config.Id != 0 {
 		existing, err := model.GetConfigurationById(config.Id)
@@ -51,6 +53,44 @@ func AddEditConfiguration(config *model.Configuration) error {
 	}
 
 	return nil
+}
+
+func setDynamicTrack(config *model.Configuration) {
+	if !config.DynamicTrack || config.Condition == "CUSTOM" {
+		return
+	}
+
+	if config.Condition == "DUSTY" {
+		config.StartValue = 86
+		config.Randomness = 1
+		config.TransferredGrip = 50
+		config.LapsToImproveGrip = 30
+	} else if config.Condition == "OLD" {
+		config.StartValue = 89
+		config.Randomness = 3
+		config.TransferredGrip = 80
+		config.LapsToImproveGrip = 50
+	} else if config.Condition == "SLOW" {
+		config.StartValue = 96
+		config.Randomness = 1
+		config.TransferredGrip = 80
+		config.LapsToImproveGrip = 300
+	} else if config.Condition == "GREEN" {
+		config.StartValue = 95
+		config.Randomness = 2
+		config.TransferredGrip = 90
+		config.LapsToImproveGrip = 132
+	} else if config.Condition == "FAST" {
+		config.StartValue = 98
+		config.Randomness = 2
+		config.TransferredGrip = 80
+		config.LapsToImproveGrip = 700
+	} else if config.Condition == "OPTIMUM" {
+		config.StartValue = 100
+		config.Randomness = 0
+		config.TransferredGrip = 100
+		config.LapsToImproveGrip = 1
+	}
 }
 
 func removeWeather(old, config *model.Configuration) error {

@@ -99,9 +99,9 @@
 							<td>ABS:</td>
 							<td>
 								<select name="abs" v-model="abs">
-									<option>Denied</option>
-									<option>Factory</option>
-									<option>Forced</option>
+									<option value="0">Denied</option>
+									<option value="1">Factory</option>
+									<option value="2">Forced</option>
 								</select>
 							</td>
 						</tr>
@@ -109,9 +109,9 @@
 							<td>TC:</td>
 							<td>
 								<select name="tc" v-model="tc">
-									<option>Denied</option>
-									<option>Factory</option>
-									<option>Forced</option>
+									<option value="0">Denied</option>
+									<option value="1">Factory</option>
+									<option value="2">Forced</option>
 								</select>
 							</td>
 						</tr>
@@ -222,8 +222,8 @@
 							<td>Blacklist:</td>
 							<td>
 								<select name="blacklist" v-model="blacklist">
-									<option>Kick Player</option>
-									<option>Kick Until Restart</option>
+									<option value="0">Kick Player</option>
+									<option value="1">Kick Until Restart</option>
 								</select>
 							</td>
 						</tr>
@@ -299,9 +299,9 @@
 							<td>Join type:</td>
 							<td>
 								<select name="join_type" v-model="join_type">
-									<option>Close</option>
-									<option>Open</option>
-									<option>Close at Start</option>
+									<option value="0">Close</option>
+									<option value="1">Open</option>
+									<option value="2">Close at Start</option>
 								</select>
 							</td>
 						</tr>
@@ -329,13 +329,13 @@
 										<td>Weather:</td>
 										<td>
 											<select name="weather" v-model="w.weather">
-												<option>Clear</option>
-												<option>Heavy Clouds</option>
-												<option>Heavy Fog</option>
-												<option>Light Clouds</option>
-												<option>Light Fog</option>
-												<option>Mid Clear</option>
-												<option>Mid Clouds</option>
+												<option value="3_clear">Clear</option>
+												<option value="7_heavy_clouds">Heavy Clouds</option>
+												<option value="1_heavy_fog">Heavy Fog</option>
+												<option value="5_light_clouds">Light Clouds</option>
+												<option value="2_light_fog">Light Fog</option>
+												<option value="4_mid_clear">Mid Clear</option>
+												<option value="6_mid_clouds">Mid Clouds</option>
 											</select>
 										</td>
 										<td>
