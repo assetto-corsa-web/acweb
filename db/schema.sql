@@ -24,6 +24,7 @@ CREATE TABLE `configurations` (
   `packets_hz` int(11) NOT NULL,
   `loop_mode` tinyint(1) NOT NULL,
   `show_in_lobby` tinyint(1) NOT NULL,
+  `threads` int(11) NOT NULL,
   `abs` varchar(40) NOT NULL,
   `tc` varchar(40) NOT NULL,
   `stability_aid` tinyint(1) NOT NULL,
@@ -35,6 +36,8 @@ CREATE TABLE `configurations` (
   `tires_wear_rate` int(11) NOT NULL,
   `allowed_tires_out` int(11) NOT NULL,
   `max_ballast` int(11) NOT NULL,
+  `disable_gas_cut_penality` tinyint(1) NOT NULL,
+  `result_screen_time` int(11) NOT NULL,
   `dynamic_track` tinyint(1) NOT NULL,
   `track_condition` varchar(40) NOT NULL,
   `start_value` int(11) NOT NULL,
@@ -45,6 +48,7 @@ CREATE TABLE `configurations` (
   `session_vote_quorum` int(11) NOT NULL,
   `vote_duration` int(11) NOT NULL,
   `blacklist` varchar(40) NOT NULL,
+  `max_collisions_km` int(11) NOT NULL,
   `booking` tinyint(1) NOT NULL,
   `booking_time` int(11) NOT NULL,
   `practice` tinyint(1) NOT NULL,
@@ -56,15 +60,19 @@ CREATE TABLE `configurations` (
   `race` tinyint(1) NOT NULL,
   `race_time` int(11) NOT NULL,
   `race_wait_time` int(11) NOT NULL,
+  `race_extra_lap` tinyint(1) NOT NULL,
   `join_type` varchar(40) NOT NULL,
   `time` varchar(20) NOT NULL,
-  `track` varchar(100) NOT NULL
+  `sun_angle` int(11) NOT NULL,
+  `track` varchar(100) NOT NULL,
+  `track_config` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `settings` (
   `id` int(10) UNSIGNED NOT NULL,
   `folder` text NOT NULL,
-  `command` text NOT NULL
+  `executable` text NOT NULL,
+  `args` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `user` (
@@ -105,15 +113,15 @@ ALTER TABLE `weather`
 
 
 ALTER TABLE `cars`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 ALTER TABLE `configurations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 ALTER TABLE `settings`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 ALTER TABLE `user`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 ALTER TABLE `weather`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 ALTER TABLE `cars`
   ADD CONSTRAINT `cars_config_fk` FOREIGN KEY (`configuration`) REFERENCES `configurations` (`id`);
