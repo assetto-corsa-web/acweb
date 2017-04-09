@@ -8,57 +8,64 @@ import (
 )
 
 type Configuration struct {
-	Id                 int64     `json:"id"`
-	Name               string    `json:"name"`
-	Pwd                string    `json:"pwd"`
-	AdminPwd           string    `json:"admin_pwd"`
-	PickupMode         bool      `json:"pickup_mode"`
-	RaceOvertime       int       `json:"race_overtime"`
-	MaxSlots           int       `json:"max_slots"`
-	Description        string    `json:"description"`
-	UDP                int       `json:"udp"`
-	TCP                int       `json:"tcp"`
-	HTTP               int       `json:"http"`
-	PacketsHz          int       `json:"packets_hz"`
-	LoopMode           bool      `json:"loop_mode"`
-	ShowInLobby        bool      `json:"show_in_lobby"`
-	ABS                string    `json:"abs"`
-	TC                 string    `json:"tc"`
-	StabilityAid       bool      `json:"stability_aid"`
-	AutoClutch         bool      `json:"auto_clutch"`
-	TyreBlankets       bool      `json:"tyre_blankets"`
-	ForceVirtualMirror bool      `json:"force_virtual_mirror"`
-	FuelRate           int       `json:"fuel_rate"`
-	DamageRate         int       `json:"damage_rate"`
-	TiresWearRate      int       `json:"tires_wear_rate"`
-	AllowedTiresOut    int       `json:"allowed_tires_out"`
-	MaxBallast         int       `json:"max_ballast"`
-	DynamicTrack       bool      `json:"dynamic_track"`
-	Condition          string    `json:"condition"`
-	StartValue         int       `json:"start_value"`
-	Randomness         int       `json:"randomness"`
-	TransferredGrip    int       `json:"transferred_grip"`
-	LapsToImproveGrip  int       `json:"laps_to_improve_grip"`
-	KickVoteQuorum     int       `json:"kick_vote_quorum"`
-	SessionVoteQuorum  int       `json:"session_vote_quorum"`
-	VoteDuration       int       `json:"vote_duration"`
-	Blacklist          string    `json:"blacklist"`
-	Booking            bool      `json:"booking"`
-	BookingTime        int       `json:"booking_time"`
-	Practice           bool      `json:"practice"`
-	PracticeTime       int       `json:"practice_time"`
-	CanJoinPractice    bool      `json:"can_join_practice"`
-	Qualify            bool      `json:"qualify"`
-	QualifyTime        int       `json:"qualify_time"`
-	CanJoinQualify     bool      `json:"can_join_qualify"`
-	Race               bool      `json:"race"`
-	RaceTime           int       `json:"race_time"`
-	RaceWaitTime       int       `json:"race_wait_time"`
-	JoinType           string    `json:"join_type"`
-	Time               string    `json:"time"`
-	Weather            []Weather `json:"weather"`
-	Track              string    `json:"track"`
-	Cars               []Car     `json:"cars"`
+	Id                    int64     `json:"id"`
+	Name                  string    `json:"name"`
+	Pwd                   string    `json:"pwd"`
+	AdminPwd              string    `json:"admin_pwd"`
+	PickupMode            bool      `json:"pickup_mode"`
+	RaceOvertime          int       `json:"race_overtime"`
+	MaxSlots              int       `json:"max_slots"`
+	Description           string    `json:"description"`
+	UDP                   int       `json:"udp"`
+	TCP                   int       `json:"tcp"`
+	HTTP                  int       `json:"http"`
+	PacketsHz             int       `json:"packets_hz"`
+	LoopMode              bool      `json:"loop_mode"`
+	ShowInLobby           bool      `json:"show_in_lobby"`
+	Threads               int       `json:"threads"`
+	ABS                   string    `json:"abs"`
+	TC                    string    `json:"tc"`
+	StabilityAid          bool      `json:"stability_aid"`
+	AutoClutch            bool      `json:"auto_clutch"`
+	TyreBlankets          bool      `json:"tyre_blankets"`
+	ForceVirtualMirror    bool      `json:"force_virtual_mirror"`
+	FuelRate              int       `json:"fuel_rate"`
+	DamageRate            int       `json:"damage_rate"`
+	TiresWearRate         int       `json:"tires_wear_rate"`
+	AllowedTiresOut       int       `json:"allowed_tires_out"`
+	MaxBallast            int       `json:"max_ballast"`
+	DisableGasCutPenality bool      `json:"disable_gas_cut_penality"`
+	ResultScreenTime      int       `json:"result_screen_time"`
+	DynamicTrack          bool      `json:"dynamic_track"`
+	Condition             string    `json:"condition"`
+	StartValue            int       `json:"start_value"`
+	Randomness            int       `json:"randomness"`
+	TransferredGrip       int       `json:"transferred_grip"`
+	LapsToImproveGrip     int       `json:"laps_to_improve_grip"`
+	KickVoteQuorum        int       `json:"kick_vote_quorum"`
+	SessionVoteQuorum     int       `json:"session_vote_quorum"`
+	VoteDuration          int       `json:"vote_duration"`
+	Blacklist             string    `json:"blacklist"`
+	MaxCollisionsKm       int       `json:"max_collisions_km"`
+	Booking               bool      `json:"booking"`
+	BookingTime           int       `json:"booking_time"`
+	Practice              bool      `json:"practice"`
+	PracticeTime          int       `json:"practice_time"`
+	CanJoinPractice       bool      `json:"can_join_practice"`
+	Qualify               bool      `json:"qualify"`
+	QualifyTime           int       `json:"qualify_time"`
+	CanJoinQualify        bool      `json:"can_join_qualify"`
+	Race                  bool      `json:"race"`
+	RaceTime              int       `json:"race_time"`
+	RaceWaitTime          int       `json:"race_wait_time"`
+	RaceExtraLap          bool      `json:"race_extra_lap"`
+	JoinType              string    `json:"join_type"`
+	Time                  string    `json:"time"`
+	SunAngle              int       `json:"sun_angle"`
+	Track                 string    `json:"track"`
+	TrackConfig           string    `json:"track_config"`
+	Weather               []Weather `json:"weather"`
+	Cars                  []Car     `json:"cars"`
 }
 
 type Weather struct {
@@ -139,6 +146,7 @@ func (m *Configuration) saveConfiguration(tx *sql.Tx) error {
 			packets_hz,
 			loop_mode,
 			show_in_lobby,
+			threads,
 			abs,
 			tc,
 			stability_aid,
@@ -150,6 +158,8 @@ func (m *Configuration) saveConfiguration(tx *sql.Tx) error {
 			tires_wear_rate,
 			allowed_tires_out,
 			max_ballast,
+			disable_gas_cut_penality,
+			result_screen_time,
 			dynamic_track,
 			track_condition,
 			start_value,
@@ -160,6 +170,7 @@ func (m *Configuration) saveConfiguration(tx *sql.Tx) error {
 			session_vote_quorum,
 			vote_duration,
 			blacklist,
+			max_collisions_km,
 			booking,
 			booking_time,
 			practice,
@@ -171,13 +182,17 @@ func (m *Configuration) saveConfiguration(tx *sql.Tx) error {
 			race,
 			race_time,
 			race_wait_time,
+			race_extra_lap,
 			join_type,
 			time,
-			track) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
+			sun_angle,
+			track,
+			track_config) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
 			?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
 			?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
 			?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
-			?, ?, ?, ?, ?, ?, ?, ?)`, m.Name,
+			?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
+			?, ?, ?, ?, ?)`, m.Name,
 			m.Pwd,
 			m.AdminPwd,
 			m.PickupMode,
@@ -190,6 +205,7 @@ func (m *Configuration) saveConfiguration(tx *sql.Tx) error {
 			m.PacketsHz,
 			m.LoopMode,
 			m.ShowInLobby,
+			m.Threads,
 			m.ABS,
 			m.TC,
 			m.StabilityAid,
@@ -201,6 +217,8 @@ func (m *Configuration) saveConfiguration(tx *sql.Tx) error {
 			m.TiresWearRate,
 			m.AllowedTiresOut,
 			m.MaxBallast,
+			m.DisableGasCutPenality,
+			m.ResultScreenTime,
 			m.DynamicTrack,
 			m.Condition,
 			m.StartValue,
@@ -211,6 +229,7 @@ func (m *Configuration) saveConfiguration(tx *sql.Tx) error {
 			m.SessionVoteQuorum,
 			m.VoteDuration,
 			m.Blacklist,
+			m.MaxCollisionsKm,
 			m.Booking,
 			m.BookingTime,
 			m.Practice,
@@ -222,9 +241,12 @@ func (m *Configuration) saveConfiguration(tx *sql.Tx) error {
 			m.Race,
 			m.RaceTime,
 			m.RaceWaitTime,
+			m.RaceExtraLap,
 			m.JoinType,
 			m.Time,
-			m.Track)
+			m.SunAngle,
+			m.Track,
+			m.TrackConfig)
 
 		if err != nil {
 			tx.Rollback()
@@ -255,6 +277,7 @@ func (m *Configuration) saveConfiguration(tx *sql.Tx) error {
 		packets_hz = ?,
 		loop_mode = ?,
 		show_in_lobby = ?,
+		threads = ?,
 		abs = ?,
 		tc = ?,
 		stability_aid = ?,
@@ -266,6 +289,8 @@ func (m *Configuration) saveConfiguration(tx *sql.Tx) error {
 		tires_wear_rate = ?,
 		allowed_tires_out = ?,
 		max_ballast = ?,
+		disable_gas_cut_penality = ?,
+		result_screen_time = ?,
 		dynamic_track = ?,
 		track_condition = ?,
 		start_value = ?,
@@ -276,6 +301,7 @@ func (m *Configuration) saveConfiguration(tx *sql.Tx) error {
 		session_vote_quorum = ?,
 		vote_duration = ?,
 		blacklist = ?,
+		max_collisions_km = ?,
 		booking = ?,
 		booking_time = ?,
 		practice = ?,
@@ -287,9 +313,12 @@ func (m *Configuration) saveConfiguration(tx *sql.Tx) error {
 		race = ?,
 		race_time = ?,
 		race_wait_time = ?,
+		race_extra_lap = ?,
 		join_type = ?,
 		time = ?,
-		track = ? WHERE id = ?`, m.Name,
+		sun_angle = ?,
+		track = ?,
+		track_config = ? WHERE id = ?`, m.Name,
 		m.Pwd,
 		m.AdminPwd,
 		m.PickupMode,
@@ -302,6 +331,7 @@ func (m *Configuration) saveConfiguration(tx *sql.Tx) error {
 		m.PacketsHz,
 		m.LoopMode,
 		m.ShowInLobby,
+		m.Threads,
 		m.ABS,
 		m.TC,
 		m.StabilityAid,
@@ -313,6 +343,8 @@ func (m *Configuration) saveConfiguration(tx *sql.Tx) error {
 		m.TiresWearRate,
 		m.AllowedTiresOut,
 		m.MaxBallast,
+		m.DisableGasCutPenality,
+		m.ResultScreenTime,
 		m.DynamicTrack,
 		m.Condition,
 		m.StartValue,
@@ -323,6 +355,7 @@ func (m *Configuration) saveConfiguration(tx *sql.Tx) error {
 		m.SessionVoteQuorum,
 		m.VoteDuration,
 		m.Blacklist,
+		m.MaxCollisionsKm,
 		m.Booking,
 		m.BookingTime,
 		m.Practice,
@@ -334,9 +367,12 @@ func (m *Configuration) saveConfiguration(tx *sql.Tx) error {
 		m.Race,
 		m.RaceTime,
 		m.RaceWaitTime,
+		m.RaceExtraLap,
 		m.JoinType,
 		m.Time,
+		m.SunAngle,
 		m.Track,
+		m.TrackConfig,
 		m.Id)
 
 	if err != nil {
@@ -538,6 +574,7 @@ func scanConfiguration(row util.RowScanner) (*Configuration, error) {
 		&config.PacketsHz,
 		&config.LoopMode,
 		&config.ShowInLobby,
+		&config.Threads,
 		&config.ABS,
 		&config.TC,
 		&config.StabilityAid,
@@ -549,6 +586,8 @@ func scanConfiguration(row util.RowScanner) (*Configuration, error) {
 		&config.TiresWearRate,
 		&config.AllowedTiresOut,
 		&config.MaxBallast,
+		&config.DisableGasCutPenality,
+		&config.ResultScreenTime,
 		&config.DynamicTrack,
 		&config.Condition,
 		&config.StartValue,
@@ -559,6 +598,7 @@ func scanConfiguration(row util.RowScanner) (*Configuration, error) {
 		&config.SessionVoteQuorum,
 		&config.VoteDuration,
 		&config.Blacklist,
+		&config.MaxCollisionsKm,
 		&config.Booking,
 		&config.BookingTime,
 		&config.Practice,
@@ -570,9 +610,12 @@ func scanConfiguration(row util.RowScanner) (*Configuration, error) {
 		&config.Race,
 		&config.RaceTime,
 		&config.RaceWaitTime,
+		&config.RaceExtraLap,
 		&config.JoinType,
 		&config.Time,
-		&config.Track); err != nil {
+		&config.SunAngle,
+		&config.Track,
+		&config.TrackConfig); err != nil {
 		return nil, err
 	}
 

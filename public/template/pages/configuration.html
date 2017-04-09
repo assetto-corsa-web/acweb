@@ -40,6 +40,10 @@
 							<td><input type="number" name="max_slots" v-model="max_slots" /></td>
 						</tr>
 						<tr>
+							<td>Result screen time:</td>
+							<td><input type="number" name="result_screen_time" v-model="result_screen_time" /></td>
+						</tr>
+						<tr>
 							<td>Description:</td>
 							<td><textarea name="description" v-model="description"></textarea></td>
 						</tr>
@@ -71,13 +75,29 @@
 							<td><input type="checkbox" name="show_in_lobby" v-model="show_in_lobby" /></td>
 						</tr>
 						<tr>
+							<td>Threads:</td>
+							<td>
+								<select name="threads" v-model="threads">
+									<option>2</option>
+									<option>3</option>
+									<option>4</option>
+									<option>5</option>
+									<option>6</option>
+									<option>7</option>
+									<option>8</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
 							<td colspan="2"><h3>Assists</h3></td>
 						</tr>
 						<tr>
 							<td>ABS:</td>
 							<td>
 								<select name="abs" v-model="abs">
+									<option>Denied</option>
 									<option>Factory</option>
+									<option>Forced</option>
 								</select>
 							</td>
 						</tr>
@@ -85,7 +105,9 @@
 							<td>TC:</td>
 							<td>
 								<select name="tc" v-model="tc">
+									<option>Denied</option>
 									<option>Factory</option>
+									<option>Forced</option>
 								</select>
 							</td>
 						</tr>
@@ -124,13 +146,21 @@
 							<td>Allowed tires out:</td>
 							<td>
 								<select name="allowed_tires_out" v-model="allowed_tires_out">
+									<option>0</option>
+									<option>1</option>
 									<option>2</option>
+									<option>3</option>
+									<option>4</option>
 								</select>
 							</td>
 						</tr>
 						<tr>
 							<td>Max ballast:</td>
 							<td><input type="number" name="max_ballast" v-model="max_ballast" /></td>
+						</tr>
+						<tr>
+							<td>Disable gas cut penality:</td>
+							<td><input type="checkbox" name="disable_gas_cut_penality" v-model="disable_gas_cut_penality" /></td>
 						</tr>
 						<tr>
 							<td colspan="2"><h3>Dynamic Track</h3></td>
@@ -143,7 +173,13 @@
 							<td>Condition:</td>
 							<td>
 								<select name="condition" v-model="condition">
-									<option>Optimum</option>
+									<option>CUSTOM</option>
+									<option>DUSTY</option>
+									<option>OLD</option>
+									<option>SLOW</option>
+									<option>GREEN</option>
+									<option>FAST</option>
+									<option>OPTIMUM</option>
 								</select>
 							</td>
 						</tr>
@@ -182,9 +218,14 @@
 							<td>Blacklist:</td>
 							<td>
 								<select name="blacklist" v-model="blacklist">
-									<option>Kick player</option>
+									<option>Kick Player</option>
+									<option>Kick Until Restart</option>
 								</select>
 							</td>
+						</tr>
+						<tr>
+							<td>Max. collisions per KM:</td>
+							<td><input type="number" name="max_collisions_km" v-model="max_collisions_km" /></td>
 						</tr>
 						<tr>
 							<td colspan="2"><h3>Booking</h3></td>
@@ -243,10 +284,16 @@
 							<td><input type="number" name="race_wait_time" v-model="race_wait_time" /></td>
 						</tr>
 						<tr>
+							<td>Race extra lap:</td>
+							<td><input type="checkbox" name="race_extra_lap" v-model="race_extra_lap" /></td>
+						</tr>
+						<tr>
 							<td>Join type:</td>
 							<td>
 								<select name="join_type" v-model="join_type">
+									<option>Close</option>
 									<option>Open</option>
+									<option>Close at Start</option>
 								</select>
 							</td>
 						</tr>
@@ -255,7 +302,14 @@
 						</tr>
 						<tr>
 							<td>Time:</td>
-							<td><input type="time" name="time" v-model="time" /></td>
+							<td>
+								<input type="time" name="time" v-model="time" />
+								(08:00 - 18:00)
+							</td>
+						</tr>
+						<tr>
+							<td>Sun angle:</td>
+							<td><input type="number" name="sun_angle" v-model="sun_angle" /></td>
 						</tr>
 						<tr>
 							<td colspan="2"><h3>Weather</h3></td>
@@ -268,6 +322,12 @@
 										<td>
 											<select name="weather" v-model="w.weather">
 												<option>Clear</option>
+												<option>Heavy Clouds</option>
+												<option>Heavy Fog</option>
+												<option>Light Clouds</option>
+												<option>Light Fog</option>
+												<option>Mid Clear</option>
+												<option>Mid Clouds</option>
 											</select>
 										</td>
 										<td>

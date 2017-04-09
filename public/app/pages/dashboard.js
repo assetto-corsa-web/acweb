@@ -61,8 +61,6 @@ Vue.component('Dashboard', {
 			this.stopInstance = false;
 		},
 		performStart: function(){
-			this._reset();
-
 			this.$http.post('/api/startInstance', {name: this.name, config: this.config})
 			.then(function(resp){
 				if(resp.data.code){
@@ -71,6 +69,7 @@ Vue.component('Dashboard', {
 					return;
 				}
 
+				this._reset();
 				this._load();
 				this.started = true;
 			});

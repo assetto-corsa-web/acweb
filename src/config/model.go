@@ -2,6 +2,7 @@ package config
 
 type Track struct {
 	Name        string `json:"name"`
+	Config      string `json:"config"`
 	Description string `json:"description"`
 	MaxSlots    int    `json:"max_slots"`
 }

@@ -6,12 +6,13 @@ import (
 	"model"
 )
 
-func SaveSettings(folder, cmd string) error {
+func SaveSettings(folder, executable, args string) error {
 	folder = util.Trim(folder)
-	cmd = util.Trim(cmd)
+	executable = util.Trim(executable)
+	args = util.Trim(args)
 
-	if folder == "" || cmd == "" {
-		return util.OpError{1, "Folder and command must be set"}
+	if folder == "" || executable == "" {
+		return util.OpError{1, "Folder and executable must be set"}
 	}
 
 	settings, err := model.GetSettings()
@@ -22,7 +23,8 @@ func SaveSettings(folder, cmd string) error {
 	}
 
 	settings.Folder = folder
-	settings.Cmd = cmd
+	settings.Executable = executable
+	settings.Args = args
 
 	if err := settings.Save(); err != nil {
 		log.Printf("Error saving settings: %v", err)

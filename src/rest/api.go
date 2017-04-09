@@ -154,7 +154,7 @@ func SaveSettings(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err := settings.SaveSettings(req.Folder, req.Cmd)
+	err := settings.SaveSettings(req.Folder, req.Executable, req.Args)
 
 	if iserror(w, err) {
 		return

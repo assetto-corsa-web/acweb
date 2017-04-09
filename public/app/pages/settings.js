@@ -4,7 +4,8 @@ Vue.component('Settings', {
 		return {
 			err: 0,
 			folder: '',
-			cmd: '',
+			executable: '',
+			args: '',
 			saved: false
 		}
 	},
@@ -21,14 +22,16 @@ Vue.component('Settings', {
 				}
 
 				this.folder = resp.data.folder;
-				this.cmd = resp.data.cmd;
+				this.executable = resp.data.executable;
+				this.args = resp.data.args;
 			});
 		},
 		performSave: function(){
 			this.saved = false;
 
 			this.$http.post('/api/saveSettings', {folder: this.folder,
-				cmd: this.cmd})
+				executable: this.executable,
+				args: this.args})
 			.then(function(resp){
 				if(resp.data.code){
 					console.log(resp.data.code+': '+resp.data.msg);

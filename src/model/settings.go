@@ -6,15 +6,17 @@ import (
 )
 
 type Settings struct {
-	Id     int64  `json:"id"`
-	Folder string `json:"folder"`
-	Cmd    string `json:"cmd"`
+	Id         int64  `json:"id"`
+	Folder     string `json:"folder"`
+	Executable string `json:"executable"`
+	Args       string `json:"args"`
 }
 
 func (m *Settings) Save() error {
 	if m.Id == 0 {
-		res, err := db.Get().Exec("INSERT INTO settings (folder, command) VALUES (?, ?)", m.Folder,
-			m.Cmd)
+		res, err := db.Get().Exec("INSERT INTO settings (folder, executable, args) VALUES (?, ?, ?)", m.Folder,
+			m.Executable,
+			m.Args)
 
 		if err != nil {
 			return err
@@ -30,8 +32,9 @@ func (m *Settings) Save() error {
 		return nil
 	}
 
-	_, err := db.Get().Exec("UPDATE settings SET folder = ?, command = ? WHERE id = ?", m.Folder,
-		m.Cmd,
+	_, err := db.Get().Exec("UPDATE settings SET folder = ?, executable = ?, args = ? WHERE id = ?", m.Folder,
+		m.Executable,
+		m.Args,
 		m.Id)
 	return err
 }
@@ -46,7 +49,8 @@ func scanSettings(row util.RowScanner) (*Settings, error) {
 
 	if err := row.Scan(&settings.Id,
 		&settings.Folder,
-		&settings.Cmd); err != nil {
+		&settings.Executable,
+		&settings.Args); err != nil {
 		return nil, err
 	}
 

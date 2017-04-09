@@ -20,6 +20,7 @@ Vue.component('Configuration', {
 			pickup_mode: false,
 			race_overtime: 0,
 			max_slots: 0,
+			result_screen_time: 0,
 			description: '',
 			udp: 0,
 			tcp: 0,
@@ -27,6 +28,7 @@ Vue.component('Configuration', {
 			packets_hz: 0,
 			loop_mode: false,
 			show_in_lobby: false,
+			threads: 0,
 			abs: '',
 			tc: '',
 			stability_aid: false,
@@ -38,6 +40,7 @@ Vue.component('Configuration', {
 			tires_wear_rate: 0,
 			allowed_tires_out: 0,
 			max_ballast: 0,
+			disable_gas_cut_penality: false,
 			dynamic_track: false,
 			condition: '',
 			start_value: 0,
@@ -48,6 +51,7 @@ Vue.component('Configuration', {
 			session_vote_quorum: 0,
 			vote_duration: 0,
 			blacklist: '',
+			max_collisions_km: 0,
 			booking: false,
 			booking_time: 0,
 			practice: false,
@@ -59,8 +63,10 @@ Vue.component('Configuration', {
 			race: false,
 			race_time: 0,
 			race_wait_time: 0,
+			race_extra_lap: false,
 			join_type: '',
 			time: '',
+			sun_angle: 0,
 			track: '',
 			// ---
 			err: 0,
@@ -139,6 +145,7 @@ Vue.component('Configuration', {
 				this.packets_hz = resp.data.packets_hz;
 				this.loop_mode = resp.data.loop_mode;
 				this.show_in_lobby = resp.data.show_in_lobby;
+				this.threads = resp.data.threads;
 				this.abs = resp.data.abs;
 				this.tc = resp.data.tc;
 				this.stability_aid = resp.data.stability_aid;
@@ -150,6 +157,8 @@ Vue.component('Configuration', {
 				this.tires_wear_rate = resp.data.tires_wear_rate;
 				this.allowed_tires_out = resp.data.allowed_tires_out;
 				this.max_ballast = resp.data.max_ballast;
+				this.disable_gas_cut_penality = resp.data.disable_gas_cut_penality;
+				this.result_screen_time = resp.data.result_screen_time;
 				this.dynamic_track = resp.data.dynamic_track;
 				this.condition = resp.data.condition;
 				this.start_value = resp.data.start_value;
@@ -160,6 +169,7 @@ Vue.component('Configuration', {
 				this.session_vote_quorum = resp.data.session_vote_quorum;
 				this.vote_duration = resp.data.vote_duration;
 				this.blacklist = resp.data.blacklist;
+				this.max_collisions_km = resp.data.max_collisions_km;
 				this.booking = resp.data.booking;
 				this.booking_time = resp.data.booking_time;
 				this.practice = resp.data.practice;
@@ -171,8 +181,10 @@ Vue.component('Configuration', {
 				this.race = resp.data.race;
 				this.race_time = resp.data.race_time;
 				this.race_wait_time = resp.data.race_wait_time;
+				this.race_extra_lap = resp.data.race_extra_lap;
 				this.join_type = resp.data.join_type;
 				this.time = resp.data.time;
+				this.sun_angle = resp.data.sun_angle;
 
 				if(copy){
 					this.name += ' (copy)';
@@ -259,6 +271,7 @@ Vue.component('Configuration', {
 				packets_hz: parseInt(this.packets_hz),
 				loop_mode: this.loop_mode,
 				show_in_lobby: this.show_in_lobby,
+				threads: parseInt(this.threads),
 				abs: this.abs,
 				tc: this.tc,
 				stability_aid: this.stability_aid,
@@ -270,6 +283,8 @@ Vue.component('Configuration', {
 				tires_wear_rate: parseInt(this.tires_wear_rate),
 				allowed_tires_out: parseInt(this.allowed_tires_out),
 				max_ballast: parseInt(this.max_ballast),
+				disable_gas_cut_penality: this.disable_gas_cut_penality,
+				result_screen_time: parseInt(this.result_screen_time),
 				dynamic_track: this.dynamic_track,
 				condition: this.condition,
 				start_value: parseInt(this.start_value),
@@ -280,6 +295,7 @@ Vue.component('Configuration', {
 				session_vote_quorum: parseInt(this.session_vote_quorum),
 				vote_duration: parseInt(this.vote_duration),
 				blacklist: this.blacklist,
+				max_collisions_km: parseInt(this.max_collisions_km),
 				booking: this.booking,
 				booking_time: parseInt(this.booking_time),
 				practice: this.practice,
@@ -291,10 +307,13 @@ Vue.component('Configuration', {
 				race: this.race,
 				race_time: parseInt(this.race_time),
 				race_wait_time: parseInt(this.race_wait_time),
+				race_extra_lap: this.race_extra_lap,
 				join_type: this.join_type,
 				time: this.time,
+				sun_angle: parseInt(this.sun_angle),
 				weather: this.weather,
 				track: this.track.name,
+				track_config: this.track.config,
 				cars: this.selectedCars
 			};
 

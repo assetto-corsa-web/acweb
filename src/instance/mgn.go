@@ -7,6 +7,7 @@ import (
 	"os/exec"
 	"path/filepath"
 	"settings"
+	"strings"
 	"sync"
 )
 
@@ -35,6 +36,11 @@ func StartInstance(name string, configuration int64) error {
 		return util.OpError{2, "Error reading configuration"}
 	}
 
+	if err := config.Join(); err != nil {
+		log.Printf("Error joining entities to configuration to start instance: %v", err)
+		return util.OpError{2, "Error reading configuration"}
+	}
+
 	// read settings
 	s := settings.GetSettings()
 
@@ -44,7 +50,7 @@ func StartInstance(name string, configuration int64) error {
 	}
 
 	// start
-	cmd := exec.Command(filepath.Join(s.Folder, s.Cmd), "test")
+	cmd := exec.Command(filepath.Join(s.Folder, s.Executable), strings.Split(s.Args, " ")...)
 
 	if err := cmd.Start(); err != nil {
 		log.Printf("Error starting instance: %v", err)
