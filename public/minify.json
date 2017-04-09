@@ -9,7 +9,7 @@
 		"app/components/hmenu.js",
 		"app/pages/about.js",
 		"app/pages/configuration.js",
-		"app/pages/dashboard.js",
+		"app/pages/instance.js",
 		"app/pages/login.js",
 		"app/pages/settings.js",
 		"app/pages/user.js",

@@ -1,5 +1,5 @@
-Vue.component('Dashboard', {
-	template: '{{include=template/pages/dashboard.html}}',
+Vue.component('Instance', {
+	template: '{{include=template/pages/instance.html}}',
 	data: function(){
 		return {
 			_pid: 0,

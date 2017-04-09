@@ -8,8 +8,8 @@ var router = new VueRouter({
 			component: Vue.component('Login')
 		},
 		{
-			path: '/dashboard',
-			component: Vue.component('Dashboard')
+			path: '/instance',
+			component: Vue.component('Instance')
 		},
 		{
 			path: '/configuration',
@@ -46,7 +46,7 @@ router.beforeEach(function(to, from, next){
 
 		// if login or password page, but logged in, redirect to start page
 		if(!resp.data.code && to.path == '/'){
-			next('/dashboard');
+			next('/instance');
 			return;
 		}
 

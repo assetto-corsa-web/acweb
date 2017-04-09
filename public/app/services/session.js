@@ -11,7 +11,7 @@ var SessionService = {
 	},
 	login: function(router, data){
 		this.init(data.data);
-		router.push('/dashboard');
+		router.push('/instance');
 	},
 	logout: function(router){
 		this.data.userId = 0;
