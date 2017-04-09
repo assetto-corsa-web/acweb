@@ -13,6 +13,7 @@ type Configuration struct {
 	Pwd                   string    `json:"pwd"`
 	AdminPwd              string    `json:"admin_pwd"`
 	PickupMode            bool      `json:"pickup_mode"`
+	LockEntryList         bool      `json:"lock_entry_list"`
 	RaceOvertime          int       `json:"race_overtime"`
 	MaxSlots              int       `json:"max_slots"`
 	Welcome               string    `json:"welcome"`
@@ -139,6 +140,7 @@ func (m *Configuration) saveConfiguration(tx *sql.Tx) error {
 			pwd,
 			admin_pwd,
 			pickup_mode,
+			lock_entry_list,
 			race_overtime,
 			max_slots,
 			welcome,
@@ -196,10 +198,11 @@ func (m *Configuration) saveConfiguration(tx *sql.Tx) error {
 			?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
 			?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
 			?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
-			?, ?, ?, ?, ?, ?, ?)`, m.Name,
+			?, ?, ?, ?, ?, ?, ?, ?)`, m.Name,
 			m.Pwd,
 			m.AdminPwd,
 			m.PickupMode,
+			m.LockEntryList,
 			m.RaceOvertime,
 			m.MaxSlots,
 			m.Welcome,
@@ -274,6 +277,7 @@ func (m *Configuration) saveConfiguration(tx *sql.Tx) error {
 		pwd = ?,
 		admin_pwd = ?,
 		pickup_mode = ?,
+		lock_entry_list = ?,
 		race_overtime = ?,
 		max_slots = ?,
 		welcome = ?,
@@ -330,6 +334,7 @@ func (m *Configuration) saveConfiguration(tx *sql.Tx) error {
 		m.Pwd,
 		m.AdminPwd,
 		m.PickupMode,
+		m.LockEntryList,
 		m.RaceOvertime,
 		m.MaxSlots,
 		m.Welcome,
@@ -575,6 +580,7 @@ func scanConfiguration(row util.RowScanner) (*Configuration, error) {
 		&config.Pwd,
 		&config.AdminPwd,
 		&config.PickupMode,
+		&config.LockEntryList,
 		&config.RaceOvertime,
 		&config.MaxSlots,
 		&config.Welcome,

@@ -15,6 +15,7 @@ CREATE TABLE `configurations` (
   `pwd` varchar(40) NOT NULL,
   `admin_pwd` varchar(40) NOT NULL,
   `pickup_mode` tinyint(1) NOT NULL,
+  `lock_entry_list` tinyint(1) NOT NULL,
   `race_overtime` int(11) NOT NULL,
   `max_slots` int(11) NOT NULL,
   `welcome` varchar(200) NOT NULL,
@@ -121,7 +122,7 @@ ALTER TABLE `configurations`
 ALTER TABLE `settings`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 ALTER TABLE `user`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 ALTER TABLE `weather`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 

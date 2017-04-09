@@ -4,11 +4,5 @@
 		"config": "",
 		"description": "Imola",
 		"max_slots": 24
-	},
-	{
-		"name": "ks_barcelona",
-		"config": "layout_moto",
-		"description": "Circuito de Barcelona",
-		"max_slots": 32
 	}
 ]

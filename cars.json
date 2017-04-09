@@ -3,16 +3,8 @@
 		"name": "ks_porsche_911_gt3_rs",
 		"description": "Porsche 911 GT3 RS",
 		"paintings": [
-			"silver_metallic",
-			"red_metallic"
-		]
-	},
-	{
-		"name": "ks_porsche_718_spyder_rs",
-		"description": "Porsche 718 Spyder RS",
-		"paintings": [
-			"green_metallic",
-			"orange_metallic"
+			"02_gt_silver_metallic",
+			"00_lava_orange"
 		]
 	}
 ]

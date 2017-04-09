@@ -8,6 +8,7 @@ export GOPATH=$DIR
 
 go get github.com/DeKugelschieber/go-session
 go get github.com/DeKugelschieber/go-util
+go get github.com/DeKugelschieber/go-resp
 go get github.com/go-sql-driver/mysql
 
 go run src/main/main.go

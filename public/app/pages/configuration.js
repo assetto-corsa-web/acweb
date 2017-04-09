@@ -17,7 +17,8 @@ Vue.component('Configuration', {
 			name: 'Servername',
 			pwd: '',
 			admin_pwd: '',
-			pickup_mode: false,
+			pickup_mode: true,
+			lock_entry_list: false,
 			race_overtime: 60,
 			max_slots: 0,
 			result_screen_time: 60,
@@ -138,6 +139,7 @@ Vue.component('Configuration', {
 				this.pwd = resp.data.pwd;
 				this.admin_pwd = resp.data.admin_pwd;
 				this.pickup_mode = resp.data.pickup_mode;
+				this.lock_entry_list = resp.data.lock_entry_list;
 				this.race_overtime = resp.data.race_overtime;
 				this.max_slots = resp.data.max_slots;
 				this.welcome = resp.data.welcome;
@@ -266,6 +268,7 @@ Vue.component('Configuration', {
 				pwd: this.pwd,
 				admin_pwd: this.admin_pwd,
 				pickup_mode: this.pickup_mode,
+				lock_entry_list: this.lock_entry_list,
 				race_overtime: parseInt(this.race_overtime),
 				max_slots: parseInt(this.max_slots),
 				welcome: this.welcome,

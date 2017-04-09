@@ -51,7 +51,7 @@ func writeServerIni(s *model.Settings, config *model.Configuration) error {
 	ini += "RACE_PIT_WINDOW_START=0" + sep
 	ini += "RACE_PIT_WINDOW_END=0" + sep
 	ini += "REVERSED_GRID_RACE_POSITIONS=0" + sep
-	ini += "LOCKED_ENTRY_LIST=1" + sep
+	ini += "LOCKED_ENTRY_LIST=" + boolToStr(config.LockEntryList) + sep
 	ini += "PICKUP_MODE_ENABLED=" + boolToStr(config.PickupMode) + sep
 	ini += "LOOP_MODE=" + boolToStr(config.LoopMode) + sep
 	ini += "SLEEP_TIME=1" + sep

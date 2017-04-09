@@ -68,7 +68,13 @@ func StartInstance(name string, configuration int64) error {
 
 func observeProcess(cmd *exec.Cmd) {
 	if err := cmd.Wait(); err != nil {
-		log.Printf("Error when instance stopped: %v", err)
+		exitErr, ok := err.(*exec.ExitError)
+
+		if !ok {
+			log.Printf("Error when instance stopped: %v", err)
+		} else {
+			log.Printf("Error when instance stopped: %v %v %v", exitErr.Error(), exitErr.ProcessState, string(exitErr.Stderr))
+		}
 	}
 
 	// remove process
