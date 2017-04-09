@@ -6,7 +6,7 @@ import (
 	"model"
 )
 
-func AddEditUser(id int64, login, email, pwd1, pwd2 string) error {
+func AddEditUser(id int64, login, email, pwd1, pwd2 string, admin, moderator bool) error {
 	// check fields
 	login = util.Trim(login)
 	email = util.Trim(email)
@@ -32,7 +32,7 @@ func AddEditUser(id int64, login, email, pwd1, pwd2 string) error {
 	var user *model.User
 
 	if id == 0 {
-		user = &model.User{0, login, email, util.Md5base64(pwd1)}
+		user = &model.User{}
 	} else {
 		existingUser, err := model.GetUserById(id)
 
@@ -41,14 +41,25 @@ func AddEditUser(id int64, login, email, pwd1, pwd2 string) error {
 			return util.OpError{5, "Error reading user"}
 		}
 
-		existingUser.Login = login
-		existingUser.Email = email
-
-		if pwd1 != "" {
-			existingUser.Pwd = util.Md5base64(pwd1)
-		}
-
 		user = existingUser
+	}
+
+	user.Login = login
+	user.Email = email
+
+	if pwd1 != "" {
+		user.Pwd = util.Md5base64(pwd1)
+	}
+
+	if admin {
+		user.Admin = true
+		user.Moderator = false
+	} else if moderator {
+		user.Admin = false
+		user.Moderator = true
+	} else {
+		user.Admin = false
+		user.Moderator = false
 	}
 
 	if err := user.Save(); err != nil {

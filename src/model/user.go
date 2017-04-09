@@ -8,17 +8,21 @@ import (
 )
 
 type User struct {
-	Id    int64  `json:"id"`
-	Login string `json:"login"`
-	Email string `json:"email"`
-	Pwd   string // do not send this to client
+	Id        int64  `json:"id"`
+	Login     string `json:"login"`
+	Email     string `json:"email"`
+	Pwd       string // do not send this to client
+	Admin     bool   `json:"admin"`
+	Moderator bool   `json:"moderator"`
 }
 
 func (m *User) Save() error {
 	if m.Id == 0 {
-		res, err := db.Get().Exec("INSERT INTO user (login, email, password) VALUES (?, ?, ?)", m.Login,
+		res, err := db.Get().Exec("INSERT INTO user (login, email, password, admin, moderator) VALUES (?, ?, ?, ?, ?)", m.Login,
 			m.Email,
-			m.Pwd)
+			m.Pwd,
+			m.Admin,
+			m.Moderator)
 
 		if err != nil {
 			return err
@@ -34,9 +38,11 @@ func (m *User) Save() error {
 		return nil
 	}
 
-	_, err := db.Get().Exec("UPDATE user SET login = ?, email = ?, password = ? WHERE id = ?", m.Login,
+	_, err := db.Get().Exec("UPDATE user SET login = ?, email = ?, password = ?, admin = ?, moderator = ? WHERE id = ?", m.Login,
 		m.Email,
 		m.Pwd,
+		m.Admin,
+		m.Moderator,
 		m.Id)
 	return err
 }
@@ -97,7 +103,9 @@ func scanOneUser(row util.RowScanner) (*User, error) {
 	if err := row.Scan(&user.Id,
 		&user.Login,
 		&user.Email,
-		&user.Pwd); err != nil {
+		&user.Pwd,
+		&user.Admin,
+		&user.Moderator); err != nil {
 		return nil, err
 	}
 

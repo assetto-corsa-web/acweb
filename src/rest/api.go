@@ -93,7 +93,13 @@ func AddEditUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err := user.AddEditUser(req.Id, req.Login, req.Email, req.Pwd1, req.Pwd2)
+	err := user.AddEditUser(req.Id,
+		req.Login,
+		req.Email,
+		req.Pwd1,
+		req.Pwd2,
+		req.Admin,
+		req.Moderator)
 
 	if iserror(w, err) {
 		return

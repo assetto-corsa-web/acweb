@@ -14,6 +14,10 @@ This tool provides monitoring and management for your Assetto Corsa server insta
 
 *TODO*
 
+## Updating
+
+*TODO*
+
 ## Usage
 
 *TODO*

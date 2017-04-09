@@ -30,6 +30,14 @@
 							<td><input type="password" name="pwd2" class="full-width" v-model="pwd2" /></td>
 						</tr>
 						<tr>
+							<td>Administrator:</td>
+							<td><input type="checkbox" name="admin" class="full-width" v-model="admin" /></td>
+						</tr>
+						<tr>
+							<td>Moderator:</td>
+							<td><input type="checkbox" name="moderator" class="full-width" v-model="moderator" /></td>
+						</tr>
+						<tr>
 							<td></td>
 							<td>
 								<input type="submit" value="Save" />
@@ -65,8 +73,9 @@
 					<thead>
 						<tr>
 							<td class="w5">ID</td>
-							<td class="w40">Login</td>
-							<td class="w40">E-Mail</td>
+							<td class="w30">Login</td>
+							<td class="w30">E-Mail</td>
+							<td class="w30">Role</td>
 							<td></td>
 						</tr>
 					</thead>
@@ -76,12 +85,24 @@
 							<td>{{u.login}}</td>
 							<td>{{u.email}}</td>
 							<td>
+								<span v-if="u.admin">Administrator</span>
+								<span v-if="u.moderator">Moderator</span>
+							</td>
+							<td>
 								<i class="fa fa-pencil" aria-hidden="true" title="Edit user" v-on:click="openAddEditUser(u.id)"></i>
 								<i class="fa fa-trash" aria-hidden="true" title="Remove user" v-on:click="openRemoveUser(u.id)"></i>
 							</td>
 						</tr>
 					</tbody>
 				</table>
+			</div>
+		</div>
+
+		<div class="box">
+			<div class="wrapper">
+				<strong>Administrators</strong> have full access and can change all settings (including changing user passwords).<br />
+				<strong>Moderators</strong> can start/stop server instances and create, change and remove configurations.<br />
+				Other users have read access, except for user E-Mail addresses.
 			</div>
 		</div>
 	</div>

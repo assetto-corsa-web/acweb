@@ -8,6 +8,8 @@ Vue.component('User', {
 			email: '',
 			pwd1: '',
 			pwd2: '',
+			admin: false,
+			moderator: false,
 			err: 0,
 			addEditUser: false,
 			removeUser: false,
@@ -36,6 +38,8 @@ Vue.component('User', {
 			this.email = '';
 			this.pwd1 = '';
 			this.pwd2 = '';
+			this.admin = false;
+			this.moderator = false;
 			this.err = 0;
 			this.addEditUser = false;
 			this.removeUser = false;
@@ -57,6 +61,8 @@ Vue.component('User', {
 
 					this.login = resp.data.login;
 					this.email = resp.data.email;
+					this.admin = resp.data.admin;
+					this.moderator = resp.data.moderator;
 					this.addEditUser = true;
 				});
 			}
@@ -79,7 +85,9 @@ Vue.component('User', {
 				login: this.login,
 				email: this.email,
 				pwd1: this.pwd1,
-				pwd2: this.pwd2})
+				pwd2: this.pwd2,
+				admin: this.admin,
+				moderator: this.moderator})
 			.then(function(resp){
 				if(resp.data.code){
 					console.log(resp.data.code+': '+resp.data.msg);

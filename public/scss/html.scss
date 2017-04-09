@@ -201,6 +201,10 @@ input[type~="submit"]:hover, button:hover, a.button:hover{
 	animation-fill-mode: forwards;
 }
 
+input[type~="checkbox"]{
+	width: auto;
+}
+
 input.no-margin, button.no-margin{
 	margin: 0;
 }
