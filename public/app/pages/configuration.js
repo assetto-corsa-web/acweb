@@ -117,85 +117,102 @@ Vue.component('Configuration', {
 			this.saved = false;
 			this.removed = false;
 		},
+		_openConfig: function(id, copy){
+			this.$http.get('/api/getConfiguration', {params: {id: id}})
+			.then(function(resp){
+				if(resp.data.code){
+					console.log(resp.data.code+': '+resp.data.msg);
+					return;
+				}
+
+				// config
+				this.name = resp.data.name;
+				this.pwd = resp.data.pwd;
+				this.admin_pwd = resp.data.admin_pwd;
+				this.pickup_mode = resp.data.pickup_mode;
+				this.race_overtime = resp.data.race_overtime;
+				this.max_slots = resp.data.max_slots;
+				this.description = resp.data.description;
+				this.udp = resp.data.udp;
+				this.tcp = resp.data.tcp;
+				this.http = resp.data.http;
+				this.packets_hz = resp.data.packets_hz;
+				this.loop_mode = resp.data.loop_mode;
+				this.show_in_lobby = resp.data.show_in_lobby;
+				this.abs = resp.data.abs;
+				this.tc = resp.data.tc;
+				this.stability_aid = resp.data.stability_aid;
+				this.auto_clutch = resp.data.auto_clutch;
+				this.tyre_blankets = resp.data.tyre_blankets;
+				this.force_virtual_mirror = resp.data.force_virtual_mirror;
+				this.fuel_rate = resp.data.fuel_rate;
+				this.damage_rate = resp.data.damage_rate;
+				this.tires_wear_rate = resp.data.tires_wear_rate;
+				this.allowed_tires_out = resp.data.allowed_tires_out;
+				this.max_ballast = resp.data.max_ballast;
+				this.dynamic_track = resp.data.dynamic_track;
+				this.condition = resp.data.condition;
+				this.start_value = resp.data.start_value;
+				this.randomness = resp.data.randomness;
+				this.transferred_grip = resp.data.transferred_grip;
+				this.laps_to_improve_grip = resp.data.laps_to_improve_grip;
+				this.kick_vote_quorum = resp.data.kick_vote_quorum;
+				this.session_vote_quorum = resp.data.session_vote_quorum;
+				this.vote_duration = resp.data.vote_duration;
+				this.blacklist = resp.data.blacklist;
+				this.booking = resp.data.booking;
+				this.booking_time = resp.data.booking_time;
+				this.practice = resp.data.practice;
+				this.practice_time = resp.data.practice_time;
+				this.can_join_practice = resp.data.can_join_practice;
+				this.qualify = resp.data.qualify;
+				this.qualify_time = resp.data.qualify_time;
+				this.can_join_qualify = resp.data.can_join_qualify;
+				this.race = resp.data.race;
+				this.race_time = resp.data.race_time;
+				this.race_wait_time = resp.data.race_wait_time;
+				this.join_type = resp.data.join_type;
+				this.time = resp.data.time;
+
+				if(copy){
+					this.name += ' (copy)';
+				}
+
+				// track
+				for(var i = 0; i < this.tracks.length; i++){
+					if(this.tracks[i].name == resp.data.track){
+						this.selectTrack(i);
+						break;
+					}
+				}
+				
+				// weather
+				this.weather = resp.data.weather;
+
+				if(copy){
+					for(var i = 0; i < this.weather.length; i++){
+						this.weather[i].id = 0;
+					}
+				}
+
+				// cars
+				this.selectedCars = resp.data.cars;
+
+				if(copy){
+					for(var i = 0; i < this.selectedCars.length; i++){
+						this.selectedCars[i].id = 0;
+					}
+				}
+
+				this.addEditConfig = true;
+			});
+		},
 		openAddEditConfig: function(id){
 			this._reset();
 			
 			if(id){
 				this._id = id;
-
-				this.$http.get('/api/getConfiguration', {params: {id: id}})
-				.then(function(resp){
-					if(resp.data.code){
-						console.log(resp.data.code+': '+resp.data.msg);
-						return;
-					}
-
-					// config
-					this._id = resp.data.id;
-					this.name = resp.data.name;
-					this.pwd = resp.data.pwd;
-					this.admin_pwd = resp.data.admin_pwd;
-					this.pickup_mode = resp.data.pickup_mode;
-					this.race_overtime = resp.data.race_overtime;
-					this.max_slots = resp.data.max_slots;
-					this.description = resp.data.description;
-					this.udp = resp.data.udp;
-					this.tcp = resp.data.tcp;
-					this.http = resp.data.http;
-					this.packets_hz = resp.data.packets_hz;
-					this.loop_mode = resp.data.loop_mode;
-					this.show_in_lobby = resp.data.show_in_lobby;
-					this.abs = resp.data.abs;
-					this.tc = resp.data.tc;
-					this.stability_aid = resp.data.stability_aid;
-					this.auto_clutch = resp.data.auto_clutch;
-					this.tyre_blankets = resp.data.tyre_blankets;
-					this.force_virtual_mirror = resp.data.force_virtual_mirror;
-					this.fuel_rate = resp.data.fuel_rate;
-					this.damage_rate = resp.data.damage_rate;
-					this.tires_wear_rate = resp.data.tires_wear_rate;
-					this.allowed_tires_out = resp.data.allowed_tires_out;
-					this.max_ballast = resp.data.max_ballast;
-					this.dynamic_track = resp.data.dynamic_track;
-					this.condition = resp.data.condition;
-					this.start_value = resp.data.start_value;
-					this.randomness = resp.data.randomness;
-					this.transferred_grip = resp.data.transferred_grip;
-					this.laps_to_improve_grip = resp.data.laps_to_improve_grip;
-					this.kick_vote_quorum = resp.data.kick_vote_quorum;
-					this.session_vote_quorum = resp.data.session_vote_quorum;
-					this.vote_duration = resp.data.vote_duration;
-					this.blacklist = resp.data.blacklist;
-					this.booking = resp.data.booking;
-					this.booking_time = resp.data.booking_time;
-					this.practice = resp.data.practice;
-					this.practice_time = resp.data.practice_time;
-					this.can_join_practice = resp.data.can_join_practice;
-					this.qualify = resp.data.qualify;
-					this.qualify_time = resp.data.qualify_time;
-					this.can_join_qualify = resp.data.can_join_qualify;
-					this.race = resp.data.race;
-					this.race_time = resp.data.race_time;
-					this.race_wait_time = resp.data.race_wait_time;
-					this.join_type = resp.data.join_type;
-					this.time = resp.data.time;
-
-					// track
-					for(var i = 0; i < this.tracks.length; i++){
-						if(this.tracks[i].name == resp.data.track){
-							this.selectTrack(i);
-							break;
-						}
-					}
-					
-					// weather
-					this.weather = resp.data.weather;
-
-					// cars
-					this.selectedCars = resp.data.cars;
-
-					this.addEditConfig = true;
-				});
+				this._openConfig(id, false);
 			}
 			else{
 				this.addEditConfig = true;
@@ -212,7 +229,7 @@ Vue.component('Configuration', {
 			this.removeConfig = true;
 		},
 		copyConfig: function(id){
-
+			this._openConfig(id, true);
 		},
 		performAddEditConfig: function(){
 			for(var i = 0; i < this.weather.length; i++){
