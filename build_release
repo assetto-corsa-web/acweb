@@ -24,6 +24,8 @@ cd ..
 
 # copy additional folders
 cp config.original.json release/v$1/config.json
+cp tracks.json release/v$1/tracks.json
+cp cars.json release/v$1/cars.json
 cp -r db release/v$1/db
 cp README.md release/v$1/README.md
 cp LICENSE release/v$1/LICENSE
@@ -38,8 +40,5 @@ rm release/v$1/public/build_app
 rm release/v$1/public/build_sass
 rm release/v$1/public/minify.json
 rm release/v$1/public/minvue
-#rm release/v$1/public/js/vue.js
-#rm release/v$1/public/js/vue-router.js
-#rm release/v$1/public/js/vue-resource.js
 
 echo "done"
