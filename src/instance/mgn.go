@@ -4,11 +4,17 @@ import (
 	"github.com/DeKugelschieber/go-util"
 	"log"
 	"model"
+	"os"
 	"os/exec"
 	"path/filepath"
 	"settings"
 	"strings"
 	"sync"
+	"time"
+)
+
+const (
+	log_dir = "server_log"
 )
 
 var (
@@ -26,6 +32,12 @@ func StartInstance(name string, configuration int64) error {
 
 	if name == "" {
 		return util.OpError{1, "Name must be set"}
+	}
+
+	// create log dir
+	if err := os.MkdirAll(log_dir, 0755); err != nil {
+		log.Printf("Error creating server log folder: %v", err)
+		return util.OpError{5, "Error creating server log folder"}
 	}
 
 	// read config
@@ -51,13 +63,24 @@ func StartInstance(name string, configuration int64) error {
 
 	// start
 	cmd := exec.Command(filepath.Join(s.Folder, s.Executable), strings.Split(s.Args, " ")...)
+	now := strings.Replace(time.Now().String(), " ", "_", -1)
+
+	logfile, err := os.Create(filepath.Join(log_dir, config.Name+now))
+
+	if err != nil {
+		log.Printf("Error creating log file: %v", err)
+		return util.OpError{6, "Error creating log file"}
+	}
+
+	cmd.Stdout = logfile
+	cmd.Stderr = logfile
 
 	if err := cmd.Start(); err != nil {
 		log.Printf("Error starting instance: %v", err)
 		return util.OpError{4, "Error starting instance"}
 	}
 
-	instance := Instance{cmd.Process.Pid, name, config.Id, cmd}
+	instance := Instance{cmd.Process.Pid, name, config.Id, cmd, logfile}
 	m.Lock()
 	instances = append(instances, instance)
 	m.Unlock()
@@ -83,6 +106,10 @@ func observeProcess(cmd *exec.Cmd) {
 
 	for i, instance := range instances {
 		if instance.PID == cmd.Process.Pid {
+			if err := instance.File.Close(); err != nil {
+				log.Printf("Error closing log file: %v", err)
+			}
+
 			instances = append(instances[:i], instances[i+1:]...)
 			log.Printf("Instance %v with PID %v removed", i, instance.PID)
 			return
