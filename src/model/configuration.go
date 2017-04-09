@@ -15,6 +15,7 @@ type Configuration struct {
 	PickupMode            bool      `json:"pickup_mode"`
 	RaceOvertime          int       `json:"race_overtime"`
 	MaxSlots              int       `json:"max_slots"`
+	Welcome               string    `json:"welcome"`
 	Description           string    `json:"description"`
 	UDP                   int       `json:"udp"`
 	TCP                   int       `json:"tcp"`
@@ -56,6 +57,7 @@ type Configuration struct {
 	QualifyTime           int       `json:"qualify_time"`
 	CanJoinQualify        bool      `json:"can_join_qualify"`
 	Race                  bool      `json:"race"`
+	RaceLaps              int       `json:"race_laps"`
 	RaceTime              int       `json:"race_time"`
 	RaceWaitTime          int       `json:"race_wait_time"`
 	RaceExtraLap          bool      `json:"race_extra_lap"`
@@ -139,6 +141,7 @@ func (m *Configuration) saveConfiguration(tx *sql.Tx) error {
 			pickup_mode,
 			race_overtime,
 			max_slots,
+			welcome,
 			description,
 			udp,
 			tcp,
@@ -180,6 +183,7 @@ func (m *Configuration) saveConfiguration(tx *sql.Tx) error {
 			qualify_time,
 			can_join_qualify,
 			race,
+			race_laps,
 			race_time,
 			race_wait_time,
 			race_extra_lap,
@@ -192,12 +196,13 @@ func (m *Configuration) saveConfiguration(tx *sql.Tx) error {
 			?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
 			?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
 			?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
-			?, ?, ?, ?, ?)`, m.Name,
+			?, ?, ?, ?, ?, ?, ?)`, m.Name,
 			m.Pwd,
 			m.AdminPwd,
 			m.PickupMode,
 			m.RaceOvertime,
 			m.MaxSlots,
+			m.Welcome,
 			m.Description,
 			m.UDP,
 			m.TCP,
@@ -239,6 +244,7 @@ func (m *Configuration) saveConfiguration(tx *sql.Tx) error {
 			m.QualifyTime,
 			m.CanJoinQualify,
 			m.Race,
+			m.RaceLaps,
 			m.RaceTime,
 			m.RaceWaitTime,
 			m.RaceExtraLap,
@@ -270,6 +276,7 @@ func (m *Configuration) saveConfiguration(tx *sql.Tx) error {
 		pickup_mode = ?,
 		race_overtime = ?,
 		max_slots = ?,
+		welcome = ?,
 		description = ?,
 		udp = ?,
 		tcp = ?,
@@ -311,6 +318,7 @@ func (m *Configuration) saveConfiguration(tx *sql.Tx) error {
 		qualify_time = ?,
 		can_join_qualify = ?,
 		race = ?,
+		race_laps = ?,
 		race_time = ?,
 		race_wait_time = ?,
 		race_extra_lap = ?,
@@ -324,6 +332,7 @@ func (m *Configuration) saveConfiguration(tx *sql.Tx) error {
 		m.PickupMode,
 		m.RaceOvertime,
 		m.MaxSlots,
+		m.Welcome,
 		m.Description,
 		m.UDP,
 		m.TCP,
@@ -365,6 +374,7 @@ func (m *Configuration) saveConfiguration(tx *sql.Tx) error {
 		m.QualifyTime,
 		m.CanJoinQualify,
 		m.Race,
+		m.RaceLaps,
 		m.RaceTime,
 		m.RaceWaitTime,
 		m.RaceExtraLap,
@@ -567,6 +577,7 @@ func scanConfiguration(row util.RowScanner) (*Configuration, error) {
 		&config.PickupMode,
 		&config.RaceOvertime,
 		&config.MaxSlots,
+		&config.Welcome,
 		&config.Description,
 		&config.UDP,
 		&config.TCP,
@@ -608,6 +619,7 @@ func scanConfiguration(row util.RowScanner) (*Configuration, error) {
 		&config.QualifyTime,
 		&config.CanJoinQualify,
 		&config.Race,
+		&config.RaceLaps,
 		&config.RaceTime,
 		&config.RaceWaitTime,
 		&config.RaceExtraLap,

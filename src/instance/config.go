@@ -85,7 +85,7 @@ func writeServerIni(s *model.Settings, config *model.Configuration) error {
 	ini += "AUTH_PLUGIN_ADDRESS=" + sep
 	ini += "LEGAL_TYRES=" + sep
 	ini += "RACE_EXTRA_LAP=" + boolToStr(config.RaceExtraLap) + sep
-	ini += "WELCOME_MESSAGE=" + sep
+	ini += "WELCOME_MESSAGE=" + config.Welcome + sep
 
 	if config.Practice {
 		ini += sep
@@ -107,7 +107,7 @@ func writeServerIni(s *model.Settings, config *model.Configuration) error {
 		ini += sep
 		ini += "[RACE]" + sep
 		ini += "NAME=Race" + sep
-		//ini += "LAPS="  + sep
+		ini += "LAPS=" + intToStr(config.RaceLaps) + sep
 		ini += "TIME=" + intToStr(config.RaceTime) + sep
 		ini += "WAIT_TIME=" + intToStr(config.RaceWaitTime) + sep
 		ini += "IS_OPEN=" + config.JoinType + sep
@@ -133,15 +133,14 @@ func writeServerIni(s *model.Settings, config *model.Configuration) error {
 		ini += "VARIATION_ROAD=" + intToStr(w.RoadVariation) + sep
 	}
 
-	/*
-		[DATA]
-		DESCRIPTION=
-		EXSERVEREXE=
-		EXSERVERBAT=
-		EXSERVERHIDEWIN=0
-		WEBLINK=
-		WELCOME_PATH=
-	*/
+	ini += sep
+	ini += "[DATA]" + sep
+	ini += "DESCRIPTION=" + sep
+	ini += "EXSERVEREXE=" + sep
+	ini += "EXSERVERBAT=" + sep
+	ini += "EXSERVERHIDEWIN=0" + sep
+	ini += "WEBLINK=" + sep
+	ini += "WELCOME_PATH=" + sep
 
 	// write ini
 	if err := ioutil.WriteFile(filepath.Join(s.Folder, cfg_folder, server_ini), []byte(ini), 0775); err != nil {

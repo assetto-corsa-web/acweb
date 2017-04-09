@@ -44,6 +44,10 @@
 							<td><input type="number" name="result_screen_time" v-model="result_screen_time" /></td>
 						</tr>
 						<tr>
+							<td>Welcome message:</td>
+							<td><input type="text" name="welcome" class="full-width" v-model="welcome" /></td>
+						</tr>
+						<tr>
 							<td>Description:</td>
 							<td><textarea name="description" v-model="description"></textarea></td>
 						</tr>
@@ -274,6 +278,10 @@
 						<tr>
 							<td>Race:</td>
 							<td><input type="checkbox" name="race" v-model="race" /></td>
+						</tr>
+						<tr>
+							<td>Race laps:</td>
+							<td><input type="number" name="race_laps" v-model="race_laps" /></td>
 						</tr>
 						<tr>
 							<td>Race time:</td>
