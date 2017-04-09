@@ -57,7 +57,7 @@ func StartInstance(name string, configuration int64) error {
 	s := settings.GetSettings()
 
 	// write config
-	if err := writeConfig(s, config); err != nil {
+	if err := writeConfig(config); err != nil {
 		return util.OpError{3, "Error writing configuration"}
 	}
 
@@ -65,7 +65,7 @@ func StartInstance(name string, configuration int64) error {
 	cmd := exec.Command(filepath.Join(s.Folder, s.Executable), strings.Split(s.Args, " ")...)
 	now := strings.Replace(time.Now().String(), " ", "_", -1)
 
-	logfile, err := os.Create(filepath.Join(log_dir, config.Name+now))
+	logfile, err := os.Create(filepath.Join(log_dir, config.Name+"_"+now))
 
 	if err != nil {
 		log.Printf("Error creating log file: %v", err)

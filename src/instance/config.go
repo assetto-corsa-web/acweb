@@ -17,24 +17,24 @@ const (
 	sep            = "\n"
 )
 
-func writeConfig(s *model.Settings, config *model.Configuration) error {
-	if err := os.MkdirAll(filepath.Join(s.Folder, cfg_folder), 0755); err != nil {
+func writeConfig(config *model.Configuration) error {
+	if err := os.MkdirAll(cfg_folder, 0755); err != nil {
 		log.Printf("Error creating cfg folder: %v", err)
 		return err
 	}
 
-	if err := writeServerIni(s, config); err != nil {
+	if err := writeServerIni(config); err != nil {
 		return err
 	}
 
-	if err := writeEntryListIni(s, config); err != nil {
+	if err := writeEntryListIni(config); err != nil {
 		return err
 	}
 
 	return nil
 }
 
-func writeServerIni(s *model.Settings, config *model.Configuration) error {
+func writeServerIni(config *model.Configuration) error {
 	ini := "[SERVER]" + sep
 	ini += "NAME=" + config.Name + sep
 	ini += "CARS=" + getCars(config) + sep
@@ -143,7 +143,7 @@ func writeServerIni(s *model.Settings, config *model.Configuration) error {
 	ini += "WELCOME_PATH=" + sep
 
 	// write ini
-	if err := ioutil.WriteFile(filepath.Join(s.Folder, cfg_folder, server_ini), []byte(ini), 0775); err != nil {
+	if err := ioutil.WriteFile(filepath.Join(cfg_folder, server_ini), []byte(ini), 0775); err != nil {
 		log.Printf("Error writing server_cfg.ini: %v", err)
 		return err
 	}
@@ -172,7 +172,7 @@ func getCars(config *model.Configuration) string {
 	return strings.Join(cars, ";")
 }
 
-func writeEntryListIni(s *model.Settings, config *model.Configuration) error {
+func writeEntryListIni(config *model.Configuration) error {
 	ini := ""
 
 	for i, car := range config.Cars {
@@ -188,7 +188,7 @@ func writeEntryListIni(s *model.Settings, config *model.Configuration) error {
 	}
 
 	// write ini
-	if err := ioutil.WriteFile(filepath.Join(s.Folder, cfg_folder, entry_list_ini), []byte(ini), 0775); err != nil {
+	if err := ioutil.WriteFile(filepath.Join(cfg_folder, entry_list_ini), []byte(ini), 0775); err != nil {
 		log.Printf("Error writing entry_list.ini: %v", err)
 		return err
 	}
