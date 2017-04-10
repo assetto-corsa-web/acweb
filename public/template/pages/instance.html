@@ -2,6 +2,8 @@
 	<hmenu></hmenu>
 
 	<div class="main">
+		<h1>Status</h1>
+
 		<div class="box" v-if="startInstance">
 			<div class="wrapper">
 				<h2>Start New Instance</h2>
@@ -50,7 +52,7 @@
 
 		<div class="box">
 			<div class="wrapper">
-				<h1>Status</h1>
+				<h2>Active Server Instances</h2>
 
 				<msg :type="\'success\'" :msg="\'The server instance has been started.\'" v-if="started"></msg>
 				<msg :type="\'success\'" :msg="\'The server instance has been stopped.\'" v-if="stopped"></msg>
@@ -63,7 +65,7 @@
 							<td class="w5">PID</td>
 							<td class="w40">Instance</td>
 							<td class="w40">Configuration</td>
-							<td></td>
+							<td class="w15"></td>
 						</tr>
 					</thead>
 					<tbody>
@@ -75,6 +77,29 @@
 								<!--<i class="fa fa-terminal" aria-hidden="true" title="Show console output"></i>-->
 								<i class="fa fa-stop" aria-hidden="true" title="Stop instance" v-on:click="showStopInstance(instance.pid)"></i>
 							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="box">
+			<div class="wrapper">
+				<h2>Log Files</h2>
+
+				<table>
+					<thead>
+						<tr>
+							<td class="w50">Filename</td>
+							<td class="w35">Date</td>
+							<td class="w15"></td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>1</td>
+							<td>2</td>
+							<td>3</td>
 						</tr>
 					</tbody>
 				</table>

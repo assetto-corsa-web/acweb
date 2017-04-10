@@ -2,6 +2,8 @@
 	<hmenu></hmenu>
 
 	<div class="main">
+		<h1>Configurations</h1>
+		
 		<div class="box" v-if="addEditConfig">
 			<div class="wrapper">
 				<h2>Create/Edit Configuration</h2>
@@ -477,8 +479,6 @@
 
 		<div class="box">
 			<div class="wrapper">
-				<h1>Configurations</h1>
-
 				<msg :type="\'success\'" :msg="\'The configuration has been saved.\'" v-if="saved"></msg>
 				<msg :type="\'success\'" :msg="\'The configuration has been removed.\'" v-if="removed"></msg>
 
