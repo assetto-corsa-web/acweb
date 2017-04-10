@@ -53,6 +53,36 @@ INSERT INTO `user` (`id`, `login`, `email`, `password`, `admin`, `moderator`) VA
 4. update your MySQL database (db/mig_FROM_TO.sql)
 5. start it
 
+## Adding tracks and cars
+
+To add tracks and cars, from a mod for instance, you must add them to the cars.json and tracks.json configuration files to make them appear in the web interface:
+
+```
+[
+    {
+        "name": "NAME",
+        "config": "CONFIG_TRACK",
+        "description": "Name",
+        "max_slots": NUMBER_OF_SLOTS
+    },
+    // ...
+```
+
+```
+[
+    // car
+    {
+        "name": "CAR_NAME",
+        "description": "Car Name",
+        "paintings": [
+            "SKIN_0",
+            "SKIN_1",
+            // ...
+        ]
+    },
+    // ...
+```
+
 ## License
 
 MIT
