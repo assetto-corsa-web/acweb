@@ -48,7 +48,7 @@ func AddEditUser(id int64, login, email, pwd1, pwd2 string, admin, moderator boo
 	user.Email = email
 
 	if pwd1 != "" {
-		user.Pwd = util.Md5base64(pwd1)
+		user.Pwd = util.Sha256base64(pwd1)
 	}
 
 	if admin {

@@ -15,7 +15,7 @@ func Login(loginEmail, pwd string) (*model.User, error) {
 	}
 
 	// read user
-	pwd = util.Md5base64(pwd)
+	pwd = util.Sha256base64(pwd)
 	user, err := model.GetUserByLoginOrEmailAndPassword(loginEmail, loginEmail, pwd)
 
 	if err != nil {
