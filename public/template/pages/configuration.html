@@ -9,6 +9,7 @@
 				<msg :type="\'error\'" :msg="\'The name must be set.\'" v-if="err == 1"></msg>
 				<msg :type="\'error\'" :msg="\'At least one weather configuration must be added.\'" v-if="err == 2"></msg>
 				<msg :type="\'error\'" :msg="\'At least one car must be added.\'" v-if="err == 3"></msg>
+				<msg :type="\'error\'" :msg="\'You have no permission to do this.\'" v-if="err == 200"></msg>
 
 				<form v-on:submit.prevent="performAddEditConfig()">
 					<table>
@@ -450,6 +451,11 @@
 						</tr>
 					</table>
 
+					<msg :type="\'error\'" :msg="\'The name must be set.\'" v-if="err == 1"></msg>
+					<msg :type="\'error\'" :msg="\'At least one weather configuration must be added.\'" v-if="err == 2"></msg>
+					<msg :type="\'error\'" :msg="\'At least one car must be added.\'" v-if="err == 3"></msg>
+					<msg :type="\'error\'" :msg="\'You have no permission to do this.\'" v-if="err == 200"></msg>
+
 					<input type="submit" value="Save" />
 					<button v-on:click.prevent="addEditConfig = false">Cancel</button>
 				</form>
@@ -459,6 +465,8 @@
 		<div class="box" v-if="removeConfig">
 			<div class="wrapper">
 				<h2>Remove Configuration</h2>
+
+				<msg :type="\'error\'" :msg="\'You have no permission to do this.\'" v-if="err == 200"></msg>
 
 				<p>Do you really want to remove this configuration? This won\'t stop any instances currently running.</p>
 

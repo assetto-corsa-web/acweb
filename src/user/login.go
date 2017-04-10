@@ -6,12 +6,12 @@ import (
 	"model"
 )
 
-func Login(loginEmail, pwd string) (int64, error) {
+func Login(loginEmail, pwd string) (*model.User, error) {
 	loginEmail = util.Trim(loginEmail)
 	pwd = util.Trim(pwd)
 
 	if loginEmail == "" || pwd == "" {
-		return 0, util.OpError{1, "Login and password must be set"}
+		return nil, util.OpError{1, "Login and password must be set"}
 	}
 
 	// read user
@@ -20,9 +20,9 @@ func Login(loginEmail, pwd string) (int64, error) {
 
 	if err != nil {
 		log.Printf("User could not be found on login: %v", err)
-		return 0, util.OpError{2, "User not found"}
+		return nil, util.OpError{2, "User not found"}
 	}
 
 	// session is started within the HTTP handler
-	return user.Id, nil
+	return user, nil
 }

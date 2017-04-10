@@ -42,7 +42,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	userId, err := user.Login(req.Login, req.Pwd)
+	user, err := user.Login(req.Login, req.Pwd)
 
 	if iserror(w, err) {
 		return
@@ -57,7 +57,9 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	s.Set("user_id", userId)
+	s.Set("user_id", user.Id)
+	s.Set("admin", user.Admin)
+	s.Set("moderator", user.Moderator)
 
 	if err := s.Save(); err != nil {
 		log.Printf("Error saving session on login: %v", err)
@@ -87,6 +89,11 @@ func Logout(w http.ResponseWriter, r *http.Request) {
 }
 
 func AddEditUser(w http.ResponseWriter, r *http.Request) {
+	if !isadmin(r) {
+		denyAccess(w)
+		return
+	}
+
 	var req addEditUserReq
 
 	if decode(w, r, &req) {
@@ -109,6 +116,11 @@ func AddEditUser(w http.ResponseWriter, r *http.Request) {
 }
 
 func RemoveUser(w http.ResponseWriter, r *http.Request) {
+	if !isadmin(r) {
+		denyAccess(w)
+		return
+	}
+
 	var req removeUserReq
 
 	if decode(w, r, &req) {
@@ -131,6 +143,12 @@ func GetAllUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	if !isadmin(r) {
+		for i := range user {
+			user[i].Email = ""
+		}
+	}
+
 	resp, _ := json.Marshal(user)
 	w.Write(resp)
 }
@@ -149,11 +167,20 @@ func GetUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	if !isadmin(r) {
+		user.Email = ""
+	}
+
 	resp, _ := json.Marshal(user)
 	w.Write(resp)
 }
 
 func SaveSettings(w http.ResponseWriter, r *http.Request) {
+	if !isadmin(r) {
+		denyAccess(w)
+		return
+	}
+
 	var req saveSettingsReq
 
 	if decode(w, r, &req) {
@@ -176,6 +203,11 @@ func GetSettings(w http.ResponseWriter, r *http.Request) {
 }
 
 func AddEditConfiguration(w http.ResponseWriter, r *http.Request) {
+	if !ismoderator(r) {
+		denyAccess(w)
+		return
+	}
+
 	var req model.Configuration
 
 	if decode(w, r, &req) {
@@ -192,6 +224,11 @@ func AddEditConfiguration(w http.ResponseWriter, r *http.Request) {
 }
 
 func RemoveConfiguration(w http.ResponseWriter, r *http.Request) {
+	if !ismoderator(r) {
+		denyAccess(w)
+		return
+	}
+
 	var req removeConfigReq
 
 	if decode(w, r, &req) {
@@ -259,6 +296,11 @@ func GetAvailableCars(w http.ResponseWriter, r *http.Request) {
 }
 
 func StartInstance(w http.ResponseWriter, r *http.Request) {
+	if !ismoderator(r) {
+		denyAccess(w)
+		return
+	}
+
 	var req startInstanceReq
 
 	if decode(w, r, &req) {
@@ -275,6 +317,11 @@ func StartInstance(w http.ResponseWriter, r *http.Request) {
 }
 
 func StopInstance(w http.ResponseWriter, r *http.Request) {
+	if !ismoderator(r) {
+		denyAccess(w)
+		return
+	}
+
 	var req stopInstanceReq
 
 	if decode(w, r, &req) {

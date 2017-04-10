@@ -56,7 +56,10 @@ Vue.component('Instance', {
 		},
 		_reset: function(){
 			this.err = 0;
+			this.name = '';
+			this.config = 0;
 			this.started = false;
+			this.stopped = false;
 			this.startInstance = false;
 			this.stopInstance = false;
 		},
@@ -89,6 +92,7 @@ Vue.component('Instance', {
 			.then(function(resp){
 				if(resp.data.code){
 					console.log(resp.data.code+': '+resp.data.msg);
+					this.err = resp.data.code;
 					return;
 				}
 

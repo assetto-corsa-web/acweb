@@ -344,6 +344,7 @@ Vue.component('Configuration', {
 			.then(function(resp){
 				if(resp.data.code){
 					console.log(resp.data.code+': '+resp.data.msg);
+					this.err = resp.data.code;
 					return;
 				}
 

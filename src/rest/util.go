@@ -3,6 +3,7 @@ package rest
 import (
 	"encoding/json"
 	"github.com/DeKugelschieber/go-resp"
+	"github.com/DeKugelschieber/go-session"
 	"github.com/DeKugelschieber/go-util"
 	"log"
 	"net/http"
@@ -32,4 +33,30 @@ func iserror(w http.ResponseWriter, err error) bool {
 	}
 
 	return false
+}
+
+func isadmin(r *http.Request) bool {
+	s, _ := session.GetCurrentSession(r)
+	var admin bool
+	s.Get("admin", &admin)
+
+	return admin
+}
+
+func ismoderator(r *http.Request) bool {
+	s, _ := session.GetCurrentSession(r)
+	var admin, moderator bool
+	s.Get("admin", &admin)
+
+	if admin {
+		return true
+	}
+
+	s.Get("moderator", &moderator)
+
+	return moderator
+}
+
+func denyAccess(w http.ResponseWriter) {
+	resp.Error(w, 200, "Access denied", nil)
 }

@@ -10,6 +10,7 @@
 				<msg :type="\'error\'" :msg="\'The passwords must be at least 8 characters long.\'" v-if="err == 2"></msg>
 				<msg :type="\'error\'" :msg="\'The passwords must be equal.\'" v-if="err == 3"></msg>
 				<msg :type="\'error\'" :msg="\'The Login and/or E-Mail is in use already.\'" v-if="err == 4"></msg>
+				<msg :type="\'error\'" :msg="\'You have no permission to do this.\'" v-if="err == 200"></msg>
 
 				<form v-on:submit.prevent="performAddEditUser()">
 					<table>
@@ -52,6 +53,8 @@
 		<div class="box" v-if="removeUser">
 			<div class="wrapper">
 				<h2>Remove User</h2>
+
+				<msg :type="\'error\'" :msg="\'You have no permission to do this.\'" v-if="err == 200"></msg>
 
 				<p>Do you really want to remove this user?</p>
 

@@ -6,7 +6,8 @@
 			<div class="wrapper">
 				<h2>Start New Instance</h2>
 
-				<msg :type="\'error\'" :msg="\'Error starting server instance.\'" v-if="err != 0"></msg>
+				<msg :type="\'error\'" :msg="\'Error starting server instance.\'" v-if="err != 0 && err != 200"></msg>
+				<msg :type="\'error\'" :msg="\'You have no permission to do this.\'" v-if="err == 200"></msg>
 
 				<form v-on:submit.prevent="performStart()">
 					<table>
@@ -26,7 +27,7 @@
 							<td></td>
 							<td>
 								<input type="submit" value="Start" />
-								<button>Cancel</button>
+								<button v-on:click="startInstance = false">Cancel</button>
 							</td>
 						</tr>
 					</table>
@@ -37,6 +38,8 @@
 		<div class="box" v-if="stopInstance">
 			<div class="wrapper">
 				<h2>Stop Instance</h2>
+
+				<msg :type="\'error\'" :msg="\'You have no permission to do this.\'" v-if="err == 200"></msg>
 
 				<p>Do you really want to stop this server instance?</p>
 
