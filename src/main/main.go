@@ -110,6 +110,7 @@ func startServer() {
 	mux.Handle("/api/startInstance", session.AccessMiddleware(http.HandlerFunc(rest.StartInstance), returnSessionErr))
 	mux.Handle("/api/stopInstance", session.AccessMiddleware(http.HandlerFunc(rest.StopInstance), returnSessionErr))
 	mux.Handle("/api/getAllInstances", session.AccessMiddleware(http.HandlerFunc(rest.GetAllInstances), returnSessionErr))
+	mux.Handle("/api/getAllInstanceLogs", session.AccessMiddleware(http.HandlerFunc(rest.GetAllInstanceLogs), returnSessionErr))
 	mux.Handle("/api/getInstanceLog", session.AccessMiddleware(http.HandlerFunc(rest.GetInstanceLog), returnSessionErr))
 
 	if cfg.TLSPrivateKey == "" || cfg.TLSCert == "" {

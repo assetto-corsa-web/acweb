@@ -50,6 +50,16 @@
 			</div>
 		</div>
 
+		<div class="box" v-if="showLog">
+			<div class="wrapper">
+				<h2>Log Output</h2>
+
+				<textarea v-model="log"></textarea>
+
+				<button v-on:click="showLog = false">Close</button>
+			</div>
+		</div>
+
 		<div class="box">
 			<div class="wrapper">
 				<h2>Active Server Instances</h2>
@@ -72,9 +82,12 @@
 						<tr v-for="instance in instances">
 							<td>{{instance.pid}}</td>
 							<td>{{instance.name}}</td>
-							<td>{{instance.configuration}}</td>
 							<td>
-								<!--<i class="fa fa-terminal" aria-hidden="true" title="Show console output"></i>-->
+								{{instance.configuration.name}}<br />
+								{{instance.configuration.track}}<br />
+								TCP: {{instance.configuration.tcp}} UPD: {{instance.configuration.udp}}
+							</td>
+							<td>
 								<i class="fa fa-stop" aria-hidden="true" title="Stop instance" v-on:click="showStopInstance(instance.pid)"></i>
 							</td>
 						</tr>
@@ -96,10 +109,12 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>1</td>
-							<td>2</td>
-							<td>3</td>
+						<tr v-for="log in logs">
+							<td>{{log.file}}</td>
+							<td>{{log.date}}</td>
+							<td>
+								<i class="fa fa-terminal" aria-hidden="true" title="Show console output" v-on:click="openLog(log.file)"></i>
+							</td>
 						</tr>
 					</tbody>
 				</table>

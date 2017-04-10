@@ -343,6 +343,25 @@ func GetAllInstances(w http.ResponseWriter, r *http.Request) {
 	w.Write(resp)
 }
 
+func GetAllInstanceLogs(w http.ResponseWriter, r *http.Request) {
+	logs, err := instance.GetAllInstanceLogs()
+
+	if iserror(w, err) {
+		return
+	}
+
+	resp, _ := json.Marshal(logs)
+	w.Write(resp)
+}
+
 func GetInstanceLog(w http.ResponseWriter, r *http.Request) {
-	// TODO
+	file := r.URL.Query().Get("file")
+	log, err := instance.GetInstanceLog(file)
+
+	if iserror(w, err) {
+		return
+	}
+
+	resp, _ := json.Marshal(log)
+	w.Write(resp)
 }

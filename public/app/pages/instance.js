@@ -5,9 +5,12 @@ Vue.component('Instance', {
 			_pid: 0,
 			instances: [],
 			configs: [],
+			logs: [],
 			err: 0,
 			name: '',
 			config: 0,
+			log: '',
+			showLog: false,
 			started: false,
 			stopped: false,
 			startInstance: false,
@@ -29,6 +32,20 @@ Vue.component('Instance', {
 				this.configs = resp.data;
 				this._loadInstances();
 			});
+
+			this.$http.get('/api/getAllInstanceLogs')
+			.then(function(resp){
+				if(resp.data.code){
+					console.log(resp.data.code+': '+resp.data.msg);
+					return;
+				}
+
+				this.logs = resp.data;
+
+				for(var i = 0; i < this.logs.length; i++){
+					this.logs[i].date = Date.parseTime(this.logs[i].date).formatDE();
+				}
+			});
 		},
 		_loadInstances: function(){
 			this.$http.get('/api/getAllInstances')
@@ -48,16 +65,18 @@ Vue.component('Instance', {
 		_getConfigName: function(id){
 			for(i in this.configs){
 				if(id == this.configs[i].id){
-					return this.configs[i].name;
+					return this.configs[i];
 				}
 			}
 
-			return '';
+			return null;
 		},
 		_reset: function(){
 			this.err = 0;
 			this.name = '';
 			this.config = 0;
+			this.log = '';
+			this.showLog = false;
 			this.started = false;
 			this.stopped = false;
 			this.startInstance = false;
@@ -99,6 +118,21 @@ Vue.component('Instance', {
 				this._reset();
 				this._load();
 				this.stopped = true;
+			});
+		},
+		openLog: function(file){
+			this._reset();
+
+			this.$http.get('/api/getInstanceLog', {params: {file: file}})
+			.then(function(resp){
+				if(resp.data.code){
+					console.log(resp.data.code+': '+resp.data.msg);
+					return;
+				}
+
+				var log = resp.data.substr(1, resp.data.length-2).split('\\n');
+				this.log = log.join('\n');
+				this.showLog = true;
 			});
 		}
 	}
