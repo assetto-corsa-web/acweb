@@ -17,7 +17,7 @@ This tool provides monitoring and management for your Assetto Corsa server insta
 
 ## Installation
 
-This instruction supposes you to use Linux. You need a MySQL database and rights to upload and execute applications. I recommend to create a user for your web interface installation.
+This instruction supposes you to use Linux. On Windows you basically need to perform the same steps. You need a MySQL database and rights to upload and execute applications. I recommend to create a user for your web interface installation.
 
 1. download the latest release of acweb
 2. upload it to your server and unzip it
@@ -50,7 +50,7 @@ INSERT INTO `user` (`id`, `login`, `email`, `password`, `admin`, `moderator`) VA
 1. download the latest release
 2. upload it to your server and unzip it
 3. cp the config.json from the old version to the new version
-4. update your MySQL database (db/mig_FROM_TO.sql)
+4. update your MySQL database (migration scripts can be found in db/mig_FROMVERSION_TOVERSION.sql)
 5. start it
 
 ## Adding tracks and cars
@@ -59,6 +59,7 @@ To add tracks and cars, from a mod for instance, you must add them to the cars.j
 
 ```
 [
+    // a track
     {
         "name": "NAME",
         "config": "CONFIG_TRACK",
@@ -70,7 +71,7 @@ To add tracks and cars, from a mod for instance, you must add them to the cars.j
 
 ```
 [
-    // car
+    // a car
     {
         "name": "CAR_NAME",
         "description": "Car Name",
