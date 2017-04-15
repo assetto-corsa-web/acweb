@@ -1,0 +1,1 @@
+ALTER TABLE `cars` ADD `spectator` BOOLEAN NOT NULL AFTER `painting`, ADD `driver` VARCHAR(40) NOT NULL AFTER `spectator`, ADD `team` VARCHAR(40) NOT NULL AFTER `driver`, ADD `guid` VARCHAR(100) NOT NULL AFTER `team`;

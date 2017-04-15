@@ -9,6 +9,10 @@ Vue.component('Configuration', {
 			selectedTrack: 0,
 			selectedCar: 0,
 			selectedPainting: 0,
+			spectator: false,
+			driver: '',
+			team: '',
+			guid: '',
 			// ---
 			selectedCars: [],
 			weather: [],
@@ -119,7 +123,73 @@ Vue.component('Configuration', {
 			});
 		},
 		_reset: function(){
+			this.spectator = false;
+			this.driver = '';
+			this.team = '';
+			this.guid = '';
+
+			this.selectedCars = [];
+			this.weather = [];
+
 			this._id = 0;
+			this.name = 'Servername';
+			this.pwd = '';
+			this.admin_pwd = '';
+			this.pickup_mode = true;
+			this.lock_entry_list = false;
+			this.race_overtime = 60;
+			this.max_slots = 0;
+			this.result_screen_time = 60;
+			this.welcome = '';
+			this.description = '';
+			this.udp = 9600;
+			this.tcp = 9600;
+			this.http = 8081;
+			this.packets_hz = 18;
+			this.loop_mode = true;
+			this.show_in_lobby = true;
+			this.threads = 2;
+			this.abs = '';
+			this.tc = '';
+			this.stability_aid = true;
+			this.auto_clutch = true;
+			this.tyre_blankets = false;
+			this.force_virtual_mirror = false;
+			this.fuel_rate = 100;
+			this.damage_rate = 50;
+			this.tires_wear_rate = 100;
+			this.allowed_tires_out = 2;
+			this.max_ballast = 150;
+			this.disable_gas_cut_penality = false;
+			this.dynamic_track = true;
+			this.condition = '';
+			this.start_value = 100;
+			this.randomness = 0;
+			this.transferred_grip = 100;
+			this.laps_to_improve_grip = 1;
+			this.kick_vote_quorum = 70;
+			this.session_vote_quorum = 70;
+			this.vote_duration = 15;
+			this.blacklist = '';
+			this.max_collisions_km = 5;
+			this.booking = false;
+			this.booking_time = 0;
+			this.practice = true;
+			this.practice_time = 15;
+			this.can_join_practice = true;
+			this.qualify = true;
+			this.qualify_time = 15;
+			this.can_join_qualify = true;
+			this.race = true;
+			this.race_laps = 10;
+			this.race_time = 0;
+			this.race_wait_time = 60;
+			this.race_extra_lap = false;
+			this.join_type = '';
+			this.time = '08 =00';
+			this.sun_angle = 32;
+			this.track = '';
+
 			this.err = 0;
 			this.addEditConfig = false;
 			this.removeConfig = false;
@@ -383,8 +453,16 @@ Vue.component('Configuration', {
 			this.selectedCars.push({
 				car: car.name,
 				painting: car.paintings[this.selectedPainting],
+				spectator: this.spectator,
+				driver: this.driver,
+				team: this.team,
+				guid: this.guid,
 				position: this.selectedCars.length
 			});
+
+			// only reset driver and GUID in case user wants to add multiple similar slots
+			this.driver = '';
+			this.guid = '';
 		},
 		carUp: function(i){
 			if(i == 0){

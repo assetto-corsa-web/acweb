@@ -87,6 +87,10 @@ type Car struct {
 	Configuration int64  `json:"configuration"`
 	Car           string `json:"car"`
 	Painting      string `json:"painting"`
+	Spectator     bool   `json:"spectator"`
+	Driver        string `json:"driver"`
+	Team          string `json:"team"`
+	GUID          string `json:"guid"`
 	Position      int    `json:"position"`
 }
 
@@ -449,9 +453,17 @@ func (m *Configuration) saveCars(tx *sql.Tx) error {
 			_, err := tx.Exec(`INSERT INTO cars (configuration,
 				car,
 				painting,
-				position) VALUES (?, ?, ?, ?)`, m.Id,
+				spectator,
+				driver,
+				team,
+				guid,
+				position) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`, m.Id,
 				car.Car,
 				car.Painting,
+				car.Spectator,
+				car.Driver,
+				car.Team,
+				car.GUID,
 				car.Position)
 
 			if err != nil {
@@ -461,8 +473,16 @@ func (m *Configuration) saveCars(tx *sql.Tx) error {
 		} else {
 			_, err := tx.Exec(`UPDATE cars SET car = ?,
 				painting = ?,
+				spectator = ?,
+				driver = ?,
+				team = ?,
+				guid = ?,
 				position = ? WHERE id = ?`, car.Car,
 				car.Painting,
+				car.Spectator,
+				car.Driver,
+				car.Team,
+				car.GUID,
 				car.Position,
 				car.Id)
 
@@ -691,13 +711,22 @@ func scanCars(rows *sql.Rows) ([]Car, error) {
 
 func scanCar(row util.RowScanner) (*Car, error) {
 	car := Car{}
+	var spectator string
 
 	if err := row.Scan(&car.Id,
 		&car.Configuration,
 		&car.Car,
 		&car.Painting,
+		&spectator,
+		&car.Driver,
+		&car.Team,
+		&car.GUID,
 		&car.Position); err != nil {
 		return nil, err
+	}
+
+	if spectator == "1" {
+		car.Spectator = true
 	}
 
 	return &car, nil

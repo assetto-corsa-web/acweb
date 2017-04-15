@@ -421,7 +421,28 @@
 											</div>
 										</td>
 										<td class="w33">
-											<button v-on:click.prevent="addCar()">Add Car</button>
+											<table>
+												<tr>
+													<td class="w20">Spectator:</td>
+													<td><input type="checkbox" name="spectator" v-model="spectator" /></td>
+												</tr>
+												<tr>
+													<td>Driver:</td>
+													<td><input type="text" name="driver" v-model="driver" /></td>
+												</tr>
+												<tr>
+													<td>Team:</td>
+													<td><input type="text" name="team" v-model="team" /></td>
+												</tr>
+												<tr>
+													<td>GUID:</td>
+													<td><input type="text" name="guid" v-model="guid" /></td>
+												</tr>
+												<tr>
+													<td></td>
+													<td><button v-on:click.prevent="addCar()">Add Car</button></td>
+												</tr>
+											</table>
 										</td>
 									</tr>
 								</table>
@@ -434,6 +455,10 @@
 										<tr>
 											<td class="w20">Car</td>
 											<td class="w20">Painting</td>
+											<td class="w5">Spectator</td>
+											<td class="w10">Driver</td>
+											<td class="w10">Team</td>
+											<td class="w20">GUID</td>
 											<td></td>
 										</tr>
 									</thead>
@@ -441,6 +466,10 @@
 										<tr v-for="(car, i) in selectedCars">
 											<td>{{car.car}}</td>
 											<td>{{car.painting}}</td>
+											<td>{{car.spectator}}</td>
+											<td>{{car.driver}}</td>
+											<td>{{car.team}}</td>
+											<td>{{car.guid}}</td>
 											<td>
 												<i class="fa fa-angle-up" aria-hidden="true" title="Move up" v-on:click.prevent="carUp(i)"></i>
 												<i class="fa fa-angle-down" aria-hidden="true" title="Move down" v-on:click.prevent="carDown(i)"></i>
