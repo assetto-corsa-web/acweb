@@ -22,7 +22,7 @@ Vue.component('Instance', {
 	},
 	methods: {
 		_load: function(){
-			this.$http.get('/api/getAllConfigurations')
+			this.$http.get('/api/configuration')
 			.then(function(resp){
 				if(resp.data.code){
 					console.log(resp.data.code+': '+resp.data.msg);
@@ -33,7 +33,7 @@ Vue.component('Instance', {
 				this._loadInstances();
 			});
 
-			this.$http.get('/api/getAllInstanceLogs')
+			this.$http.get('/api/instance/log')
 			.then(function(resp){
 				if(resp.data.code){
 					console.log(resp.data.code+': '+resp.data.msg);
@@ -48,7 +48,7 @@ Vue.component('Instance', {
 			});
 		},
 		_loadInstances: function(){
-			this.$http.get('/api/getAllInstances')
+			this.$http.get('/api/instance')
 			.then(function(resp){
 				if(resp.data.code){
 					console.log(resp.data.code+': '+resp.data.msg);
@@ -83,7 +83,7 @@ Vue.component('Instance', {
 			this.stopInstance = false;
 		},
 		performStart: function(){
-			this.$http.post('/api/startInstance', {name: this.name, config: this.config})
+			this.$http.post('/api/instance', {name: this.name, config: this.config})
 			.then(function(resp){
 				if(resp.data.code){
 					console.log(resp.data.code+': '+resp.data.msg);
@@ -107,7 +107,7 @@ Vue.component('Instance', {
 			this.stopInstance = true;
 		},
 		performStop: function(){
-			this.$http.post('/api/stopInstance', {pid: this._pid})
+			this.$http.delete('/api/instance', {params: {pid: this._pid}})
 			.then(function(resp){
 				if(resp.data.code){
 					console.log(resp.data.code+': '+resp.data.msg);
@@ -123,7 +123,7 @@ Vue.component('Instance', {
 		openLog: function(file){
 			this._reset();
 
-			this.$http.get('/api/getInstanceLog', {params: {file: file}})
+			this.$http.get('/api/instance/log', {params: {file: file}})
 			.then(function(resp){
 				if(resp.data.code){
 					console.log(resp.data.code+': '+resp.data.msg);

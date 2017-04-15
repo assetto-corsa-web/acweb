@@ -84,7 +84,7 @@ Vue.component('Configuration', {
 	},
 	methods: {
 		_load: function(){
-			this.$http.get('/api/getAllConfigurations')
+			this.$http.get('/api/configuration')
 			.then(function(resp){
 				if(resp.data.code){
 					console.log(resp.data.code+': '+resp.data.msg);
@@ -94,7 +94,7 @@ Vue.component('Configuration', {
 				this.configs = resp.data;
 			});
 
-			this.$http.get('/api/getAvailableTracks')
+			this.$http.get('/api/tracks')
 			.then(function(resp){
 				if(resp.data.code){
 					console.log(resp.data.code+': '+resp.data.msg);
@@ -104,7 +104,7 @@ Vue.component('Configuration', {
 				this.tracks = resp.data;
 			});
 
-			this.$http.get('/api/getAvailableCars')
+			this.$http.get('/api/cars')
 			.then(function(resp){
 				if(resp.data.code){
 					console.log(resp.data.code+': '+resp.data.msg);
@@ -127,7 +127,7 @@ Vue.component('Configuration', {
 			this.removed = false;
 		},
 		_openConfig: function(id, copy){
-			this.$http.get('/api/getConfiguration', {params: {id: id}})
+			this.$http.get('/api/configuration', {params: {id: id}})
 			.then(function(resp){
 				if(resp.data.code){
 					console.log(resp.data.code+': '+resp.data.msg);
@@ -326,7 +326,7 @@ Vue.component('Configuration', {
 				cars: this.selectedCars
 			};
 
-			this.$http.post('/api/addEditConfiguration', data)
+			this.$http.post('/api/configuration', data)
 			.then(function(resp){
 				if(resp.data.code){
 					console.log(resp.data.code+': '+resp.data.msg);
@@ -340,7 +340,7 @@ Vue.component('Configuration', {
 			});
 		},
 		performRemoveConfig: function(){
-			this.$http.post('/api/removeConfiguration', {id: this._id})
+			this.$http.delete('/api/configuration', {params: {id: this._id}})
 			.then(function(resp){
 				if(resp.data.code){
 					console.log(resp.data.code+': '+resp.data.msg);

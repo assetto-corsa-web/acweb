@@ -14,7 +14,63 @@ import (
 	"user"
 )
 
-func CheckSessionHandler(w http.ResponseWriter, r *http.Request) {
+func UserHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method == "POST" {
+		AddEditUser(w, r)
+	} else if r.Method == "DELETE" {
+		RemoveUser(w, r)
+	} else if r.Method == "GET" {
+		if r.URL.Query().Get("id") == "" {
+			GetAllUser(w, r)
+		} else {
+			GetUser(w, r)
+		}
+	}
+}
+
+func SettingsHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method == "POST" {
+		SaveSettings(w, r)
+	} else if r.Method == "GET" {
+		GetSettings(w, r)
+	}
+}
+
+func ConfigurationHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method == "POST" {
+		AddEditConfiguration(w, r)
+	} else if r.Method == "DELETE" {
+		RemoveConfiguration(w, r)
+	} else if r.Method == "GET" {
+		if r.URL.Query().Get("id") == "" {
+			GetAllConfigurations(w, r)
+		} else {
+			GetConfiguration(w, r)
+		}
+	}
+}
+
+func InstanceHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method == "POST" {
+		StartInstance(w, r)
+	} else if r.Method == "DELETE" {
+		StopInstance(w, r)
+	} else if r.Method == "GET" {
+		GetAllInstances(w, r)
+	}
+}
+
+func InstanceLogHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method == "GET" {
+		if r.URL.Query().Get("file") == "" {
+			GetAllInstanceLogs(w, r)
+		} else {
+			GetInstanceLog(w, r)
+		}
+	}
+}
+
+func CheckSession(w http.ResponseWriter, r *http.Request) {
 	s, _ := session.GetCurrentSession(r)
 
 	if s.Active() {
@@ -121,13 +177,14 @@ func RemoveUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var req removeUserReq
+	id, err := strconv.Atoi(r.URL.Query().Get("id"))
 
-	if decode(w, r, &req) {
+	if err != nil {
+		resp.Error(w, 100, err.Error(), nil)
 		return
 	}
 
-	err := user.RemoveUser(req.Id)
+	err = user.RemoveUser(int64(id))
 
 	if iserror(w, err) {
 		return
@@ -229,13 +286,14 @@ func RemoveConfiguration(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var req removeConfigReq
+	id, err := strconv.Atoi(r.URL.Query().Get("id"))
 
-	if decode(w, r, &req) {
+	if err != nil {
+		resp.Error(w, 100, err.Error(), nil)
 		return
 	}
 
-	err := config.RemoveConfiguration(req.Id)
+	err = config.RemoveConfiguration(int64(id))
 
 	if iserror(w, err) {
 		return
@@ -322,13 +380,14 @@ func StopInstance(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var req stopInstanceReq
+	pid, err := strconv.Atoi(r.URL.Query().Get("pid"))
 
-	if decode(w, r, &req) {
+	if err != nil {
+		resp.Error(w, 100, err.Error(), nil)
 		return
 	}
 
-	err := instance.StopInstance(req.PID)
+	err = instance.StopInstance(pid)
 
 	if iserror(w, err) {
 		return

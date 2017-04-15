@@ -14,7 +14,7 @@ Vue.component('Settings', {
 	},
 	methods: {
 		_load: function(){
-			this.$http.get('/api/getSettings')
+			this.$http.get('/api/settings')
 			.then(function(resp){
 				if(resp.data.code){
 					console.log(resp.data.code+': '+resp.data.msg);
@@ -29,7 +29,7 @@ Vue.component('Settings', {
 		performSave: function(){
 			this.saved = false;
 
-			this.$http.post('/api/saveSettings', {folder: this.folder,
+			this.$http.post('/api/settings', {folder: this.folder,
 				executable: this.executable,
 				args: this.args})
 			.then(function(resp){

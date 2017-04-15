@@ -81,37 +81,23 @@ func logToFile() *os.File {
 	return handle
 }
 
-// Starts the REST server.
+// Starts the RESTful server.
 func startServer() {
 	log.Print("Starting server on ", cfg.Host)
 
 	mux := http.NewServeMux()
 	mux.Handle("/robots.txt", http.HandlerFunc(returnRobotsTxt))
 	mux.Handle("/", http.FileServer(http.Dir(public_dir)))
-
-	mux.HandleFunc("/api/checkLogin", http.HandlerFunc(rest.CheckSessionHandler))
+	mux.HandleFunc("/api/session", http.HandlerFunc(rest.CheckSession))
 	mux.HandleFunc("/api/login", http.HandlerFunc(rest.Login))
 	mux.HandleFunc("/api/logout", http.HandlerFunc(rest.Logout))
-	mux.Handle("/api/addEditUser", session.AccessMiddleware(http.HandlerFunc(rest.AddEditUser), returnSessionErr))
-	mux.Handle("/api/removeUser", session.AccessMiddleware(http.HandlerFunc(rest.RemoveUser), returnSessionErr))
-	mux.Handle("/api/getAllUser", session.AccessMiddleware(http.HandlerFunc(rest.GetAllUser), returnSessionErr))
-	mux.Handle("/api/getUser", session.AccessMiddleware(http.HandlerFunc(rest.GetUser), returnSessionErr))
-
-	mux.Handle("/api/saveSettings", session.AccessMiddleware(http.HandlerFunc(rest.SaveSettings), returnSessionErr))
-	mux.Handle("/api/getSettings", session.AccessMiddleware(http.HandlerFunc(rest.GetSettings), returnSessionErr))
-
-	mux.Handle("/api/addEditConfiguration", session.AccessMiddleware(http.HandlerFunc(rest.AddEditConfiguration), returnSessionErr))
-	mux.Handle("/api/removeConfiguration", session.AccessMiddleware(http.HandlerFunc(rest.RemoveConfiguration), returnSessionErr))
-	mux.Handle("/api/getAllConfigurations", session.AccessMiddleware(http.HandlerFunc(rest.GetAllConfigurations), returnSessionErr))
-	mux.Handle("/api/getConfiguration", session.AccessMiddleware(http.HandlerFunc(rest.GetConfiguration), returnSessionErr))
-	mux.Handle("/api/getAvailableTracks", session.AccessMiddleware(http.HandlerFunc(rest.GetAvailableTracks), returnSessionErr))
-	mux.Handle("/api/getAvailableCars", session.AccessMiddleware(http.HandlerFunc(rest.GetAvailableCars), returnSessionErr))
-
-	mux.Handle("/api/startInstance", session.AccessMiddleware(http.HandlerFunc(rest.StartInstance), returnSessionErr))
-	mux.Handle("/api/stopInstance", session.AccessMiddleware(http.HandlerFunc(rest.StopInstance), returnSessionErr))
-	mux.Handle("/api/getAllInstances", session.AccessMiddleware(http.HandlerFunc(rest.GetAllInstances), returnSessionErr))
-	mux.Handle("/api/getAllInstanceLogs", session.AccessMiddleware(http.HandlerFunc(rest.GetAllInstanceLogs), returnSessionErr))
-	mux.Handle("/api/getInstanceLog", session.AccessMiddleware(http.HandlerFunc(rest.GetInstanceLog), returnSessionErr))
+	mux.Handle("/api/user", session.AccessMiddleware(http.HandlerFunc(rest.UserHandler), returnSessionErr))
+	mux.Handle("/api/settings", session.AccessMiddleware(http.HandlerFunc(rest.SettingsHandler), returnSessionErr))
+	mux.Handle("/api/configuration", session.AccessMiddleware(http.HandlerFunc(rest.ConfigurationHandler), returnSessionErr))
+	mux.Handle("/api/tracks", session.AccessMiddleware(http.HandlerFunc(rest.GetAvailableTracks), returnSessionErr))
+	mux.Handle("/api/cars", session.AccessMiddleware(http.HandlerFunc(rest.GetAvailableCars), returnSessionErr))
+	mux.Handle("/api/instance", session.AccessMiddleware(http.HandlerFunc(rest.InstanceHandler), returnSessionErr))
+	mux.Handle("/api/instance/log", session.AccessMiddleware(http.HandlerFunc(rest.InstanceLogHandler), returnSessionErr))
 
 	if cfg.TLSPrivateKey == "" || cfg.TLSCert == "" {
 		if err := http.ListenAndServe(cfg.Host, mux); err != nil {

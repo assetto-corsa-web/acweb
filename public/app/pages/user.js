@@ -22,7 +22,7 @@ Vue.component('User', {
 	},
 	methods: {
 		_load: function(){
-			this.$http.get('/api/getAllUser')
+			this.$http.get('/api/user')
 			.then(function(resp){
 				if(resp.data.code){
 					console.log(resp.data.code+': '+resp.data.msg);
@@ -52,7 +52,7 @@ Vue.component('User', {
 			if(id){
 				this._id = id;
 
-				this.$http.get('/api/getUser', {params: {id: id}})
+				this.$http.get('/api/user', {params: {id: id}})
 				.then(function(resp){
 					if(resp.data.code){
 						console.log(resp.data.code+': '+resp.data.msg);
@@ -81,7 +81,7 @@ Vue.component('User', {
 			this.removeUser = true;
 		},
 		performAddEditUser: function(){
-			this.$http.post('/api/addEditUser', {id: this._id,
+			this.$http.post('/api/user', {id: this._id,
 				login: this.login,
 				email: this.email,
 				pwd1: this.pwd1,
@@ -101,7 +101,7 @@ Vue.component('User', {
 			});
 		},
 		performRemoveUser: function(){
-			this.$http.post('/api/removeUser', {id: this._id})
+			this.$http.delete('/api/user', {params: {id: this._id}})
 			.then(function(resp){
 				if(resp.data.code){
 					console.log(resp.data.code+': '+resp.data.msg);

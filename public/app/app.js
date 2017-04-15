@@ -36,7 +36,7 @@ var router = new VueRouter({
 
 // Simple login check with redirection when not logged in.
 router.beforeEach(function(to, from, next){
-	Vue.http.get('/api/checkLogin')
+	Vue.http.get('/api/session')
 	.then(function(resp){
 		// if not logged in and not on login page, redirect to login
 		if(resp.data.code && to.path != '/'){
