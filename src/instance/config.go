@@ -179,10 +179,10 @@ func writeEntryListIni(config *model.Configuration) error {
 		ini += "[CAR_" + intToStr(i) + "]" + sep
 		ini += "MODEL=" + car.Car + sep
 		ini += "SKIN=" + car.Painting + sep
-		ini += "SPECTATOR_MODE=0" + sep
-		ini += "DRIVERNAME=" + sep
-		ini += "TEAM=" + sep
-		ini += "GUID=" + sep
+		ini += "SPECTATOR_MODE=" + boolToStr(car.Spectator) + sep
+		ini += "DRIVERNAME=" + car.Driver + sep
+		ini += "TEAM=" + car.Team + sep
+		ini += "GUID=" + car.GUID + sep
 		ini += "BALLAST=0" + sep
 		ini += sep
 	}
