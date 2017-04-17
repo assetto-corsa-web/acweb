@@ -18,7 +18,7 @@ func GetAllInstanceLogs() ([]Log, error) {
 	logs := make([]Log, 0)
 
 	for _, file := range dir {
-		log := Log{file.Name(), file.ModTime()}
+		log := Log{file.Name(), file.ModTime(), file.Size()}
 		logs = append(logs, log)
 	}
 

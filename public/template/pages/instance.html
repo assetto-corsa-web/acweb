@@ -103,8 +103,9 @@
 				<table>
 					<thead>
 						<tr>
-							<td class="w50">Filename</td>
-							<td class="w35">Date</td>
+							<td class="w55">Filename</td>
+							<td class="w15">Date</td>
+							<td class="w15">Size</td>
 							<td class="w15"></td>
 						</tr>
 					</thead>
@@ -112,6 +113,7 @@
 						<tr v-for="log in logs">
 							<td>{{log.file}}</td>
 							<td>{{log.date}}</td>
+							<td>{{log.size}}</td>
 							<td>
 								<i class="fa fa-terminal" aria-hidden="true" title="Show console output" v-on:click="openLog(log.file)"></i>
 							</td>

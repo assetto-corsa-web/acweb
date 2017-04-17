@@ -42,8 +42,19 @@ Vue.component('Instance', {
 
 				this.logs = resp.data;
 
-				for(var i = 0; i < this.logs.length; i++){
-					this.logs[i].date = Date.parseTime(this.logs[i].date).formatDE();
+				// reverse
+				for(var i = this.logs.length-1; i >= 0; i--){
+					this.logs[i].date = new Date(this.logs[i].date).formatDE();
+
+					if(this.logs[i].size > 1024*1024){
+						this.logs[i].size = Math.round(this.logs[i].size/1024/1024*100)/100+' MB';
+					}
+					else if(this.logs[i].size > 1024){
+						this.logs[i].size = Math.round(this.logs[i].size/1024*100)/100+' KB';
+					}
+					else{
+						this.logs[i].size = Math.round(this.logs[i].size*100)/100+' Byte';
+					}
 				}
 			});
 		},
