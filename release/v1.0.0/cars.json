@@ -1,0 +1,2639 @@
+[
+    {
+        "name": "abarth500",
+        "description": "Abarth 500 EsseEsse",
+        "paintings": [
+            "0_white_scorpion",
+            "black_red",
+            "grey_white",
+            "light_blue",
+            "light_blue_scorpion",
+            "pearl",
+            "pearl_scorpion",
+            "red_scorpion",
+            "red_white",
+            "white"
+        ]
+    },
+    {
+        "name": "abarth500_s1",
+        "description": "Abarth 500 EsseEsse Step1",
+        "paintings": [
+            "black_neon",
+            "dark_blue_blue",
+            "dark_green_yellow",
+            "light_blue_orange",
+            "maroon_white",
+            "orange_grey",
+            "red_yellow",
+            "silver_red",
+            "white_grey",
+            "yellow_orange"
+        ]
+    },
+    {
+        "name": "alfa_romeo_giulietta_qv",
+        "description": "Giulietta QV",
+        "paintings": [
+            "0_rosso_alfa",
+            "Argento_Alfa",
+            "Bianco_Ghiaccio",
+            "Blu_Anodizzato",
+            "Bronzo",
+            "Grigio_Antracite",
+            "Grigio_Magnesio",
+            "Nero",
+            "Nero_Etna",
+            "Perla_Moonlight",
+            "Rosso_Competizione"
+        ]
+    },
+    {
+        "name": "alfa_romeo_giulietta_qv_le",
+        "description": "Giulietta QV Launch Edition 2014",
+        "paintings": [
+            "0_rosso_alfa",
+            "Argento_Alfa",
+            "Bianco_Ghiaccio",
+            "Blu_Anodizzato",
+            "Bronzo",
+            "Grigio_Antracite",
+            "Grigio_Magnesio",
+            "Nero",
+            "Nero_Etna",
+            "Perla_Moonlight",
+            "Rosso_Competizione"
+        ]
+    },
+    {
+        "name": "bmw_1m",
+        "description": "BMW 1M",
+        "paintings": [
+            "0_orange",
+            "black_sapphire",
+            "crimson_red",
+            "deep_sea_blue",
+            "glacier_silver",
+            "grey",
+            "liquid_blue",
+            "midnight_blue",
+            "mineral_grey",
+            "red",
+            "sparkling_bronze",
+            "valencia_orange",
+            "white",
+            "zaphir"
+        ]
+    },
+    {
+        "name": "bmw_1m_s3",
+        "description": "BMW 1M Stage 3",
+        "paintings": [
+            "ArisTek_5",
+            "BMW_Bank_22",
+            "BMW_Motorsport_black_88",
+            "BMW_Motorsport_white_99",
+            "BMW_motorsport_07",
+            "Green_Motorsport_45",
+            "Inferno_64",
+            "Just_Mareo_14",
+            "Kunos_Racing_2",
+            "Midnight_Boss",
+            "Street_Racer",
+            "Taurus_3D_17",
+            "Yashugan_DGFX_Art_4",
+            "black_sapphire_02",
+            "black_sapphire_03",
+            "bmw_20",
+            "crimson_red_04",
+            "deep_sea_blue_08",
+            "dgfx_11",
+            "glacier_silver_09",
+            "grey_05",
+            "liquid_blue_10",
+            "midnight_blue_12",
+            "mineral_grey_13",
+            "red_01",
+            "sparkling_bronze_17",
+            "staiger_15",
+            "valencia_orange_18",
+            "white_14",
+            "zaphir_19"
+        ]
+    },
+    {
+        "name": "bmw_m3_e30",
+        "description": "BMW M3 E30",
+        "paintings": [
+            "0_jet_black",
+            "Brilliant_red",
+            "Cinnabar_red",
+            "Henna_Red",
+            "Macau_Blue_Metallic",
+            "Misano_red",
+            "Nogaro_Silver_metallic",
+            "Salmon_Silver_metallic",
+            "Sterling_Silver_metallic",
+            "alpine_white",
+            "diamond_black_metallic"
+        ]
+    },
+    {
+        "name": "bmw_m3_e30_drift",
+        "description": "BMW M3 E30 Drift",
+        "paintings": [
+            "DGFX_Vinyl",
+            "Falken",
+            "JTC_Drift",
+            "Nitto_Red",
+            "Nitto_White"
+        ]
+    },
+    {
+        "name": "bmw_m3_e30_dtm",
+        "description": "BMW M3 E30 Gr.A 92",
+        "paintings": [
+            "0_fina_7",
+            "LUK",
+            "black",
+            "bmw"
+        ]
+    },
+    {
+        "name": "bmw_m3_e30_gra",
+        "description": "BMW M3 E30 Group A",
+        "paintings": [
+            "0_Sterling_Silver_metallic",
+            "Brilliant_red",
+            "Cinnabar_red",
+            "Henna_Red",
+            "Jet_Black",
+            "Macau_Blue_Metallic",
+            "Misano_red",
+            "Nogaro_Silver_metallic",
+            "Salmon_Silver_metallic",
+            "alpine_white",
+            "diamond_black_metallic"
+        ]
+    },
+    {
+        "name": "bmw_m3_e30_s1",
+        "description": "BMW M3 E30 Step1",
+        "paintings": [
+            "2_Tone_White_Red",
+            "Burnt_Orange",
+            "Diamond_Black_metallic",
+            "Germany",
+            "Nogaro_Silver_metallic",
+            "Sterling_Silver_metallic",
+            "Street_2",
+            "Street_Racer",
+            "alpine_white"
+        ]
+    },
+    {
+        "name": "bmw_m3_e92",
+        "description": "BMW M3 E92",
+        "paintings": [
+            "0_monte_carlo_blue",
+            "Atlantis_metallic",
+            "Azurite_Black",
+            "Barbera_Red",
+            "Black_Sapphire_metallic",
+            "Brilliant_White",
+            "Dakar_Yellow",
+            "Frozen_Black",
+            "Hellrot",
+            "Laguna_Seca_Blue",
+            "Marrakesh_Brown",
+            "Midnight_Blue",
+            "Moonstone",
+            "Orange",
+            "Phoenix_Yellow",
+            "Power_Green",
+            "Red",
+            "Santorini_Blue",
+            "Titanium_Silver"
+        ]
+    },
+    {
+        "name": "bmw_m3_e92_drift",
+        "description": "BMW M3 E92 drift",
+        "paintings": [
+            "BMW_Academy",
+            "Falken",
+            "GSR",
+            "Hankook",
+            "Koni_7",
+            "Monster_Falken",
+            "Rockstar",
+            "drivemotive"
+        ]
+    },
+    {
+        "name": "bmw_m3_e92_s1",
+        "description": "BMW M3 E92 Step1",
+        "paintings": [
+            "0_monte_carlo_blue",
+            "Atlantis_metallic",
+            "Barbera_Red",
+            "Black_Sapphire_metallic",
+            "Dakar_Yellow",
+            "Frozen_Black",
+            "Hellrot",
+            "Moonstone",
+            "Nvidia",
+            "Orange",
+            "Phoenix_Yellow",
+            "Power_Green",
+            "Red",
+            "Titanium_Silver",
+            "basic",
+            "drivemotive"
+        ]
+    },
+    {
+        "name": "bmw_m3_gt2",
+        "description": "BMW M3 GT2",
+        "paintings": [
+            "0_BMW_Motorsport",
+            "ADVAN",
+            "DSD",
+            "Digigrafet",
+            "Endless",
+            "Falken",
+            "Ozoshi",
+            "kunos_racing",
+            "kunos_racing_80",
+            "kunos_racing_81"
+        ]
+    },
+    {
+        "name": "bmw_z4",
+        "description": "BMW Z4 E89",
+        "paintings": [
+            "0_space_grey_metal",
+            "alpine_white",
+            "atacama_yellow",
+            "black_sapphire_metal",
+            "crimson_red",
+            "deep_sea_blue_metal",
+            "jet_black",
+            "melbourne_red_metal",
+            "mineral_white_metal",
+            "orion_silver_metal",
+            "titamium_silver_metal"
+        ]
+    },
+    {
+        "name": "bmw_z4_drift",
+        "description": "BMW Z4 E89 Drift",
+        "paintings": [
+            "Falken",
+            "drift_418",
+            "drift_419",
+            "ksart_17",
+            "ksart_18"
+        ]
+    },
+    {
+        "name": "bmw_z4_gt3",
+        "description": "BMW Z4 GT3",
+        "paintings": [
+            "0_bmw_motorsport_2013_black",
+            "TCR_2014_097",
+            "TCR_2014_903",
+            "Vita4one",
+            "assetto_z",
+            "bmw_motorsport_2012",
+            "bmw_motorsport_2013_white",
+            "fanatec",
+            "marc_vds_2013",
+            "scuderia_ecosse",
+            "walkenhorst_motorsport",
+            "xdrive_20_z"
+        ]
+    },
+    {
+        "name": "bmw_z4_s1",
+        "description": "BMW Z4 E89 Step1",
+        "paintings": [
+            "0_red",
+            "black",
+            "black_matte",
+            "blue",
+            "ksart_black",
+            "ksart_orange",
+            "ksart_white",
+            "white"
+        ]
+    },
+    {
+        "name": "ferrari_312t",
+        "description": "Ferrari 312T",
+        "paintings": [
+            "00_racing_12",
+            "01_ita_11",
+            "02_ita_1",
+            "03_racing_2",
+            "04_racing_4",
+            "05_racing_5",
+            "06_racing_6",
+            "07_racing_3"
+        ]
+    },
+    {
+        "name": "ferrari_458",
+        "description": "Ferrari 458 Italia",
+        "paintings": [
+            "00_rosso_scuderia",
+            "01_rosso_scuderia_dark_top",
+            "02_giallo_modena",
+            "03_blupozzi",
+            "04_grigio_scuro",
+            "05_giallo_modena_dark_top",
+            "06_avorio",
+            "07_rosso_corsa",
+            "08_rosso_mugello",
+            "09_bianco_avus"
+        ]
+    },
+    {
+        "name": "ferrari_458_gt2",
+        "description": "Ferrari 458 GT2",
+        "paintings": [
+            "00_red",
+            "2011_Team_Sofrev_ASP_20",
+            "2014_Team_Sofrev_ASP_GTE_58",
+            "AF_Corse_WEC_2014_71",
+            "af_corse_51",
+            "black_38",
+            "black_matte",
+            "kessel1_52",
+            "kunos_14",
+            "rosso_corsa",
+            "white",
+            "yellow"
+        ]
+    },
+    {
+        "name": "ferrari_458_s3",
+        "description": "Ferrari 458 Italia Stage 3",
+        "paintings": [
+            "00_rosso_scuderia",
+            "01_rosso_scuderia_dark_top",
+            "02_giallo_modena",
+            "03_blupozzi",
+            "04_grigio_scuro",
+            "05_giallo_modena_dark_top",
+            "06_avorio",
+            "07_rosso_corsa",
+            "08_rosso_mugello",
+            "09_bianco_avus"
+        ]
+    },
+    {
+        "name": "ferrari_599xxevo",
+        "description": "Ferrari 599XX EVO",
+        "paintings": [
+            "1",
+            "2",
+            "24",
+            "25",
+            "27",
+            "4",
+            "40",
+            "97"
+        ]
+    },
+    {
+        "name": "ferrari_f40",
+        "description": "Ferrari F40",
+        "paintings": [
+            "01_red"
+        ]
+    },
+    {
+        "name": "ferrari_f40_s3",
+        "description": "Ferrari F40 Stage 3",
+        "paintings": [
+            "01_yellow",
+            "02_black",
+            "03_red",
+            "04_blue",
+            "05_grey",
+            "06_white"
+        ]
+    },
+    {
+        "name": "ferrari_laferrari",
+        "description": "Ferrari LaFerrari",
+        "paintings": [
+            "00_rosso_scuderia",
+            "01_giallo_modena",
+            "02_rosso_corsa_r",
+            "04_grigio_scuro",
+            "05_blupozzi_r",
+            "06_bianco_avus",
+            "07_avorio_r",
+            "08_rosso_mugello",
+            "09_rosso_scuderia_r",
+            "10_giallo_modena_r",
+            "11_rosso_corsa",
+            "12_grigio_scuro_r",
+            "13_blupozzi",
+            "14_bianco_avus_r",
+            "15_avorio",
+            "16_rosso_mugello_r"
+        ]
+    },
+    {
+        "name": "ks_abarth500_assetto_corse",
+        "description": "Abarth 500 Assetto Corse",
+        "paintings": [
+            "0_official",
+            "black_neon",
+            "dark_blue",
+            "dark_green_yellow",
+            "light_blue_orange",
+            "maroon_white",
+            "orange_grey",
+            "racing_500",
+            "racing_501",
+            "racing_502",
+            "red_yellow",
+            "silver_red",
+            "white_grey",
+            "yellow_orange",
+            "ze_507",
+            "ze_508",
+            "ze_509"
+        ]
+    },
+    {
+        "name": "ks_abarth_595ss",
+        "description": "Abarth 595 SS",
+        "paintings": [
+            "1_official",
+            "2_official",
+            "avorio_antico",
+            "azzurro_acquamarina",
+            "beige_sabbia",
+            "bianco",
+            "blu_oriente",
+            "blue_medio",
+            "blue_scuro",
+            "grigio_garda",
+            "grigio_medio",
+            "rosso_corallo",
+            "rosso_corallo_scuro",
+            "rosso_medio"
+        ]
+    },
+    {
+        "name": "ks_abarth_595ss_s1",
+        "description": "Abarth 595 SS Step 1",
+        "paintings": [
+            "3_official",
+            "black",
+            "blue",
+            "campione",
+            "checkered",
+            "orange",
+            "red",
+            "yellow"
+        ]
+    },
+    {
+        "name": "ks_abarth_595ss_s2",
+        "description": "Abarth 595 SS Step 2",
+        "paintings": [
+            "4_official",
+            "black",
+            "blue",
+            "orange",
+            "red",
+            "yellow"
+        ]
+    },
+    {
+        "name": "ks_alfa_mito_qv",
+        "description": "Alfa Romeo Mito QV",
+        "paintings": [
+            "0_rosso_alfa",
+            "Biancospino",
+            "Blu_Tornado",
+            "Grigio_Grafite",
+            "Grigio_Techno",
+            "Nero",
+            "Nero_Etna",
+            "Rosso"
+        ]
+    },
+    {
+        "name": "ks_alfa_romeo_155_v6",
+        "description": "Alfa Romeo 155 TI V6",
+        "paintings": [
+            "0_racing_8",
+            "basic",
+            "racing_18",
+            "racing_19",
+            "racing_21",
+            "racing_5",
+            "racing_6",
+            "racing_7",
+            "racing_9",
+            "racing_91"
+        ]
+    },
+    {
+        "name": "ks_alfa_romeo_4c",
+        "description": "Alfa Romeo 4C",
+        "paintings": [
+            "0_rosso_alfa",
+            "bianco",
+            "bianco_black_rims",
+            "bianco_madreperla",
+            "bianco_madreperla_black_rims",
+            "grigio_basalto",
+            "grigio_basalto_black_rims",
+            "nero",
+            "nero_black_rims",
+            "orange_satin",
+            "orange_satin_black_rims",
+            "red",
+            "red_black_rims",
+            "red_black_rims_pastel",
+            "red_pastel",
+            "rosso_alfa_black_rims",
+            "rosso_alfa_black_rims_pastel",
+            "rosso_alfa_pastel"
+        ]
+    },
+    {
+        "name": "ks_alfa_romeo_gta",
+        "description": "Alfa Romeo GTA",
+        "paintings": [
+            "0_rosso_alfa",
+            "101_williams",
+            "10_marte",
+            "12_martocci",
+            "159_lugo",
+            "22_lavezzi",
+            "262_carrera",
+            "2_porzio",
+            "3_lemont",
+            "41_barthez",
+            "42_cardinali",
+            "46_jackermeier",
+            "4_marquez",
+            "55_coneja",
+            "61_perez",
+            "71_yoshida",
+            "72_johnson",
+            "84_lasarthe",
+            "91_raucci",
+            "96_colado",
+            "99_willis",
+            "black",
+            "cerulean",
+            "corn_yellow",
+            "dark_brown",
+            "dark_cerulean",
+            "dark_tangerine",
+            "denim",
+            "dim_gray",
+            "dodger_blue",
+            "fractal",
+            "golden_rod",
+            "monza_red",
+            "real_red",
+            "sangria_red"
+        ]
+    },
+    {
+        "name": "ks_audi_a1s1",
+        "description": "Audi S1",
+        "paintings": [
+            "00_sepang_blue_pearl_effect_br",
+            "01_vegas_yellow_br",
+            "02_misano_red_pearl_br",
+            "03_floret_silver_metallic_gr",
+            "03_scuba_blue_metallic_br",
+            "04_floret_silver_metallic_br",
+            "05_daytona_grey_pearl_br",
+            "06_glacier_white_metallic_br",
+            "07_nano_grey_metallic_gr",
+            "09_misano_red_pearl_gr",
+            "10_mythos_black_metallic_br",
+            "11_mythos_black_metallic_gr",
+            "12_nano_grey_metallic_br",
+            "13_glacier_white_metallic_gr",
+            "14_daytona_grey_pearl_gr",
+            "15_scuba_blue_metallic_gr",
+            "16_sepang_blue_pearl_effect_gr",
+            "17_vegas_yellow_gr",
+            "18_brilliant_black_br"
+        ]
+    },
+    {
+        "name": "ks_audi_r8_lms",
+        "description": "Audi R8 LMS Ultra",
+        "paintings": [
+            "2014_Hankook_C_Abt_09",
+            "2014_Hankook_C_Abt_10",
+            "2015_C_Abt_Racing_1",
+            "2015_C_Abt_Racing_2",
+            "2015_C_Abt_Racing_3",
+            "2015_WRT_1",
+            "2015_WRT_2",
+            "2015_WRT_3",
+            "audi_sport",
+            "factory_grey",
+            "factory_matte",
+            "factory_white"
+        ]
+    },
+    {
+        "name": "ks_audi_r8_plus",
+        "description": "Audi R8 V10 Plus",
+        "paintings": [
+            "00_brilliant_red_t",
+            "01_sepang_blue_matte_t",
+            "03_daytona_gray_pearl",
+            "04_estoril_blue_crystal",
+            "05_ibis_white_t",
+            "06_ice_silver_metallic",
+            "07_panther_black_crystal_t",
+            "08_phantom_black_pearl",
+            "09_samoa_orange_metallic_t",
+            "10_sepang_blue_pearl",
+            "11_suzuka_gray_metallic_t",
+            "12_teak_brown_metallic",
+            "Brilliant_Red",
+            "Ibis_White",
+            "Panther_Black_Crystal",
+            "Samoa_Orange_Metallic",
+            "Sepang_Blue_Matte",
+            "Suzuka_Gray_Metallic",
+            "daytona_gray_pearl_t",
+            "estoril_blue_crystal_t",
+            "ice_silver_metallic_t",
+            "phantom_black_pearl_t",
+            "sepang_blue_pearl_t",
+            "teak_brown_metallic_t"
+        ]
+    },
+    {
+        "name": "ks_audi_sport_quattro",
+        "description": "Audi Sport quattro",
+        "paintings": [
+            "00_tornado_red_rings",
+            "01_alpine_white",
+            "02_black",
+            "03_copenhagen_blue_rings",
+            "04_malachite_green",
+            "05_tornado_red",
+            "06_alpine_white_rings",
+            "07_copenhagen_blue",
+            "08_malachite_green_rings"
+        ]
+    },
+    {
+        "name": "ks_audi_sport_quattro_rally",
+        "description": "Audi Sport quattro S1 E2",
+        "paintings": [
+            "00_racing_2",
+            "01_roc_4",
+            "02_sanremo_5",
+            "03_racing_1",
+            "04_montecarlo_6"
+        ]
+    },
+    {
+        "name": "ks_audi_sport_quattro_s1",
+        "description": "Audi Sport quattro Step1",
+        "paintings": [
+            "00_copenhagen_blue_rings",
+            "01_alpine_white",
+            "02_black",
+            "03_tornado_red_rings",
+            "04_malachite_green",
+            "05_tornado_red",
+            "06_alpine_white_rings",
+            "07_copenhagen_blue",
+            "08_malachite_green_rings"
+        ]
+    },
+    {
+        "name": "ks_bmw_m235i_racing",
+        "description": "BMW M235i Racing",
+        "paintings": [
+            "00_racing_1",
+            "00_racing_171",
+            "racing_1",
+            "racing_2",
+            "racing_233",
+            "racing_235",
+            "racing_310",
+            "racing_44",
+            "racing_669",
+            "racing_71",
+            "racing_903",
+            "racing_909"
+        ]
+    },
+    {
+        "name": "ks_bmw_m4",
+        "description": "BMW M4",
+        "paintings": [
+            "0_austin_yellow_metallic",
+            "alpinweiss_iii_pastel",
+            "azuritschwarz_metallic",
+            "champagne_metallic",
+            "m_black_stripe",
+            "m_white_stripe",
+            "m_white_stripe_2",
+            "mineral_grau_metallic",
+            "mineral_white_metallic",
+            "sakhir_orange",
+            "saphirschwarz_metallic",
+            "silverstone_ii_metallic",
+            "smocked_topaz",
+            "tananit_blue_metallic",
+            "yas_marina_blue_metallic"
+        ]
+    },
+    {
+        "name": "ks_bmw_m4_akrapovic",
+        "description": "BMW M4 Akrapovic",
+        "paintings": [
+            "0_akrapovic",
+            "AH_Exclusive",
+            "Blackbox",
+            "akrapovic_m",
+            "alpinweiss_iii_pastel",
+            "austin_yellow_metallic",
+            "azuritschwarz_metallic",
+            "champagne_metallic",
+            "mineral_grau_metallic",
+            "mineral_white_metallic",
+            "sakhir_orange",
+            "saphirschwarz_metallic",
+            "silverstone_ii_metallic",
+            "smocked_topaz",
+            "tananit_blue_metallic",
+            "yas_marina_blue_metallic"
+        ]
+    },
+    {
+        "name": "ks_corvette_c7_stingray",
+        "description": "Chevrolet Corvette C7 Stingray",
+        "paintings": [
+            "00_velocity_yellow",
+            "01_torch_red",
+            "02_black_s",
+            "03_laguna_blue_sw",
+            "04_blade_silver_met_s",
+            "05_cyber_grey_s",
+            "06_lime_rock_green",
+            "07_night_race_blue_met_s",
+            "08_arctic_white_sr",
+            "Arctic_White_S",
+            "Arctic_White_SB",
+            "Black",
+            "Black_SG",
+            "Blade_Silver_Met",
+            "Crystal_Red",
+            "Cyber_Grey",
+            "Laguna_Blue",
+            "Laguna_Blue_SB",
+            "Lime_Rock_Green_S",
+            "Night_Race_Blue_Met",
+            "Torch_Red_SB",
+            "Torch_Red_SW",
+            "Velocity_Yellow_SB",
+            "Velocity_Yellow_SG",
+            "x_pacecar"
+        ]
+    },
+    {
+        "name": "ks_corvette_c7r",
+        "description": "Chevrolet Corvette C7R",
+        "paintings": [
+            "0_racing_3",
+            "101",
+            "12",
+            "15",
+            "22",
+            "23",
+            "25",
+            "26",
+            "4",
+            "40",
+            "41",
+            "42",
+            "46",
+            "55",
+            "63",
+            "64",
+            "72",
+            "racing_00"
+        ]
+    },
+    {
+        "name": "ks_ferrari_488_gt3",
+        "description": "Ferrari 488 GT3",
+        "paintings": []
+    },
+    {
+        "name": "ks_ferrari_488_gtb",
+        "description": "Ferrari 488 GTB",
+        "paintings": [
+            "00_rosso_scuderia",
+            "01_rosso_corsa_b",
+            "02_rosso_mugello",
+            "03_nero_pastello",
+            "04_giallo_modena_b",
+            "05_avorio",
+            "06_bianco_avus_b",
+            "07_blu_abu_dhabi",
+            "08_grigio_ferro_b",
+            "avorio_b",
+            "bianco_avus",
+            "blu_abu_dhabi_b",
+            "giallo_modena",
+            "grigio_ferro",
+            "rosso_corsa",
+            "rosso_mugello_b",
+            "rosso_scuderia_b"
+        ]
+    },
+    {
+        "name": "ks_ferrari_f138",
+        "description": "Ferrari F138",
+        "paintings": []
+    },
+    {
+        "name": "ks_ferrari_fxx_k",
+        "description": "Ferrari FXX K",
+        "paintings": [
+            "01_rosso_ferrari_10",
+            "02_giallo_ferrari_15",
+            "02_red_yellow_13",
+            "03_black_yellow_44",
+            "04_blu_white_27",
+            "05_rosso_ferrari_69",
+            "06_red_silver_52",
+            "07_white_red_47"
+        ]
+    },
+    {
+        "name": "ks_ferrari_sf15t",
+        "description": "Ferrari SF15-T",
+        "paintings": []
+    },
+    {
+        "name": "ks_ford_escort_mk1",
+        "description": "Ford Escort RS1600",
+        "paintings": [
+            "blue_white",
+            "classic_1",
+            "classic_112",
+            "classic_2",
+            "classic_34",
+            "classic_85",
+            "classic_zakspeed_25",
+            "grey_black",
+            "light_blue",
+            "lime_black",
+            "mexico_beige",
+            "mexico_black",
+            "mexico_copper",
+            "mexico_green",
+            "mexico_silver",
+            "orange_black",
+            "red_white",
+            "white_blue",
+            "yellow_black"
+        ]
+    },
+    {
+        "name": "ks_ford_gt40",
+        "description": "Ford GT40",
+        "paintings": [
+            "0_blue_stripes",
+            "15",
+            "19",
+            "29",
+            "beige",
+            "green",
+            "grey",
+            "orange",
+            "racing_6",
+            "racing_7",
+            "racing_9",
+            "racing_dark",
+            "racing_mcqueen",
+            "red",
+            "scuderia",
+            "white",
+            "yellow_stripes"
+        ]
+    },
+    {
+        "name": "ks_ford_mustang_2015",
+        "description": "Ford Mustang 2015",
+        "paintings": [
+            "00_deep_impact_blue_metallic_s",
+            "01_black",
+            "02_triple_yellow_tricoat_s2",
+            "03_deep_impact_blue_metallic",
+            "04_ingot_silver_metallic",
+            "05_competition_orange_s",
+            "06_oxford_white",
+            "07_race_red_s",
+            "08_guard_metallic",
+            "09_ruby_red_metallic_s",
+            "10_triple_yellow_tricoat",
+            "11_race_red",
+            "12_magnetic_metallic",
+            "13_black_s",
+            "14_competition_orange",
+            "15_oxford_white_s",
+            "16_ingot_silver_metallic_s",
+            "17_ruby_red_metallic",
+            "18_guard_metallic_s2",
+            "19_magnetic_metallic_s2"
+        ]
+    },
+    {
+        "name": "ks_glickenhaus_scg003",
+        "description": "SCG 003C",
+        "paintings": [
+            "0_mimetic",
+            "macchina1",
+            "macchina2"
+        ]
+    },
+    {
+        "name": "ks_lamborghini_aventador_sv",
+        "description": "Lamborghini Aventador SV",
+        "paintings": []
+    },
+    {
+        "name": "ks_lamborghini_countach",
+        "description": "Lamborghini Countach",
+        "paintings": [
+            "0_oro_sahara_metal",
+            "WalterWolf_black",
+            "WalterWolf_blue",
+            "WalterWolf_green",
+            "WalterWolf_red",
+            "argento_luna_metal",
+            "bianco_polo_park",
+            "blu_acapulco_metal",
+            "blu_tahiti_metal",
+            "canna_fucile_metal",
+            "nero_tenebre",
+            "nero_tenebre_gold",
+            "rosso_siviglia",
+            "rosso_siviglia_gold"
+        ]
+    },
+    {
+        "name": "ks_lamborghini_countach_s1",
+        "description": "Lamborghini Countach S1",
+        "paintings": [
+            "0_oro_sahara_metal",
+            "WalterWolf_black",
+            "WalterWolf_blue",
+            "WalterWolf_green",
+            "WalterWolf_red",
+            "argento_luna_metal",
+            "bianco_polo_park",
+            "blu_acapulco_metal",
+            "blu_tahiti_metal",
+            "canna_fucile_metal",
+            "nero_tenebre",
+            "nero_tenebre_gold",
+            "rosso_siviglia",
+            "rosso_siviglia_gold"
+        ]
+    },
+    {
+        "name": "ks_lamborghini_gallardo_sl",
+        "description": "Lamborghini Gallardo SL",
+        "paintings": [
+            "0_verde_ithaca_pearl",
+            "arancio_borealis_pearl",
+            "bianco_canopus",
+            "bianco_monocerus",
+            "blu_ely",
+            "edizione_technica",
+            "giallo_horus_matt",
+            "giallo_midas_pearl",
+            "grigio_telesto",
+            "nero_nemesis_matt",
+            "nero_noctis",
+            "rosso_mars",
+            "striped_grey",
+            "striped_orange",
+            "striped_yellow",
+            "tricolor_black",
+            "tricolor_white"
+        ]
+    },
+    {
+        "name": "ks_lamborghini_gallardo_sl_s3",
+        "description": "Lamborghini Gallardo SL Step3",
+        "paintings": [
+            "striped_black_orange",
+            "striped_grey",
+            "striped_orange",
+            "striped_orange_black",
+            "striped_yellow",
+            "tricolor_black",
+            "tricolor_white"
+        ]
+    },
+    {
+        "name": "ks_lamborghini_huracan_gt3",
+        "description": "Lamborghini Huracan GT3",
+        "paintings": [
+            "0_Racing_green",
+            "Racing_Black",
+            "Racing_Black_matte",
+            "Racing_BlizzardBlue",
+            "Racing_Cinnabar",
+            "Racing_Grey",
+            "Racing_Lime",
+            "Racing_Orange",
+            "Racing_Orange_matte",
+            "Racing_Red",
+            "Racing_Violet",
+            "Racing_White",
+            "Racing_Yellow",
+            "Racing_apricot",
+            "Racing_blue",
+            "Racing_copper",
+            "Racing_darkgreen",
+            "Racing_darkred",
+            "Racing_grey_matte"
+        ]
+    },
+    {
+        "name": "ks_lamborghini_huracan_st",
+        "description": "Lamborghini Huracan ST",
+        "paintings": [
+            "0_Racing_63",
+            "Racing_18",
+            "Racing_23",
+            "Racing_25",
+            "Racing_26",
+            "Racing_28",
+            "Racing_29",
+            "Racing_35",
+            "Racing_36",
+            "Racing_37",
+            "Racing_38",
+            "Racing_39",
+            "Racing_52",
+            "Racing_53",
+            "Racing_55",
+            "Racing_56",
+            "Racing_68",
+            "Racing_69",
+            "Racing_76",
+            "Racing_79",
+            "Racing_82",
+            "Racing_99"
+        ]
+    },
+    {
+        "name": "ks_lamborghini_miura_sv",
+        "description": "Lamborghini Miura P400 SV",
+        "paintings": [
+            "Arancio_Gold",
+            "Arancio_Silver",
+            "Argento",
+            "Azzuro_Cielo",
+            "Bianco",
+            "Bleu_Medio",
+            "Bleu_Notte",
+            "Bleu_Tahiti",
+            "Champagne",
+            "Giallo_Miura",
+            "Nero_Cangiante_Gold",
+            "Nero_Cangiante_Silver",
+            "Rosso_Corsa_Gold",
+            "Rosso_Corsa_Silver",
+            "Rosso_Rubino_Metalizzato",
+            "Verde_Inglese",
+            "Verde_Miura",
+            "Verde_Rio_Metalizzato_Gold",
+            "Verde_Rio_Metalizzato_Silver"
+        ]
+    },
+    {
+        "name": "ks_lotus_25",
+        "description": "Lotus Type 25",
+        "paintings": [
+            "racing_01",
+            "racing_02",
+            "racing_03",
+            "racing_04",
+            "racing_05",
+            "racing_06",
+            "racing_07",
+            "racing_08",
+            "racing_09",
+            "racing_10",
+            "racing_11",
+            "racing_12",
+            "racing_13",
+            "racing_14",
+            "racing_15",
+            "racing_16",
+            "racing_17",
+            "racing_18",
+            "racing_19",
+            "racing_20",
+            "racing_21"
+        ]
+    },
+    {
+        "name": "ks_lotus_72d",
+        "description": "Lotus 72D",
+        "paintings": [
+            "classic_lotus_5",
+            "gold_2",
+            "lotus_10",
+            "lotus_11",
+            "lotus_12",
+            "lotus_13",
+            "lotus_14",
+            "lotus_15",
+            "lotus_16",
+            "lotus_3",
+            "lotus_4",
+            "lotus_5",
+            "lotus_6",
+            "lotus_7",
+            "lotus_8",
+            "lotus_9"
+        ]
+    },
+    {
+        "name": "ks_maserati_250f_12cyl",
+        "description": "Maserati 250F 12 cylinder",
+        "paintings": []
+    },
+    {
+        "name": "ks_maserati_250f_6cyl",
+        "description": "Maserati 250F 6 cylinder",
+        "paintings": []
+    },
+    {
+        "name": "ks_maserati_gt_mc_gt4",
+        "description": "Maserati GranTurismo MC GT4",
+        "paintings": []
+    },
+    {
+        "name": "ks_maserati_levante",
+        "description": "Maserati Levante S",
+        "paintings": [
+            "00_nero_ribelle",
+            "01_champagne",
+            "02_blu_emozione",
+            "03_grigio",
+            "04_rosso_rubino",
+            "05_grigio_metallo",
+            "06_rame",
+            "07_grigio_maratea",
+            "08_blu_passione",
+            "09_bianco",
+            "10_bianco_alpi",
+            "11_nero",
+            "12_verde_ossido"
+        ]
+    },
+    {
+        "name": "ks_mazda_787b",
+        "description": "Mazda 787B",
+        "paintings": [
+            "00_renown_55",
+            "01_renown_lm_55",
+            "02_mazda_18",
+            "03_mazda_56",
+            "04_mazda_201"
+        ]
+    },
+    {
+        "name": "ks_mazda_miata",
+        "description": "Mazda Miata NA",
+        "paintings": [
+            "00_classic_red",
+            "01_mariner_blue",
+            "02_crystal_white",
+            "03_silver_stone_metallic_red",
+            "04_brilliant_black",
+            "05_sunburst_yellow",
+            "06_white_tan",
+            "07_montego_blue_mica",
+            "08_merlot_mica_tan",
+            "09_marina_green_mica",
+            "10_twilight_blue",
+            "11_british_racing_green_lim",
+            "12_black_lim",
+            "13_black_red_lim",
+            "14_montego_blue_lim",
+            "15_laguna_blue_lim",
+            "16_merlot_lim",
+            "17_starlight_blue_lim",
+            "18_marina_green_lim",
+            "19_twilight_blue_lim"
+        ]
+    },
+    {
+        "name": "ks_mazda_mx5_cup",
+        "description": "Mazda MX5 Cup",
+        "paintings": [
+            "00_official",
+            "01_cup_07",
+            "02_cup_23",
+            "03_cup_24",
+            "04_cup_29",
+            "05_cup_36",
+            "06_cup_55",
+            "07_cup_56",
+            "08_cup_57",
+            "09_cup_58",
+            "10_cup_60",
+            "11_cup_61",
+            "12_cup_62",
+            "13_cup_70",
+            "14_cup_87",
+            "15_speedsource_71",
+            "17_arisoil_72"
+        ]
+    },
+    {
+        "name": "ks_mazda_mx5_nd",
+        "description": "Mazda MX5 ND",
+        "paintings": [
+            "00_soul_red_metallic",
+            "01_jet_black_mica",
+            "02_artic_white",
+            "03_ceramic_metallic",
+            "04_blue_reflex_mica",
+            "05_meteor_grey_mica",
+            "06_crystal_white_pearlescent"
+        ]
+    },
+    {
+        "name": "ks_mazda_rx7_spirit_r",
+        "description": "Mazda RX-7 Spirit R",
+        "paintings": [
+            "00_blaze_red_b",
+            "01_pure_white",
+            "02_titanium_grey_b",
+            "03_competition_yellow",
+            "04_blue_mica_b",
+            "05_brilliant_black",
+            "06_blaze_red",
+            "07_pure_white_b",
+            "08_titanium_grey",
+            "09_competition_yellow_b",
+            "10_blue_mica"
+        ]
+    },
+    {
+        "name": "ks_mazda_rx7_tuned",
+        "description": "Mazda RX-7 Tuned",
+        "paintings": [
+            "00_orange_s2",
+            "01_blaze_red_s1",
+            "02_blue_mica_s2",
+            "03_competition_yellow_s1",
+            "04_brilliant_black_s2",
+            "05_titanium_grey_s1",
+            "06_white_stripe_s2",
+            "07_kunos_63",
+            "08_kunos_66",
+            "09_kunos_64",
+            "10_kunos_65",
+            "11_orange_s1",
+            "12_blaze_red_s2",
+            "13_blue_mica_s1",
+            "14_competition_yellow_s2",
+            "15_brilliant_black_s1",
+            "16_titanium_grey_s2",
+            "17_white_stripe_s1",
+            "18_mspeed"
+        ]
+    },
+    {
+        "name": "ks_mclaren_650_gt3",
+        "description": "McLaren 650S GT3",
+        "paintings": [
+            "00_racing_59",
+            "racing_2",
+            "racing_3",
+            "racing_57",
+            "racing_58",
+            "racing_60",
+            "racing_61",
+            "racing_62",
+            "racing_63",
+            "racing_64",
+            "racing_65",
+            "w_great_britain"
+        ]
+    },
+    {
+        "name": "ks_mclaren_f1_gtr",
+        "description": "McLaren F1 GTR",
+        "paintings": [
+            "0_orange",
+            "Fina_39",
+            "Fina_42",
+            "Gulf_24",
+            "Gulf_33",
+            "dark_grey",
+            "default",
+            "grey",
+            "red"
+        ]
+    },
+    {
+        "name": "ks_mclaren_p1",
+        "description": "McLaren P1",
+        "paintings": [
+            "0_mclaren_orange",
+            "azure_blue",
+            "carbon_black",
+            "mercury_red",
+            "pearl_white",
+            "silver",
+            "volcano_orange",
+            "volcano_red",
+            "volcano_yellow",
+            "yellow"
+        ]
+    },
+    {
+        "name": "ks_mercedes_190_evo2",
+        "description": "Mercedes-Benz 190E EVO II",
+        "paintings": [
+            "0_Sonax_3",
+            "Argento_Iridio_65",
+            "Blue_71",
+            "Grigio_Alanite_designo_68",
+            "Mystic_White_designo_55",
+            "Nero_Ossidiana_72",
+            "Rosso_Opale_67",
+            "Silver_Blue_13",
+            "Yellow_Blue_12",
+            "alpine_white_64",
+            "black_66"
+        ]
+    },
+    {
+        "name": "ks_mercedes_amg_gt3",
+        "description": "Mercedes-Benz AMG GT3",
+        "paintings": [
+            "0_0fficial",
+            "racing_69",
+            "racing_70",
+            "racing_71",
+            "racing_72",
+            "racing_73",
+            "racing_74",
+            "racing_75",
+            "racing_76"
+        ]
+    },
+    {
+        "name": "ks_mercedes_c9",
+        "description": "Mercedes-Benz C9 1989 LM",
+        "paintings": [
+            "00_sauber_63",
+            "01_sauber_61",
+            "02_michelin_63",
+            "03_aeg_61",
+            "04_aeg_olympia_62",
+            "05_team_redline_blue",
+            "06_team_redline_classic",
+            "07_team_redline_navy",
+            "08_team_redline_red",
+            "09_team_redline_white"
+        ]
+    },
+    {
+        "name": "ks_nissan_370z",
+        "description": "Nissan 370z Nismo",
+        "paintings": [
+            "00_pearl_white_met",
+            "01_magnetic_black_met",
+            "02_solid_red_solid",
+            "03_brillant_silver_met"
+        ]
+    },
+    {
+        "name": "ks_nissan_gtr",
+        "description": "Nissan GT-R NISMO",
+        "paintings": [
+            "0_pearl_white",
+            "jet_black",
+            "solid_red",
+            "super_silver"
+        ]
+    },
+    {
+        "name": "ks_nissan_gtr_gt3",
+        "description": "Nissan GT-R GT3",
+        "paintings": [
+            "0_Nissan_12",
+            "2t_94",
+            "2t_95",
+            "2t_96",
+            "2t_97",
+            "JRM_22",
+            "JRM_23",
+            "JRM_230",
+            "Nissan_98",
+            "ac_15",
+            "ac_36",
+            "ac_67",
+            "gt3_91",
+            "gt3_92",
+            "gt3_93",
+            "kunosart_112",
+            "kunosart_121",
+            "nismo_88",
+            "nismo_89",
+            "nismo_90"
+        ]
+    },
+    {
+        "name": "ks_nissan_skyline_r34",
+        "description": "Nissan Skyline GTR R34 V-Spec",
+        "paintings": [
+            "00_bayside_blue",
+            "01_active_red",
+            "02_athlete_silver",
+            "03_black_pearl",
+            "04_lightning_yellow",
+            "05_pearl_white",
+            "06_sonic_silver",
+            "07_midnight_purple_ii",
+            "08_millennium_jade",
+            "09_silica_breath"
+        ]
+    },
+    {
+        "name": "ks_porsche_718_boxster_s",
+        "description": "Porsche 718 Boxster S",
+        "paintings": [
+            "00_gt_silver_metallic",
+            "01_miami_blue",
+            "02_carmine_red",
+            "03_black",
+            "04_white",
+            "05_racing_yellow",
+            "06_guards_red",
+            "07_carrara_white_metallic",
+            "08_jet_black_metallic",
+            "09_graphite_blue_metallic",
+            "10_rhodium_silver_metallic",
+            "11_night_blue_metallic",
+            "12_agate_grey_metallic",
+            "13_lava_orange",
+            "14_sapphire_blue_metallic",
+            "15_mahogany_metallic"
+        ]
+    },
+    {
+        "name": "ks_porsche_718_boxster_s_pdk",
+        "description": "Porsche 718 Boxster S PDK",
+        "paintings": [
+            "00_carmine_red",
+            "01_lava_orange",
+            "02_miami_blue",
+            "03_black",
+            "04_white",
+            "05_racing_yellow",
+            "06_guards_red",
+            "07_carrara_white_metallic",
+            "08_jet_black_metallic",
+            "09_graphite_blue_metallic",
+            "10_rhodium_silver_metallic",
+            "11_night_blue_metallic",
+            "12_agate_grey_metallic",
+            "13_gt_silver_metallic",
+            "14_sapphire_blue_metallic",
+            "15_mahogany_metallic"
+        ]
+    },
+    {
+        "name": "ks_porsche_718_cayman_s",
+        "description": "Porsche 718 Cayman S",
+        "paintings": [
+            "00_graphite_blue_metallic",
+            "01_carmine_red",
+            "02_lava_orange",
+            "03_black",
+            "04_white",
+            "05_racing_yellow",
+            "06_guards_red",
+            "07_carrara_white_metallic",
+            "08_jet_black_metallic",
+            "09_miami_blue",
+            "10_rhodium_silver_metallic",
+            "11_night_blue_metallic",
+            "12_agate_grey_metallic",
+            "13_gt_silver_metallic",
+            "14_sapphire_blue_metallic",
+            "15_mahogany_metallic"
+        ]
+    },
+    {
+        "name": "ks_porsche_718_spyder_rs",
+        "description": "Porsche 718 RS 60 Spyder",
+        "paintings": [
+            "00_racing_42",
+            "01_racing_34",
+            "02_racing_50",
+            "03_racing_136",
+            "04_racing_silver"
+        ]
+    },
+    {
+        "name": "ks_porsche_908_lh",
+        "description": "Porsche 908 LH",
+        "paintings": [
+            "00_racing_64",
+            "01_racing_25",
+            "02_racing_60",
+            "03_racing_33",
+            "04_racing_10",
+            "05_racing_5"
+        ]
+    },
+    {
+        "name": "ks_porsche_911_carrera_rsr",
+        "description": "Porsche 911 Carrera RSR 3.0",
+        "paintings": [
+            "00_imsa_74",
+            "01_racing_red",
+            "02_kremer",
+            "03_kunosracing_17",
+            "04_kunosracing_52",
+            "05_kunosracing_56",
+            "06_carrera_white",
+            "07_carrera_blue",
+            "08_carrera_green",
+            "09_carrera_black",
+            "10_carrera_grey",
+            "11_carrera_lime",
+            "12_carrera_red",
+            "13_carrera_76",
+            "14_carrera_brown",
+            "15_carrera_purple",
+            "16_carrera_cyan",
+            "17_carrera_burgundy",
+            "18_kunosracing_57",
+            "19_kunosracing_58",
+            "20_kunosracing_59",
+            "21_kunosracing_75"
+        ]
+    },
+    {
+        "name": "ks_porsche_911_gt1",
+        "description": "Porsche 911 GT1-98",
+        "paintings": [
+            "00_racing_26",
+            "01_racing_25",
+            "02_racing_5",
+            "03_racing_6"
+        ]
+    },
+    {
+        "name": "ks_porsche_911_gt3_cup_2017",
+        "description": "Porsche 911 GT3 Cup 2017",
+        "paintings": [
+            "00_cup",
+            "01_racing_912",
+            "02_racing_917",
+            "03_racing_919",
+            "04_racing_915",
+            "05_racing_913",
+            "06_racing_922",
+            "07_racing_914",
+            "08_racing_920",
+            "09_racing_921",
+            "10_racing_918",
+            "11_racing_923",
+            "12_racing_924",
+            "13_racing_925",
+            "14_racing_926",
+            "15_racing_927",
+            "16_racing_928",
+            "17_racing_929",
+            "18_racing_930",
+            "19_racing_916",
+            "20_racing_931"
+        ]
+    },
+    {
+        "name": "ks_porsche_911_gt3_r_2016",
+        "description": "Porsche 911 GT3 R 2016",
+        "paintings": [
+            "00_gt3",
+            "01_racing_912",
+            "02_racing_911",
+            "03_racing_910"
+        ]
+    },
+    {
+        "name": "ks_porsche_911_gt3_rs",
+        "description": "Porsche 911 GT3 RS",
+        "paintings": [
+            "00_lava_orange",
+            "01_ultraviolet",
+            "02_gt_silver_metallic",
+            "03_white"
+        ]
+    },
+    {
+        "name": "ks_porsche_911_r",
+        "description": "Porsche 911 R",
+        "paintings": [
+            "00_white_red",
+            "01_silver_green",
+            "02_white",
+            "03_gt_silver_metallic",
+            "04_silver_red",
+            "05_white_green"
+        ]
+    },
+    {
+        "name": "ks_porsche_911_rsr_2017",
+        "description": "Porsche 911 RSR 2017",
+        "paintings": [
+            "00_rsr",
+            "01_racing_911",
+            "02_racing_912"
+        ]
+    },
+    {
+        "name": "ks_porsche_917_30",
+        "description": "Porsche 917/30 Spyder",
+        "paintings": [
+            "00_chassis_002_racing",
+            "01_chassis_003_racing",
+            "02_chassis_006_racing",
+            "03_chassis_004_private",
+            "04_chassis_005_private"
+        ]
+    },
+    {
+        "name": "ks_porsche_917_k",
+        "description": "Porsche 917 K",
+        "paintings": [
+            "00_racing_21",
+            "01_racing_20",
+            "02_racing_1",
+            "03_racing_2",
+            "04_racing_3",
+            "05_racing_23",
+            "06_racing_32",
+            "07_racing_16"
+        ]
+    },
+    {
+        "name": "ks_porsche_918_spyder",
+        "description": "Porsche 918 Spyder",
+        "paintings": [
+            "00_salzburg_racing_03",
+            "01_salzburg_racing_25",
+            "02_rhodium_silver_metallic",
+            "03_liquid_metal_silver",
+            "04_guards_red",
+            "05_black_matte",
+            "06_basalt_black_metallic",
+            "07_black",
+            "08_dark_blue_metallic",
+            "09_gt_silver_metallic",
+            "10_liquid_metal_chrome_blue",
+            "11_meteor_grey_metallic",
+            "12_racing_yellow",
+            "13_sapphire_blue_metallic",
+            "14_white",
+            "15_salzburg_racing_28",
+            "16_salzburg_racing_04",
+            "17_salzburg_racing_05",
+            "18_salzburg_racing_01"
+        ]
+    },
+    {
+        "name": "ks_porsche_919_hybrid_2015",
+        "description": "Porsche 919 Hybrid 2015",
+        "paintings": [
+            "00_lms_19",
+            "01_lms_17",
+            "02_lms_18"
+        ]
+    },
+    {
+        "name": "ks_porsche_919_hybrid_2016",
+        "description": "Porsche 919 Hybrid 2016",
+        "paintings": [
+            "00_lms_02",
+            "01_lms_01"
+        ]
+    },
+    {
+        "name": "ks_porsche_935_78_moby_dick",
+        "description": "Porsche 935/78 'Moby Dick'",
+        "paintings": [
+            "00_racing_01",
+            "01_racing_43",
+            "02_racing_27",
+            "03_racing_30",
+            "04_racing_70",
+            "05_racing_66",
+            "06_racing_79"
+        ]
+    },
+    {
+        "name": "ks_porsche_962c_longtail",
+        "description": "Porsche 962 C Long Tail",
+        "paintings": [
+            "00_racing_17_87",
+            "01_racing_18_87",
+            "02_racing_1_87",
+            "03_racing_17_88",
+            "04_racing_19_88",
+            "05_racing_10",
+            "06_racing_11",
+            "07_racing_12",
+            "08_racing_4",
+            "09_racing_77"
+        ]
+    },
+    {
+        "name": "ks_porsche_962c_shorttail",
+        "description": "Porsche 962 C Short Tail",
+        "paintings": [
+            "00_racing_01",
+            "01_racing_02",
+            "02_racing_17",
+            "03_racing_7",
+            "04_racing_99",
+            "05_racing_78",
+            "06_racing_18"
+        ]
+    },
+    {
+        "name": "ks_porsche_991_carrera_s",
+        "description": "Porsche 911 Carrera S",
+        "paintings": [
+            "00_guards_red",
+            "01_black",
+            "02_white",
+            "03_agate_grey_metallic",
+            "04_racing_yellow",
+            "05_carmine_red",
+            "06_lava_orange",
+            "07_miami_blue",
+            "08_carrara_white_metallic",
+            "09_jet_black_metallic",
+            "10_graphite_blue_metallic",
+            "11_rhodium_silver_metallic",
+            "12_sapphire_blue_metallic",
+            "13_night_blue_metallic",
+            "14_gt_silver_metallic",
+            "15_mahogany_metallic"
+        ]
+    },
+    {
+        "name": "ks_porsche_991_turbo_s",
+        "description": "Porsche 911 Turbo S",
+        "paintings": [
+            "00_miami_blue",
+            "01_black",
+            "02_white",
+            "03_agate_grey_metallic",
+            "04_racing_yellow",
+            "05_carmine_red",
+            "06_lava_orange",
+            "07_guards_red",
+            "08_carrara_white_metallic",
+            "09_jet_black_metallic",
+            "10_graphite_blue_metallic",
+            "11_rhodium_silver_metallic",
+            "12_sapphire_blue_metallic",
+            "13_night_blue_metallic",
+            "14_gt_silver_metallic",
+            "15_mahogany_metallic"
+        ]
+    },
+    {
+        "name": "ks_porsche_cayenne",
+        "description": "Porsche Cayenne Turbo S",
+        "paintings": [
+            "00_black",
+            "01_meteor_grey_metallic",
+            "02_white",
+            "03_carmine_red",
+            "04_purpurite_metallic",
+            "05_carrara_white_metallic",
+            "06_jet_black_metallic",
+            "07_moonlight_blue_metallic",
+            "08_rhodium_silver_metallic",
+            "09_sapphire_blue_metallic",
+            "10_palladium_metallic",
+            "11_mahogany_metallic"
+        ]
+    },
+    {
+        "name": "ks_porsche_cayman_gt4_clubsport",
+        "description": "Porsche Cayman GT4 Clubsport",
+        "paintings": [
+            "00_clubsport",
+            "02_cup_01",
+            "03_cup_02",
+            "04_cup_03",
+            "05_cup_05",
+            "06_cup_06",
+            "07_cup_07",
+            "08_cup_08",
+            "09_cup_09",
+            "10_cup_10",
+            "11_cup_11",
+            "12_cup_12",
+            "13_cup_13",
+            "14_cup_26",
+            "15_cup_33",
+            "16_cup_46",
+            "17_cup_76",
+            "18_cup_62",
+            "19_cup_63",
+            "20_cup_64"
+        ]
+    },
+    {
+        "name": "ks_porsche_cayman_gt4_std",
+        "description": "Porsche Cayman GT4",
+        "paintings": [
+            "00_racing_yellow",
+            "01_agate_grey_metallic",
+            "02_black",
+            "03_carmine_red",
+            "04_carrara_white_metallic",
+            "05_gt_silver_metallic",
+            "06_guards_red",
+            "07_jet_black_metallic",
+            "08_rhodium_silver_metallic",
+            "09_sapphire_blue_metallic",
+            "10_white",
+            "11_dark_blue_metallic"
+        ]
+    },
+    {
+        "name": "ks_porsche_macan",
+        "description": "Porsche Macan Turbo",
+        "paintings": [
+            "00_agate_grey_metallic",
+            "01_black",
+            "02_white",
+            "03_carmine_red",
+            "05_carrara_white_metallic",
+            "06_jet_black_metallic",
+            "07_volcano_grey_metallic",
+            "08_rhodium_silver_metallic",
+            "09_sapphire_blue_metallic",
+            "10_night_blue_metallic",
+            "11_mahogany_metallic",
+            "12_meteor_grey_metallic"
+        ]
+    },
+    {
+        "name": "ks_porsche_panamera",
+        "description": "Porsche Panamera Turbo",
+        "paintings": [
+            "00_sapphire_blue_metallic",
+            "01_black",
+            "02_white",
+            "03_carmine_red",
+            "04_gt_silver_metallic",
+            "05_carrara_white_metallic",
+            "06_jet_black_metallic",
+            "07_volcano_grey_metallic",
+            "08_rhodium_silver_metallic",
+            "09_agate_grey_metallic",
+            "10_night_blue_metallic",
+            "11_mahogany_metallic",
+            "12_palladium_metallic",
+            "13_amethyst_metallic",
+            "14_chalk"
+        ]
+    },
+    {
+        "name": "ks_praga_r1",
+        "description": "Praga R1",
+        "paintings": [
+            "00_praga_cars_racing_blue",
+            "01_praga_cars_racing_9",
+            "02_gryphon_racing_69",
+            "04_monticello_motor_club_36",
+            "05_robert_haub_69",
+            "06_power_sport_racing_56",
+            "07_gryphon_racing_69",
+            "08_blueberry_racing_771",
+            "09_racing_praga_27",
+            "10_Gryphon_racing_13",
+            "11_blueberry_racing_770",
+            "12_endurance_2015_01"
+        ]
+    },
+    {
+        "name": "ks_ruf_rt12r",
+        "description": "RUF RT12 R",
+        "paintings": [
+            "0_official",
+            "Green",
+            "black",
+            "black_matte_silver",
+            "blue",
+            "kunos_fanatec",
+            "light_blue",
+            "light_green",
+            "lime",
+            "orange",
+            "purple",
+            "red",
+            "silver",
+            "silver_matte",
+            "silver_matte_gr",
+            "white",
+            "yellow"
+        ]
+    },
+    {
+        "name": "ks_ruf_rt12r_awd",
+        "description": "RUF RT12 R AWD",
+        "paintings": [
+            "0_official",
+            "Green",
+            "black",
+            "black_matte_silver",
+            "blue",
+            "kunos",
+            "light_blue",
+            "light_green",
+            "lime",
+            "orange",
+            "purple",
+            "red",
+            "silver",
+            "silver_matte",
+            "silver_matte_gr",
+            "white",
+            "yellow"
+        ]
+    },
+    {
+        "name": "ks_toyota_ae86",
+        "description": "Toyota AE86",
+        "paintings": [
+            "00_white",
+            "01_black",
+            "02_blue_met",
+            "03_silver_gray",
+            "04_red",
+            "05_white_carbon",
+            "06_dark_orange_met",
+            "07_wine_met",
+            "08_black_met",
+            "09_light_topaz_met",
+            "10_lt_bluemd_blue",
+            "11_shell_met",
+            "12_medium_blue_met",
+            "14_silver_black",
+            "15_white_bhood",
+            "16_yellow"
+        ]
+    },
+    {
+        "name": "ks_toyota_ae86_drift",
+        "description": "Toyota AE86 Drift",
+        "paintings": [
+            "00_ksdrift7",
+            "01_ksdrift3",
+            "02_ksdrift8",
+            "03_ksdrift5",
+            "04_ksdrift4",
+            "05_ksdrift2",
+            "06_ksdrift6",
+            "07_ksdrift1"
+        ]
+    },
+    {
+        "name": "ks_toyota_ae86_tuned",
+        "description": "Toyota AE86 Tuned",
+        "paintings": [
+            "01_spooler_16",
+            "02_spooler_17",
+            "03_toyo_84",
+            "04_trd_86",
+            "05_white_carbon"
+        ]
+    },
+    {
+        "name": "ks_toyota_gt86",
+        "description": "Toyota GT86",
+        "paintings": [
+            "0_fusion_orange",
+            "crystal_black",
+            "crystal_white_pearl",
+            "dark_grey",
+            "galaxy_blue",
+            "gravity_blue",
+            "ice_silver",
+            "ignition_red",
+            "lightning_red",
+            "rsrnurburg",
+            "velocity_orange",
+            "vivid_yellow"
+        ]
+    },
+    {
+        "name": "ks_toyota_supra_mkiv",
+        "description": "Toyota Supra MKIV",
+        "paintings": [
+            "00_super_red",
+            "01_dark_green_pearl_met",
+            "02_super_white",
+            "03_silver_met",
+            "04_black",
+            "05_blue_pearl_met"
+        ]
+    },
+    {
+        "name": "ks_toyota_supra_mkiv_drift",
+        "description": "Toyota Supra MKIV Drift",
+        "paintings": [
+            "00_orange",
+            "01_black",
+            "02_blue",
+            "03_red",
+            "04_silver",
+            "05_white",
+            "06_yellow",
+            "07_ksart",
+            "08_classic_yellow"
+        ]
+    },
+    {
+        "name": "ks_toyota_supra_mkiv_tuned",
+        "description": "Toyota Supra MKIV Time Attack",
+        "paintings": [
+            "00_kunos",
+            "01_art",
+            "03_tims",
+            "04_toyo_stripe",
+            "05_red_carbon",
+            "06_black_carbon",
+            "07_purple_carbon",
+            "08_white_carbon",
+            "09_lime_carbon",
+            "10_silver_stripe",
+            "11_black_stripe",
+            "12_blue_stripe",
+            "13_white_stripe"
+        ]
+    },
+    {
+        "name": "ktm_xbow_r",
+        "description": "KTM X-Bow R",
+        "paintings": [
+            "00_orange_14",
+            "01_blue_01",
+            "02_isotope_green_10",
+            "03_dark_grey_06",
+            "04_yellow_07",
+            "05_light_blue_04",
+            "06_red_18",
+            "07_dark_grey_09",
+            "08_orange_19",
+            "09_red_15",
+            "10_blue_02",
+            "11_carbon_03",
+            "12_cyan_05",
+            "13_light_grey_08",
+            "14_isotope_green_11",
+            "15_lemon_12",
+            "16_light_grey_13",
+            "17_green_20"
+        ]
+    },
+    {
+        "name": "lotus_2_eleven",
+        "description": "Lotus 2-Eleven",
+        "paintings": [
+            "2_eleven",
+            "kunos_racing_40",
+            "kunos_racing_41",
+            "red"
+        ]
+    },
+    {
+        "name": "lotus_2_eleven_gt4",
+        "description": "Lotus 2-Eleven GT4",
+        "paintings": [
+            "2ELEVEN_13",
+            "2ELEVEN_14",
+            "2ELEVEN_15",
+            "2ELEVEN_16",
+            "Atech_Green_07",
+            "Atech_Orange_08",
+            "Cloud9_19",
+            "Cloud9_20",
+            "DGFX_Blue_06",
+            "DGFX_Red_05",
+            "Kunos_Racing_11",
+            "Kunos_Racing_12",
+            "Lotus_Black_03",
+            "Lotus_Green_01",
+            "Lotus_White_04",
+            "Lotus_Yellow_02",
+            "Mareo_Wins_09",
+            "Mareo_Wins_10",
+            "Taurus_17",
+            "Taurus_18"
+        ]
+    },
+    {
+        "name": "lotus_49",
+        "description": "Lotus Type 49",
+        "paintings": [
+            "00_default",
+            "1967_02",
+            "1967_03",
+            "1967_05",
+            "1967_06",
+            "1967_12",
+            "1967_14",
+            "1967_15",
+            "1967_16",
+            "1967_18",
+            "1967_20",
+            "1967_29",
+            "1967_32",
+            "1967_34",
+            "1967__07",
+            "1967__17",
+            "racing_22",
+            "racing_5"
+        ]
+    },
+    {
+        "name": "lotus_98t",
+        "description": "Lotus 98T",
+        "paintings": [
+            "0_delonghi_11",
+            "DeLonghi_12",
+            "Mullberry_17",
+            "Mullberry_18",
+            "brokmans_13",
+            "brokmans_14",
+            "craft_03",
+            "craft_04",
+            "dline_01",
+            "dline_02",
+            "dome_15",
+            "dome_16",
+            "eastern_07",
+            "eastern_08",
+            "epoxo_09",
+            "epoxo_10",
+            "race_trim_19",
+            "race_trim_20",
+            "wilson_05",
+            "wilson_06"
+        ]
+    },
+    {
+        "name": "lotus_elise_sc",
+        "description": "Lotus Elise SC",
+        "paintings": [
+            "0_racing_green",
+            "black_metallic",
+            "blue_metallic",
+            "grey_metallic",
+            "orange_metallic",
+            "signature_grey",
+            "silver_metallic",
+            "solid_red",
+            "solid_yellow",
+            "white_metallic"
+        ]
+    },
+    {
+        "name": "lotus_elise_sc_s1",
+        "description": "Lotus Elise SC Step1",
+        "paintings": [
+            "0_Motorsport_Green",
+            "Aquamarine_Blue",
+            "Autumn_Bronze",
+            "Chrome_Orange",
+            "Ice_White",
+            "Laser_Blue",
+            "Quartz_Silver",
+            "Sienna_Brown",
+            "Starlight_Black",
+            "Velvet_Red"
+        ]
+    },
+    {
+        "name": "lotus_elise_sc_s2",
+        "description": "Lotus Elise SC Step2",
+        "paintings": [
+            "0_Racing_Green_Stripe",
+            "Amethyst_Grey",
+            "Ardent_Red",
+            "Canyon_Red",
+            "Frost_Blue",
+            "Isotope_Green",
+            "Liquid_Blue",
+            "Persian_Blue",
+            "Solar_Yellow",
+            "Storm_Titanium"
+        ]
+    },
+    {
+        "name": "lotus_evora_gtc",
+        "description": "Lotus Evora GTC",
+        "paintings": [
+            "Burnt_Orange",
+            "Carbon_Grey",
+            "Motorsport_Green",
+            "Motorsport_Green_Cosworth",
+            "Phantom_Black",
+            "Quartz_Silver",
+            "Solar_Yellow",
+            "battery_tender",
+            "bull_run",
+            "racing_green",
+            "red"
+        ]
+    },
+    {
+        "name": "lotus_evora_gte",
+        "description": "Lotus Evora GTE",
+        "paintings": [
+            "0_yellow",
+            "black_red",
+            "grey",
+            "kunos_racing_72",
+            "red",
+            "red_stripes",
+            "white_black"
+        ]
+    },
+    {
+        "name": "lotus_evora_gte_carbon",
+        "description": "Lotus Evora GTE Carbon",
+        "paintings": [
+            "carbon"
+        ]
+    },
+    {
+        "name": "lotus_evora_gx",
+        "description": "Lotus Evora GX",
+        "paintings": [
+            "Burnt_Orange",
+            "Carbon_Grey",
+            "Motorsport_Green",
+            "Phantom_Black",
+            "Quartz_Silver",
+            "Solar_Yellow",
+            "battery_tender",
+            "default",
+            "racing_green",
+            "red"
+        ]
+    },
+    {
+        "name": "lotus_evora_s",
+        "description": "Lotus Evora S",
+        "paintings": [
+            "0_Racing_Green",
+            "Aquamarine_Blue",
+            "Aspen_White",
+            "Canyon_Red",
+            "Chrome_Orange",
+            "Nightfall_Blue",
+            "Quartz_Silver",
+            "Solar_Yellow"
+        ]
+    },
+    {
+        "name": "lotus_evora_s_s2",
+        "description": "Lotus Evora S Stage 2",
+        "paintings": [
+            "0_Motorsport_Green",
+            "Amethyst_Grey",
+            "Ardent_Red",
+            "Autumn_Bronze",
+            "Carbon_Grey",
+            "Phantom_Black",
+            "Sienna_Brown"
+        ]
+    },
+    {
+        "name": "lotus_exige_240",
+        "description": "Lotus Exige 240R",
+        "paintings": [
+            "orange",
+            "red"
+        ]
+    },
+    {
+        "name": "lotus_exige_240_s3",
+        "description": "Lotus Exige 240R Stage3",
+        "paintings": [
+            "0_motorsport_green_stripe",
+            "black",
+            "blue_dsd",
+            "light_blue_orange",
+            "orange_aris",
+            "red_dgfx",
+            "tcr_2014"
+        ]
+    },
+    {
+        "name": "lotus_exige_s",
+        "description": "Lotus Exige S",
+        "paintings": [
+            "0_racing_green",
+            "Amethyst_Grey",
+            "Aquamarine_Blue",
+            "Ardent_Red",
+            "Artic_Silver",
+            "Aspen_White",
+            "Autumn_Bronze",
+            "Burnt_Orange",
+            "Canyon_Red",
+            "Carbon_Grey",
+            "Chrome_Orange",
+            "Frost_Blue",
+            "Graphite_Grey",
+            "Ice_White",
+            "Isotope_Green",
+            "Laser_Blue",
+            "Liquid_Blue",
+            "Motorsport_Green",
+            "Nightfall_Blue",
+            "Persian_Blue",
+            "Phantom_Black",
+            "Quartz_Silver",
+            "Sienna_Brown",
+            "Solar_Yellow",
+            "Starlight_Black",
+            "Storm_Titanium",
+            "Velvet_Red"
+        ]
+    },
+    {
+        "name": "lotus_exige_s_roadster",
+        "description": "Lotus Exige S roadster",
+        "paintings": [
+            "0_racing_green",
+            "Amethyst_Grey",
+            "Ardent_Red",
+            "Artic_Silver",
+            "Aspen_White",
+            "Autumn_Bronze",
+            "Burnt_Orange",
+            "Canyon_Red",
+            "Motorsport_Green",
+            "Nightfall_Blue",
+            "Phantom_Black",
+            "Solar_Yellow"
+        ]
+    },
+    {
+        "name": "lotus_exige_scura",
+        "description": "Lotus Exige Scura",
+        "paintings": [
+            "scura"
+        ]
+    },
+    {
+        "name": "lotus_exige_v6_cup",
+        "description": "Lotus Exige V6 CUP",
+        "paintings": [
+            "0_solar_yellow",
+            "Ardent_Red",
+            "Chrome_Orange",
+            "Grey",
+            "Nightfall_Blue",
+            "Quartz_Silver",
+            "Starlight_Black",
+            "racing_green"
+        ]
+    },
+    {
+        "name": "lotus_exos_125",
+        "description": "Lotus Exos 125",
+        "paintings": [
+            "0_Lotus",
+            "Premiere",
+            "carbon"
+        ]
+    },
+    {
+        "name": "lotus_exos_125_s1",
+        "description": "Lotus Exos 125 Stage 1",
+        "paintings": [
+            "00_racing_green",
+            "01_lotus_legends",
+            "02_racing_23",
+            "03_racing_24",
+            "04_racing_25",
+            "05_racing_68",
+            "06_racing_22",
+            "07_kunos_racing",
+            "08_kunos_black",
+            "09_kunos_green",
+            "10_kunos_red",
+            "11_black_red",
+            "12_german_grey"
+        ]
+    },
+    {
+        "name": "mclaren_mp412c",
+        "description": "McLaren MP4-12C",
+        "paintings": [
+            "0_mclaren_orange",
+            "azure_blue",
+            "carbon_black",
+            "mercury_red",
+            "orange_rsr",
+            "pearl_white",
+            "silver",
+            "silver_rsr",
+            "volcano_orange",
+            "volcano_red",
+            "volcano_yellow"
+        ]
+    },
+    {
+        "name": "mclaren_mp412c_gt3",
+        "description": "McLaren MP4-12C GT3",
+        "paintings": [
+            "0_2013-Official_McLaren",
+            "2012-Gemballa_Racing",
+            "2012-United_Autosports",
+            "2012-g_racing",
+            "2013-ART_GrandPrix",
+            "2013-Hexis_Racing"
+        ]
+    },
+    {
+        "name": "mercedes_sls",
+        "description": "Mercedes SLS AMG",
+        "paintings": [
+            "Argento_Iridio",
+            "Grigio_Alanite_designo",
+            "Mystic_White_designo",
+            "Nero_Ossidiana",
+            "Rosso_Opale"
+        ]
+    },
+    {
+        "name": "mercedes_sls_gt3",
+        "description": "Mercedes SLS AMG GT3",
+        "paintings": [
+            "0_AMG",
+            "ALL_INKL_37",
+            "ALL_INKL_38",
+            "Black_Falcon_Dubai_24H_1",
+            "Black_Falcon_Dubai_24H_2",
+            "Black_Falcon_Porta_9",
+            "Black_Falcon_SB_Mobel_Boss_10",
+            "Kunos_zp_115",
+            "Kunos_zp_116",
+            "Kunos_zp_117",
+            "TCR_2014_05",
+            "TCR_2014_65",
+            "kunos_zp_121"
+        ]
+    },
+    {
+        "name": "p4-5_2011",
+        "description": "P4/5 Competizione 2011",
+        "paintings": [
+            "2011"
+        ]
+    },
+    {
+        "name": "pagani_huayra",
+        "description": "Pagani Huayra",
+        "paintings": [
+            "2013_car_of_the_year",
+            "black",
+            "cadet_grey",
+            "casper",
+            "cerulean",
+            "dark_grey",
+            "dark_sienna",
+            "firebrick",
+            "graphite",
+            "ice",
+            "light_grey",
+            "light_sapphire",
+            "mountbatten_violet",
+            "night_black",
+            "ochre",
+            "orange",
+            "peru",
+            "red",
+            "rust",
+            "scarlet",
+            "silver",
+            "slate_blue",
+            "slate_violet",
+            "titanium",
+            "white",
+            "yellow"
+        ]
+    },
+    {
+        "name": "pagani_zonda_r",
+        "description": "Pagani Zonda R",
+        "paintings": [
+            "00_default",
+            "01_world_record",
+            "02_kunos_racing"
+        ]
+    },
+    {
+        "name": "ruf_yellowbird",
+        "description": "RUF CTR Yellowbird",
+        "paintings": [
+            "00_yellowbird_black",
+            "01_yellowbird_silver",
+            "02_yellowbird_silverblack",
+            "03_black",
+            "04_green",
+            "05_blue",
+            "06_red_blackrims",
+            "07_blue_blackrims",
+            "08_green_blackrims",
+            "09_red",
+            "10_black_blackrims"
+        ]
+    },
+    {
+        "name": "shelby_cobra_427sc",
+        "description": "Shelby Cobra 427 S/C",
+        "paintings": [
+            "50th_anniversary",
+            "black_15",
+            "black_34",
+            "blue_44",
+            "blue_95",
+            "brick_red_90",
+            "dark_blue_52",
+            "dark_blue_96",
+            "dark_red_98",
+            "light_blue_67",
+            "light_blue_69",
+            "red_27",
+            "red_71",
+            "silver_6",
+            "silver_8",
+            "white_11",
+            "white_23",
+            "white_60",
+            "yellow_13",
+            "yellow_33"
+        ]
+    },
+    {
+        "name": "tatuusfa1",
+        "description": "Tatuus FA01",
+        "paintings": [
+            "scheme_0",
+            "scheme_1",
+            "scheme_2",
+            "scheme_3",
+            "scheme_4"
+        ]
+    }
+]
