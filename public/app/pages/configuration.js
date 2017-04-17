@@ -268,7 +268,7 @@ Vue.component('Configuration', {
 
 				// track
 				for(var i = 0; i < this.tracks.length; i++){
-					if(this.tracks[i].name == resp.data.track){
+					if(this.tracks[i].name == resp.data.track && this.tracks[i].config == resp.data.track_config){
 						this.selectTrack(i);
 						break;
 					}
