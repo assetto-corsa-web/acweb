@@ -844,7 +844,29 @@
     {
         "name": "ks_ferrari_488_gt3",
         "description": "Ferrari 488 GT3",
-        "paintings": []
+        "paintings": [
+            "00_rosso_scuderia",
+            "01_racing_483",
+            "02_racing_487",
+            "03_racing_480",
+            "04_racing_500",
+            "05_racing_502",
+            "06_racing_489",
+            "07_racing_501",
+            "08_racing_490",
+            "09_racing_491",
+            "10_racing_492",
+            "11_racing_493",
+            "12_racing_494",
+            "13_racing_495",
+            "14_racing_496",
+            "15_racing_497",
+            "16_racing_498",
+            "17_racing_499",
+            "18_racing_503",
+            "19_racing_504",
+            "20_racing_505"
+        ]
     },
     {
         "name": "ks_ferrari_488_gtb",
@@ -872,7 +894,11 @@
     {
         "name": "ks_ferrari_f138",
         "description": "Ferrari F138",
-        "paintings": []
+        "paintings": [
+            "00_official",
+            "01_ferrari_3",
+            "02_ferrari_4"
+        ]
     },
     {
         "name": "ks_ferrari_fxx_k",
@@ -891,7 +917,11 @@
     {
         "name": "ks_ferrari_sf15t",
         "description": "Ferrari SF15-T",
-        "paintings": []
+        "paintings": [
+            "00_default",
+            "01_ferrari_5",
+            "02_ferrari_7"
+        ]
     },
     {
         "name": "ks_ford_escort_mk1",
@@ -979,7 +1009,42 @@
     {
         "name": "ks_lamborghini_aventador_sv",
         "description": "Lamborghini Aventador SV",
-        "paintings": []
+        "paintings": [
+            "00_rosso_bia_glittered",
+            "01_giallo_evros_solid",
+            "02_arancio_argos_pearl",
+            "03_azzurro_thetys_metal",
+            "04_verde_ithaca_pearl",
+            "05_nero_pegaso_metal",
+            "06_verde_ermes_metal",
+            "07_oro_elios_metal",
+            "08_rosso_mars_metallic",
+            "09_grigio_thalasso_metal",
+            "10_giallo_horus_matt",
+            "11_blue_cepheus_pearl",
+            "12_grigio_telesto_pearl",
+            "13_arancio_atlas_pearl",
+            "14_blu_fontus_metal",
+            "15_grigio_estoque_metal",
+            "16_marrone_apus_matt",
+            "17_nero_nemesis_matt",
+            "18_bianco_isis",
+            "19_grigio_titans_matt",
+            "20_grigio_lynx_metal",
+            "21_new_giallo_orion_pearl",
+            "22_giallo_tenerife_pearl",
+            "23_blu_sideris_glittered",
+            "24_blu_nethus_metal",
+            "25_blu_caelum_metal",
+            "26_bianco_canopus_matt",
+            "27_blu_glauco_solid",
+            "28_balloon_white_pearl",
+            "29_blu_hera_metal",
+            "30_grigio_antares_metal",
+            "31_nero_aldebaran_solid",
+            "32_rosso_efesto_metal",
+            "33_verde_scandal_solid"
+        ]
     },
     {
         "name": "ks_lamborghini_countach",
@@ -1187,17 +1252,66 @@
     {
         "name": "ks_maserati_250f_12cyl",
         "description": "Maserati 250F 12 cylinder",
-        "paintings": []
+        "paintings": [
+            "00_racing_06",
+            "01_racing_02",
+            "02_racing_12",
+            "03_racing_14",
+            "04_racing_15",
+            "05_racing_18",
+            "06_racing_22",
+            "07_racing_24",
+            "08_racing_26",
+            "09_racing_282",
+            "10_racing_283",
+            "11_racing_29",
+            "12_racing_30",
+            "13_racing_33",
+            "14_racing_52",
+            "15_racing_53",
+            "16_racing_54"
+        ]
     },
     {
         "name": "ks_maserati_250f_6cyl",
         "description": "Maserati 250F 6 cylinder",
-        "paintings": []
+        "paintings": [
+            "00_racing_01",
+            "01_racing_03",
+            "02_racing_05",
+            "03_racing_06",
+            "04_racing_13",
+            "05_racing_16",
+            "06_racing_20",
+            "07_racing_21",
+            "08_racing_24",
+            "09_racing_25",
+            "10_racing_27",
+            "11_racing_28",
+            "12_racing_56"
+        ]
     },
     {
         "name": "ks_maserati_gt_mc_gt4",
         "description": "Maserati GranTurismo MC GT4",
-        "paintings": []
+        "paintings": [
+            "00_official",
+            "01_racing_12",
+            "02_racing_14",
+            "03_racing_17",
+            "04_racing_34",
+            "05_racing_56",
+            "06_racing_58",
+            "07_racing_67",
+            "08_racing_82",
+            "09_racing_89",
+            "10_racing_40",
+            "11_racing_41",
+            "12_racing_44",
+            "13_racing_65",
+            "14_racing_190",
+            "15_red"
+        ]
     },
     {
         "name": "ks_maserati_levante",
