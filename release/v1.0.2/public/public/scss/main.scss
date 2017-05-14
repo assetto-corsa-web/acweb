@@ -1,0 +1,184 @@
+@import "roboto.scss";
+@import "fa/font-awesome.scss";
+@import "shadow.scss";
+
+$font_family: "Roboto";
+$font_size_large: 20px;
+$font_size: 16px;
+$font_size_small: 12px;
+$font_color: #333;
+$line_height: 1.5;
+
+$bg_color: #FAFAFA;
+$highlight: #ea141e;
+$gray: #9E9E9E;
+$light_gray: #EEEEEE;
+$dark_gray: #212121;
+$green: #4CAF50;
+$yellow: #FFEB3B;
+$red: #F44336;
+
+$shadow_animation_speed: 0.3s;
+
+.font{
+	font-family: $font_family;
+	font-size: $font_size;
+	color: $font_color;
+}
+
+html, body{
+	@extend .font;
+
+	padding: 0;
+	margin: 0;
+	line-height: $line_height;
+	background: $bg_color;
+}
+
+.wrapper{
+	padding: 20px;
+}
+
+.box{
+	@extend .shadow-l1;
+
+	background: #fff;
+	margin: 0 0 20px 0;
+}
+
+// messages
+
+.msg{
+	padding: 20px;
+	margin: 20px 0 20px 0;
+	background: #fff;
+	border-style: solid;
+	border-width: 1px 1px 1px 5px;
+
+	.close{
+		float: right;
+		margin: 0 0 -10px 0;
+	}
+
+	.close:hover{
+		cursor: pointer;
+	}
+}
+
+.success{
+	@extend .msg;
+	
+	border-color: $green;
+}
+
+.warn{
+	@extend .msg;
+	
+	border-color: $yellow;
+}
+
+.error{
+	@extend .msg;
+
+	border-color: $red;
+}
+
+// login
+
+.login{
+	max-width: 400px;
+	margin: 100px auto 20px auto;
+
+	.center{
+		text-align: center;
+	}
+
+	.version{
+		font-size: $font_size_small;
+		text-align: center;
+	}
+}
+
+// menu
+
+.menu{
+	@extend .shadow-l1;
+
+	position: fixed;
+	width: 100%;
+	top: 0;
+	height: 40px;
+	background: $dark_gray;
+	padding: 0 20px 0 20px;
+
+	.wrapper{
+		padding: 0 20px 0 20px;
+	}
+
+	.logo{
+		float: left;
+		width: 40px;
+		height: 40px;
+		margin: 0 20px 0 0;
+		background: url("../img/aclogo_small.png");
+	}
+
+	a{
+		display: block;
+		float: left;
+		padding: 8px 15px 8px 15px;
+		color: #fff;
+		font-weight: bold;
+	}
+
+	a:hover{
+		background: $light_gray;
+		color: $font_color;
+	}
+
+	.right{
+		float: right;
+	}
+}
+
+// main
+
+.main{
+	padding: 20px;
+	margin: 40px 0 0 0;
+}
+
+// util
+
+img.track{
+	float: left;
+	margin: 0 20px 0 0;
+}
+
+.select{
+	height: 400px;
+	overflow-y: scroll;
+	border: 1px solid $light_gray;
+	margin: 5px;
+
+	.option{
+		padding: 5px;
+	}
+
+	.option:hover{
+		cursor: pointer;
+		background: $light_gray;
+		color: $font_color;
+	}
+
+	.selected{
+		background: $highlight;
+		color: #fff;
+	}
+}
+
+.fa:hover{
+	cursor: pointer;
+}
+
+@import "html.scss";
