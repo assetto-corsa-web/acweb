@@ -1,4 +1,4 @@
-var VERSION = '1.0.0';
+var VERSION = '1.0.2';
 var _MS_PER_DAY = 1000 * 60 * 60 * 24;
 
 // Returns date in format dd.mm.yyyy hh:mi:ss.

@@ -1,4 +1,0 @@
-#!/bin/bash
-
-node-sass --output css scss/main.scss
-node-sass --watch --output css scss/main.scss
