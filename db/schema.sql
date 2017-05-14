@@ -6,6 +6,10 @@ CREATE TABLE `cars` (
   `configuration` int(10) UNSIGNED NOT NULL,
   `car` varchar(100) NOT NULL,
   `painting` varchar(100) NOT NULL,
+  `spectator` tinyint(1) NOT NULL,
+  `driver` varchar(40) NOT NULL,
+  `team` varchar(40) NOT NULL,
+  `guid` varchar(100) NOT NULL,
   `position` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -82,7 +86,9 @@ CREATE TABLE `user` (
   `id` int(10) UNSIGNED NOT NULL,
   `login` varchar(40) NOT NULL,
   `email` varchar(200) NOT NULL,
-  `password` varchar(64) NOT NULL
+  `password` varchar(64) NOT NULL,
+  `admin` tinyint(1) NOT NULL,
+  `moderator` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `weather` (
@@ -116,18 +122,19 @@ ALTER TABLE `weather`
 
 
 ALTER TABLE `cars`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 ALTER TABLE `configurations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 ALTER TABLE `settings`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 ALTER TABLE `user`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 ALTER TABLE `weather`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 ALTER TABLE `cars`
   ADD CONSTRAINT `cars_config_fk` FOREIGN KEY (`configuration`) REFERENCES `configurations` (`id`);
 
 ALTER TABLE `weather`
   ADD CONSTRAINT `weather_config_fk` FOREIGN KEY (`configuration`) REFERENCES `configurations` (`id`);
+
