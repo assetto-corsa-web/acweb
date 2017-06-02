@@ -15,7 +15,24 @@ This tool provides monitoring and management for your Assetto Corsa server insta
 
 ## Install using Docker
 
-*WIP*
+The easiest way to install acweb is to use [Docker](https://hub.docker.com/r/kugel/acweb/):
+
+1. install Docker on your (Linux) server
+2. pull the latest release:
+
+```
+docker pull kugel/acweb
+```
+
+3. install MySQL on your server or use a docker image
+4. follow step 3 and 4 in the manual installation. You can overwrite the environment variables by using the -e parameter
+5. start the Docker container:
+
+```
+sudo docker run -d --net=host kugel/acweb
+```
+
+This will use a MySQL database installed on your host machine. To use a MySQL database running in a container, please rever to the official [MySQL image](https://hub.docker.com/_/mysql/).
 
 ## Manual installation
 
@@ -28,6 +45,8 @@ This instruction supposes you to use Linux. On Windows you basically need to per
 ```
 INSERT INTO `user` (`id`, `login`, `email`, `password`, `admin`, `moderator`) VALUES (NULL, 'username', 'user@email.com', 'SHA256_HASH', '1', '0');
 ```
+
+Note that the user password must be a SHA256 hash. You can find tools online to create one from a clear password.
 
 4. set the environment variables to configure your server:
 
@@ -61,6 +80,8 @@ export ACWEB_DB=acweb
 4. update your MySQL database (migration scripts can be found in db/mig_FROMVERSION_TOVERSION.sql)
 5. start it
 
+For Docker pull the latest release and start it.
+
 ## Adding tracks and cars
 
 To add tracks and cars, from a mod for instance, you must add them to the cars.json and tracks.json configuration files to make them appear in the web interface:
@@ -91,6 +112,12 @@ To add tracks and cars, from a mod for instance, you must add them to the cars.j
     },
     // ...
 ```
+
+## Links
+
+* [Docker Hub](https://hub.docker.com/r/kugel/acweb/)
+* [Assetto Corsa Forums](http://www.assettocorsa.net/forum/index.php?threads/ac-server-web-interface.44582)
+* [Spieleprogrammierer.de](https://www.spieleprogrammierer.de/12-projektvorstellungen-und-stellenangebote/26396-tool-assetto-corsa-server-web-interface/?highlight=)
 
 ## License
 
