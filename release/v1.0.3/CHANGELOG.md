@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.3
+
+Now providing a docker image! Configuration is now done via environment variables, see README.md for details.
+
 ## 1.0.2
 
 * fixed: added missing columns to schema.sql
