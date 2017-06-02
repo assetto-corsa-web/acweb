@@ -2,9 +2,7 @@ package main
 
 import (
 	"db"
-	"encoding/json"
 	"github.com/DeKugelschieber/go-session"
-	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
@@ -23,43 +21,9 @@ const (
 	session_cookie_lifetime = 60 * 60 * 24
 )
 
-// Default configuration with server, port, database and log file.
-type config struct {
-	Host          string `json:"host"`
-	TLSPrivateKey string `json:"tls_private_key"`
-	TLSCert       string `json:"tls_cert"`
-	DbUser        string `json:"dbuser"`
-	DbPwd         string `json:"dbpwd"`
-	DbHost        string `json:"dbhost"`
-	Db            string `json:"db"`
-	LogFile       string `json:"logfile"`
-}
-
-var (
-	cfg config
-)
-
-// Loads config from json.
-func loadConfig(file string) {
-	cfg = config{}
-
-	// read
-	log.Print("Loading config file: ", file)
-	content, err := ioutil.ReadFile(file)
-
-	if err != nil {
-		panic(err)
-	}
-
-	// parse
-	if err := json.Unmarshal(content, &cfg); err != nil {
-		panic(err)
-	}
-}
-
 // Log to file if logfile name is set.
 func logToFile() *os.File {
-	if cfg.LogFile == "" {
+	if os.Getenv("ACWEB_LOGDIR") == "" {
 		return nil
 	}
 
@@ -70,7 +34,7 @@ func logToFile() *os.File {
 	}
 
 	now := time.Now().Format("02.01.2006_15:04:05")
-	handle, err := os.Create(filepath.Join(log_dir, cfg.LogFile+"_"+now))
+	handle, err := os.Create(filepath.Join(log_dir, os.Getenv("ACWEB_LOGDIR")+"_"+now))
 
 	if err != nil {
 		panic(err)
@@ -83,7 +47,7 @@ func logToFile() *os.File {
 
 // Starts the RESTful server.
 func startServer() {
-	log.Print("Starting server on ", cfg.Host)
+	log.Print("Starting server on ", os.Getenv("ACWEB_HOST"))
 
 	mux := http.NewServeMux()
 	mux.Handle("/robots.txt", http.HandlerFunc(returnRobotsTxt))
@@ -99,14 +63,14 @@ func startServer() {
 	mux.Handle("/api/instance", session.AccessMiddleware(http.HandlerFunc(rest.InstanceHandler), returnSessionErr))
 	mux.Handle("/api/instance/log", session.AccessMiddleware(http.HandlerFunc(rest.InstanceLogHandler), returnSessionErr))
 
-	if cfg.TLSPrivateKey == "" || cfg.TLSCert == "" {
-		if err := http.ListenAndServe(cfg.Host, mux); err != nil {
+	if os.Getenv("ACWEB_TLS_PRIVATE_KEY") == "" || os.Getenv("ACWEB_TLS_CERT") == "" {
+		if err := http.ListenAndServe(os.Getenv("ACWEB_HOST"), mux); err != nil {
 			panic(err)
 		}
 	} else {
 		log.Print("Started with TLS enabled")
 
-		if err := http.ListenAndServeTLS(cfg.Host, cfg.TLSCert, cfg.TLSPrivateKey, mux); err != nil {
+		if err := http.ListenAndServeTLS(os.Getenv("ACWEB_HOST"), os.Getenv("ACWEB_TLS_CERT"), os.Getenv("ACWEB_TLS_PRIVATE_KEY"), mux); err != nil {
 			panic(err)
 		}
 	}
@@ -124,8 +88,7 @@ func returnSessionErr(w http.ResponseWriter, r *http.Request) bool {
 }
 
 func main() {
-	// load and setup log
-	loadConfig(config_file)
+	// setup log
 	log := logToFile()
 
 	if log != nil {
@@ -133,7 +96,7 @@ func main() {
 	}
 
 	// connect to db
-	db.Connect(cfg.DbUser, cfg.DbPwd, cfg.DbHost, cfg.Db)
+	db.Connect(os.Getenv("ACWEB_DB_USER"), os.Getenv("ACWEB_DB_PASSWORD"), os.Getenv("ACWEB_DB_HOST"), os.Getenv("ACWEB_DB"))
 	defer db.Disconnect()
 
 	// start session manager

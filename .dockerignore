@@ -1,0 +1,15 @@
+db/
+pkg/
+release/
+screenshots/
+tools/
+log/
+server_log/
+.git/
+.gitignore
+CHANGELOG.md
+LICENSE
+REAMDE.md
+aclogo.png
+build_release
+run
