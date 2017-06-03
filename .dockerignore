@@ -1,5 +1,6 @@
 db/
 pkg/
+src/github.com/
 release/
 screenshots/
 tools/
@@ -13,3 +14,4 @@ REAMDE.md
 aclogo.png
 build_release
 run
+
