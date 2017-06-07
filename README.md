@@ -4,6 +4,8 @@
 
 This tool provides monitoring and management for your Assetto Corsa server instances. You can create multiple configuration profiles, start/stop server instances and watch the status of them.
 
+**Screenshots at the bottom of this page!**
+
 ## Install
 
 Note that the scripts within the main directory are not used to start or install the server. They're for development only and not shipped with the release. Download releases from the [GitHub release page](https://github.com/DeKugelschieber/acweb/releases) instead of the release/ directory. If you find any issues installing the server or bugs, please open an issue in the issue section on GitHub.
