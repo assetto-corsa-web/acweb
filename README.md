@@ -4,16 +4,12 @@
 
 This tool provides monitoring and management for your Assetto Corsa server instances. You can create multiple configuration profiles, start/stop server instances and watch the status of them.
 
-## Screenshots
+## Install
 
-![Screenshot 1](screenshots/screen1.png)
-![Screenshot 2](screenshots/screen2.png)
-![Screenshot 3](screenshots/screen3.png)
-![Screenshot 4](screenshots/screen4.png)
-![Screenshot 5](screenshots/screen5.png)
-![Screenshot 6](screenshots/screen6.png)
+Note that the scripts within the main directory are not used to start or install the server. They're for development only and not shipped with the release. Download releases from the [GitHub release page](https://github.com/DeKugelschieber/acweb/releases) instead of the release/ directory. If you find any issues installing the server or bugs, please open an issue in the issue section on GitHub.
+These instructions do not provide information on how to install the Assetto Corsa server itself. On Linux, you basically install steam, login to your account and download **the Windows version** of the game, which also includes the Linux server.
 
-## Install using Docker
+### Install using Docker
 
 The easiest way to install acweb is to use [Docker](https://hub.docker.com/r/kugel/acweb/):
 
@@ -25,16 +21,35 @@ docker pull kugel/acweb
 ```
 
 3. install MySQL on your server or use a docker image
-4. follow step 3 and 4 in the manual installation. You can overwrite the environment variables by using the -e parameter
-5. start the Docker container:
+4. create the database schema (db/schema.sql) and create the first user:
 
 ```
-sudo docker run -d --net=host kugel/acweb
+INSERT INTO `user` (`id`, `login`, `email`, `password`, `admin`, `moderator`) VALUES (NULL, 'username', 'user@email.com', 'SHA256_HASH', '1', '0');
 ```
 
-This will use a MySQL database installed on your host machine. To use a MySQL database running in a container, please rever to the official [MySQL image](https://hub.docker.com/_/mysql/).
+Note that the user password must be a SHA256 hash. You can find tools online to create one from a clear password.
 
-## Manual installation
+5. start the Docker container (adjust the parameters to your needs):
+
+```
+# expose the same port you start the server on: -p PORT:${ACWEB_HOST}
+sudo docker run -d -p 80:8080 --name acweb \
+    -e ACWEB_HOST=0.0.0.0:8080 \
+    -e ACWEB_LOGDIR=log \
+    -e ACWEB_DB_USER=root \
+    -e ACWEB_DB_PASSWORD=password \
+    -e ACWEB_DB_HOST=tcp(127.0.0.1:3306) \
+    -e ACWEB_DB=acweb \
+    kugel/acweb
+
+# make sure its running
+sudo docker ps acweb
+```
+
+This will use a MySQL database installed on your host machine. To use a MySQL database running in a container, please head over to the official [MySQL docker image](https://hub.docker.com/_/mysql/).
+To start the server, you can also use a [docker-compose file](https://docs.docker.com/compose/). I recommend to enable SSL using [letsencrypt](https://letsencrypt.org/) and a reverse proxy.
+
+### Manual installation
 
 This instruction supposes you to use Linux. On Windows you basically need to perform the same steps. You need a MySQL database and rights to upload and execute applications. I recommend to create a user for your web interface installation.
 
@@ -113,6 +128,12 @@ To add tracks and cars, from a mod for instance, you must add them to the cars.j
     // ...
 ```
 
+When added, rebuild the Docker image if you use it or just overwrite the files in the main directory if you don't.
+
+## Contribute
+
+To contribute please open issues and pull requests. The frontend is build using VueJs, [minvue](https://github.com/DeKugelschieber/vuejs-minify) and sass. The backend is build on Go (golang) and MySQL. For details please view the provided scripts within the main directory.
+
 ## Links
 
 * [Docker Hub](https://hub.docker.com/r/kugel/acweb/)
@@ -122,3 +143,12 @@ To add tracks and cars, from a mod for instance, you must add them to the cars.j
 ## License
 
 MIT
+
+## Screenshots
+
+![Screenshot 1](screenshots/screen1.png)
+![Screenshot 2](screenshots/screen2.png)
+![Screenshot 3](screenshots/screen3.png)
+![Screenshot 4](screenshots/screen4.png)
+![Screenshot 5](screenshots/screen5.png)
+![Screenshot 6](screenshots/screen6.png)
