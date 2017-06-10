@@ -31,4 +31,8 @@ ENV ACWEB_DB_PASSWORD=
 ENV ACWEB_DB_HOST=
 ENV ACWEB_DB=acweb
 
+# expose Assetto Corsa folder
+VOLUME ["/ac"]
+
 CMD ["/app/main"]
+

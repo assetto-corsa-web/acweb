@@ -29,10 +29,10 @@ docker pull kugel/acweb
 5. start the Docker container:
 
 ```
-sudo docker run -d --net=host kugel/acweb
+sudo docker run -d --net=host -v /ac/install/path:/ac kugel/acweb
 ```
 
-This will use a MySQL database installed on your host machine. To use a MySQL database running in a container, please rever to the official [MySQL image](https://hub.docker.com/_/mysql/).
+This will use a MySQL database installed on your host machine. To use a MySQL database running in a container, please rever to the official [MySQL image](https://hub.docker.com/_/mysql/). To run server instances, you need to mount the Assetto Corsa installation directory (containing the binary) to /ac. In the UI set the execution path (Settings -> AC server folder) to /ac.
 
 ## Manual installation
 
