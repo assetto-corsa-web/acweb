@@ -35,10 +35,7 @@ Note that the user password must be a SHA256 hash. You can find tools online to 
 
 ```
 # expose the same port you start the server on: -p PORT:${ACWEB_HOST}
-# adjust the environment variables and both volumes to your needs
 sudo docker run -d -p 80:8080 --name acweb \
-    -e ACWEB_HOST=:8080 \
-    -e ACWEB_LOGDIR=log \
     -e ACWEB_DB_USER=root \
     -e ACWEB_DB_PASSWORD=password \
     -e ACWEB_DB_HOST="tcp(127.0.0.1:3306)" \
@@ -51,7 +48,9 @@ sudo docker run -d -p 80:8080 --name acweb \
 sudo docker ps acweb
 ```
 
-This will use a MySQL database installed on your host machine. To use a MySQL database running in a container, please rever to the official [MySQL image](https://hub.docker.com/_/mysql/). To start the server, you can also use a [docker-compose file](https://docs.docker.com/compose/). I recommend to enable SSL using [letsencrypt](https://letsencrypt.org/) and a reverse proxy. To run server instances, you need to mount the Assetto Corsa installation directory (containing the binary) to /ac. In the UI set the execution path (Settings -> AC server folder) to /ac.
+This will use a MySQL database installed on your host machine. To use a MySQL database running in a container, please rever to the official [MySQL image](https://hub.docker.com/_/mysql/). You have to use Dockers --link option to access it, if you don't expose the MySQL port.
+To start the server, you can also use a [docker-compose file](https://docs.docker.com/compose/). I recommend to enable SSL using [letsencrypt](https://letsencrypt.org/) and a reverse proxy.
+To run server instances, you need to mount the Assetto Corsa installation directory (containing the binary) to /ac. In the UI set the execution path (Settings -> AC server folder) to /ac.
 
 ### Manual installation
 
