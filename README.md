@@ -35,14 +35,16 @@ Note that the user password must be a SHA256 hash. You can find tools online to 
 
 ```
 # expose the same port you start the server on: -p PORT:${ACWEB_HOST}
+# adjust the environment variables and both volumes to your needs
 sudo docker run -d -p 80:8080 --name acweb \
-    -e ACWEB_HOST=0.0.0.0:8080 \
+    -e ACWEB_HOST=:8080 \
     -e ACWEB_LOGDIR=log \
     -e ACWEB_DB_USER=root \
     -e ACWEB_DB_PASSWORD=password \
-    -e ACWEB_DB_HOST=tcp(127.0.0.1:3306) \
+    -e ACWEB_DB_HOST="tcp(127.0.0.1:3306)" \
     -e ACWEB_DB=acweb \
-    -v /ac/install/path:/ac
+    -v /ac/install/path:/ac \
+    -v /log/dir/path:/logs \
     kugel/acweb
 
 # make sure its running
