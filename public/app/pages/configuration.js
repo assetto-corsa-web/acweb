@@ -88,8 +88,12 @@ Vue.component('Configuration', {
 			err: 0,
 			addEditConfig: false,
 			removeConfig: false,
+			importConfig: false,
 			saved: false,
-			removed: false
+			removed: false,
+			// ---
+			tmpSrvCfg: null,
+			tmpEntryListCfg: null
 		}
 	},
 	mounted: function(){
@@ -219,6 +223,7 @@ Vue.component('Configuration', {
 			this.err = 0;
 			this.addEditConfig = false;
 			this.removeConfig = false;
+			this.importConfig = false;
 			this.saved = false;
 			this.removed = false;
 		},
@@ -301,13 +306,8 @@ Vue.component('Configuration', {
 				}
 
 				// track
-				for(var i = 0; i < this.tracks.length; i++){
-					if(this.tracks[i].name == resp.data.track && this.tracks[i].config == resp.data.track_config){
-						this.selectTrack(i);
-						break;
-					}
-				}
-				
+				this.findAndSelectTrack(resp.data.track, resp.data.track_config);
+
 				// weather
 				this.weather = resp.data.weather;
 
@@ -328,6 +328,216 @@ Vue.component('Configuration', {
 
 				this.addEditConfig = true;
 			});
+		},
+
+		importConfigs: function (files) {
+			// https://stackoverflow.com/a/12452845
+			var parseINIString = function (data) {
+				var regex = {
+					section: /^\s*\[\s*([^\]]*)\s*\]\s*$/,
+					param: /^\s*([^=]+?)\s*=\s*(.*?)\s*$/,
+					comment: /^\s*;.*$/
+				};
+				var value = {};
+				var lines = data.split(/[\r\n]+/);
+				var section = null;
+				lines.forEach(function (line) {
+					var match;
+					if (regex.comment.test(line)) {
+						// Ignore comments
+					} else if (regex.param.test(line)) {
+						match = line.match(regex.param);
+						if (section) {
+							value[section][match[1]] = match[2];
+						} else {
+							value[match[1]] = match[2];
+						}
+					} else if (regex.section.test(line)) {
+						match = line.match(regex.section);
+						value[match[1]] = {};
+						section = match[1];
+					} else if (line.length === 0 && section) {
+						section = null;
+					}
+				});
+
+				return value;
+			};
+
+			for (var i = 0; i < files.length; i++) {
+				var reader = new FileReader();
+
+				reader.onerror = function () {
+					alert('Error while loading the config files');
+					this.closeImportConfig();
+				}.bind(this);
+
+				reader.onload = function (e) {
+					var ini = parseINIString(e.target.result);
+
+					if ('SERVER' in ini) {
+						this.tmpSrvCfg = ini;
+					} else if ('CAR_0' in ini) {
+						this.tmpEntryListCfg = ini;
+					}
+
+					this.checkImportableConfigs();
+				}.bind(this);
+
+				reader.readAsText(files[i]);
+			}
+		},
+		checkImportableConfigs: function () {
+			if (!this.tmpSrvCfg || !this.tmpEntryListCfg) {
+				return;
+			}
+
+			this.openAddEditConfig(0);
+
+			sToB = function (s) { return s === '1' };
+
+			this.name = this.tmpSrvCfg.SERVER.NAME;
+			this.pwd = this.tmpSrvCfg.SERVER.PASSWORD;
+			this.admin_pwd = this.tmpSrvCfg.SERVER.ADMIN_PASSWORD;
+			this.pickup_mode = sToB(this.tmpSrvCfg.SERVER.PICKUP_MODE_ENABLED);
+			this.max_slots = this.tmpSrvCfg.SERVER.MAX_CLIENTS;
+			this.udp = this.tmpSrvCfg.SERVER.UDP_PORT;
+			this.tcp = this.tmpSrvCfg.SERVER.TCP_PORT;
+			this.http = this.tmpSrvCfg.SERVER.HTTP_PORT;
+			this.packets_hz = this.tmpSrvCfg.SERVER.CLIENT_SEND_INTERVAL_HZ;
+			this.show_in_lobby = sToB(this.tmpSrvCfg.SERVER.REGISTER_TO_LOBBY);
+			this.loop_mode = sToB(this.tmpSrvCfg.SERVER.LOOP_MODE);
+			this.threads = this.tmpSrvCfg.SERVER.NUM_THREADS;
+			this.abs = this.tmpSrvCfg.SERVER.ABS_ALLOWED;
+			this.tc = this.tmpSrvCfg.SERVER.TC_ALLOWED;
+			this.welcome = this.tmpSrvCfg.SERVER.WELCOME_MESSAGE;
+			this.fuel_rate = this.tmpSrvCfg.SERVER.FUEL_RATE;
+			this.damage_rate = this.tmpSrvCfg.SERVER.DAMAGE_MULTIPLIER;
+			this.tires_wear_rate = this.tmpSrvCfg.SERVER.TYRE_WEAR_RATE;
+			this.auto_clutch = sToB(this.tmpSrvCfg.SERVER.AUTOCLUTCH_ALLOWED);
+			this.stability_aid = sToB(this.tmpSrvCfg.SERVER.STABILITY_ALLOWED);
+			this.tyre_blankets = sToB(this.tmpSrvCfg.SERVER.TYRE_BLANKETS_ALLOWED);
+			this.force_virtual_mirror = sToB(this.tmpSrvCfg.SERVER.FORCE_VIRTUAL_MIRROR);
+			this.result_screen_time = this.tmpSrvCfg.SERVER.RESULT_SCREEN_TIME;
+			this.kick_vote_quorum = this.tmpSrvCfg.SERVER.KICK_QUORUM;
+			this.session_vote_quorum = this.tmpSrvCfg.SERVER.VOTING_QUORUM;
+			this.vote_duration = this.tmpSrvCfg.SERVER.VOTE_DURATION;
+			this.max_ballast = this.tmpSrvCfg.SERVER.MAX_BALLAST_KG;
+			this.start_rule = this.tmpSrvCfg.SERVER.START_RULE;
+			this.disable_gas_cut_penality = sToB(this.tmpSrvCfg.SERVER.RACE_GAS_PENALTY_DISABLED);
+			this.sun_angle = this.tmpSrvCfg.SERVER.SUN_ANGLE;
+			this.time_of_day_mult = this.tmpSrvCfg.SERVER.TIME_OF_DAY_MULT;
+			this.legal_tyres = this.tmpSrvCfg.SERVER.LEGAL_TYRES;
+			this.udp_plugin_local_port = this.tmpSrvCfg.SERVER.UDP_PLUGIN_LOCAL_PORT;
+			this.udp_plugin_address = this.tmpSrvCfg.SERVER.UDP_PLUGIN_ADDRESS;
+			this.allowed_tires_out = this.tmpSrvCfg.SERVER.ALLOWED_TYRES_OUT;
+			this.max_collisions_km = this.tmpSrvCfg.SERVER.MAX_CONTACTS_PER_KM;
+			this.blacklist = this.tmpSrvCfg.SERVER.BLACKLIST_MODE;
+			this.description = this.tmpSrvCfg.DATA.DESCRIPTION;
+
+			if (this.booking = this.tmpSrvCfg.BOOK !== undefined) {
+				this.booking_time = this.tmpSrvCfg.BOOK.TIME;
+			}
+			if (this.practice = this.tmpSrvCfg.PRACTICE !== undefined) {
+				this.practice_time = this.tmpSrvCfg.PRACTICE.TIME;
+				this.can_join_practice = sToB(this.tmpSrvCfg.PRACTICE.IS_OPEN);
+			}
+			if (this.qualify = this.tmpSrvCfg.QUALIFY !== undefined) {
+				this.qualify_time = this.tmpSrvCfg.QUALIFY.TIME;
+				this.can_join_qualify = sToB(this.tmpSrvCfg.QUALIFY.IS_OPEN);
+			}
+			if (this.race = this.tmpSrvCfg.RACE !== undefined) {
+				this.race_time = this.tmpSrvCfg.RACE.TIME;
+				this.race_laps = this.tmpSrvCfg.RACE.LAPS;
+				this.race_wait_time = this.tmpSrvCfg.RACE.WAIT_TIME;
+				this.join_type = this.tmpSrvCfg.RACE.IS_OPEN;
+			}
+			this.race_extra_lap = this.tmpSrvCfg.RACE_EXTRA_LAP;
+			this.race_overtime = this.tmpSrvCfg.SERVER.RACE_OVER_TIME;
+			this.race_pit_window_start = this.tmpSrvCfg.SERVER.RACE_PIT_WINDOW_START;
+			this.race_pit_window_end = this.tmpSrvCfg.SERVER.RACE_PIT_WINDOW_END;
+			this.reversed_grid_race_positions = this.tmpSrvCfg.SERVER.REVERSED_GRID_RACE_POSITIONS;
+
+			if (this.dynamic_track = this.tmpSrvCfg.DYNAMIC_TRACK !== undefined) {
+				this.start_value = this.tmpSrvCfg.DYNAMIC_TRACK.SESSION_START;
+				this.randomness = this.tmpSrvCfg.DYNAMIC_TRACK.RANDOMNESS;
+				this.transferred_grip = this.tmpSrvCfg.DYNAMIC_TRACK.SESSION_TRANSFER;
+				this.laps_to_improve_grip = this.tmpSrvCfg.DYNAMIC_TRACK.LAP_GAIN;
+			}
+
+			for (var wi = 0; wi < 25; wi++) {
+				var key = 'WEATHER_' + wi;
+				if (!(key in this.tmpSrvCfg)) {
+					break;
+				}
+
+				this.weather.push({
+					weather: this.tmpSrvCfg[key].GRAPHICS,
+					base_ambient_temp: this.tmpSrvCfg[key].BASE_TEMPERATURE_AMBIENT,
+					base_road_temp: this.tmpSrvCfg[key].BASE_TEMPERATURE_ROAD,
+					ambient_variation: this.tmpSrvCfg[key].VARIATION_AMBIENT,
+					road_variation: this.tmpSrvCfg[key].VARIATION_ROAD,
+					wind_base_speed_min: this.tmpSrvCfg[key].WIND_BASE_SPEED_MIN,
+					wind_base_speed_max: this.tmpSrvCfg[key].WIND_BASE_SPEED_MAX,
+					wind_base_direction: this.tmpSrvCfg[key].WIND_BASE_DIRECTION,
+					wind_variation_direction: this.tmpSrvCfg[key].WIND_VARIATION_DIRECTION
+				});
+			}
+
+			var unknownTrack = null;
+			if (!this.findAndSelectTrack(this.tmpSrvCfg.SERVER.TRACK, this.tmpSrvCfg.SERVER.CONFIG_TRACK)) {
+				unknownTrack = this.tmpSrvCfg.SERVER.TRACK;
+				if (this.tmpSrvCfg.SERVER.CONFIG_TRACK) {
+					unknownTrack += ' (' + this.tmpSrvCfg.SERVER.CONFIG_TRACK + ')';
+				}
+			}
+
+			var unknownCars = [];
+			Object.keys(this.tmpEntryListCfg).forEach(function (car_idx) {
+				var carIsUnknown = unknownCars.indexOf(this.tmpEntryListCfg[car_idx].MODEL) > -1;
+
+				if (carIsUnknown) {
+					return;
+				}
+
+				for (var ci = 0; ci < this.cars.length; ci++) {
+					if (this.cars[ci].name === this.tmpEntryListCfg[car_idx].MODEL) {
+						this.selectedCars.push({
+							car: this.tmpEntryListCfg[car_idx].MODEL,
+							painting: this.tmpEntryListCfg[car_idx].SKIN,
+							spectator: sToB(this.tmpEntryListCfg[car_idx].SPECTATOR_MODE),
+							driver: this.tmpEntryListCfg[car_idx].DRIVERNAME,
+							team: this.tmpEntryListCfg[car_idx].TEAM,
+							guid: this.tmpEntryListCfg[car_idx].GUID,
+							fixed_setup: this.tmpEntryListCfg[car_idx].FIXED_SETUP,
+							position: this.selectedCars.length
+						});
+
+						return;
+					}
+				}
+
+				if (!carIsUnknown) {
+					unknownCars.push(this.tmpEntryListCfg[car_idx].MODEL);
+				}
+			}.bind(this));
+
+			this.closeImportConfig();
+
+			if (unknownTrack) {
+				alert('Unknown track: ' + unknownTrack);
+			}
+			if (unknownCars.length > 0) {
+				alert('Unknown cars: ' + unknownCars.join(', '));
+			}
+		},
+		openImportConfig: function () {
+			this.importConfig = true;
+			this.tmpSrvCfg = this.tmpEntryListCfg = null;
+		},
+		closeImportConfig: function () {
+			this.importConfig = false;
+			this.tmpSrvCfg = this.tmpEntryListCfg = null;
 		},
 		openAddEditConfig: function(id){
 			this._reset();
@@ -487,6 +697,16 @@ Vue.component('Configuration', {
 		selectTrack: function(i){
 			this.selectedTrack = i;
 			this.track = this.tracks[i];
+		},
+		findAndSelectTrack: function (name, config_name) {
+			for (var i = 0; i < this.tracks.length; i++) {
+				if (this.tracks[i].name === name && (!config_name || this.tracks[i].config === config_name)) {
+					this.selectTrack(i);
+					return true;
+				}
+			}
+
+			return false;
 		},
 		selectCar: function(i){
 			this.selectedCar = i;
