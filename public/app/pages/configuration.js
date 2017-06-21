@@ -191,13 +191,13 @@ Vue.component('Configuration', {
 			this.race_wait_time = 60;
 			this.race_extra_lap = false;
 			this.join_type = '';
-			this.time = '08 =00';
-			this.sun_angle = 32;
+			this.time = '14:00';
+			this.sun_angle = 16;
 			this.track = '';
 			this.legal_tyres = '';
-			this.udp_plugin_local_port = '';
+			this.udp_plugin_local_port = 0;
 			this.udp_plugin_address = '';
-
+			
 			this.err = 0;
 			this.addEditConfig = false;
 			this.removeConfig = false;
