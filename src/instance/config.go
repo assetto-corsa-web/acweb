@@ -217,5 +217,5 @@ func intToStr(i int) string {
 }
 
 func int64ToStr(i int64) string {
-	return strconv.Itoa64(i)
+	return strconv.FormatInt(i, 10)
 }
