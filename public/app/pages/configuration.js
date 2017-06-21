@@ -72,7 +72,7 @@ Vue.component('Configuration', {
 			race_time: 0,
 			race_wait_time: 60,
 			race_extra_lap: false,
-			join_type: '',
+			join_type: 1,
 			time: '14:00',
 			sun_angle: 16,
 			track: '',
