@@ -13,6 +13,7 @@ Vue.component('Configuration', {
 			driver: '',
 			team: '',
 			guid: '',
+			fixed_setup: '',
 			// ---
 			selectedCars: [],
 			weather: [],
@@ -75,6 +76,9 @@ Vue.component('Configuration', {
 			time: '08:00',
 			sun_angle: 32,
 			track: '',
+			legal_tyres: '',
+			udp_plugin_local_port: '',
+			udp_plugin_address: '',
 			// ---
 			err: 0,
 			addEditConfig: false,
@@ -127,6 +131,7 @@ Vue.component('Configuration', {
 			this.driver = '';
 			this.team = '';
 			this.guid = '';
+			this.fixed_setup = '';
 
 			this.selectedCars = [];
 			this.weather = [];
@@ -189,6 +194,9 @@ Vue.component('Configuration', {
 			this.time = '08 =00';
 			this.sun_angle = 32;
 			this.track = '';
+			this.legal_tyres = '';
+			this.udp_plugin_local_port = '';
+			this.udp_plugin_address = '';
 
 			this.err = 0;
 			this.addEditConfig = false;
@@ -261,6 +269,9 @@ Vue.component('Configuration', {
 				this.join_type = resp.data.join_type;
 				this.time = resp.data.time;
 				this.sun_angle = resp.data.sun_angle;
+				this.legal_tyres = resp.data.legal_tyres;
+				this.udp_plugin_local_port = resp.data.udp_plugin_local_port;
+				this.udp_plugin_address = resp.data.udp_plugin_address;
 
 				if(copy){
 					this.name += ' (copy)';
@@ -393,6 +404,9 @@ Vue.component('Configuration', {
 				weather: this.weather,
 				track: this.track.name,
 				track_config: this.track.config,
+				legal_tyres: this.legal_tyres,
+				udp_plugin_local_port: this.udp_plugin_local_port,
+				udp_plugin_address: this.udp_plugin_address,
 				cars: this.selectedCars
 			};
 
@@ -457,7 +471,8 @@ Vue.component('Configuration', {
 				driver: this.driver,
 				team: this.team,
 				guid: this.guid,
-				position: this.selectedCars.length
+				position: this.selectedCars.length,
+				fixed_setup: this.fixed_setup
 			});
 
 			// only reset driver and GUID in case user wants to add multiple similar slots
