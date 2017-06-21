@@ -18,7 +18,7 @@ const (
 )
 
 func writeConfig(config *model.Configuration) error {
-	iniPath := filepath.Join(cfg_folder, config.Id)
+	iniPath := filepath.Join(cfg_folder, intToStr(config.Id))
 	if err := os.MkdirAll(iniPath, 0755); err != nil {
 		log.Printf("Error creating cfg folder: %v", err)
 		return err
@@ -148,7 +148,7 @@ func writeServerIni(config *model.Configuration) error {
 	ini += "WELCOME_PATH=" + sep
 
 	// write ini
-	iniFile := filepath.Join(cfg_folder, config.Id, server_ini)
+	iniFile := filepath.Join(cfg_folder, intToStr(config.Id), server_ini)
 	if err := ioutil.WriteFile(iniFile, []byte(ini), 0775); err != nil {
 		log.Printf("Error writing server_cfg.ini: %v", err)
 		return err
@@ -195,7 +195,7 @@ func writeEntryListIni(config *model.Configuration) error {
 	}
 
 	// write ini
-	iniFile := filepath.Join(cfg_folder, config.Id, entry_list_ini)
+	iniFile := filepath.Join(cfg_folder, intToStr(config.Id), entry_list_ini)
 	if err := ioutil.WriteFile(iniFile, []byte(ini), 0775); err != nil {
 		log.Printf("Error writing entry_list.ini: %v", err)
 		return err
