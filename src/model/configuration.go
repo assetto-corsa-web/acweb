@@ -527,7 +527,7 @@ func (m *Configuration) saveCars(tx *sql.Tx) error {
 				car.Team,
 				car.GUID,
 				car.Position,
-				car.FixedSetup
+				car.FixedSetup,
 				car.Id)
 
 			if err != nil {
