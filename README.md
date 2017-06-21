@@ -137,6 +137,11 @@ When added, rebuild the Docker image if you use it or just overwrite the files i
 
 To contribute please open issues and pull requests. The frontend is build using VueJs, [minvue](https://github.com/DeKugelschieber/vuejs-minify) and sass. The backend is build on Go (golang) and MySQL. For details please view the provided scripts within the main directory.
 
+### Contributors (alphabetical)
+
+macedot
+vinyii
+
 ## Links
 
 * [Docker Hub](https://hub.docker.com/r/kugel/acweb/)
