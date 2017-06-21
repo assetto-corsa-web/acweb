@@ -18,7 +18,8 @@ const (
 )
 
 func writeConfig(config *model.Configuration) error {
-	if err := os.MkdirAll(cfg_folder, 0755); err != nil {
+	iniPath := filepath.Join(cfg_folder, config.Id)
+	if err := os.MkdirAll(iniPath, 0755); err != nil {
 		log.Printf("Error creating cfg folder: %v", err)
 		return err
 	}
@@ -80,10 +81,10 @@ func writeServerIni(config *model.Configuration) error {
 	ini += "REGISTER_TO_LOBBY=" + boolToStr(config.ShowInLobby) + sep
 	ini += "MAX_CLIENTS=" + intToStr(config.MaxSlots) + sep
 	ini += "NUM_THREADS=" + intToStr(config.Threads) + sep
-	ini += "UDP_PLUGIN_LOCAL_PORT=0" + sep
-	ini += "UDP_PLUGIN_ADDRESS=" + sep
+	ini += "UDP_PLUGIN_LOCAL_PORT=" + intToStr(config.UdpPluginPort) + sep
+	ini += "UDP_PLUGIN_ADDRESS=" + config.UdpPluginAddr + sep
 	ini += "AUTH_PLUGIN_ADDRESS=" + sep
-	ini += "LEGAL_TYRES=" + sep
+	ini += "LEGAL_TYRES=" + config.LegalTyres + sep
 	ini += "RACE_EXTRA_LAP=" + boolToStr(config.RaceExtraLap) + sep
 	ini += "WELCOME_MESSAGE=" + config.Welcome + sep
 
@@ -131,6 +132,10 @@ func writeServerIni(config *model.Configuration) error {
 		ini += "BASE_TEMPERATURE_ROAD=" + intToStr(w.BaseRoadTemp) + sep
 		ini += "VARIATION_AMBIENT=" + intToStr(w.AmbientVariation) + sep
 		ini += "VARIATION_ROAD=" + intToStr(w.RoadVariation) + sep
+		ini += "WIND_BASE_SPEED_MIN=" + intToStr(w.WindBaseSpeedMin) + sep
+		ini += "WIND_BASE_SPEED_MAX=" + intToStr(w.WindBaseSpeedMax) + sep
+		ini += "WIND_BASE_DIRECTION=" + intToStr(w.WindBaseDirection) + sep
+		ini += "WIND_VARIATION_DIRECTION=" + intToStr(w.WindVariationDirection) + sep
 	}
 
 	ini += sep
@@ -143,7 +148,8 @@ func writeServerIni(config *model.Configuration) error {
 	ini += "WELCOME_PATH=" + sep
 
 	// write ini
-	if err := ioutil.WriteFile(filepath.Join(cfg_folder, server_ini), []byte(ini), 0775); err != nil {
+	iniFile := filepath.Join(cfg_folder, config.Id, server_ini)
+	if err := ioutil.WriteFile(iniFile, []byte(ini), 0775); err != nil {
 		log.Printf("Error writing server_cfg.ini: %v", err)
 		return err
 	}
@@ -184,11 +190,13 @@ func writeEntryListIni(config *model.Configuration) error {
 		ini += "TEAM=" + car.Team + sep
 		ini += "GUID=" + car.GUID + sep
 		ini += "BALLAST=0" + sep
+		ini += "FIXED_SETUP=" + car.FixedSetup + sep
 		ini += sep
 	}
 
 	// write ini
-	if err := ioutil.WriteFile(filepath.Join(cfg_folder, entry_list_ini), []byte(ini), 0775); err != nil {
+	iniFile := filepath.Join(cfg_folder, config.Id, entry_list_ini)
+	if err := ioutil.WriteFile(iniFile, []byte(ini), 0775); err != nil {
 		log.Printf("Error writing entry_list.ini: %v", err)
 		return err
 	}
