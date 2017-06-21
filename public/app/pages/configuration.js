@@ -48,7 +48,7 @@ Vue.component('Configuration', {
 			max_ballast: 150,
 			disable_gas_cut_penality: false,
 			dynamic_track: true,
-			condition: '',
+			condition: 'CUSTOM',
 			start_value: 100,
 			randomness: 0,
 			transferred_grip: 100,
@@ -85,6 +85,11 @@ Vue.component('Configuration', {
 	},
 	mounted: function(){
 		this._load();
+	},
+	watch: {
+		condition: function (value) {
+			this.populateDynamicTrackWithPreset(value);
+		}
 	},
 	methods: {
 		_load: function(){
@@ -162,7 +167,7 @@ Vue.component('Configuration', {
 			this.max_ballast = 150;
 			this.disable_gas_cut_penality = false;
 			this.dynamic_track = true;
-			this.condition = '';
+			this.condition = 'CUSTOM';
 			this.start_value = 100;
 			this.randomness = 0;
 			this.transferred_grip = 100;
@@ -484,6 +489,46 @@ Vue.component('Configuration', {
 		},
 		removeCar: function(i){
 			this.selectedCars.splice(i, 1);
+		},
+		populateDynamicTrackWithPreset: function(preset) {
+			switch(preset) {
+				case 'DUSTY':
+					this.start_value = 86;
+					this.randomness = 1;
+					this.transferred_grip = 50;
+					this.laps_to_improve_grip = 30;
+					break;
+				case 'OLD':
+					this.start_value = 89;
+					this.randomness = 3;
+					this.transferred_grip = 80;
+					this.laps_to_improve_grip = 50;
+					break;
+				case 'SLOW':
+					this.start_value = 96;
+					this.randomness = 1;
+					this.transferred_grip = 80;
+					this.laps_to_improve_grip = 300;
+					break;
+				case 'GREEN':
+					this.start_value = 95;
+					this.randomness = 2;
+					this.transferred_grip = 90;
+					this.laps_to_improve_grip = 132;
+					break;
+				case 'FAST':
+					this.start_value = 98;
+					this.randomness = 2;
+					this.transferred_grip = 80;
+					this.laps_to_improve_grip = 700;
+					break;
+				case 'OPTIMUM':
+					this.start_value = 100;
+					this.randomness = 0;
+					this.transferred_grip = 100;
+					this.laps_to_improve_grip = 1;
+					break;
+			}
 		}
 	}
 });
