@@ -73,11 +73,11 @@ Vue.component('Configuration', {
 			race_wait_time: 60,
 			race_extra_lap: false,
 			join_type: '',
-			time: '08:00',
-			sun_angle: 32,
+			time: '14:00',
+			sun_angle: 16,
 			track: '',
 			legal_tyres: '',
-			udp_plugin_local_port: '',
+			udp_plugin_local_port: 0,
 			udp_plugin_address: '',
 			// ---
 			err: 0,
@@ -337,6 +337,10 @@ Vue.component('Configuration', {
 				this.weather[i].base_road_temp = parseInt(this.weather[i].base_road_temp);
 				this.weather[i].ambient_variation = parseInt(this.weather[i].ambient_variation);
 				this.weather[i].road_variation = parseInt(this.weather[i].road_variation);
+				this.weather[i].wind_base_speed_min = parseInt(this.weather[i].wind_base_speed_min);
+				this.weather[i].wind_base_speed_max = parseInt(this.weather[i].wind_base_speed_max);
+				this.weather[i].wind_base_direction = parseInt(this.weather[i].wind_base_direction);
+				this.weather[i].wind_variation_direction = parseInt(this.weather[i].wind_variation_direction);
 			}
 
 			for(var i = 0; i < this.selectedCars.length; i++){
@@ -405,7 +409,7 @@ Vue.component('Configuration', {
 				track: this.track.name,
 				track_config: this.track.config,
 				legal_tyres: this.legal_tyres,
-				udp_plugin_local_port: this.udp_plugin_local_port,
+				udp_plugin_local_port: parseInt(this.udp_plugin_local_port),
 				udp_plugin_address: this.udp_plugin_address,
 				cars: this.selectedCars
 			};
@@ -444,7 +448,11 @@ Vue.component('Configuration', {
 				realistic_road_temp: 1,
 				base_road_temp: 18,
 				ambient_variation: 1,
-				road_variation: 1
+				road_variation: 1,
+				wind_base_speed_min: 0,
+				wind_base_speed_max: 0,
+				wind_base_direction: 0,
+				wind_variation_direction: 0
 			});
 		},
 		removeWeather: function(i){
