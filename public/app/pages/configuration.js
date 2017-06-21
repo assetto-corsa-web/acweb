@@ -36,12 +36,12 @@ Vue.component('Configuration', {
 			loop_mode: true,
 			show_in_lobby: true,
 			threads: 2,
-			abs: '',
-			tc: '',
-			stability_aid: true,
-			auto_clutch: true,
-			tyre_blankets: false,
-			force_virtual_mirror: false,
+			abs: 1,
+			tc: 1,
+			stability_aid: false,
+			auto_clutch: false,
+			tyre_blankets: true,
+			force_virtual_mirror: true,
 			fuel_rate: 100,
 			damage_rate: 50,
 			tires_wear_rate: 100,
@@ -57,7 +57,7 @@ Vue.component('Configuration', {
 			kick_vote_quorum: 70,
 			session_vote_quorum: 70,
 			vote_duration: 15,
-			blacklist: '',
+			blacklist: 0,
 			max_collisions_km: 5,
 			booking: false,
 			booking_time: 0,
@@ -154,12 +154,12 @@ Vue.component('Configuration', {
 			this.loop_mode = true;
 			this.show_in_lobby = true;
 			this.threads = 2;
-			this.abs = '';
-			this.tc = '';
-			this.stability_aid = true;
-			this.auto_clutch = true;
-			this.tyre_blankets = false;
-			this.force_virtual_mirror = false;
+			this.abs = 1;
+			this.tc = 1;
+			this.stability_aid = false;
+			this.auto_clutch = false;
+			this.tyre_blankets = true;
+			this.force_virtual_mirror = true;
 			this.fuel_rate = 100;
 			this.damage_rate = 50;
 			this.tires_wear_rate = 100;
@@ -175,7 +175,7 @@ Vue.component('Configuration', {
 			this.kick_vote_quorum = 70;
 			this.session_vote_quorum = 70;
 			this.vote_duration = 15;
-			this.blacklist = '';
+			this.blacklist = 0;
 			this.max_collisions_km = 5;
 			this.booking = false;
 			this.booking_time = 0;
@@ -190,7 +190,7 @@ Vue.component('Configuration', {
 			this.race_time = 0;
 			this.race_wait_time = 60;
 			this.race_extra_lap = false;
-			this.join_type = '';
+			this.join_type = 1;
 			this.time = '14:00';
 			this.sun_angle = 16;
 			this.track = '';

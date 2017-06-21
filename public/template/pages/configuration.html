@@ -39,8 +39,12 @@
 							<td><input type="checkbox" name="lock_entry_list" v-model="lock_entry_list" /></td>
 						</tr>
 						<tr>
-							<td>Race overtime:</td>
-							<td><input type="number" name="race_overtime" v-model="race_overtime" /></td>
+							<td>Loop mode:</td>
+							<td><input type="checkbox" name="loop_mode" v-model="loop_mode" /></td>
+						</tr>
+						<tr>
+							<td>Show on lobby:</td>
+							<td><input type="checkbox" name="show_in_lobby" v-model="show_in_lobby" /></td>
 						</tr>
 						<tr>
 							<td>Max. slots:</td>
@@ -76,14 +80,6 @@
 						<tr>
 							<td>Packets Hz:</td>
 							<td><input type="number" name="packets_hz" v-model="packets_hz" /></td>
-						</tr>
-						<tr>
-							<td>Loop mode:</td>
-							<td><input type="checkbox" name="loop_mode" v-model="loop_mode" /></td>
-						</tr>
-						<tr>
-							<td>Show on lobby:</td>
-							<td><input type="checkbox" name="show_in_lobby" v-model="show_in_lobby" /></td>
 						</tr>
 						<tr>
 							<td>Threads:</td>
@@ -301,6 +297,10 @@
 						<tr>
 							<td>Race time:</td>
 							<td><input type="number" name="race_time" v-model="race_time" /></td>
+						</tr>
+						<tr>
+							<td>Race overtime:</td>
+							<td><input type="number" name="race_overtime" v-model="race_overtime" /></td>
 						</tr>
 						<tr>
 							<td>Race wait time:</td>
