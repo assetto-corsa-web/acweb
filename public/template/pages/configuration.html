@@ -342,13 +342,13 @@
 						<tr>
 							<td>Time:</td>
 							<td>
-								<input type="time" name="time" v-model="time" />
-								(08:00 - 18:00)
+								<input type="time" name="time" v-model="time" step="1800" min="08:00" max="18:00" />
+								(08:00 - 18:00, 30 minute steps)
 							</td>
 						</tr>
 						<tr>
 							<td>Sun angle:</td>
-							<td><input type="number" name="sun_angle" v-model="sun_angle" /></td>
+							<td><input type="number" name="sun_angle" v-model="sun_angle" readonly /></td>
 						</tr>
 						<tr>
 							<td colspan="2"><h3>Weather</h3></td>
@@ -376,11 +376,6 @@
 									<tr>
 										<td>Base ambient temp:</td>
 										<td><input type="number" name="base_ambient_temp" v-model="w.base_ambient_temp" /></td>
-										<td></td>
-									</tr>
-									<tr>
-										<td>Realistic road temp:</td>
-										<td><input type="number" name="realistic_road_temp" v-model="w.realistic_road_temp" /></td>
 										<td></td>
 									</tr>
 									<tr>
