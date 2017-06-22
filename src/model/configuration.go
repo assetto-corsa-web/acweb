@@ -156,9 +156,6 @@ func (m *Configuration) saveConfiguration(tx *sql.Tx) error {
 			admin_pwd,
 			pickup_mode,
 			lock_entry_list,
-			race_pit_window_start,
-			race_pit_window_end,
-			reversed_grid_race_positions,
 			race_overtime,
 			max_slots,
 			welcome,
@@ -214,7 +211,10 @@ func (m *Configuration) saveConfiguration(tx *sql.Tx) error {
 			track_config,
 			legal_tyres,
 			udp_plugin_local_port,
-			udp_plugin_address) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
+			udp_plugin_address,
+			race_pit_window_start,
+			race_pit_window_end,
+			reversed_grid_race_positions) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
 			?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
 			?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
 			?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
@@ -225,9 +225,6 @@ func (m *Configuration) saveConfiguration(tx *sql.Tx) error {
 			m.AdminPwd,
 			m.PickupMode,
 			m.LockEntryList,
-			m.RacePitWindowStart,
-			m.RacePitWindowEnd,
-			m.ReversedGridRacePos,
 			m.RaceOvertime,
 			m.MaxSlots,
 			m.Welcome,
@@ -283,7 +280,10 @@ func (m *Configuration) saveConfiguration(tx *sql.Tx) error {
 			m.TrackConfig,
 			m.LegalTyres,
 			m.UdpPluginPort,
-			m.UdpPluginAddr)
+			m.UdpPluginAddr,
+			m.RacePitWindowStart,
+			m.RacePitWindowEnd,
+			m.ReversedGridRacePos)
 
 		if err != nil {
 			tx.Rollback()
@@ -306,9 +306,6 @@ func (m *Configuration) saveConfiguration(tx *sql.Tx) error {
 		admin_pwd = ?,
 		pickup_mode = ?,
 		lock_entry_list = ?,
-		race_pit_window_start = ?,
-		race_pit_window_end = ?,
-		reversed_grid_race_positions = ?,
 		race_overtime = ?,
 		max_slots = ?,
 		welcome = ?,
@@ -364,15 +361,15 @@ func (m *Configuration) saveConfiguration(tx *sql.Tx) error {
 		track_config = ?,
 		legal_tyres = ?,
 		udp_plugin_local_port = ?,
-		udp_plugin_address = ?
+		udp_plugin_address = ?,
+		race_pit_window_start = ?,
+		race_pit_window_end = ?,
+		reversed_grid_race_positions = ?
 		WHERE id = ?`, m.Name,
 		m.Pwd,
 		m.AdminPwd,
 		m.PickupMode,
 		m.LockEntryList,
-		m.RacePitWindowStart,
-		m.RacePitWindowEnd,
-		m.ReversedGridRacePos,
 		m.RaceOvertime,
 		m.MaxSlots,
 		m.Welcome,
@@ -429,6 +426,9 @@ func (m *Configuration) saveConfiguration(tx *sql.Tx) error {
 		m.LegalTyres,
 		m.UdpPluginPort,
 		m.UdpPluginAddr,
+		m.RacePitWindowStart,
+		m.RacePitWindowEnd,
+		m.ReversedGridRacePos,
 		m.Id)
 
 	if err != nil {
@@ -660,9 +660,6 @@ func scanConfiguration(row util.RowScanner) (*Configuration, error) {
 		&config.AdminPwd,
 		&config.PickupMode,
 		&config.LockEntryList,
-		&config.RacePitWindowStart,
-		&config.RacePitWindowEnd,
-		&config.ReversedGridRacePos,
 		&config.RaceOvertime,
 		&config.MaxSlots,
 		&config.Welcome,
@@ -718,7 +715,10 @@ func scanConfiguration(row util.RowScanner) (*Configuration, error) {
 		&config.TrackConfig,
 		&config.LegalTyres,
 		&config.UdpPluginPort,
-		&config.UdpPluginAddr); err != nil {
+		&config.UdpPluginAddr,
+		&config.RacePitWindowStart,
+		&config.RacePitWindowEnd,
+		&config.ReversedGridRacePos); err != nil {
 		return nil, err
 	}
 
