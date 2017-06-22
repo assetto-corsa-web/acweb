@@ -49,9 +49,9 @@ func writeServerIni(config *model.Configuration) error {
 	ini += "HTTP_PORT=" + intToStr(config.HTTP) + sep
 	ini += "MAX_BALLAST_KG=" + intToStr(config.MaxBallast) + sep
 	ini += "QUALIFY_MAX_WAIT_PERC=120" + sep
-	ini += "RACE_PIT_WINDOW_START=0" + sep
-	ini += "RACE_PIT_WINDOW_END=0" + sep
-	ini += "REVERSED_GRID_RACE_POSITIONS=0" + sep
+	ini += "RACE_PIT_WINDOW_START=" + intToStr(config.RacePitWindowStart) + sep
+	ini += "RACE_PIT_WINDOW_END=" + intToStr(config.RacePitWindowEnd) + sep
+	ini += "REVERSED_GRID_RACE_POSITIONS=" + intToStr(config.ReversedGridRacePos) + sep
 	ini += "LOCKED_ENTRY_LIST=" + boolToStr(config.LockEntryList) + sep
 	ini += "PICKUP_MODE_ENABLED=" + boolToStr(config.PickupMode) + sep
 	ini += "LOOP_MODE=" + boolToStr(config.LoopMode) + sep

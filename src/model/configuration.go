@@ -14,6 +14,9 @@ type Configuration struct {
 	AdminPwd              string    `json:"admin_pwd"`
 	PickupMode            bool      `json:"pickup_mode"`
 	LockEntryList         bool      `json:"lock_entry_list"`
+	RacePitWindowStart    int       `json:"race_pit_window_start"`
+	RacePitWindowEnd      int       `json:"race_pit_window_end"`
+	ReversedGridRacePos   int       `json:"reversed_grid_race_positions"`
 	RaceOvertime          int       `json:"race_overtime"`
 	MaxSlots              int       `json:"max_slots"`
 	Welcome               string    `json:"welcome"`
@@ -153,6 +156,9 @@ func (m *Configuration) saveConfiguration(tx *sql.Tx) error {
 			admin_pwd,
 			pickup_mode,
 			lock_entry_list,
+			race_pit_window_start,
+			race_pit_window_end,
+			reversed_grid_race_positions,
 			race_overtime,
 			max_slots,
 			welcome,
@@ -219,6 +225,9 @@ func (m *Configuration) saveConfiguration(tx *sql.Tx) error {
 			m.AdminPwd,
 			m.PickupMode,
 			m.LockEntryList,
+			m.RacePitWindowStart,
+			m.RacePitWindowEnd,
+			m.ReversedGridRacePos,
 			m.RaceOvertime,
 			m.MaxSlots,
 			m.Welcome,
@@ -297,6 +306,9 @@ func (m *Configuration) saveConfiguration(tx *sql.Tx) error {
 		admin_pwd = ?,
 		pickup_mode = ?,
 		lock_entry_list = ?,
+		race_pit_window_start = ?,
+		race_pit_window_end = ?,
+		reversed_grid_race_positions = ?,
 		race_overtime = ?,
 		max_slots = ?,
 		welcome = ?,
@@ -358,6 +370,9 @@ func (m *Configuration) saveConfiguration(tx *sql.Tx) error {
 		m.AdminPwd,
 		m.PickupMode,
 		m.LockEntryList,
+		m.RacePitWindowStart,
+		m.RacePitWindowEnd,
+		m.ReversedGridRacePos,
 		m.RaceOvertime,
 		m.MaxSlots,
 		m.Welcome,
@@ -645,6 +660,9 @@ func scanConfiguration(row util.RowScanner) (*Configuration, error) {
 		&config.AdminPwd,
 		&config.PickupMode,
 		&config.LockEntryList,
+		&config.RacePitWindowStart,
+		&config.RacePitWindowEnd,
+		&config.ReversedGridRacePos,
 		&config.RaceOvertime,
 		&config.MaxSlots,
 		&config.Welcome,
