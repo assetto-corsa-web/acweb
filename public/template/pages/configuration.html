@@ -39,6 +39,18 @@
 							<td><input type="checkbox" name="lock_entry_list" v-model="lock_entry_list" /></td>
 						</tr>
 						<tr>
+							<td>Race Pit Window Start:</td>
+							<td><input type="number" name="race_pit_window_start" v-model="race_pit_window_start" /></td>
+						</tr>
+						<tr>
+							<td>Race Pit Window End:</td>
+							<td><input type="number" name="race_pit_window_end" v-model="race_pit_window_end" /></td>
+						</tr>
+						<tr>
+							<td>Reversed Grid Race Postion:</td>
+							<td><input type="number" name="reversed_grid_race_positions" v-model="reversed_grid_race_positions" /></td>
+						</tr>
+						<tr>
 							<td>Loop mode:</td>
 							<td><input type="checkbox" name="loop_mode" v-model="loop_mode" /></td>
 						</tr>
@@ -170,12 +182,16 @@
 							<td><input type="checkbox" name="disable_gas_cut_penality" v-model="disable_gas_cut_penality" /></td>
 						</tr>
 						<tr>
+							<td>Legal Tyres:</td>
+							<td><input type="text" name="legal_tyres" v-model="legal_tyres" /></td>
+						</tr>
+						<tr>
 							<td>UDP Plugin Local Port:</td>
-							<td><input type="checkbox" name="udp_plugin_local_port" v-model="udp_plugin_local_port" /></td>
+							<td><input type="number" name="udp_plugin_local_port" v-model="udp_plugin_local_port" /></td>
 						</tr>
 						<tr>
 							<td>UDP Plugin Address:</td>
-							<td><input type="checkbox" name="udp_plugin_address" v-model="udp_plugin_address" /></td>
+							<td><input type="text" name="udp_plugin_address" v-model="udp_plugin_address" /></td>
 						</tr>
 						<tr>
 							<td colspan="2"><h3>Dynamic Track</h3></td>
