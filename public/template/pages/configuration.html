@@ -39,6 +39,18 @@
 							<td><input type="checkbox" name="lock_entry_list" v-model="lock_entry_list" /></td>
 						</tr>
 						<tr>
+							<td>Race Pit Window Start:</td>
+							<td><input type="number" name="race_pit_window_start" v-model="race_pit_window_start" /></td>
+						</tr>
+						<tr>
+							<td>Race Pit Window End:</td>
+							<td><input type="number" name="race_pit_window_end" v-model="race_pit_window_end" /></td>
+						</tr>
+						<tr>
+							<td>Reversed Grid Race Postion:</td>
+							<td><input type="number" name="reversed_grid_race_positions" v-model="reversed_grid_race_positions" /></td>
+						</tr>
+						<tr>
 							<td>Loop mode:</td>
 							<td><input type="checkbox" name="loop_mode" v-model="loop_mode" /></td>
 						</tr>
@@ -168,6 +180,18 @@
 						<tr>
 							<td>Disable gas cut penality:</td>
 							<td><input type="checkbox" name="disable_gas_cut_penality" v-model="disable_gas_cut_penality" /></td>
+						</tr>
+						<tr>
+							<td>Legal Tyres:</td>
+							<td><input type="text" name="legal_tyres" v-model="legal_tyres" /></td>
+						</tr>
+						<tr>
+							<td>UDP Plugin Local Port:</td>
+							<td><input type="number" name="udp_plugin_local_port" v-model="udp_plugin_local_port" /></td>
+						</tr>
+						<tr>
+							<td>UDP Plugin Address:</td>
+							<td><input type="text" name="udp_plugin_address" v-model="udp_plugin_address" /></td>
 						</tr>
 						<tr>
 							<td colspan="2"><h3>Dynamic Track</h3></td>
@@ -374,6 +398,26 @@
 										<td><input type="number" name="road_variation" v-model="w.road_variation" /></td>
 										<td></td>
 									</tr>
+									<tr>
+										<td>Wind Base Speed Min:</td>
+										<td><input type="number" name="wind_base_speed_min" v-model="w.wind_base_speed_min" /></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td>Wind Base Speed Max:</td>
+										<td><input type="number" name="wind_base_speed_max" v-model="w.wind_base_speed_max" /></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td>Wind Base Direction:</td>
+										<td><input type="number" name="wind_base_direction" v-model="w.wind_base_direction" /></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td>Wind Variation Direction:</td>
+										<td><input type="number" name="wind_variation_direction" v-model="w.wind_variation_direction" /></td>
+										<td></td>
+									</tr>
 								</table>
 							</td>
 						</tr>
@@ -441,6 +485,10 @@
 													<td><input type="text" name="guid" v-model="guid" /></td>
 												</tr>
 												<tr>
+													<td>Fixed Setup:</td>
+													<td><input type="text" name="fixed_setup" v-model="fixed_setup" /></td>
+												</tr>
+												<tr>
 													<td></td>
 													<td><button v-on:click.prevent="addCar()">Add Car</button></td>
 												</tr>
@@ -461,6 +509,7 @@
 											<td class="w10">Driver</td>
 											<td class="w10">Team</td>
 											<td class="w20">GUID</td>
+											<td class="w20">Fixed Setup</td>
 											<td></td>
 										</tr>
 									</thead>
@@ -472,6 +521,7 @@
 											<td>{{car.driver}}</td>
 											<td>{{car.team}}</td>
 											<td>{{car.guid}}</td>
+											<td>{{car.fixed_setup}}</td>
 											<td>
 												<i class="fa fa-angle-up" aria-hidden="true" title="Move up" v-on:click.prevent="carUp(i)"></i>
 												<i class="fa fa-angle-down" aria-hidden="true" title="Move down" v-on:click.prevent="carDown(i)"></i>
