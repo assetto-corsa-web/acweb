@@ -25,8 +25,8 @@ type Configuration struct {
 	LoopMode              bool      `json:"loop_mode"`
 	ShowInLobby           bool      `json:"show_in_lobby"`
 	Threads               int       `json:"threads"`
-	ABS                   string    `json:"abs"`
-	TC                    string    `json:"tc"`
+	ABS                   int       `json:"abs"`
+	TC                    int       `json:"tc"`
 	StabilityAid          bool      `json:"stability_aid"`
 	AutoClutch            bool      `json:"auto_clutch"`
 	TyreBlankets          bool      `json:"tyre_blankets"`
@@ -47,7 +47,7 @@ type Configuration struct {
 	KickVoteQuorum        int       `json:"kick_vote_quorum"`
 	SessionVoteQuorum     int       `json:"session_vote_quorum"`
 	VoteDuration          int       `json:"vote_duration"`
-	Blacklist             string    `json:"blacklist"`
+	Blacklist             int       `json:"blacklist"`
 	MaxCollisionsKm       int       `json:"max_collisions_km"`
 	Booking               bool      `json:"booking"`
 	BookingTime           int       `json:"booking_time"`
@@ -62,7 +62,7 @@ type Configuration struct {
 	RaceTime              int       `json:"race_time"`
 	RaceWaitTime          int       `json:"race_wait_time"`
 	RaceExtraLap          bool      `json:"race_extra_lap"`
-	JoinType              string    `json:"join_type"`
+	JoinType              int       `json:"join_type"`
 	Time                  string    `json:"time"`
 	SunAngle              int       `json:"sun_angle"`
 	Track                 string    `json:"track"`

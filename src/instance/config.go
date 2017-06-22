@@ -62,13 +62,13 @@ func writeServerIni(config *model.Configuration) error {
 	ini += "KICK_QUORUM=" + intToStr(config.KickVoteQuorum) + sep
 	ini += "VOTING_QUORUM=" + intToStr(config.SessionVoteQuorum) + sep
 	ini += "VOTE_DURATION=" + intToStr(config.VoteDuration) + sep
-	ini += "BLACKLIST_MODE=" + config.Blacklist + sep
+	ini += "BLACKLIST_MODE=" + intToStr(config.Blacklist) + sep
 	ini += "FUEL_RATE=" + intToStr(config.FuelRate) + sep
 	ini += "DAMAGE_MULTIPLIER=" + intToStr(config.DamageRate) + sep
 	ini += "TYRE_WEAR_RATE=" + intToStr(config.TiresWearRate) + sep
 	ini += "ALLOWED_TYRES_OUT=" + intToStr(config.AllowedTiresOut) + sep
-	ini += "ABS_ALLOWED=" + config.ABS + sep
-	ini += "TC_ALLOWED=" + config.TC + sep
+	ini += "ABS_ALLOWED=" + intToStr(config.ABS) + sep
+	ini += "TC_ALLOWED=" + intToStr(config.TC) + sep
 	ini += "START_RULE=1" + sep
 	ini += "RACE_GAS_PENALTY_DISABLED=" + boolToStr(config.DisableGasCutPenality) + sep
 	ini += "RESULT_SCREEN_TIME=" + intToStr(config.ResultScreenTime) + sep
@@ -110,7 +110,7 @@ func writeServerIni(config *model.Configuration) error {
 		ini += "LAPS=" + intToStr(config.RaceLaps) + sep
 		ini += "TIME=" + intToStr(config.RaceTime) + sep
 		ini += "WAIT_TIME=" + intToStr(config.RaceWaitTime) + sep
-		ini += "IS_OPEN=" + config.JoinType + sep
+		ini += "IS_OPEN=" + intToStr(config.JoinType) + sep
 	}
 
 	if config.DynamicTrack {
