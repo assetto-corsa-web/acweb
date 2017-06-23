@@ -2,7 +2,7 @@ package user
 
 import (
 	"github.com/DeKugelschieber/go-util"
-	"log"
+	log "github.com/sirupsen/logrus"
 	"model"
 )
 
@@ -37,7 +37,7 @@ func AddEditUser(id int64, login, email, pwd1, pwd2 string, admin, moderator boo
 		existingUser, err := model.GetUserById(id)
 
 		if err != nil {
-			log.Printf("Error reading user by ID: %v", err)
+			log.WithFields(log.Fields{"err": err}).Error("Error reading user by ID")
 			return util.OpError{5, "Error reading user"}
 		}
 
@@ -63,7 +63,7 @@ func AddEditUser(id int64, login, email, pwd1, pwd2 string, admin, moderator boo
 	}
 
 	if err := user.Save(); err != nil {
-		log.Printf("Error saving new user: %v", err)
+		log.WithFields(log.Fields{"err": err}).Error("Error saving new user")
 		return util.OpError{6, "Error saving new user"}
 	}
 

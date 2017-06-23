@@ -3,7 +3,7 @@ package instance
 import (
 	"github.com/DeKugelschieber/go-util"
 	"io/ioutil"
-	"log"
+	log "github.com/sirupsen/logrus"
 	"os"
 	"path/filepath"
 )
@@ -12,7 +12,7 @@ func GetAllInstanceLogs() ([]Log, error) {
 	dir, err := ioutil.ReadDir(os.Getenv("ACWEB_INSTANCE_LOGDIR"))
 
 	if err != nil {
-		log.Printf("Error reading log directory", err)
+		log.WithFields(log.Fields{"err": err}).Error("Error reading log directory")
 		return nil, util.OpError{1, "Error reading log directory"}
 	}
 
@@ -30,7 +30,7 @@ func GetInstanceLog(file string) (string, error) {
 	content, err := ioutil.ReadFile(filepath.Join(os.Getenv("ACWEB_INSTANCE_LOGDIR"), file))
 
 	if err != nil {
-		log.Printf("Error reading log file: %v", err)
+		log.WithFields(log.Fields{"err": err}).Error("Error reading log file")
 		return "", util.OpError{1, "Error reading log file"}
 	}
 

@@ -1,7 +1,7 @@
 package settings
 
 import (
-	"log"
+	log "github.com/sirupsen/logrus"
 	"model"
 )
 
@@ -9,7 +9,7 @@ func GetSettings() *model.Settings {
 	settings, err := model.GetSettings()
 
 	if err != nil {
-		log.Printf("Error reading settings: %v", err)
+		log.WithFields(log.Fields{"err": err}).Error("Error reading settings")
 		settings = &model.Settings{}
 	}
 

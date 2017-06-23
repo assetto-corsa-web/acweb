@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/DeKugelschieber/go-session"
-	"log"
+	log "github.com/sirupsen/logrus"
 	"model"
 	"net/http"
 	"os"
@@ -47,7 +47,7 @@ func logToFile() *os.File {
 
 // Starts the RESTful server.
 func startServer() {
-	log.Print("Starting server on ", os.Getenv("ACWEB_HOST"))
+	log.Info("Starting server on ", os.Getenv("ACWEB_HOST"))
 
 	mux := http.NewServeMux()
 	mux.Handle("/robots.txt", http.HandlerFunc(returnRobotsTxt))

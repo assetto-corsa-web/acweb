@@ -6,7 +6,7 @@ import (
 	"github.com/DeKugelschieber/go-resp"
 	"github.com/DeKugelschieber/go-session"
 	"instance"
-	"log"
+	log "github.com/sirupsen/logrus"
 	"model"
 	"net/http"
 	"settings"
@@ -77,7 +77,7 @@ func CheckSession(w http.ResponseWriter, r *http.Request) {
 		var id int64
 
 		if err := s.Get("user_id", &id); err != nil {
-			log.Printf("Error reading user ID: %v", err)
+			log.WithFields(log.Fields{"err": err}).Error("Error reading user ID")
 			resp.Error(w, 1, "Error reading user ID", nil)
 			return
 		}
@@ -108,7 +108,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	s, err := session.NewSession(w, r)
 
 	if err != nil {
-		log.Printf("Error starting session on login: %v", err)
+		log.WithFields(log.Fields{"err": err}).Error("Error starting session on login")
 		resp.Error(w, 3, err.Error(), nil)
 		return
 	}
@@ -118,7 +118,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	s.Set("moderator", user.Moderator)
 
 	if err := s.Save(); err != nil {
-		log.Printf("Error saving session on login: %v", err)
+		log.WithFields(log.Fields{"err": err}).Error("Error saving session on login")
 		resp.Error(w, 4, err.Error(), nil)
 		return
 	}
@@ -130,13 +130,13 @@ func Logout(w http.ResponseWriter, r *http.Request) {
 	s, err := session.GetCurrentSession(r)
 
 	if !s.Active() {
-		log.Printf("Session not found on logout: %v", err)
+		log.WithFields(log.Fields{"err": err}).Error("Session not found on logout")
 		resp.Error(w, 1, "Session not found", err)
 		return
 	}
 
 	if err := s.Destroy(w, r); err != nil {
-		log.Printf("Error destroying user session on logout: %v", err)
+		log.WithFields(log.Fields{"err": err}).Error("Error destroying user session on logout")
 		resp.Error(w, 2, "Error destroying user session", nil)
 		return
 	}

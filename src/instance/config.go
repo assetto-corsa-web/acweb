@@ -2,7 +2,7 @@ package instance
 
 import (
 	"io/ioutil"
-	"log"
+	log "github.com/sirupsen/logrus"
 	"model"
 	"os"
 	"path/filepath"
@@ -20,7 +20,7 @@ const (
 func writeConfig(config *model.Configuration) error {
 	iniPath := filepath.Join(cfg_folder, int64ToStr(config.Id))
 	if err := os.MkdirAll(iniPath, 0755); err != nil {
-		log.Printf("Error creating cfg folder: %v", err)
+		log.WithFields(log.Fields{"err": err}).Error("Error creating cfg folder")
 		return err
 	}
 
@@ -150,7 +150,7 @@ func writeServerIni(config *model.Configuration) error {
 	// write ini
 	iniFile := filepath.Join(cfg_folder, int64ToStr(config.Id), server_ini)
 	if err := ioutil.WriteFile(iniFile, []byte(ini), 0775); err != nil {
-		log.Printf("Error writing server_cfg.ini: %v", err)
+		log.WithFields(log.Fields{"err": err}).Error("Error writing server_cfg.ini")
 		return err
 	}
 
@@ -197,7 +197,7 @@ func writeEntryListIni(config *model.Configuration) error {
 	// write ini
 	iniFile := filepath.Join(cfg_folder, int64ToStr(config.Id), entry_list_ini)
 	if err := ioutil.WriteFile(iniFile, []byte(ini), 0775); err != nil {
-		log.Printf("Error writing entry_list.ini: %v", err)
+		log.WithFields(log.Fields{"err": err}).Error("Error writing entry_list.ini")
 		return err
 	}
 
