@@ -8,6 +8,7 @@ export GOPATH=$DIR
 
 export ACWEB_HOST=localhost:8080
 export ACWEB_LOGDIR=
+export ACWEB_CONFIG_DIR=config
 export ACWEB_TLS_PRIVATE_KEY=
 export ACWEB_TLS_CERT=
 export ACWEB_DB_USER=root

@@ -73,6 +73,8 @@ Note that the user password must be a SHA256 hash. You can find tools online to 
 export ACWEB_HOST=localhost:8080
 # optional log file location (will be created if it doesn't exist)
 export ACWEB_LOGDIR=
+# config file directory for tracks.json and cars.json
+export ACWEB_CONFIG_DIR=
 # path to TLS private key file
 export ACWEB_TLS_PRIVATE_KEY=
 # path to TLS cert file
@@ -94,11 +96,10 @@ export ACWEB_DB=acweb
 
 1. download the latest release
 2. upload it to your server and unzip it
-3. cp the config.json from the old version to the new version
-4. update your MySQL database (migration scripts can be found in db/mig_FROMVERSION_TOVERSION.sql)
-5. start it
+3. update your MySQL database (migration scripts can be found in db/mig_FROMVERSION_TOVERSION.sql)
+4. start it
 
-For Docker pull the latest release and start it.
+For Docker pull the latest release, execute the migration script(s) and start it.
 
 ## Adding tracks and cars
 
@@ -131,7 +132,7 @@ To add tracks and cars, from a mod for instance, you must add them to the cars.j
     // ...
 ```
 
-When added, rebuild the Docker image if you use it or just overwrite the files in the main directory if you don't.
+The files can be found within the config directory. To modify them using Docker, mount a volume to /config and copy the original files into it, then modify them.
 
 ## Contribute
 

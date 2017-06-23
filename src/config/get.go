@@ -6,6 +6,8 @@ import (
 	"io/ioutil"
 	"log"
 	"model"
+	"os"
+	"path/filepath"
 )
 
 const (
@@ -42,7 +44,7 @@ func GetConfiguration(id int64) (*model.Configuration, error) {
 
 func GetAvailableTracks() ([]Track, error) {
 	var tracks []Track
-	content, err := ioutil.ReadFile(track_file)
+	content, err := ioutil.ReadFile(filepath.Join(os.Getenv("ACWEB_CONFIG_DIR"), track_file))
 
 	if err != nil {
 		log.Printf("Error reading track file: %v", err)
@@ -59,7 +61,7 @@ func GetAvailableTracks() ([]Track, error) {
 
 func GetAvailableCars() ([]Car, error) {
 	var cars []Car
-	content, err := ioutil.ReadFile(car_file)
+	content, err := ioutil.ReadFile(filepath.Join(os.Getenv("ACWEB_CONFIG_DIR"), car_file))
 
 	if err != nil {
 		log.Printf("Error reading car file: %v", err)
