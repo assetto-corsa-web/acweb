@@ -5,8 +5,8 @@ import (
 	"encoding/json"
 	"github.com/DeKugelschieber/go-resp"
 	"github.com/DeKugelschieber/go-session"
-	"instance"
 	log "github.com/sirupsen/logrus"
+	"instance"
 	"model"
 	"net/http"
 	"settings"
@@ -82,7 +82,7 @@ func CheckSession(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		resp.Success(w, 0, "", loginRes{id})
+		resp.Success(w, 0, "", struct{Id int64 `json:"user_id"`}{id})
 	} else {
 		// don't log this
 		resp.Log = false
@@ -92,7 +92,10 @@ func CheckSession(w http.ResponseWriter, r *http.Request) {
 }
 
 func Login(w http.ResponseWriter, r *http.Request) {
-	var req loginReq
+	req := struct {
+		Login string `json:"login"`
+	Pwd   string `json:"pwd"`
+	}{}
 
 	if decode(w, r, &req) {
 		return
@@ -150,7 +153,15 @@ func AddEditUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var req addEditUserReq
+	req := struct {
+		Id        int64  `json:"id"`
+		Login     string `json:"login"`
+		Email     string `json:"email"`
+		Pwd1      string `json:"pwd1"`
+		Pwd2      string `json:"pwd2"`
+		Admin     bool   `json:"admin"`
+		Moderator bool   `json:"moderator"`
+	}{}
 
 	if decode(w, r, &req) {
 		return
@@ -238,7 +249,11 @@ func SaveSettings(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var req saveSettingsReq
+	req := struct {
+		Folder     string `json:"folder"`
+		Executable string `json:"executable"`
+		Args       string `json:"args"`
+	}{}
 
 	if decode(w, r, &req) {
 		return
@@ -359,7 +374,10 @@ func StartInstance(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var req startInstanceReq
+	req := struct {
+		Name          string `json:"name"`
+		Configuration int64  `json:"config"`
+	}{}
 
 	if decode(w, r, &req) {
 		return

@@ -3,8 +3,8 @@ package config
 import (
 	"encoding/json"
 	"github.com/DeKugelschieber/go-util"
-	"io/ioutil"
 	log "github.com/sirupsen/logrus"
+	"io/ioutil"
 	"model"
 	"os"
 	"path/filepath"

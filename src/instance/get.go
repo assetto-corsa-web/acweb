@@ -2,8 +2,8 @@ package instance
 
 import (
 	"github.com/DeKugelschieber/go-util"
-	"io/ioutil"
 	log "github.com/sirupsen/logrus"
+	"io/ioutil"
 	"os"
 	"path/filepath"
 )

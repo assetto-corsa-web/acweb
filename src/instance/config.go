@@ -1,8 +1,8 @@
 package instance
 
 import (
-	"io/ioutil"
 	log "github.com/sirupsen/logrus"
+	"io/ioutil"
 	"model"
 	"os"
 	"path/filepath"
