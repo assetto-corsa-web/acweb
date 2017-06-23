@@ -4,11 +4,12 @@ import (
 	"github.com/DeKugelschieber/go-util"
 	"io/ioutil"
 	"log"
+	"os"
 	"path/filepath"
 )
 
 func GetAllInstanceLogs() ([]Log, error) {
-	dir, err := ioutil.ReadDir(log_dir)
+	dir, err := ioutil.ReadDir(os.Getenv("ACWEB_INSTANCE_LOGDIR"))
 
 	if err != nil {
 		log.Printf("Error reading log directory", err)
@@ -26,7 +27,7 @@ func GetAllInstanceLogs() ([]Log, error) {
 }
 
 func GetInstanceLog(file string) (string, error) {
-	content, err := ioutil.ReadFile(filepath.Join(log_dir, file))
+	content, err := ioutil.ReadFile(filepath.Join(os.Getenv("ACWEB_INSTANCE_LOGDIR"), file))
 
 	if err != nil {
 		log.Printf("Error reading log file: %v", err)

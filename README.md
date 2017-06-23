@@ -50,7 +50,7 @@ sudo docker ps acweb
 
 This will use a MySQL database installed on your host machine. To use a MySQL database running in a container, please rever to the official [MySQL image](https://hub.docker.com/_/mysql/). You have to use Dockers --link option to access it, if you don't expose the MySQL port.
 To start the server, you can also use a [docker-compose file](https://docs.docker.com/compose/). I recommend to enable SSL using [letsencrypt](https://letsencrypt.org/) and a reverse proxy.
-To run server instances, you need to mount the Assetto Corsa installation directory (containing the binary) to /ac. In the UI set the execution path (Settings -> AC server folder) to /ac.
+To run server instances, you need to mount the Assetto Corsa installation directory (containing the binary) to /ac. In the UI set the execution path (Settings -> AC server folder) to /ac. To save the instance logs outside the Docker container, you can mount /instance_logs.
 
 ### Manual installation
 
@@ -73,6 +73,8 @@ Note that the user password must be a SHA256 hash. You can find tools online to 
 export ACWEB_HOST=localhost:8080
 # optional log file location (will be created if it doesn't exist)
 export ACWEB_LOGDIR=
+# log directory for server instances, must be set
+export ACWEB_INSTANCE_LOGDIR=instance_logs
 # config file directory for tracks.json and cars.json
 export ACWEB_CONFIG_DIR=
 # path to TLS private key file

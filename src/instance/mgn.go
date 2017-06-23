@@ -13,10 +13,6 @@ import (
 	"time"
 )
 
-const (
-	log_dir = "server_log"
-)
-
 var (
 	instances = make([]Instance, 0)
 	m         sync.Mutex
@@ -35,7 +31,7 @@ func StartInstance(name string, configuration int64) error {
 	}
 
 	// create log dir
-	if err := os.MkdirAll(log_dir, 0755); err != nil {
+	if err := os.MkdirAll(os.Getenv("ACWEB_INSTANCE_LOGDIR"), 0755); err != nil {
 		log.Printf("Error creating server log folder: %v", err)
 		return util.OpError{5, "Error creating server log folder"}
 	}
@@ -65,7 +61,7 @@ func StartInstance(name string, configuration int64) error {
 	cmd := exec.Command(filepath.Join(s.Folder, s.Executable), strings.Split(s.Args, " ")...)
 	now := strings.Replace(time.Now().String(), " ", "_", -1)
 
-	logfile, err := os.Create(filepath.Join(log_dir, now+"_"+config.Name+".log"))
+	logfile, err := os.Create(filepath.Join(os.Getenv("ACWEB_INSTANCE_LOGDIR"), now+"_"+config.Name+".log"))
 
 	if err != nil {
 		log.Printf("Error creating log file: %v", err)
