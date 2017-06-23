@@ -8,73 +8,74 @@ import (
 )
 
 type Configuration struct {
-	Id                    int64     `json:"id"`
-	Name                  string    `json:"name"`
-	Pwd                   string    `json:"pwd"`
-	AdminPwd              string    `json:"admin_pwd"`
-	PickupMode            bool      `json:"pickup_mode"`
-	LockEntryList         bool      `json:"lock_entry_list"`
-	RacePitWindowStart    int       `json:"race_pit_window_start"`
-	RacePitWindowEnd      int       `json:"race_pit_window_end"`
-	ReversedGridRacePos   int       `json:"reversed_grid_race_positions"`
-	RaceOvertime          int       `json:"race_overtime"`
-	MaxSlots              int       `json:"max_slots"`
-	Welcome               string    `json:"welcome"`
-	Description           string    `json:"description"`
-	UDP                   int       `json:"udp"`
-	TCP                   int       `json:"tcp"`
-	HTTP                  int       `json:"http"`
-	PacketsHz             int       `json:"packets_hz"`
-	LoopMode              bool      `json:"loop_mode"`
-	ShowInLobby           bool      `json:"show_in_lobby"`
-	Threads               int       `json:"threads"`
-	ABS                   int       `json:"abs"`
-	TC                    int       `json:"tc"`
-	StabilityAid          bool      `json:"stability_aid"`
-	AutoClutch            bool      `json:"auto_clutch"`
-	TyreBlankets          bool      `json:"tyre_blankets"`
-	ForceVirtualMirror    bool      `json:"force_virtual_mirror"`
-	FuelRate              int       `json:"fuel_rate"`
-	DamageRate            int       `json:"damage_rate"`
-	TiresWearRate         int       `json:"tires_wear_rate"`
-	AllowedTiresOut       int       `json:"allowed_tires_out"`
-	MaxBallast            int       `json:"max_ballast"`
-	DisableGasCutPenality bool      `json:"disable_gas_cut_penality"`
-	ResultScreenTime      int       `json:"result_screen_time"`
-	DynamicTrack          bool      `json:"dynamic_track"`
-	Condition             string    `json:"condition"`
-	StartValue            int       `json:"start_value"`
-	Randomness            int       `json:"randomness"`
-	TransferredGrip       int       `json:"transferred_grip"`
-	LapsToImproveGrip     int       `json:"laps_to_improve_grip"`
-	KickVoteQuorum        int       `json:"kick_vote_quorum"`
-	SessionVoteQuorum     int       `json:"session_vote_quorum"`
-	VoteDuration          int       `json:"vote_duration"`
-	Blacklist             int       `json:"blacklist"`
-	MaxCollisionsKm       int       `json:"max_collisions_km"`
-	Booking               bool      `json:"booking"`
-	BookingTime           int       `json:"booking_time"`
-	Practice              bool      `json:"practice"`
-	PracticeTime          int       `json:"practice_time"`
-	CanJoinPractice       bool      `json:"can_join_practice"`
-	Qualify               bool      `json:"qualify"`
-	QualifyTime           int       `json:"qualify_time"`
-	CanJoinQualify        bool      `json:"can_join_qualify"`
-	Race                  bool      `json:"race"`
-	RaceLaps              int       `json:"race_laps"`
-	RaceTime              int       `json:"race_time"`
-	RaceWaitTime          int       `json:"race_wait_time"`
-	RaceExtraLap          bool      `json:"race_extra_lap"`
-	JoinType              int       `json:"join_type"`
-	Time                  string    `json:"time"`
-	SunAngle              int       `json:"sun_angle"`
-	Track                 string    `json:"track"`
-	TrackConfig           string    `json:"track_config"`
-	LegalTyres            string    `json:"legal_tyres"`
-	UdpPluginPort         int       `json:"udp_plugin_local_port"`
-	UdpPluginAddr         string    `json:"udp_plugin_address"`
-	Weather               []Weather `json:"weather"`
-	Cars                  []Car     `json:"cars"`
+	Id                    int64  `json:"id"`
+	Name                  string `json:"name"`
+	Pwd                   string `json:"pwd"`
+	AdminPwd              string `json:"admin_pwd"`
+	PickupMode            bool   `json:"pickup_mode"`
+	LockEntryList         bool   `json:"lock_entry_list"`
+	RaceOvertime          int    `json:"race_overtime"`
+	MaxSlots              int    `json:"max_slots"`
+	Welcome               string `json:"welcome"`
+	Description           string `json:"description"`
+	UDP                   int    `json:"udp"`
+	TCP                   int    `json:"tcp"`
+	HTTP                  int    `json:"http"`
+	PacketsHz             int    `json:"packets_hz"`
+	LoopMode              bool   `json:"loop_mode"`
+	ShowInLobby           bool   `json:"show_in_lobby"`
+	Threads               int    `json:"threads"`
+	ABS                   int    `json:"abs"`
+	TC                    int    `json:"tc"`
+	StabilityAid          bool   `json:"stability_aid"`
+	AutoClutch            bool   `json:"auto_clutch"`
+	TyreBlankets          bool   `json:"tyre_blankets"`
+	ForceVirtualMirror    bool   `json:"force_virtual_mirror"`
+	FuelRate              int    `json:"fuel_rate"`
+	DamageRate            int    `json:"damage_rate"`
+	TiresWearRate         int    `json:"tires_wear_rate"`
+	AllowedTiresOut       int    `json:"allowed_tires_out"`
+	MaxBallast            int    `json:"max_ballast"`
+	DisableGasCutPenality bool   `json:"disable_gas_cut_penality"`
+	ResultScreenTime      int    `json:"result_screen_time"`
+	DynamicTrack          bool   `json:"dynamic_track"`
+	Condition             string `json:"condition"`
+	StartValue            int    `json:"start_value"`
+	Randomness            int    `json:"randomness"`
+	TransferredGrip       int    `json:"transferred_grip"`
+	LapsToImproveGrip     int    `json:"laps_to_improve_grip"`
+	KickVoteQuorum        int    `json:"kick_vote_quorum"`
+	SessionVoteQuorum     int    `json:"session_vote_quorum"`
+	VoteDuration          int    `json:"vote_duration"`
+	Blacklist             int    `json:"blacklist"`
+	MaxCollisionsKm       int    `json:"max_collisions_km"`
+	Booking               bool   `json:"booking"`
+	BookingTime           int    `json:"booking_time"`
+	Practice              bool   `json:"practice"`
+	PracticeTime          int    `json:"practice_time"`
+	CanJoinPractice       bool   `json:"can_join_practice"`
+	Qualify               bool   `json:"qualify"`
+	QualifyTime           int    `json:"qualify_time"`
+	CanJoinQualify        bool   `json:"can_join_qualify"`
+	Race                  bool   `json:"race"`
+	RaceLaps              int    `json:"race_laps"`
+	RaceTime              int    `json:"race_time"`
+	RaceWaitTime          int    `json:"race_wait_time"`
+	RaceExtraLap          bool   `json:"race_extra_lap"`
+	JoinType              int    `json:"join_type"`
+	Time                  string `json:"time"`
+	SunAngle              int    `json:"sun_angle"`
+	Track                 string `json:"track"`
+	TrackConfig           string `json:"track_config"`
+	LegalTyres            string `json:"legal_tyres"`
+	UdpPluginPort         int    `json:"udp_plugin_local_port"`
+	UdpPluginAddr         string `json:"udp_plugin_address"`
+	RacePitWindowStart    int    `json:"race_pit_window_start"`
+	RacePitWindowEnd      int    `json:"race_pit_window_end"`
+	ReversedGridRacePos   int    `json:"reversed_grid_race_positions"`
+
+	Weather []Weather `json:"weather"`
+	Cars    []Car     `json:"cars"`
 }
 
 type Weather struct {
@@ -220,7 +221,7 @@ func (m *Configuration) saveConfiguration(tx *sql.Tx) error {
 			?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
 			?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
 			?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
-			?)`, m.Name,
+			?, ?, ?, ?)`, m.Name,
 			m.Pwd,
 			m.AdminPwd,
 			m.PickupMode,
@@ -453,7 +454,10 @@ func (m *Configuration) saveWeather(tx *sql.Tx) error {
 				wind_base_speed_max,
 				wind_base_direction,
 				wind_variation_direction
-				) VALUES (?, ?, ?, ?, ?, ?, ?)`, m.Id,
+				) VALUES (?, ?, ?, ?, ?,
+				?, ?, ?, ?, ?,
+				?)`,
+				m.Id,
 				weather.Weather,
 				weather.BaseAmbientTemp,
 				weather.RealisticRoadTemp,
@@ -480,7 +484,8 @@ func (m *Configuration) saveWeather(tx *sql.Tx) error {
 				wind_base_speed_max = ?,
 				wind_base_direction = ?,
 				wind_variation_direction = ?
-				WHERE id = ?`, weather.Weather,
+				WHERE id = ?`,
+				weather.Weather,
 				weather.BaseAmbientTemp,
 				weather.RealisticRoadTemp,
 				weather.BaseRoadTemp,
@@ -513,7 +518,10 @@ func (m *Configuration) saveCars(tx *sql.Tx) error {
 				team,
 				guid,
 				position,
-				fixed_setup) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`, m.Id,
+				fixed_setup
+				) VALUES (?, ?, ?, ?, ?,
+				?, ?, ?, ?)`,
+				m.Id,
 				car.Car,
 				car.Painting,
 				car.Spectator,
