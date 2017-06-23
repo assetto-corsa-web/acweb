@@ -75,6 +75,9 @@ func StartInstance(name string, configuration int64) error {
 	cmd.Stdout = logfile
 	cmd.Stderr = logfile
 
+	// run acServer from its folder so track and car data will be read for checksum;
+	cmd.Dir = s.Folder
+
 	if err := cmd.Start(); err != nil {
 		log.Printf("Error starting instance: %v", err)
 		return util.OpError{4, "Error starting instance"}

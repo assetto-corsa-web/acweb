@@ -13,6 +13,7 @@ Vue.component('Configuration', {
 			driver: '',
 			team: '',
 			guid: '',
+			fixed_setup: '',
 			// ---
 			selectedCars: [],
 			weather: [],
@@ -23,6 +24,9 @@ Vue.component('Configuration', {
 			admin_pwd: '',
 			pickup_mode: true,
 			lock_entry_list: false,
+			race_pit_window_start: 0,
+			race_pit_window_end: 0,
+			reversed_grid_race_positions: 0,
 			race_overtime: 60,
 			max_slots: 0,
 			result_screen_time: 60,
@@ -72,9 +76,12 @@ Vue.component('Configuration', {
 			race_wait_time: 60,
 			race_extra_lap: false,
 			join_type: 1,
-			time: '08:00',
-			sun_angle: 32,
+			time: '14:00',
+			sun_angle: 16,
 			track: '',
+			legal_tyres: '',
+			udp_plugin_local_port: 0,
+			udp_plugin_address: '',
 			// ---
 			err: 0,
 			addEditConfig: false,
@@ -132,6 +139,7 @@ Vue.component('Configuration', {
 			this.driver = '';
 			this.team = '';
 			this.guid = '';
+			this.fixed_setup = '';
 
 			this.selectedCars = [];
 			this.weather = [];
@@ -142,6 +150,9 @@ Vue.component('Configuration', {
 			this.admin_pwd = '';
 			this.pickup_mode = true;
 			this.lock_entry_list = false;
+			this.race_pit_window_start = 0;
+			this.race_pit_window_end = 0;
+			this.reversed_grid_race_positions = 0;
 			this.race_overtime = 60;
 			this.max_slots = 0;
 			this.result_screen_time = 60;
@@ -191,10 +202,13 @@ Vue.component('Configuration', {
 			this.race_wait_time = 60;
 			this.race_extra_lap = false;
 			this.join_type = 1;
-			this.time = '08 =00';
-			this.sun_angle = 32;
+			this.time = '14:00';
+			this.sun_angle = 16;
 			this.track = '';
-
+			this.legal_tyres = '';
+			this.udp_plugin_local_port = 0;
+			this.udp_plugin_address = '';
+			
 			this.err = 0;
 			this.addEditConfig = false;
 			this.removeConfig = false;
@@ -215,6 +229,9 @@ Vue.component('Configuration', {
 				this.admin_pwd = resp.data.admin_pwd;
 				this.pickup_mode = resp.data.pickup_mode;
 				this.lock_entry_list = resp.data.lock_entry_list;
+				this.race_pit_window_start = resp.data.race_pit_window_start;
+				this.race_pit_window_end = resp.data.race_pit_window_end;
+				this.reversed_grid_race_positions = resp.data.reversed_grid_race_positions;
 				this.race_overtime = resp.data.race_overtime;
 				this.max_slots = resp.data.max_slots;
 				this.welcome = resp.data.welcome;
@@ -266,6 +283,9 @@ Vue.component('Configuration', {
 				this.join_type = resp.data.join_type;
 				this.time = resp.data.time;
 				this.sun_angle = resp.data.sun_angle;
+				this.legal_tyres = resp.data.legal_tyres;
+				this.udp_plugin_local_port = resp.data.udp_plugin_local_port;
+				this.udp_plugin_address = resp.data.udp_plugin_address;
 
 				if(copy){
 					this.name += ' (copy)';
@@ -331,6 +351,10 @@ Vue.component('Configuration', {
 				this.weather[i].base_road_temp = parseInt(this.weather[i].base_road_temp);
 				this.weather[i].ambient_variation = parseInt(this.weather[i].ambient_variation);
 				this.weather[i].road_variation = parseInt(this.weather[i].road_variation);
+				this.weather[i].wind_base_speed_min = parseInt(this.weather[i].wind_base_speed_min);
+				this.weather[i].wind_base_speed_max = parseInt(this.weather[i].wind_base_speed_max);
+				this.weather[i].wind_base_direction = parseInt(this.weather[i].wind_base_direction);
+				this.weather[i].wind_variation_direction = parseInt(this.weather[i].wind_variation_direction);
 			}
 
 			for(var i = 0; i < this.selectedCars.length; i++){
@@ -344,6 +368,9 @@ Vue.component('Configuration', {
 				admin_pwd: this.admin_pwd,
 				pickup_mode: this.pickup_mode,
 				lock_entry_list: this.lock_entry_list,
+				race_pit_window_start: this.race_pit_window_start,
+				race_pit_window_end: this.race_pit_window_end,
+				reversed_grid_race_positions: this.reversed_grid_race_positions,
 				race_overtime: parseInt(this.race_overtime),
 				max_slots: parseInt(this.max_slots),
 				welcome: this.welcome,
@@ -398,6 +425,9 @@ Vue.component('Configuration', {
 				weather: this.weather,
 				track: this.track.name,
 				track_config: this.track.config,
+				legal_tyres: this.legal_tyres,
+				udp_plugin_local_port: parseInt(this.udp_plugin_local_port),
+				udp_plugin_address: this.udp_plugin_address,
 				cars: this.selectedCars
 			};
 
@@ -435,7 +465,11 @@ Vue.component('Configuration', {
 				realistic_road_temp: 1,
 				base_road_temp: 18,
 				ambient_variation: 1,
-				road_variation: 1
+				road_variation: 1,
+				wind_base_speed_min: 0,
+				wind_base_speed_max: 0,
+				wind_base_direction: 0,
+				wind_variation_direction: 0
 			});
 		},
 		removeWeather: function(i){
@@ -462,7 +496,8 @@ Vue.component('Configuration', {
 				driver: this.driver,
 				team: this.team,
 				guid: this.guid,
-				position: this.selectedCars.length
+				position: this.selectedCars.length,
+				fixed_setup: this.fixed_setup
 			});
 
 			// only reset driver and GUID in case user wants to add multiple similar slots

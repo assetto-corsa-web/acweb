@@ -14,6 +14,9 @@ type Configuration struct {
 	AdminPwd              string    `json:"admin_pwd"`
 	PickupMode            bool      `json:"pickup_mode"`
 	LockEntryList         bool      `json:"lock_entry_list"`
+	RacePitWindowStart    int       `json:"race_pit_window_start"`
+	RacePitWindowEnd      int       `json:"race_pit_window_end"`
+	ReversedGridRacePos   int       `json:"reversed_grid_race_positions"`
 	RaceOvertime          int       `json:"race_overtime"`
 	MaxSlots              int       `json:"max_slots"`
 	Welcome               string    `json:"welcome"`
@@ -67,19 +70,26 @@ type Configuration struct {
 	SunAngle              int       `json:"sun_angle"`
 	Track                 string    `json:"track"`
 	TrackConfig           string    `json:"track_config"`
+	LegalTyres            string    `json:"legal_tyres"`
+	UdpPluginPort         int       `json:"udp_plugin_local_port"`
+	UdpPluginAddr         string    `json:"udp_plugin_address"`
 	Weather               []Weather `json:"weather"`
 	Cars                  []Car     `json:"cars"`
 }
 
 type Weather struct {
-	Id                int64  `json:"id"`
-	Configuration     int64  `json:"configuration"`
-	Weather           string `json:"weather"`
-	BaseAmbientTemp   int    `json:"base_ambient_temp"`
-	RealisticRoadTemp int    `json:"realistic_road_temp"`
-	BaseRoadTemp      int    `json:"base_road_temp"`
-	AmbientVariation  int    `json:"ambient_variation"`
-	RoadVariation     int    `json:"road_variation"`
+	Id                     int64  `json:"id"`
+	Configuration          int64  `json:"configuration"`
+	Weather                string `json:"weather"`
+	BaseAmbientTemp        int    `json:"base_ambient_temp"`
+	RealisticRoadTemp      int    `json:"realistic_road_temp"`
+	BaseRoadTemp           int    `json:"base_road_temp"`
+	AmbientVariation       int    `json:"ambient_variation"`
+	RoadVariation          int    `json:"road_variation"`
+	WindBaseSpeedMin       int    `json:"wind_base_speed_min"`
+	WindBaseSpeedMax       int    `json:"wind_base_speed_max"`
+	WindBaseDirection      int    `json:"wind_base_direction"`
+	WindVariationDirection int    `json:"wind_variation_direction"`
 }
 
 type Car struct {
@@ -92,6 +102,7 @@ type Car struct {
 	Team          string `json:"team"`
 	GUID          string `json:"guid"`
 	Position      int    `json:"position"`
+	FixedSetup    string `json:"fixed_setup"`
 }
 
 // Joins weather and cars.
@@ -197,12 +208,19 @@ func (m *Configuration) saveConfiguration(tx *sql.Tx) error {
 			time,
 			sun_angle,
 			track,
-			track_config) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
+			track_config,
+			legal_tyres,
+			udp_plugin_local_port,
+			udp_plugin_address,
+			race_pit_window_start,
+			race_pit_window_end,
+			reversed_grid_race_positions) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
 			?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
 			?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
 			?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
 			?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
-			?, ?, ?, ?, ?, ?, ?, ?)`, m.Name,
+			?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
+			?)`, m.Name,
 			m.Pwd,
 			m.AdminPwd,
 			m.PickupMode,
@@ -259,7 +277,13 @@ func (m *Configuration) saveConfiguration(tx *sql.Tx) error {
 			m.Time,
 			m.SunAngle,
 			m.Track,
-			m.TrackConfig)
+			m.TrackConfig,
+			m.LegalTyres,
+			m.UdpPluginPort,
+			m.UdpPluginAddr,
+			m.RacePitWindowStart,
+			m.RacePitWindowEnd,
+			m.ReversedGridRacePos)
 
 		if err != nil {
 			tx.Rollback()
@@ -334,7 +358,14 @@ func (m *Configuration) saveConfiguration(tx *sql.Tx) error {
 		time = ?,
 		sun_angle = ?,
 		track = ?,
-		track_config = ? WHERE id = ?`, m.Name,
+		track_config = ?,
+		legal_tyres = ?,
+		udp_plugin_local_port = ?,
+		udp_plugin_address = ?,
+		race_pit_window_start = ?,
+		race_pit_window_end = ?,
+		reversed_grid_race_positions = ?
+		WHERE id = ?`, m.Name,
 		m.Pwd,
 		m.AdminPwd,
 		m.PickupMode,
@@ -392,6 +423,12 @@ func (m *Configuration) saveConfiguration(tx *sql.Tx) error {
 		m.SunAngle,
 		m.Track,
 		m.TrackConfig,
+		m.LegalTyres,
+		m.UdpPluginPort,
+		m.UdpPluginAddr,
+		m.RacePitWindowStart,
+		m.RacePitWindowEnd,
+		m.ReversedGridRacePos,
 		m.Id)
 
 	if err != nil {
@@ -411,13 +448,22 @@ func (m *Configuration) saveWeather(tx *sql.Tx) error {
 				realistic_road_temp,
 				base_road_temp,
 				ambient_variation,
-				road_variation) VALUES (?, ?, ?, ?, ?, ?, ?)`, m.Id,
+				road_variation,
+				wind_base_speed_min,
+				wind_base_speed_max,
+				wind_base_direction,
+				wind_variation_direction
+				) VALUES (?, ?, ?, ?, ?, ?, ?)`, m.Id,
 				weather.Weather,
 				weather.BaseAmbientTemp,
 				weather.RealisticRoadTemp,
 				weather.BaseRoadTemp,
 				weather.AmbientVariation,
-				weather.RoadVariation)
+				weather.RoadVariation,
+				weather.WindBaseSpeedMin,
+				weather.WindBaseSpeedMax,
+				weather.WindBaseDirection,
+				weather.WindVariationDirection)
 
 			if err != nil {
 				tx.Rollback()
@@ -429,12 +475,21 @@ func (m *Configuration) saveWeather(tx *sql.Tx) error {
 				realistic_road_temp = ?,
 				base_road_temp = ?,
 				ambient_variation = ?,
-				road_variation = ? WHERE id = ?`, weather.Weather,
+				road_variation = ?,
+				wind_base_speed_min = ?,
+				wind_base_speed_max = ?,
+				wind_base_direction = ?,
+				wind_variation_direction = ?
+				WHERE id = ?`, weather.Weather,
 				weather.BaseAmbientTemp,
 				weather.RealisticRoadTemp,
 				weather.BaseRoadTemp,
 				weather.AmbientVariation,
 				weather.RoadVariation,
+				weather.WindBaseSpeedMin,
+				weather.WindBaseSpeedMax,
+				weather.WindBaseDirection,
+				weather.WindVariationDirection,
 				weather.Id)
 
 			if err != nil {
@@ -457,14 +512,16 @@ func (m *Configuration) saveCars(tx *sql.Tx) error {
 				driver,
 				team,
 				guid,
-				position) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`, m.Id,
+				position,
+				fixed_setup) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`, m.Id,
 				car.Car,
 				car.Painting,
 				car.Spectator,
 				car.Driver,
 				car.Team,
 				car.GUID,
-				car.Position)
+				car.Position,
+				car.FixedSetup)
 
 			if err != nil {
 				tx.Rollback()
@@ -477,13 +534,15 @@ func (m *Configuration) saveCars(tx *sql.Tx) error {
 				driver = ?,
 				team = ?,
 				guid = ?,
-				position = ? WHERE id = ?`, car.Car,
+				position = ?,
+				fixed_setup = ? WHERE id = ?`, car.Car,
 				car.Painting,
 				car.Spectator,
 				car.Driver,
 				car.Team,
 				car.GUID,
 				car.Position,
+				car.FixedSetup,
 				car.Id)
 
 			if err != nil {
@@ -653,7 +712,13 @@ func scanConfiguration(row util.RowScanner) (*Configuration, error) {
 		&config.Time,
 		&config.SunAngle,
 		&config.Track,
-		&config.TrackConfig); err != nil {
+		&config.TrackConfig,
+		&config.LegalTyres,
+		&config.UdpPluginPort,
+		&config.UdpPluginAddr,
+		&config.RacePitWindowStart,
+		&config.RacePitWindowEnd,
+		&config.ReversedGridRacePos); err != nil {
 		return nil, err
 	}
 
@@ -686,7 +751,11 @@ func scanOneWeather(row util.RowScanner) (*Weather, error) {
 		&weather.RealisticRoadTemp,
 		&weather.BaseRoadTemp,
 		&weather.AmbientVariation,
-		&weather.RoadVariation); err != nil {
+		&weather.RoadVariation,
+		&weather.WindBaseSpeedMin,
+		&weather.WindBaseSpeedMax,
+		&weather.WindBaseDirection,
+		&weather.WindVariationDirection); err != nil {
 		return nil, err
 	}
 
@@ -721,7 +790,8 @@ func scanCar(row util.RowScanner) (*Car, error) {
 		&car.Driver,
 		&car.Team,
 		&car.GUID,
-		&car.Position); err != nil {
+		&car.Position,
+		&car.FixedSetup); err != nil {
 		return nil, err
 	}
 
