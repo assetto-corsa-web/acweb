@@ -1,9 +1,9 @@
 package main
 
 import (
-	"db"
 	"github.com/DeKugelschieber/go-session"
 	"log"
+	"model"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -96,8 +96,8 @@ func main() {
 	}
 
 	// connect to db
-	db.Connect(os.Getenv("ACWEB_DB_USER"), os.Getenv("ACWEB_DB_PASSWORD"), os.Getenv("ACWEB_DB_HOST"), os.Getenv("ACWEB_DB"))
-	defer db.Disconnect()
+	model.Connect(os.Getenv("ACWEB_DB_USER"), os.Getenv("ACWEB_DB_PASSWORD"), os.Getenv("ACWEB_DB_HOST"), os.Getenv("ACWEB_DB"))
+	defer model.Disconnect()
 
 	// start session manager
 	sessionProvider := session.NewMemProvider()

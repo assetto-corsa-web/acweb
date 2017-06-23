@@ -1,13 +1,13 @@
-package db
+package model
 
 import (
-	"database/sql"
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/jmoiron/sqlx"
 	"log"
 )
 
 var (
-	session *sql.DB
+	session *sqlx.DB
 )
 
 // Connects to database. Will panic on error.
@@ -15,7 +15,7 @@ var (
 func Connect(user, password, host, database string) {
 	// connect
 	log.Print("Connecting to database '" + database + "' at '" + host + "'")
-	s, _ := sql.Open("mysql", user+":"+password+"@"+host+"/"+database)
+	s, _ := sqlx.Connect("mysql", user+":"+password+"@"+host+"/"+database)
 
 	if err := s.Ping(); err != nil {
 		log.Fatal(err)
@@ -30,6 +30,6 @@ func Disconnect() {
 }
 
 // Returns the database handle.
-func Get() *sql.DB {
+func Get() *sqlx.DB {
 	return session
 }

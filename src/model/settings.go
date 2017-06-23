@@ -1,10 +1,5 @@
 package model
 
-import (
-	"db"
-	"github.com/DeKugelschieber/go-util"
-)
-
 type Settings struct {
 	Id         int64  `json:"id"`
 	Folder     string `json:"folder"`
@@ -14,9 +9,7 @@ type Settings struct {
 
 func (m *Settings) Save() error {
 	if m.Id == 0 {
-		res, err := db.Get().Exec("INSERT INTO settings (folder, executable, args) VALUES (?, ?, ?)", m.Folder,
-			m.Executable,
-			m.Args)
+		res, err := session.NamedExec("INSERT INTO settings (folder, executable, args) VALUES (:folder, :executable, :args)", m)
 
 		if err != nil {
 			return err
@@ -32,27 +25,16 @@ func (m *Settings) Save() error {
 		return nil
 	}
 
-	_, err := db.Get().Exec("UPDATE settings SET folder = ?, executable = ?, args = ? WHERE id = ?", m.Folder,
-		m.Executable,
-		m.Args,
-		m.Id)
+	_, err := session.NamedExec("UPDATE settings SET folder = :folder, executable = :executable, args = :args WHERE id = :id", m)
 	return err
 }
 
 func GetSettings() (*Settings, error) {
-	row := db.Get().QueryRow("SELECT * FROM settings LIMIT 1")
-	return scanSettings(row)
-}
+	settings := new(Settings)
 
-func scanSettings(row util.RowScanner) (*Settings, error) {
-	settings := Settings{}
-
-	if err := row.Scan(&settings.Id,
-		&settings.Folder,
-		&settings.Executable,
-		&settings.Args); err != nil {
+	if err := session.Get(settings, "SELECT * FROM settings LIMIT 1"); err != nil {
 		return nil, err
 	}
 
-	return &settings, nil
+	return settings, nil
 }

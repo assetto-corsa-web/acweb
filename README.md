@@ -23,7 +23,7 @@ docker pull kugel/acweb
 ```
 
 3. install MySQL on your server or use a docker image
-4. create the database schema (db/schema.sql) and create the first user:
+4. create the database schema (db/schema.sql + all migration scripts in appropriate order) and create the first user:
 
 ```
 INSERT INTO `user` (`id`, `login`, `email`, `password`, `admin`, `moderator`) VALUES (NULL, 'username', 'user@email.com', 'SHA256_HASH', '1', '0');
@@ -58,7 +58,7 @@ This instruction supposes you to use Linux. On Windows you basically need to per
 
 1. download the latest release of acweb
 2. upload it to your server and unzip it
-3. create the database schema (db/schema.sql) and create the first user:
+3. create the database schema (db/schema.sql + all migration scripts in appropriate order) and create the first user:
 
 ```
 INSERT INTO `user` (`id`, `login`, `email`, `password`, `admin`, `moderator`) VALUES (NULL, 'username', 'user@email.com', 'SHA256_HASH', '1', '0');
