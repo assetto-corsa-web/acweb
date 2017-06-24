@@ -61,8 +61,8 @@ func StartInstance(name string, configuration int64) error {
 
 	// force server_cfg and entry_list ini paths
 	cmdArgs := s.Args
-	cmdArgs += "-c " + iniServerCfg
-	cmdArgs += "-e " + iniEntryList
+	cmdArgs += " -c " + iniServerCfg
+	cmdArgs += " -e " + iniEntryList
 
 	// start
 	cmd := exec.Command(filepath.Join(s.Folder, s.Executable), strings.Split(cmdArgs, " ")...)
