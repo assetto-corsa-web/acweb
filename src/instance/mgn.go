@@ -59,12 +59,13 @@ func StartInstance(name string, configuration int64) error {
 		return util.OpError{3, "Error writing configuration"}
 	}
 
-	cmdParams := "-c " + iniServerCfg
-	cmdParams += " -e " + iniEntryList
-	cmdParams += strings.Split(s.Args, " ")
+	// force server_cfg and entry_list ini paths
+	cmdArgs := s.Args
+	cmdArgs += "-c " + iniServerCfg
+	cmdArgs += "-e " + iniEntryList
 
 	// start
-	cmd := exec.Command(filepath.Join(s.Folder, s.Executable), cmdParams...)
+	cmd := exec.Command(filepath.Join(s.Folder, s.Executable), strings.Split(cmdArgs, " ")...)
 	now := strings.Replace(time.Now().String(), " ", "_", -1)
 
 	logfile, err := os.Create(filepath.Join(os.Getenv("ACWEB_INSTANCE_LOGDIR"), now+"_"+config.Name+".log"))

@@ -26,7 +26,7 @@ func writeConfig(config *model.Configuration) (string, string, error) {
 
 	iniServerCfg, err := writeServerIni(config)
 	if err != nil {
-		return iniServerCfg, nil, err
+		return iniServerCfg, "", err
 	}
 
 	iniEntryList, err := writeEntryListIni(config)
