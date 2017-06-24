@@ -1,15 +1,93 @@
 [
     {
+        "name": "acu_singapore",
+        "config": "day",
+        "description": "Acu_singapore - Day",
+        "max_slots": 30
+    },
+    {
+        "name": "acu_singapore",
+        "config": "night",
+        "description": "Acu_singapore - Night",
+        "max_slots": 30
+    },
+    {
+        "name": "barbagallo",
+        "config": "",
+        "description": "Barbagallo",
+        "max_slots": 30
+    },
+    {
+        "name": "blackwood_reloaded",
+        "config": "",
+        "description": "Blackwood_reloaded",
+        "max_slots": 18
+    },
+    {
+        "name": "bridgehampton",
+        "config": "fall",
+        "description": "Bridgehampton - Fall",
+        "max_slots": 24
+    },
+    {
+        "name": "bridgehampton",
+        "config": "summer",
+        "description": "Bridgehampton - Summer",
+        "max_slots": 24
+    },
+    {
+        "name": "bs_lagunaseca",
+        "config": "",
+        "description": "Bs_lagunaseca",
+        "max_slots": 27
+    },
+    {
+        "name": "circuit_de_la_sarthe",
+        "config": "24hours",
+        "description": "Circuit_de_la_sarthe - 24hours",
+        "max_slots": 30
+    },
+    {
+        "name": "circuit_de_la_sarthe",
+        "config": "24hours_osrw",
+        "description": "Circuit_de_la_sarthe - 24hours_osrw",
+        "max_slots": 34
+    },
+    {
+        "name": "circuit_de_la_sarthe",
+        "config": "nochicane",
+        "description": "Circuit_de_la_sarthe - Nochicane",
+        "max_slots": 30
+    },
+    {
+        "name": "daytona_roadcourse",
+        "config": "",
+        "description": "Daytona_roadcourse",
+        "max_slots": 43
+    },
+    {
         "name": "drift",
         "config": "",
         "description": "Drift",
         "max_slots": 18
     },
     {
+        "name": "gilles-villeneuve",
+        "config": "",
+        "description": "Gilles-villeneuve",
+        "max_slots": 28
+    },
+    {
         "name": "imola",
         "config": "",
         "description": "Imola",
         "max_slots": 24
+    },
+    {
+        "name": "interlagos",
+        "config": "",
+        "description": "Interlagos",
+        "max_slots": 23
     },
     {
         "name": "ks_barcelona",
@@ -157,9 +235,21 @@
     },
     {
         "name": "ks_nurburgring",
+        "config": "layout_gp_a_osrw",
+        "description": "Ks_nurburgring - Layout_gp_a_osrw",
+        "max_slots": 36
+    },
+    {
+        "name": "ks_nurburgring",
         "config": "layout_gp_b",
         "description": "Ks_nurburgring - Layout_gp_b",
         "max_slots": 24
+    },
+    {
+        "name": "ks_nurburgring",
+        "config": "layout_gp_b_osrw",
+        "description": "Ks_nurburgring - Layout_gp_b_osrw",
+        "max_slots": 36
     },
     {
         "name": "ks_nurburgring",
@@ -169,9 +259,21 @@
     },
     {
         "name": "ks_nurburgring",
+        "config": "layout_sprint_a_osrw",
+        "description": "Ks_nurburgring - Layout_sprint_a_osrw",
+        "max_slots": 36
+    },
+    {
+        "name": "ks_nurburgring",
         "config": "layout_sprint_b",
         "description": "Ks_nurburgring - Layout_sprint_b",
         "max_slots": 24
+    },
+    {
+        "name": "ks_nurburgring",
+        "config": "layout_sprint_b_osrw",
+        "description": "Ks_nurburgring - Layout_sprint_b_osrw",
+        "max_slots": 36
     },
     {
         "name": "ks_red_bull_ring",
@@ -240,10 +342,16 @@
         "max_slots": 18
     },
     {
-        "name": "monza",
+        "name": "monaco",
         "config": "",
-        "description": "Monza",
-        "max_slots": 26
+        "description": "Monaco",
+        "max_slots": 22
+    },
+    {
+        "name": "monza",
+        "config": "monza_osrw",
+        "description": "Monza - Monza_osrw",
+        "max_slots": 36
     },
     {
         "name": "mugello",
@@ -252,15 +360,69 @@
         "max_slots": 24
     },
     {
-        "name": "spa",
+        "name": "njmp_lightning",
         "config": "",
-        "description": "Spa",
+        "description": "Njmp_lightning",
         "max_slots": 24
+    },
+    {
+        "name": "paul_ricard",
+        "config": "blancpain",
+        "description": "Paul_ricard - Blancpain",
+        "max_slots": 36
+    },
+    {
+        "name": "paul_ricard",
+        "config": "club_practice",
+        "description": "Paul_ricard - Club_practice",
+        "max_slots": 36
+    },
+    {
+        "name": "paul_ricard",
+        "config": "gt_24h",
+        "description": "Paul_ricard - Gt_24h",
+        "max_slots": 36
+    },
+    {
+        "name": "paul_ricard",
+        "config": "wtcc",
+        "description": "Paul_ricard - Wtcc",
+        "max_slots": 36
+    },
+    {
+        "name": "road_america",
+        "config": "",
+        "description": "Road_america",
+        "max_slots": 48
+    },
+    {
+        "name": "spa",
+        "config": "spa_osrw",
+        "description": "Spa - Spa_osrw",
+        "max_slots": 40
+    },
+    {
+        "name": "tgt",
+        "config": "",
+        "description": "Tgt",
+        "max_slots": 28
+    },
+    {
+        "name": "tor_poznanl",
+        "config": "laser",
+        "description": "Tor_poznanl - Laser",
+        "max_slots": 40
     },
     {
         "name": "trento-bondone",
         "config": "",
         "description": "Trento-bondone",
         "max_slots": 4
+    },
+    {
+        "name": "tsukuba2005",
+        "config": "",
+        "description": "Tsukuba2005",
+        "max_slots": 22
     }
 ]
