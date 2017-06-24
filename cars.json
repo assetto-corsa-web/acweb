@@ -452,6 +452,7 @@
         "description": "Abarth 500 Assetto Corse",
         "paintings": [
             "0_official",
+            "Maartijmm",
             "black_neon",
             "dark_blue",
             "dark_green_yellow",
@@ -461,6 +462,7 @@
             "racing_500",
             "racing_501",
             "racing_502",
+            "ramen_team",
             "red_yellow",
             "silver_red",
             "white_grey",
@@ -637,6 +639,15 @@
         ]
     },
     {
+        "name": "ks_audi_r18_etron_quattro",
+        "description": "Audi R18 e-tron quattro 2014",
+        "paintings": [
+            "00_lm1",
+            "01_lm2",
+            "02_lm3"
+        ]
+    },
+    {
         "name": "ks_audi_r8_lms",
         "description": "Audi R8 LMS Ultra",
         "paintings": [
@@ -652,6 +663,36 @@
             "factory_grey",
             "factory_matte",
             "factory_white"
+        ]
+    },
+    {
+        "name": "ks_audi_r8_lms_2016",
+        "description": "Audi R8 LMS 2016",
+        "paintings": [
+            "00_racing_06",
+            "01_2016",
+            "02_racing_01",
+            "03_racing_04",
+            "04_racing_28",
+            "05_racing_29",
+            "06_racing_01",
+            "07_racing_32",
+            "08_racing_33",
+            "09_racing_34",
+            "10_racing_35",
+            "11_racing_36",
+            "12_racing_37",
+            "13_racing_10",
+            "14_racing_11",
+            "15_racing_12",
+            "16_racing_13",
+            "17_racing_118",
+            "18_racing_119",
+            "19_racing_220",
+            "20_racing_221",
+            "21_racing_222",
+            "22_racing_223",
+            "23_racing_224"
         ]
     },
     {
@@ -723,6 +764,62 @@
             "06_alpine_white_rings",
             "07_copenhagen_blue",
             "08_malachite_green_rings"
+        ]
+    },
+    {
+        "name": "ks_audi_tt_cup",
+        "description": "Audi TT Cup",
+        "paintings": [
+            "00_racing_02",
+            "01_racing_03",
+            "02_racing_04",
+            "03_racing_05",
+            "04_racing_06",
+            "05_racing_07",
+            "06_racing_11",
+            "07_racing_12",
+            "08_racing_14",
+            "09_racing_23",
+            "10_racing_27",
+            "11_racing_31",
+            "12_racing_33",
+            "13_racing_42",
+            "14_racing_76",
+            "15_racing_91",
+            "16_racing_96",
+            "17_racing_97",
+            "18_racing_98",
+            "19_racing_99"
+        ]
+    },
+    {
+        "name": "ks_audi_tt_vln",
+        "description": "Audi TT RS (VLN)",
+        "paintings": [
+            "00_racing_125",
+            "01_racing_126",
+            "02_racing_256",
+            "04_racing_14",
+            "05_racing_15",
+            "06_racing_16",
+            "07_racing_17",
+            "08_racing_18",
+            "09_racing_19",
+            "10_racing_20",
+            "11_racing_43",
+            "12_racing_44",
+            "13_racing_45",
+            "14_racing_46",
+            "15_racing_47",
+            "16_racing_48",
+            "17_racing_50",
+            "18_racing_52",
+            "19_racing_53",
+            "20_racing_54",
+            "21_racing_55",
+            "22_racing_56",
+            "23_racing_57",
+            "24_racing_58"
         ]
     },
     {
@@ -1070,7 +1167,7 @@
         "name": "ks_lamborghini_countach_s1",
         "description": "Lamborghini Countach S1",
         "paintings": [
-            "0_oro_sahara_metal",
+            "0_rosso_siviglia_gold",
             "WalterWolf_black",
             "WalterWolf_blue",
             "WalterWolf_green",
@@ -1082,8 +1179,8 @@
             "canna_fucile_metal",
             "nero_tenebre",
             "nero_tenebre_gold",
-            "rosso_siviglia",
-            "rosso_siviglia_gold"
+            "oro_sahara_metal",
+            "rosso_siviglia"
         ]
     },
     {
@@ -1127,6 +1224,7 @@
         "description": "Lamborghini Huracan GT3",
         "paintings": [
             "0_Racing_green",
+            "1Racing_apricot",
             "Racing_Black",
             "Racing_Black_matte",
             "Racing_BlizzardBlue",
@@ -1144,7 +1242,7 @@
             "Racing_copper",
             "Racing_darkgreen",
             "Racing_darkred",
-            "Racing_grey_matte"
+            "Racing_grey_matte",
         ]
     },
     {
@@ -1225,6 +1323,25 @@
             "racing_19",
             "racing_20",
             "racing_21"
+        ]
+    },
+    {
+        "name": "ks_lotus_3_eleven",
+        "description": "Lotus 3-Eleven",
+        "paintings": [
+            "00_green_yellow",
+            "01_metallic_orange",
+            "02_solid_yellow",
+            "03_metallic_black",
+            "04_metallic_grey",
+            "05_metallic_green",
+            "06_metallic_blue",
+            "07_metallic_silver",
+            "08_metallic_white",
+            "09_red_gold",
+            "10_black_gold",
+            "11_solid_red",
+            "12_matte_black"
         ]
     },
     {
@@ -1330,6 +1447,17 @@
             "10_bianco_alpi",
             "11_nero",
             "12_verde_ossido"
+        ]
+    },
+    {
+        "name": "ks_maserati_mc12_gt1",
+        "description": "Maserati MC12 GT1",
+        "paintings": [
+            "00_racing_00",
+            "01_racing_09",
+            "02_racing_10",
+            "03_racing_35",
+            "04_racing_36"
         ]
     },
     {
@@ -1448,6 +1576,31 @@
         ]
     },
     {
+        "name": "ks_mclaren_570s",
+        "description": "McLaren 570S",
+        "paintings": [
+            "00_mclaren_orange",
+            "01_blade_silver",
+            "02_blue",
+            "03_vermillion_red",
+            "04_fire_black",
+            "05_ice_silver",
+            "06_mantis_green",
+            "07_onyx_black",
+            "08_pearl_white",
+            "09_volcano_yellow",
+            "10_silver",
+            "11_storm_grey",
+            "12_ventura_orange",
+            "13_bourbon",
+            "14_volcano_orange",
+            "15_silica_white",
+            "16_white",
+            "17_cobalt_violet",
+            "18_pacific"
+        ]
+    },
+    {
         "name": "ks_mclaren_650_gt3",
         "description": "McLaren 650S GT3",
         "paintings": [
@@ -1482,7 +1635,7 @@
     },
     {
         "name": "ks_mclaren_p1",
-        "description": "McLaren P1",
+        "description": "McLaren P1â¢",
         "paintings": [
             "0_mclaren_orange",
             "azure_blue",
@@ -1494,6 +1647,14 @@
             "volcano_red",
             "volcano_yellow",
             "yellow"
+        ]
+    },
+    {
+        "name": "ks_mclaren_p1_gtr",
+        "description": "McLaren P1â¢ GTR",
+        "paintings": [
+            "00_livery_01",
+            "01_livery_02"
         ]
     },
     {
@@ -1517,6 +1678,7 @@
         "name": "ks_mercedes_amg_gt3",
         "description": "Mercedes-Benz AMG GT3",
         "paintings": [
+            "00ALC00",
             "0_0fficial",
             "racing_69",
             "racing_70",
@@ -1798,7 +1960,9 @@
         "paintings": [
             "00_rsr",
             "01_racing_911",
-            "02_racing_912"
+            "02_racing_912",
+            "03_racing_91",
+            "04_racing_92"
         ]
     },
     {
@@ -2167,6 +2331,17 @@
         ]
     },
     {
+        "name": "ks_toyota_celica_st185",
+        "description": "Toyota Celica ST185 4WD Turbo",
+        "paintings": [
+            "00_racing_3",
+            "01_racing_6",
+            "02_racing_2",
+            "03_racing_4",
+            "04_racing_5"
+        ]
+    },
+    {
         "name": "ks_toyota_gt86",
         "description": "Toyota GT86",
         "paintings": [
@@ -2228,6 +2403,14 @@
             "11_black_stripe",
             "12_blue_stripe",
             "13_white_stripe"
+        ]
+    },
+    {
+        "name": "ks_toyota_ts040",
+        "description": "Toyota TS040 Hybrid 2014",
+        "paintings": [
+            "00_lm_7",
+            "01_lm_8"
         ]
     },
     {
@@ -2748,6 +2931,48 @@
             "scheme_2",
             "scheme_3",
             "scheme_4"
+        ]
+    },
+    {
+        "name": "urd_t5_aura_2015",
+        "description": "T5 Aura 2015",
+        "paintings": [
+            "aura_05",
+            "aura_10",
+            "aura_17",
+            "aura_27",
+            "aura_48",
+            "aura_51",
+            "aura_53",
+            "aura_99"
+        ]
+    },
+    {
+        "name": "urd_t5_bayro_2015",
+        "description": "T5 Bayro 2015",
+        "paintings": [
+            "bayro_01",
+            "bayro_07",
+            "bayro_13",
+            "bayro_16",
+            "bayro_18",
+            "bayro_31",
+            "bayro_36",
+            "bayro_77"
+        ]
+    },
+    {
+        "name": "urd_t5_maures_2015",
+        "description": "T5 Maures 2015",
+        "paintings": [
+            "maures_02",
+            "maures_03",
+            "maures_06",
+            "maures_08",
+            "maures_12",
+            "maures_22",
+            "maures_84",
+            "maures_94"
         ]
     }
 ]
