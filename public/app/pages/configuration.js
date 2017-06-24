@@ -203,7 +203,7 @@ Vue.component('Configuration', {
 			this.legal_tyres = '';
 			this.udp_plugin_local_port = 0;
 			this.udp_plugin_address = '';
-			
+
 			this.err = 0;
 			this.addEditConfig = false;
 			this.removeConfig = false;
@@ -293,7 +293,7 @@ Vue.component('Configuration', {
 						break;
 					}
 				}
-				
+
 				// weather
 				this.weather = resp.data.weather;
 
@@ -317,7 +317,7 @@ Vue.component('Configuration', {
 		},
 		openAddEditConfig: function(id){
 			this._reset();
-			
+
 			if(id){
 				this._id = id;
 				this._openConfig(id, false);
@@ -399,7 +399,7 @@ Vue.component('Configuration', {
 				kick_vote_quorum: parseInt(this.kick_vote_quorum),
 				session_vote_quorum: parseInt(this.session_vote_quorum),
 				vote_duration: parseInt(this.vote_duration),
-				blacklist: this.blacklist,
+				blacklist: parseInt(this.blacklist),
 				max_collisions_km: parseInt(this.max_collisions_km),
 				booking: this.booking,
 				booking_time: parseInt(this.booking_time),
