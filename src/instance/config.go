@@ -21,7 +21,7 @@ func writeConfig(config *model.Configuration) (string, string, error) {
 	iniPath := filepath.Join(cfg_folder, int64ToStr(config.Id))
 	if err := os.MkdirAll(iniPath, 0755); err != nil {
 		log.WithFields(log.Fields{"err": err}).Error("Error creating cfg folder")
-		return err
+		return "", "", err
 	}
 
 	iniServerCfg, err := writeServerIni(config)
