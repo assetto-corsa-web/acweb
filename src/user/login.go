@@ -2,7 +2,7 @@ package user
 
 import (
 	"github.com/DeKugelschieber/go-util"
-	"log"
+	log "github.com/sirupsen/logrus"
 	"model"
 )
 
@@ -19,7 +19,7 @@ func Login(loginEmail, pwd string) (*model.User, error) {
 	user, err := model.GetUserByLoginOrEmailAndPassword(loginEmail, loginEmail, pwd)
 
 	if err != nil {
-		log.Printf("User could not be found on login: %v", err)
+		log.WithFields(log.Fields{"err": err}).Error("User could not be found on login")
 		return nil, util.OpError{2, "User not found"}
 	}
 

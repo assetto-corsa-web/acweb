@@ -5,7 +5,7 @@ import (
 	"github.com/DeKugelschieber/go-resp"
 	"github.com/DeKugelschieber/go-session"
 	"github.com/DeKugelschieber/go-util"
-	"log"
+	log "github.com/sirupsen/logrus"
 	"net/http"
 )
 
@@ -13,7 +13,7 @@ func decode(w http.ResponseWriter, r *http.Request, req interface{}) bool {
 	decoder := json.NewDecoder(r.Body)
 
 	if err := decoder.Decode(&req); err != nil {
-		log.Print(err)
+		log.WithFields(log.Fields{"err": err}).Error("Error decoding request")
 		resp.Error(w, 100, err.Error(), nil)
 		return true
 	}

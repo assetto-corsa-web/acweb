@@ -3,9 +3,11 @@ package config
 import (
 	"encoding/json"
 	"github.com/DeKugelschieber/go-util"
+	log "github.com/sirupsen/logrus"
 	"io/ioutil"
-	"log"
 	"model"
+	"os"
+	"path/filepath"
 )
 
 const (
@@ -17,7 +19,7 @@ func GetAllConfigurations() ([]model.Configuration, error) {
 	configs, err := model.GetAllConfigurations()
 
 	if err != nil {
-		log.Printf("Error reading all configurations: %v", err)
+		log.WithFields(log.Fields{"err": err}).Error("Error reading all configurations")
 		return nil, util.OpError{1, "Error reading all configurations"}
 	}
 
@@ -28,12 +30,12 @@ func GetConfiguration(id int64) (*model.Configuration, error) {
 	config, err := model.GetConfigurationById(id)
 
 	if err != nil {
-		log.Printf("Error reading configuration: %v", err)
+		log.WithFields(log.Fields{"err": err}).Error("Error reading configuration")
 		return nil, util.OpError{1, "Error reading configuration"}
 	}
 
 	if err := config.Join(); err != nil {
-		log.Printf("Could not join entities for configuration: %v", err)
+		log.WithFields(log.Fields{"err": err}).Error("Error joining entities for configuration")
 		return nil, util.OpError{2, "Error joining entities for configuration"}
 	}
 
@@ -42,15 +44,15 @@ func GetConfiguration(id int64) (*model.Configuration, error) {
 
 func GetAvailableTracks() ([]Track, error) {
 	var tracks []Track
-	content, err := ioutil.ReadFile(track_file)
+	content, err := ioutil.ReadFile(filepath.Join(os.Getenv("ACWEB_CONFIG_DIR"), track_file))
 
 	if err != nil {
-		log.Printf("Error reading track file: %v", err)
+		log.WithFields(log.Fields{"err": err}).Error("Error reading track file")
 		return nil, util.OpError{1, "Error reading track file"}
 	}
 
 	if err := json.Unmarshal(content, &tracks); err != nil {
-		log.Printf("Error parsing track file: %v", err)
+		log.WithFields(log.Fields{"err": err}).Error("Error parsing track file")
 		return nil, util.OpError{2, "Error parsing track file"}
 	}
 
@@ -59,15 +61,15 @@ func GetAvailableTracks() ([]Track, error) {
 
 func GetAvailableCars() ([]Car, error) {
 	var cars []Car
-	content, err := ioutil.ReadFile(car_file)
+	content, err := ioutil.ReadFile(filepath.Join(os.Getenv("ACWEB_CONFIG_DIR"), car_file))
 
 	if err != nil {
-		log.Printf("Error reading car file: %v", err)
+		log.WithFields(log.Fields{"err": err}).Error("Error reading car file")
 		return nil, util.OpError{1, "Error reading car file"}
 	}
 
 	if err := json.Unmarshal(content, &cars); err != nil {
-		log.Printf("Error parsing car file: %v", err)
+		log.WithFields(log.Fields{"err": err}).Error("Error parsing car file")
 		return nil, util.OpError{2, "Error parsing car file"}
 	}
 

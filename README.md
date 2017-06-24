@@ -23,7 +23,7 @@ docker pull kugel/acweb
 ```
 
 3. install MySQL on your server or use a docker image
-4. create the database schema (db/schema.sql) and create the first user:
+4. create the database schema (db/schema.sql + all migration scripts in appropriate order) and create the first user:
 
 ```
 INSERT INTO `user` (`id`, `login`, `email`, `password`, `admin`, `moderator`) VALUES (NULL, 'username', 'user@email.com', 'SHA256_HASH', '1', '0');
@@ -50,7 +50,7 @@ sudo docker ps acweb
 
 This will use a MySQL database installed on your host machine. To use a MySQL database running in a container, please rever to the official [MySQL image](https://hub.docker.com/_/mysql/). You have to use Dockers --link option to access it, if you don't expose the MySQL port.
 To start the server, you can also use a [docker-compose file](https://docs.docker.com/compose/). I recommend to enable SSL using [letsencrypt](https://letsencrypt.org/) and a reverse proxy.
-To run server instances, you need to mount the Assetto Corsa installation directory (containing the binary) to /ac. In the UI set the execution path (Settings -> AC server folder) to /ac.
+To run server instances, you need to mount the Assetto Corsa installation directory (containing the binary) to /ac. In the UI set the execution path (Settings -> AC server folder) to /ac. To save the instance logs outside the Docker container, you can mount /instance_logs.
 
 ### Manual installation
 
@@ -58,7 +58,7 @@ This instruction supposes you to use Linux. On Windows you basically need to per
 
 1. download the latest release of acweb
 2. upload it to your server and unzip it
-3. create the database schema (db/schema.sql) and create the first user:
+3. create the database schema (db/schema.sql + all migration scripts in appropriate order) and create the first user:
 
 ```
 INSERT INTO `user` (`id`, `login`, `email`, `password`, `admin`, `moderator`) VALUES (NULL, 'username', 'user@email.com', 'SHA256_HASH', '1', '0');
@@ -73,6 +73,10 @@ Note that the user password must be a SHA256 hash. You can find tools online to 
 export ACWEB_HOST=localhost:8080
 # optional log file location (will be created if it doesn't exist)
 export ACWEB_LOGDIR=
+# log directory for server instances, must be set
+export ACWEB_INSTANCE_LOGDIR=instance_logs
+# config file directory for tracks.json and cars.json
+export ACWEB_CONFIG_DIR=
 # path to TLS private key file
 export ACWEB_TLS_PRIVATE_KEY=
 # path to TLS cert file
@@ -94,11 +98,10 @@ export ACWEB_DB=acweb
 
 1. download the latest release
 2. upload it to your server and unzip it
-3. cp the config.json from the old version to the new version
-4. update your MySQL database (migration scripts can be found in db/mig_FROMVERSION_TOVERSION.sql)
-5. start it
+3. update your MySQL database (migration scripts can be found in db/mig_FROMVERSION_TOVERSION.sql)
+4. start it
 
-For Docker pull the latest release and start it.
+For Docker pull the latest release, execute the migration script(s) and start it.
 
 ## Adding tracks and cars
 
@@ -131,11 +134,16 @@ To add tracks and cars, from a mod for instance, you must add them to the cars.j
     // ...
 ```
 
-When added, rebuild the Docker image if you use it or just overwrite the files in the main directory if you don't.
+The files can be found within the config directory. To modify them using Docker, mount a volume to /config and copy the original files into it, then modify them.
 
 ## Contribute
 
 To contribute please open issues and pull requests. The frontend is build using VueJs, [minvue](https://github.com/DeKugelschieber/vuejs-minify) and sass. The backend is build on Go (golang) and MySQL. For details please view the provided scripts within the main directory.
+
+### Contributors (alphabetical)
+
+macedot
+vinyii
 
 ## Links
 

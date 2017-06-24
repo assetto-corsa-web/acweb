@@ -1,8 +1,8 @@
 package instance
 
 import (
+	log "github.com/sirupsen/logrus"
 	"io/ioutil"
-	"log"
 	"model"
 	"os"
 	"path/filepath"
@@ -20,7 +20,7 @@ const (
 func writeConfig(config *model.Configuration) error {
 	iniPath := filepath.Join(cfg_folder, int64ToStr(config.Id))
 	if err := os.MkdirAll(iniPath, 0755); err != nil {
-		log.Printf("Error creating cfg folder: %v", err)
+		log.WithFields(log.Fields{"err": err}).Error("Error creating cfg folder")
 		return err
 	}
 
@@ -63,13 +63,13 @@ func writeServerIni(config *model.Configuration) error {
 	ini += "KICK_QUORUM=" + intToStr(config.KickVoteQuorum) + sep
 	ini += "VOTING_QUORUM=" + intToStr(config.SessionVoteQuorum) + sep
 	ini += "VOTE_DURATION=" + intToStr(config.VoteDuration) + sep
-	ini += "BLACKLIST_MODE=" + config.Blacklist + sep
+	ini += "BLACKLIST_MODE=" + intToStr(config.Blacklist) + sep
 	ini += "FUEL_RATE=" + intToStr(config.FuelRate) + sep
 	ini += "DAMAGE_MULTIPLIER=" + intToStr(config.DamageRate) + sep
 	ini += "TYRE_WEAR_RATE=" + intToStr(config.TiresWearRate) + sep
 	ini += "ALLOWED_TYRES_OUT=" + intToStr(config.AllowedTiresOut) + sep
-	ini += "ABS_ALLOWED=" + config.ABS + sep
-	ini += "TC_ALLOWED=" + config.TC + sep
+	ini += "ABS_ALLOWED=" + intToStr(config.ABS) + sep
+	ini += "TC_ALLOWED=" + intToStr(config.TC) + sep
 	ini += "START_RULE=1" + sep
 	ini += "RACE_GAS_PENALTY_DISABLED=" + boolToStr(config.DisableGasCutPenality) + sep
 	ini += "RESULT_SCREEN_TIME=" + intToStr(config.ResultScreenTime) + sep
@@ -111,7 +111,7 @@ func writeServerIni(config *model.Configuration) error {
 		ini += "LAPS=" + intToStr(config.RaceLaps) + sep
 		ini += "TIME=" + intToStr(config.RaceTime) + sep
 		ini += "WAIT_TIME=" + intToStr(config.RaceWaitTime) + sep
-		ini += "IS_OPEN=" + config.JoinType + sep
+		ini += "IS_OPEN=" + intToStr(config.JoinType) + sep
 	}
 
 	if config.DynamicTrack {
@@ -150,7 +150,7 @@ func writeServerIni(config *model.Configuration) error {
 	// write ini
 	iniFile := filepath.Join(cfg_folder, int64ToStr(config.Id), server_ini)
 	if err := ioutil.WriteFile(iniFile, []byte(ini), 0775); err != nil {
-		log.Printf("Error writing server_cfg.ini: %v", err)
+		log.WithFields(log.Fields{"err": err}).Error("Error writing server_cfg.ini")
 		return err
 	}
 
@@ -197,7 +197,7 @@ func writeEntryListIni(config *model.Configuration) error {
 	// write ini
 	iniFile := filepath.Join(cfg_folder, int64ToStr(config.Id), entry_list_ini)
 	if err := ioutil.WriteFile(iniFile, []byte(ini), 0775); err != nil {
-		log.Printf("Error writing entry_list.ini: %v", err)
+		log.WithFields(log.Fields{"err": err}).Error("Error writing entry_list.ini")
 		return err
 	}
 

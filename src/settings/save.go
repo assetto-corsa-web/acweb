@@ -2,7 +2,7 @@ package settings
 
 import (
 	"github.com/DeKugelschieber/go-util"
-	"log"
+	log "github.com/sirupsen/logrus"
 	"model"
 )
 
@@ -18,7 +18,7 @@ func SaveSettings(folder, executable, args string) error {
 	settings, err := model.GetSettings()
 
 	if err != nil {
-		log.Printf("Error reading settings: %v", err)
+		log.WithFields(log.Fields{"err": err}).Error("Error reading settings")
 		settings = &model.Settings{}
 	}
 
@@ -27,7 +27,7 @@ func SaveSettings(folder, executable, args string) error {
 	settings.Args = args
 
 	if err := settings.Save(); err != nil {
-		log.Printf("Error saving settings: %v", err)
+		log.WithFields(log.Fields{"err": err}).Error("Error saving settings")
 		return util.OpError{2, "Error saving settings"}
 	}
 
