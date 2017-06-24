@@ -53,12 +53,16 @@ func StartInstance(name string, configuration int64) error {
 	s := settings.GetSettings()
 
 	// write config
-	if err := writeConfig(config); err != nil {
+	if iniServerCfg, iniEntryList, err := writeConfig(config); err != nil {
 		return util.OpError{3, "Error writing configuration"}
 	}
 
+	cmdParams := "-c " + iniServerCfg
+	cmdParams += " -e " + iniEntryList
+	cmdParams += strings.Split(s.Args, " ")
+
 	// start
-	cmd := exec.Command(filepath.Join(s.Folder, s.Executable), strings.Split(s.Args, " ")...)
+	cmd := exec.Command(filepath.Join(s.Folder, s.Executable), cmdParams...)
 	now := strings.Replace(time.Now().String(), " ", "_", -1)
 
 	logfile, err := os.Create(filepath.Join(os.Getenv("ACWEB_INSTANCE_LOGDIR"), now+"_"+config.Name+".log"))

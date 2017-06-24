@@ -154,7 +154,7 @@ func writeServerIni(config *model.Configuration) error {
 		return err
 	}
 
-	return nil
+	return iniFile
 }
 
 func getCars(config *model.Configuration) string {
@@ -201,7 +201,7 @@ func writeEntryListIni(config *model.Configuration) error {
 		return err
 	}
 
-	return nil
+	return iniFile
 }
 
 func boolToStr(b bool) string {
