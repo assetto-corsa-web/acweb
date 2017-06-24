@@ -11,14 +11,14 @@ import (
 )
 
 const (
-	cfg_folder     = "cfg"
+	// cfg_folder     = "cfg"
 	server_ini     = "server_cfg.ini"
 	entry_list_ini = "entry_list.ini"
 	sep            = "\n"
 )
 
 func writeConfig(config *model.Configuration) (string, string, error) {
-	iniPath := filepath.Join(cfg_folder, int64ToStr(config.Id))
+	iniPath := filepath.Join(os.Getenv("ACWEB_CONFIG_DIR"), int64ToStr(config.Id))
 	if err := os.MkdirAll(iniPath, 0755); err != nil {
 		log.WithFields(log.Fields{"err": err}).Error("Error creating cfg folder")
 		return "", "", err
@@ -150,7 +150,7 @@ func writeServerIni(config *model.Configuration) (string, error) {
 	ini += "WELCOME_PATH=" + sep
 
 	// write ini
-	iniFile := filepath.Join(cfg_folder, int64ToStr(config.Id), server_ini)
+	iniFile := filepath.Join(os.Getenv("ACWEB_CONFIG_DIR"), int64ToStr(config.Id), server_ini)
 	if err := ioutil.WriteFile(iniFile, []byte(ini), 0775); err != nil {
 		log.WithFields(log.Fields{"err": err}).Error("Error writing server_cfg.ini")
 		return iniFile, err
@@ -197,7 +197,7 @@ func writeEntryListIni(config *model.Configuration) (string, error) {
 	}
 
 	// write ini
-	iniFile := filepath.Join(cfg_folder, int64ToStr(config.Id), entry_list_ini)
+	iniFile := filepath.Join(os.Getenv("ACWEB_CONFIG_DIR"), int64ToStr(config.Id), entry_list_ini)
 	if err := ioutil.WriteFile(iniFile, []byte(ini), 0775); err != nil {
 		log.WithFields(log.Fields{"err": err}).Error("Error writing entry_list.ini")
 		return iniFile, err
