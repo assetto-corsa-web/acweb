@@ -24,9 +24,6 @@ Vue.component('Configuration', {
 			admin_pwd: '',
 			pickup_mode: true,
 			lock_entry_list: false,
-			race_pit_window_start: 0,
-			race_pit_window_end: 0,
-			reversed_grid_race_positions: 0,
 			race_overtime: 60,
 			max_slots: 0,
 			result_screen_time: 60,
@@ -52,7 +49,7 @@ Vue.component('Configuration', {
 			max_ballast: 150,
 			disable_gas_cut_penality: false,
 			dynamic_track: true,
-			condition: '',
+			condition: 'CUSTOM',
 			start_value: 100,
 			randomness: 0,
 			transferred_grip: 100,
@@ -82,6 +79,9 @@ Vue.component('Configuration', {
 			legal_tyres: '',
 			udp_plugin_local_port: 0,
 			udp_plugin_address: '',
+			race_pit_window_start: 0,
+			race_pit_window_end: 0,
+			reversed_grid_race_positions: 0,
 			// ---
 			err: 0,
 			addEditConfig: false,
@@ -92,6 +92,11 @@ Vue.component('Configuration', {
 	},
 	mounted: function(){
 		this._load();
+	},
+	watch: {
+		condition: function (value) {
+			this.populateDynamicTrackWithPreset(value);
+		}
 	},
 	methods: {
 		_load: function(){
@@ -145,9 +150,6 @@ Vue.component('Configuration', {
 			this.admin_pwd = '';
 			this.pickup_mode = true;
 			this.lock_entry_list = false;
-			this.race_pit_window_start = 0;
-			this.race_pit_window_end = 0;
-			this.reversed_grid_race_positions = 0;
 			this.race_overtime = 60;
 			this.max_slots = 0;
 			this.result_screen_time = 60;
@@ -173,7 +175,7 @@ Vue.component('Configuration', {
 			this.max_ballast = 150;
 			this.disable_gas_cut_penality = false;
 			this.dynamic_track = true;
-			this.condition = '';
+			this.condition = 'CUSTOM';
 			this.start_value = 100;
 			this.randomness = 0;
 			this.transferred_grip = 100;
@@ -203,7 +205,10 @@ Vue.component('Configuration', {
 			this.legal_tyres = '';
 			this.udp_plugin_local_port = 0;
 			this.udp_plugin_address = '';
-
+			this.race_pit_window_start = 0;
+			this.race_pit_window_end = 0;
+			this.reversed_grid_race_positions = 0;
+			
 			this.err = 0;
 			this.addEditConfig = false;
 			this.removeConfig = false;
@@ -224,9 +229,6 @@ Vue.component('Configuration', {
 				this.admin_pwd = resp.data.admin_pwd;
 				this.pickup_mode = resp.data.pickup_mode;
 				this.lock_entry_list = resp.data.lock_entry_list;
-				this.race_pit_window_start = resp.data.race_pit_window_start;
-				this.race_pit_window_end = resp.data.race_pit_window_end;
-				this.reversed_grid_race_positions = resp.data.reversed_grid_race_positions;
 				this.race_overtime = resp.data.race_overtime;
 				this.max_slots = resp.data.max_slots;
 				this.welcome = resp.data.welcome;
@@ -281,6 +283,9 @@ Vue.component('Configuration', {
 				this.legal_tyres = resp.data.legal_tyres;
 				this.udp_plugin_local_port = resp.data.udp_plugin_local_port;
 				this.udp_plugin_address = resp.data.udp_plugin_address;
+				this.race_pit_window_start = resp.data.race_pit_window_start;
+				this.race_pit_window_end = resp.data.race_pit_window_end;
+				this.reversed_grid_race_positions = resp.data.reversed_grid_race_positions;
 
 				if(copy){
 					this.name += ' (copy)';
@@ -293,7 +298,7 @@ Vue.component('Configuration', {
 						break;
 					}
 				}
-
+				
 				// weather
 				this.weather = resp.data.weather;
 
@@ -317,7 +322,7 @@ Vue.component('Configuration', {
 		},
 		openAddEditConfig: function(id){
 			this._reset();
-
+			
 			if(id){
 				this._id = id;
 				this._openConfig(id, false);
@@ -363,9 +368,6 @@ Vue.component('Configuration', {
 				admin_pwd: this.admin_pwd,
 				pickup_mode: this.pickup_mode,
 				lock_entry_list: this.lock_entry_list,
-				race_pit_window_start: this.race_pit_window_start,
-				race_pit_window_end: this.race_pit_window_end,
-				reversed_grid_race_positions: this.reversed_grid_race_positions,
 				race_overtime: parseInt(this.race_overtime),
 				max_slots: parseInt(this.max_slots),
 				welcome: this.welcome,
@@ -377,8 +379,8 @@ Vue.component('Configuration', {
 				loop_mode: this.loop_mode,
 				show_in_lobby: this.show_in_lobby,
 				threads: parseInt(this.threads),
-				abs: this.abs,
-				tc: this.tc,
+				abs: parseInt(this.abs),
+				tc: parseInt(this.tc),
 				stability_aid: this.stability_aid,
 				auto_clutch: this.auto_clutch,
 				tyre_blankets: this.tyre_blankets,
@@ -414,7 +416,7 @@ Vue.component('Configuration', {
 				race_time: parseInt(this.race_time),
 				race_wait_time: parseInt(this.race_wait_time),
 				race_extra_lap: this.race_extra_lap,
-				join_type: this.join_type,
+				join_type: parseInt(this.join_type),
 				time: this.time,
 				sun_angle: parseInt(this.sun_angle),
 				weather: this.weather,
@@ -423,6 +425,9 @@ Vue.component('Configuration', {
 				legal_tyres: this.legal_tyres,
 				udp_plugin_local_port: parseInt(this.udp_plugin_local_port),
 				udp_plugin_address: this.udp_plugin_address,
+				race_pit_window_start: parseInt(this.race_pit_window_start),
+				race_pit_window_end: parseInt(this.race_pit_window_end),
+				reversed_grid_race_positions: parseInt(this.reversed_grid_race_positions),
 				cars: this.selectedCars
 			};
 
@@ -519,6 +524,46 @@ Vue.component('Configuration', {
 		},
 		removeCar: function(i){
 			this.selectedCars.splice(i, 1);
+		},
+		populateDynamicTrackWithPreset: function(preset) {
+			switch(preset) {
+				case 'DUSTY':
+					this.start_value = 86;
+					this.randomness = 1;
+					this.transferred_grip = 50;
+					this.laps_to_improve_grip = 30;
+					break;
+				case 'OLD':
+					this.start_value = 89;
+					this.randomness = 3;
+					this.transferred_grip = 80;
+					this.laps_to_improve_grip = 50;
+					break;
+				case 'SLOW':
+					this.start_value = 96;
+					this.randomness = 1;
+					this.transferred_grip = 80;
+					this.laps_to_improve_grip = 300;
+					break;
+				case 'GREEN':
+					this.start_value = 95;
+					this.randomness = 2;
+					this.transferred_grip = 90;
+					this.laps_to_improve_grip = 132;
+					break;
+				case 'FAST':
+					this.start_value = 98;
+					this.randomness = 2;
+					this.transferred_grip = 80;
+					this.laps_to_improve_grip = 700;
+					break;
+				case 'OPTIMUM':
+					this.start_value = 100;
+					this.randomness = 0;
+					this.transferred_grip = 100;
+					this.laps_to_improve_grip = 1;
+					break;
+			}
 		}
 	}
 });
