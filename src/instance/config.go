@@ -24,15 +24,17 @@ func writeConfig(config *model.Configuration) error {
 		return err
 	}
 
-	if err := writeServerIni(config); err != nil {
+	iniServerCfg, err := writeServerIni(config)
+	if err != nil {
 		return err
 	}
 
-	if err := writeEntryListIni(config); err != nil {
+	iniEntryList, err := writeEntryListIni(config)
+	if err != nil {
 		return err
 	}
 
-	return nil
+	return iniServerCfg, iniEntryList, nil
 }
 
 func writeServerIni(config *model.Configuration) error {
@@ -154,7 +156,7 @@ func writeServerIni(config *model.Configuration) error {
 		return err
 	}
 
-	return iniFile
+	return iniFile, nil
 }
 
 func getCars(config *model.Configuration) string {
@@ -201,7 +203,7 @@ func writeEntryListIni(config *model.Configuration) error {
 		return err
 	}
 
-	return iniFile
+	return iniFile, nil
 }
 
 func boolToStr(b bool) string {

@@ -53,7 +53,9 @@ func StartInstance(name string, configuration int64) error {
 	s := settings.GetSettings()
 
 	// write config
-	if iniServerCfg, iniEntryList, err := writeConfig(config); err != nil {
+	iniServerCfg, iniEntryList, err := writeConfig(config)
+
+	if err != nil {
 		return util.OpError{3, "Error writing configuration"}
 	}
 
