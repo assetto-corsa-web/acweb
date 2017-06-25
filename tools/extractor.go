@@ -61,6 +61,11 @@ func extractTracks() {
 	}
 
 	for _, trackDir := range trackDirs {
+		// discart non-dir
+		if !trackDir.IsDir() {
+			continue
+		}
+
 		trackName := trackDir.Name()
 		trackConfig := ""
 		maxSlots := 0
