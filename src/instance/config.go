@@ -24,18 +24,28 @@ func writeConfig(config *model.Configuration) error {
 		return err
 	}
 
-	if err := writeServerIni(config); err != nil {
+	if err := writeIniFile(config, ServerConfigToIniString(config), server_ini); err != nil {
 		return err
 	}
 
-	if err := writeEntryListIni(config); err != nil {
+	if err := writeIniFile(config, EntryListToIniString(config), entry_list_ini); err != nil {
 		return err
 	}
 
 	return nil
 }
 
-func writeServerIni(config *model.Configuration) error {
+func writeIniFile(config *model.Configuration, ini, filename string) error {
+	iniFile := filepath.Join(cfg_folder, int64ToStr(config.Id), filename)
+	if err := ioutil.WriteFile(iniFile, []byte(ini), 0775); err != nil {
+		log.WithFields(log.Fields{"err": err}).Errorf("Error writing %s", filename)
+		return err
+	}
+
+	return nil
+}
+
+func ServerConfigToIniString(config *model.Configuration) string {
 	ini := "[SERVER]" + sep
 	ini += "NAME=" + config.Name + sep
 	ini += "CARS=" + getCars(config) + sep
@@ -147,14 +157,26 @@ func writeServerIni(config *model.Configuration) error {
 	ini += "WEBLINK=" + sep
 	ini += "WELCOME_PATH=" + sep
 
-	// write ini
-	iniFile := filepath.Join(cfg_folder, int64ToStr(config.Id), server_ini)
-	if err := ioutil.WriteFile(iniFile, []byte(ini), 0775); err != nil {
-		log.WithFields(log.Fields{"err": err}).Error("Error writing server_cfg.ini")
-		return err
+	return ini
+}
+
+func EntryListToIniString(config *model.Configuration) string {
+	ini := ""
+
+	for i, car := range config.Cars {
+		ini += "[CAR_" + intToStr(i) + "]" + sep
+		ini += "MODEL=" + car.Car + sep
+		ini += "SKIN=" + car.Painting + sep
+		ini += "SPECTATOR_MODE=" + boolToStr(car.Spectator) + sep
+		ini += "DRIVERNAME=" + car.Driver + sep
+		ini += "TEAM=" + car.Team + sep
+		ini += "GUID=" + car.GUID + sep
+		ini += "BALLAST=0" + sep
+		ini += "FIXED_SETUP=" + car.FixedSetup + sep
+		ini += sep
 	}
 
-	return nil
+	return ini
 }
 
 func getCars(config *model.Configuration) string {
@@ -176,32 +198,6 @@ func getCars(config *model.Configuration) string {
 	}
 
 	return strings.Join(cars, ";")
-}
-
-func writeEntryListIni(config *model.Configuration) error {
-	ini := ""
-
-	for i, car := range config.Cars {
-		ini += "[CAR_" + intToStr(i) + "]" + sep
-		ini += "MODEL=" + car.Car + sep
-		ini += "SKIN=" + car.Painting + sep
-		ini += "SPECTATOR_MODE=" + boolToStr(car.Spectator) + sep
-		ini += "DRIVERNAME=" + car.Driver + sep
-		ini += "TEAM=" + car.Team + sep
-		ini += "GUID=" + car.GUID + sep
-		ini += "BALLAST=0" + sep
-		ini += "FIXED_SETUP=" + car.FixedSetup + sep
-		ini += sep
-	}
-
-	// write ini
-	iniFile := filepath.Join(cfg_folder, int64ToStr(config.Id), entry_list_ini)
-	if err := ioutil.WriteFile(iniFile, []byte(ini), 0775); err != nil {
-		log.WithFields(log.Fields{"err": err}).Error("Error writing entry_list.ini")
-		return err
-	}
-
-	return nil
 }
 
 func boolToStr(b bool) string {
