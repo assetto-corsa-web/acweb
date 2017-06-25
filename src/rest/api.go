@@ -1,6 +1,7 @@
 package rest
 
 import (
+	"archive/zip"
 	"config"
 	"encoding/json"
 	"github.com/DeKugelschieber/go-resp"
@@ -11,6 +12,7 @@ import (
 	"net/http"
 	"settings"
 	"strconv"
+	"time"
 	"user"
 )
 
@@ -45,7 +47,11 @@ func ConfigurationHandler(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Query().Get("id") == "" {
 			GetAllConfigurations(w, r)
 		} else {
-			GetConfiguration(w, r)
+			if r.URL.Query().Get("dl") == "1" {
+				downloadConfiguration(w, r)
+			} else {
+				GetConfiguration(w, r)
+			}
 		}
 	}
 }
@@ -344,6 +350,56 @@ func GetConfiguration(w http.ResponseWriter, r *http.Request) {
 
 	resp, _ := json.Marshal(config)
 	w.Write(resp)
+}
+
+func downloadConfiguration(w http.ResponseWriter, r *http.Request) {
+	id, err := strconv.Atoi(r.URL.Query().Get("id"))
+
+	if err != nil {
+		resp.Error(w, 100, err.Error(), nil)
+		return
+	}
+
+	config, err := config.GetConfiguration(int64(id))
+
+	if iserror(w, err) {
+		return
+	}
+
+	w.Header().Set("Content-Disposition", "attachment; filename=\""+config.Name+".zip\"")
+	w.Header().Set("Content-Type", "application/zip")
+
+	writeCfgToZip := func(zw *zip.Writer, filename, ini string) bool {
+		fh := &zip.FileHeader{
+			Name:   filename,
+			Method: zip.Deflate,
+		}
+		fh.SetModTime(time.Now())
+
+		fw, err := zw.CreateHeader(fh)
+		if err != nil {
+			log.Printf("Error creating zip header: %v", err)
+			resp.Error(w, 1, "Error creating config zip archive", nil)
+			return false
+		}
+		_, err = fw.Write([]byte(ini))
+		if err != nil {
+			log.Printf("Error writing %s config to zip: %v", filename, err)
+			resp.Error(w, 1, "Error writing config zip archive", nil)
+			return false
+		}
+
+		return true
+	}
+
+	zw := zip.NewWriter(w)
+	defer zw.Close()
+
+	if !writeCfgToZip(zw, "server_cfg.ini", instance.ServerConfigToIniString(config)) {
+		return
+	}
+
+	writeCfgToZip(zw, "entry_list.ini", instance.EntryListToIniString(config))
 }
 
 func GetAvailableTracks(w http.ResponseWriter, r *http.Request) {

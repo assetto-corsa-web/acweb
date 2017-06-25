@@ -564,6 +564,9 @@ Vue.component('Configuration', {
 					this.laps_to_improve_grip = 1;
 					break;
 			}
+		},
+		generateCfgDownloadUrl: function (id) {
+			return '/api/configuration?id=' + id + '&dl=1';
 		}
 	}
 });

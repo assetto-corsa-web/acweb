@@ -582,6 +582,9 @@
 							<td>
 								<i class="fa fa-pencil" aria-hidden="true" title="Edit configuration" v-on:click="openAddEditConfig(config.id)"></i>
 								<i class="fa fa-files-o" aria-hidden="true" title="Copy configuration" v-on:click="copyConfig(config.id)"></i>
+								<a class="icon-link" v-bind:href="generateCfgDownloadUrl(config.id)">
+									<i class="fa fa-cloud-download" aria-hidden="true" title="Download configuration"></i>
+								</a>
 								<i class="fa fa-trash" aria-hidden="true" title="Remove configuration" v-on:click="openRemoveConfig(config.id)"></i>
 							</td>
 						</tr>
