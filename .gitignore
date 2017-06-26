@@ -5,3 +5,5 @@ server_log/
 cfg/
 src/github.com/
 log/
+tools/*.json
+tools/*.exe
