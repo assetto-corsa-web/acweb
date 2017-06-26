@@ -1,20 +1,18 @@
 package rest
 
 import (
-	"archive/zip"
 	"config"
 	"encoding/json"
-	"github.com/DeKugelschieber/go-resp"
-	"github.com/DeKugelschieber/go-session"
-	log "github.com/sirupsen/logrus"
 	"instance"
 	"model"
 	"net/http"
 	"settings"
 	"strconv"
-	"time"
 	"user"
-	"io/ioutil"
+
+	resp "github.com/DeKugelschieber/go-resp"
+	session "github.com/DeKugelschieber/go-session"
+	log "github.com/sirupsen/logrus"
 )
 
 func UserHandler(w http.ResponseWriter, r *http.Request) {
@@ -48,8 +46,9 @@ func ConfigurationHandler(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Query().Get("id") == "" {
 			GetAllConfigurations(w, r)
 		} else {
-			if r.URL.Query().Get("dl") == "1" {
-				downloadConfiguration(w, r)
+			dl := r.URL.Query().Get("dl")
+			if dl != "" {
+				downloadConfigurationHandler(w, r, dl)
 			} else {
 				GetConfiguration(w, r)
 			}
@@ -89,7 +88,9 @@ func CheckSession(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		resp.Success(w, 0, "", struct{Id int64 `json:"user_id"`}{id})
+		resp.Success(w, 0, "", struct {
+			Id int64 `json:"user_id"`
+		}{id})
 	} else {
 		// don't log this
 		resp.Log = false
@@ -101,7 +102,7 @@ func CheckSession(w http.ResponseWriter, r *http.Request) {
 func Login(w http.ResponseWriter, r *http.Request) {
 	req := struct {
 		Login string `json:"login"`
-	Pwd   string `json:"pwd"`
+		Pwd   string `json:"pwd"`
 	}{}
 
 	if decode(w, r, &req) {
@@ -353,65 +354,36 @@ func GetConfiguration(w http.ResponseWriter, r *http.Request) {
 	w.Write(resp)
 }
 
-func AddFileToZip(zw *zip.Writer, filename, iniFilePath string) bool {
-	fh := &zip.FileHeader{
-		Name:   filename,
-		Method: zip.Deflate,
-	}
-	fh.SetModTime(time.Now())
-
-	fw, err := zw.CreateHeader(fh)
-	if err != nil {
-		log.Printf("Error creating zip header: %v", err)
-		return false
-	}
-
-	dat, err := ioutil.ReadFile(iniFilePath)
-	if err != nil {
-		log.Printf("Error reading file: %v", err)
-		return false
-	}
-	
-	_, err = fw.Write(dat)
-	if err != nil {
-		log.Printf("Error writing %s config to zip: %v", filename, err)
-		return false
-	}
-
-	return true
-}
-
-func downloadConfiguration(w http.ResponseWriter, r *http.Request) {
+func downloadConfigurationHandler(w http.ResponseWriter, r *http.Request, dlType string) error {
 	id, err := strconv.Atoi(r.URL.Query().Get("id"))
-
 	if err != nil {
 		resp.Error(w, 100, err.Error(), nil)
-		return
+		return err
 	}
 
 	config, err := config.GetConfiguration(int64(id))
-
-	if iserror(w, err) {
-		return
+	if err != nil {
+		resp.Error(w, 100, err.Error(), nil)
+		return err
 	}
 
 	w.Header().Set("Content-Disposition", "attachment; filename=\""+config.Name+".zip\"")
 	w.Header().Set("Content-Type", "application/zip")
 
-	zw := zip.NewWriter(w)
-	defer zw.Close()
-
-	iniServerCfg := instance.GetServerCfgPath(config)
-	iniEntryList := instance.GetEntryListPath(config)
-	if !AddFileToZip(zw, "server_cfg.ini", iniServerCfg) {
-		resp.Error(w, 1, "Error writing config zip archive", nil)
-		return
+	if dlType == "1" {
+		err = instance.ZipConfiguration(config, w)
+	} else if dlType == "2" {
+		err = instance.ZipInstanceFiles(config, w)
+	} else {
+		return nil
 	}
 
-	if !AddFileToZip(zw, "entry_list.ini", iniEntryList) {
-		resp.Error(w, 1, "Error writing config zip archive", nil)
-		return
+	if err != nil {
+		resp.Error(w, 100, err.Error(), nil)
+		return err
 	}
+
+	return nil
 }
 
 func GetAvailableTracks(w http.ResponseWriter, r *http.Request) {
