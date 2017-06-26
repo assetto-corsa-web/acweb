@@ -7,3 +7,5 @@ src/github.com/
 log/
 tools/*.json
 tools/*.exe
+main
+
