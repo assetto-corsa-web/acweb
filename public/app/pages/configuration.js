@@ -567,6 +567,9 @@ Vue.component('Configuration', {
 		},
 		generateCfgDownloadUrl: function (id) {
 			return '/api/configuration?id=' + id + '&dl=1';
+		},
+		generateInstanceDownloadUrl: function (id) {
+			return '/api/configuration?id=' + id + '&dl=2';
 		}
 	}
 });
