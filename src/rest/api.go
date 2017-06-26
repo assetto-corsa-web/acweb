@@ -1,6 +1,7 @@
 package rest
 
 import (
+	"archive/zip"
 	"config"
 	"encoding/json"
 	"github.com/DeKugelschieber/go-resp"
@@ -11,7 +12,9 @@ import (
 	"net/http"
 	"settings"
 	"strconv"
+	"time"
 	"user"
+	"io/ioutil"
 )
 
 func UserHandler(w http.ResponseWriter, r *http.Request) {
@@ -45,7 +48,11 @@ func ConfigurationHandler(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Query().Get("id") == "" {
 			GetAllConfigurations(w, r)
 		} else {
-			GetConfiguration(w, r)
+			if r.URL.Query().Get("dl") == "1" {
+				downloadConfiguration(w, r)
+			} else {
+				GetConfiguration(w, r)
+			}
 		}
 	}
 }
@@ -344,6 +351,67 @@ func GetConfiguration(w http.ResponseWriter, r *http.Request) {
 
 	resp, _ := json.Marshal(config)
 	w.Write(resp)
+}
+
+func AddFileToZip(zw *zip.Writer, filename, iniFilePath string) bool {
+	fh := &zip.FileHeader{
+		Name:   filename,
+		Method: zip.Deflate,
+	}
+	fh.SetModTime(time.Now())
+
+	fw, err := zw.CreateHeader(fh)
+	if err != nil {
+		log.Printf("Error creating zip header: %v", err)
+		return false
+	}
+
+	dat, err := ioutil.ReadFile(iniFilePath)
+	if err != nil {
+		log.Printf("Error reading file: %v", err)
+		return false
+	}
+	
+	_, err = fw.Write(dat)
+	if err != nil {
+		log.Printf("Error writing %s config to zip: %v", filename, err)
+		return false
+	}
+
+	return true
+}
+
+func downloadConfiguration(w http.ResponseWriter, r *http.Request) {
+	id, err := strconv.Atoi(r.URL.Query().Get("id"))
+
+	if err != nil {
+		resp.Error(w, 100, err.Error(), nil)
+		return
+	}
+
+	config, err := config.GetConfiguration(int64(id))
+
+	if iserror(w, err) {
+		return
+	}
+
+	w.Header().Set("Content-Disposition", "attachment; filename=\""+config.Name+".zip\"")
+	w.Header().Set("Content-Type", "application/zip")
+
+	zw := zip.NewWriter(w)
+	defer zw.Close()
+
+	iniServerCfg := instance.GetServerCfgPath(config)
+	iniEntryList := instance.GetEntryListPath(config)
+	if !AddFileToZip(zw, "server_cfg.ini", iniServerCfg) {
+		resp.Error(w, 1, "Error writing config zip archive", nil)
+		return
+	}
+
+	if !AddFileToZip(zw, "entry_list.ini", iniEntryList) {
+		resp.Error(w, 1, "Error writing config zip archive", nil)
+		return
+	}
 }
 
 func GetAvailableTracks(w http.ResponseWriter, r *http.Request) {
