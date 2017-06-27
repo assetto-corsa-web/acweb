@@ -48,12 +48,12 @@ func ZipConfiguration(config *model.Configuration, w http.ResponseWriter) error 
 	defer zw.Close()
 
 	serverCfg := ServerConfigToIniString(config)
-	if !addDataToZip(zw, GetServerCfgFileName(), []byte(serverCfg)) {
+	if !addDataToZip(zw, ServerIni, []byte(serverCfg)) {
 		return util.OpError{1, "Error writing server_cfg.ini into zip archive"}
 	}
 
 	entryList := EntryListToIniString(config)
-	if !addDataToZip(zw, GetEntryListFileName(), []byte(entryList)) {
+	if !addDataToZip(zw, EntryListIni, []byte(entryList)) {
 		return util.OpError{1, "Error writing entry_list.ini into zip archive"}
 	}
 
@@ -66,12 +66,12 @@ func ZipInstanceFiles(config *model.Configuration, w http.ResponseWriter) error 
 	defer zw.Close()
 
 	iniServerCfg := GetServerCfgPath(config)
-	if !addFileToZip(zw, GetServerCfgFileName(), iniServerCfg) {
+	if !addFileToZip(zw, ServerIni, iniServerCfg) {
 		return util.OpError{1, "Error writing server config into zip archive"}
 	}
 
 	iniEntryList := GetEntryListPath(config)
-	if !addFileToZip(zw, GetEntryListFileName(), iniEntryList) {
+	if !addFileToZip(zw, EntryListIni, iniEntryList) {
 		return util.OpError{1, "Error writing entry list into zip archive"}
 	}
 

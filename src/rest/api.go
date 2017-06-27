@@ -10,8 +10,8 @@ import (
 	"strconv"
 	"user"
 
-	resp "github.com/DeKugelschieber/go-resp"
-	session "github.com/DeKugelschieber/go-session"
+	"github.com/DeKugelschieber/go-resp"
+	"github.com/DeKugelschieber/go-session"
 	log "github.com/sirupsen/logrus"
 )
 
@@ -345,7 +345,6 @@ func GetConfiguration(w http.ResponseWriter, r *http.Request) {
 	}
 
 	config, err := config.GetConfiguration(int64(id))
-
 	if iserror(w, err) {
 		return
 	}
@@ -354,17 +353,16 @@ func GetConfiguration(w http.ResponseWriter, r *http.Request) {
 	w.Write(resp)
 }
 
-func downloadConfigurationHandler(w http.ResponseWriter, r *http.Request, dlType string) error {
+func downloadConfigurationHandler(w http.ResponseWriter, r *http.Request, dlType string) {
 	id, err := strconv.Atoi(r.URL.Query().Get("id"))
 	if err != nil {
 		resp.Error(w, 100, err.Error(), nil)
-		return err
+		return
 	}
 
 	config, err := config.GetConfiguration(int64(id))
-	if err != nil {
-		resp.Error(w, 100, err.Error(), nil)
-		return err
+	if iserror(w, err) {
+		return
 	}
 
 	w.Header().Set("Content-Disposition", "attachment; filename=\""+config.Name+".zip\"")
@@ -375,15 +373,15 @@ func downloadConfigurationHandler(w http.ResponseWriter, r *http.Request, dlType
 	} else if dlType == "2" {
 		err = instance.ZipInstanceFiles(config, w)
 	} else {
-		return nil
+		resp.Error(w, 100, "Invalid download option", nil)
+		return
 	}
 
-	if err != nil {
-		resp.Error(w, 100, err.Error(), nil)
-		return err
+	if iserror(w, err) {
+		return
 	}
 
-	return nil
+	success(w)
 }
 
 func GetAvailableTracks(w http.ResponseWriter, r *http.Request) {
