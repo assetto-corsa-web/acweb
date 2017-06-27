@@ -11,18 +11,10 @@ import (
 )
 
 const (
-	server_ini     = "server_cfg.ini"
-	entry_list_ini = "entry_list.ini"
-	sep            = "\n"
+	ServerIni    = "server_cfg.ini"
+	EntryListIni = "entry_list.ini"
+	sep          = "\n"
 )
-
-func GetServerCfgFileName() string {
-	return server_ini
-}
-
-func GetEntryListFileName() string {
-	return entry_list_ini
-}
 
 func GetConfigPath(config *model.Configuration) string {
 	configPath := filepath.Join(os.Getenv("ACWEB_CONFIG_DIR"), int64ToStr(config.Id))
@@ -30,18 +22,18 @@ func GetConfigPath(config *model.Configuration) string {
 }
 
 func GetServerCfgPath(config *model.Configuration) string {
-	iniFile := filepath.Join(GetConfigPath(config), server_ini)
+	iniFile := filepath.Join(GetConfigPath(config), ServerIni)
 	return iniFile
 }
 
 func GetEntryListPath(config *model.Configuration) string {
-	iniFile := filepath.Join(GetConfigPath(config), entry_list_ini)
+	iniFile := filepath.Join(GetConfigPath(config), EntryListIni)
 	return iniFile
 }
 
 func writeIniFile(config *model.Configuration, ini, filename string) error {
 	if err := ioutil.WriteFile(filename, []byte(ini), 0775); err != nil {
-		log.WithFields(log.Fields{"err": err}).Errorf("Error writing %s", filename)
+		log.WithFields(log.Fields{"err": err, "filename": filename}).Error("Error writing INI file")
 		return err
 	}
 
