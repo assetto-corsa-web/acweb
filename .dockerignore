@@ -16,3 +16,5 @@ build_release
 run
 tools/*.json
 tools/*.exe
+main
+*.log
