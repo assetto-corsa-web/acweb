@@ -19,8 +19,7 @@ node-sass --output css scss/main.scss
 cd ..
 
 # copy additional folders
-cp tracks.json release/v$1/tracks.json
-cp cars.json release/v$1/cars.json
+cp -r config release/v$1/config
 cp -r db release/v$1/db
 cp README.md release/v$1/README.md
 cp LICENSE release/v$1/LICENSE
