@@ -66,7 +66,7 @@ func StartInstance(instanceName string, configuration int64) error {
 	cmd := exec.Command(filepath.Join(s.Folder, s.Executable), "-c", iniServerCfg, "-e", iniEntryList)
 	now := time.Now().Format("20060102_150405")
 
-	logName := now + "_" + config.Id + "_" + instanceName + ".log"
+	logName := now + "_" + int64ToStr(config.Id) + "_" + instanceName + ".log"
 	logfile, err := os.Create(filepath.Join(os.Getenv("ACWEB_INSTANCE_LOGDIR"), logName))
 
 	if err != nil {
