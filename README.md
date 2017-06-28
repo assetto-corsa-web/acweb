@@ -144,8 +144,7 @@ To contribute please open issues and pull requests. The frontend is build using 
 
 ### Contributors (alphabetical)
 
-macedot
-vinyii
+macedot, vinyii
 
 ## Links
 
