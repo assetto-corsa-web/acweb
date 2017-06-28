@@ -73,6 +73,8 @@ Note that the user password must be a SHA256 hash. You can find tools online to 
 export ACWEB_HOST=localhost:8080
 # optional log file location (will be created if it doesn't exist)
 export ACWEB_LOGDIR=
+# optional log level (debug, info or empty for warnings and higher)
+export ACWEB_LOGLEVEL=info
 # log directory for server instances, must be set
 export ACWEB_INSTANCE_LOGDIR=instance_logs
 # config file directory for tracks.json and cars.json

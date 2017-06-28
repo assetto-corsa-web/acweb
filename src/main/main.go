@@ -8,12 +8,11 @@ import (
 	"os"
 	"path/filepath"
 	"rest"
+	"strings"
 	"time"
 )
 
 const (
-	config_file = "config.json"
-	log_dir     = "log"
 	public_dir  = "public"
 	robots_txt  = "robots.txt"
 
@@ -21,28 +20,39 @@ const (
 	session_cookie_lifetime = 60 * 60 * 24
 )
 
-// Log to file if logfile name is set.
-func logToFile() *os.File {
-	if os.Getenv("ACWEB_LOGDIR") == "" {
-		return nil
-	}
+func init() {
+	// setup log
+	logdir := os.Getenv("ACWEB_LOGDIR")
 
-	if _, err := os.Stat(log_dir); err != nil {
-		if err := os.Mkdir(log_dir, 0744); err != nil {
-			panic(err)
+	if logdir != "" {
+		// create log dir if necessary
+		if _, err := os.Stat(logdir); err != nil {
+			if err := os.Mkdir(logdir, 0744); err != nil {
+				log.WithFields(log.Fields{"err": err}).Fatal("Could not create log directory")
+			}
 		}
+
+		// create log file
+		now := time.Now().Format("2006.01.02_15:04:05")
+		logfile, err := os.OpenFile(filepath.Join(logdir, now+".log"), os.O_CREATE|os.O_WRONLY, 0666)
+
+		if err != nil {
+			log.WithFields(log.Fields{"err": err}).Fatal("Could not find log directory or create log file")
+		}
+
+		log.SetOutput(logfile)
 	}
 
-	now := time.Now().Format("02.01.2006_15:04:05")
-	handle, err := os.Create(filepath.Join(log_dir, os.Getenv("ACWEB_LOGDIR")+"_"+now))
+	// set log level
+	loglevel := strings.ToLower(os.Getenv("ACWEB_LOGLEVEL"))
 
-	if err != nil {
-		panic(err)
+	if loglevel == "debug" {
+		log.SetLevel(log.DebugLevel)
+	} else if loglevel == "info" {
+		log.SetLevel(log.InfoLevel)
+	} else {
+		log.SetLevel(log.WarnLevel)
 	}
-
-	log.SetOutput(handle)
-
-	return handle
 }
 
 // Starts the RESTful server.
@@ -88,13 +98,6 @@ func returnSessionErr(w http.ResponseWriter, r *http.Request) bool {
 }
 
 func main() {
-	// setup log
-	log := logToFile()
-
-	if log != nil {
-		defer log.Close()
-	}
-
 	// connect to db
 	model.Connect(os.Getenv("ACWEB_DB_USER"), os.Getenv("ACWEB_DB_PASSWORD"), os.Getenv("ACWEB_DB_HOST"), os.Getenv("ACWEB_DB"))
 	defer model.Disconnect()

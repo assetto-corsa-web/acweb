@@ -25,6 +25,7 @@ RUN cd /app/public && ./minvue -config=minify.json
 # configure and run
 ENV ACWEB_HOST=:8080
 ENV ACWEB_LOGDIR=/logs
+ENV ACWEB_LOGLEVEL=info
 ENV ACWEB_INSTANCE_LOGDIR=/instance_logs
 ENV ACWEB_CONFIG_DIR=/config
 ENV ACWEB_TLS_PRIVATE_KEY=
