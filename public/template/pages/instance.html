@@ -118,7 +118,9 @@
 							<td>{{log.date}}</td>
 							<td>{{log.size}}</td>
 							<td>
-								<i class="fa fa-cloud-download" aria-hidden="true" title="Download console output" v-on:click="generateConsoleLogDownloadUrl(log.file)"></i>
+								<a class="icon-link" v-bind:href="generateConsoleLogDownloadUrl(log.file)">
+									<i class="fa fa-cloud-download" aria-hidden="true" title="Download console output"></i>
+								</a>
 								<i class="fa fa-terminal" aria-hidden="true" title="Show console output" v-on:click="openLog(log.file)"></i>
 							</td>
 						</tr>
