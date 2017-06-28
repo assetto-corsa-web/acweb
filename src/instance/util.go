@@ -5,6 +5,8 @@ import (
 	"io/ioutil"
 	"model"
 	"net/http"
+	"os"
+	"path/filepath"
 	"time"
 
 	util "github.com/DeKugelschieber/go-util"
@@ -73,6 +75,19 @@ func ZipInstanceFiles(config *model.Configuration, w http.ResponseWriter) error 
 	iniEntryList := GetEntryListPath(config)
 	if !addFileToZip(zw, EntryListIni, iniEntryList) {
 		return util.OpError{1, "Error writing entry list into zip archive"}
+	}
+
+	return nil
+}
+
+// ZipLogFile creates zip stream with a given log file and write it into a http.ResponseWriter
+func ZipLogFile(fileName string, w http.ResponseWriter) error {
+	zw := zip.NewWriter(w)
+	defer zw.Close()
+
+	logFullPath := filepath.Join(os.Getenv("ACWEB_INSTANCE_LOGDIR"), fileName)
+	if !addFileToZip(zw, logFullPath, fileName) {
+		return util.OpError{1, "Error writing log file into zip archive"}
 	}
 
 	return nil
