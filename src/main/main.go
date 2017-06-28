@@ -1,8 +1,6 @@
 package main
 
 import (
-	"github.com/DeKugelschieber/go-session"
-	log "github.com/sirupsen/logrus"
 	"model"
 	"net/http"
 	"os"
@@ -10,6 +8,9 @@ import (
 	"rest"
 	"strings"
 	"time"
+
+	"github.com/DeKugelschieber/go-session"
+	log "github.com/sirupsen/logrus"
 )
 
 const (
@@ -33,7 +34,7 @@ func init() {
 		}
 
 		// create log file
-		now := time.Now().Format("2006.01.02_15:04:05")
+		now := time.Now().Format("20060102_150405")
 		logfile, err := os.OpenFile(filepath.Join(logdir, now+".log"), os.O_CREATE|os.O_WRONLY, 0666)
 
 		if err != nil {
