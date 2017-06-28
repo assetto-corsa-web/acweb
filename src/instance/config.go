@@ -11,31 +11,55 @@ import (
 )
 
 const (
-	cfg_folder     = "cfg"
-	server_ini     = "server_cfg.ini"
-	entry_list_ini = "entry_list.ini"
-	sep            = "\n"
+	ServerIni    = "server_cfg.ini"
+	EntryListIni = "entry_list.ini"
+	sep          = "\n"
 )
 
-func writeConfig(config *model.Configuration) error {
-	iniPath := filepath.Join(cfg_folder, int64ToStr(config.Id))
-	if err := os.MkdirAll(iniPath, 0755); err != nil {
-		log.WithFields(log.Fields{"err": err}).Error("Error creating cfg folder")
-		return err
-	}
+func GetConfigPath(config *model.Configuration) string {
+	configPath := filepath.Join(os.Getenv("ACWEB_CONFIG_DIR"), int64ToStr(config.Id))
+	return configPath
+}
 
-	if err := writeServerIni(config); err != nil {
-		return err
-	}
+func GetServerCfgPath(config *model.Configuration) string {
+	iniFile := filepath.Join(GetConfigPath(config), ServerIni)
+	return iniFile
+}
 
-	if err := writeEntryListIni(config); err != nil {
+func GetEntryListPath(config *model.Configuration) string {
+	iniFile := filepath.Join(GetConfigPath(config), EntryListIni)
+	return iniFile
+}
+
+func writeIniFile(config *model.Configuration, ini, filename string) error {
+	if err := ioutil.WriteFile(filename, []byte(ini), 0775); err != nil {
+		log.WithFields(log.Fields{"err": err, "filename": filename}).Error("Error writing INI file")
 		return err
 	}
 
 	return nil
 }
 
-func writeServerIni(config *model.Configuration) error {
+func writeConfig(config *model.Configuration) (string, string, error) {
+	if err := os.MkdirAll(GetConfigPath(config), 0755); err != nil {
+		log.WithFields(log.Fields{"err": err}).Error("Error creating cfg folder")
+		return "", "", err
+	}
+
+	iniServerCfg := GetServerCfgPath(config)
+	if err := writeIniFile(config, ServerConfigToIniString(config), iniServerCfg); err != nil {
+		return iniServerCfg, "", err
+	}
+
+	iniEntryList := GetEntryListPath(config)
+	if err := writeIniFile(config, EntryListToIniString(config), iniEntryList); err != nil {
+		return iniServerCfg, iniEntryList, err
+	}
+
+	return iniServerCfg, iniEntryList, nil
+}
+
+func ServerConfigToIniString(config *model.Configuration) string {
 	ini := "[SERVER]" + sep
 	ini += "NAME=" + config.Name + sep
 	ini += "CARS=" + getCars(config) + sep
@@ -147,14 +171,26 @@ func writeServerIni(config *model.Configuration) error {
 	ini += "WEBLINK=" + sep
 	ini += "WELCOME_PATH=" + sep
 
-	// write ini
-	iniFile := filepath.Join(cfg_folder, int64ToStr(config.Id), server_ini)
-	if err := ioutil.WriteFile(iniFile, []byte(ini), 0775); err != nil {
-		log.WithFields(log.Fields{"err": err}).Error("Error writing server_cfg.ini")
-		return err
+	return ini
+}
+
+func EntryListToIniString(config *model.Configuration) string {
+	ini := ""
+
+	for i, car := range config.Cars {
+		ini += "[CAR_" + intToStr(i) + "]" + sep
+		ini += "MODEL=" + car.Car + sep
+		ini += "SKIN=" + car.Painting + sep
+		ini += "SPECTATOR_MODE=" + boolToStr(car.Spectator) + sep
+		ini += "DRIVERNAME=" + car.Driver + sep
+		ini += "TEAM=" + car.Team + sep
+		ini += "GUID=" + car.GUID + sep
+		ini += "BALLAST=0" + sep
+		ini += "FIXED_SETUP=" + car.FixedSetup + sep
+		ini += sep
 	}
 
-	return nil
+	return ini
 }
 
 func getCars(config *model.Configuration) string {
@@ -176,32 +212,6 @@ func getCars(config *model.Configuration) string {
 	}
 
 	return strings.Join(cars, ";")
-}
-
-func writeEntryListIni(config *model.Configuration) error {
-	ini := ""
-
-	for i, car := range config.Cars {
-		ini += "[CAR_" + intToStr(i) + "]" + sep
-		ini += "MODEL=" + car.Car + sep
-		ini += "SKIN=" + car.Painting + sep
-		ini += "SPECTATOR_MODE=" + boolToStr(car.Spectator) + sep
-		ini += "DRIVERNAME=" + car.Driver + sep
-		ini += "TEAM=" + car.Team + sep
-		ini += "GUID=" + car.GUID + sep
-		ini += "BALLAST=0" + sep
-		ini += "FIXED_SETUP=" + car.FixedSetup + sep
-		ini += sep
-	}
-
-	// write ini
-	iniFile := filepath.Join(cfg_folder, int64ToStr(config.Id), entry_list_ini)
-	if err := ioutil.WriteFile(iniFile, []byte(ini), 0775); err != nil {
-		log.WithFields(log.Fields{"err": err}).Error("Error writing entry_list.ini")
-		return err
-	}
-
-	return nil
 }
 
 func boolToStr(b bool) string {

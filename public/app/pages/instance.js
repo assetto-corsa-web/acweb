@@ -145,6 +145,9 @@ Vue.component('Instance', {
 				this.log = log.join('\n');
 				this.showLog = true;
 			});
+		},
+		generateInstanceDownloadUrl: function (id) {
+			return '/api/configuration?id=' + id + '&dl=2';
 		}
 	}
 });

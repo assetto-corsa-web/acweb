@@ -88,6 +88,9 @@
 								TCP: {{instance.configuration.tcp}} UPD: {{instance.configuration.udp}}
 							</td>
 							<td>
+								<a class="icon-link" v-bind:href="generateInstanceDownloadUrl(instance.configuration.id)">
+									<i class="fa fa-cloud-download" aria-hidden="true" title="Download instance configuration"></i>
+								</a>
 								<i class="fa fa-stop" aria-hidden="true" title="Stop instance" v-on:click="showStopInstance(instance.pid)"></i>
 							</td>
 						</tr>

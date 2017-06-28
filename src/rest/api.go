@@ -3,15 +3,16 @@ package rest
 import (
 	"config"
 	"encoding/json"
-	"github.com/DeKugelschieber/go-resp"
-	"github.com/DeKugelschieber/go-session"
-	log "github.com/sirupsen/logrus"
 	"instance"
 	"model"
 	"net/http"
 	"settings"
 	"strconv"
 	"user"
+
+	"github.com/DeKugelschieber/go-resp"
+	"github.com/DeKugelschieber/go-session"
+	log "github.com/sirupsen/logrus"
 )
 
 func UserHandler(w http.ResponseWriter, r *http.Request) {
@@ -45,7 +46,12 @@ func ConfigurationHandler(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Query().Get("id") == "" {
 			GetAllConfigurations(w, r)
 		} else {
-			GetConfiguration(w, r)
+			dl := r.URL.Query().Get("dl")
+			if dl != "" {
+				downloadConfigurationHandler(w, r, dl)
+			} else {
+				GetConfiguration(w, r)
+			}
 		}
 	}
 }
@@ -82,7 +88,9 @@ func CheckSession(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		resp.Success(w, 0, "", struct{Id int64 `json:"user_id"`}{id})
+		resp.Success(w, 0, "", struct {
+			Id int64 `json:"user_id"`
+		}{id})
 	} else {
 		// don't log this
 		resp.Log = false
@@ -94,7 +102,7 @@ func CheckSession(w http.ResponseWriter, r *http.Request) {
 func Login(w http.ResponseWriter, r *http.Request) {
 	req := struct {
 		Login string `json:"login"`
-	Pwd   string `json:"pwd"`
+		Pwd   string `json:"pwd"`
 	}{}
 
 	if decode(w, r, &req) {
@@ -337,13 +345,43 @@ func GetConfiguration(w http.ResponseWriter, r *http.Request) {
 	}
 
 	config, err := config.GetConfiguration(int64(id))
-
 	if iserror(w, err) {
 		return
 	}
 
 	resp, _ := json.Marshal(config)
 	w.Write(resp)
+}
+
+func downloadConfigurationHandler(w http.ResponseWriter, r *http.Request, dlType string) {
+	id, err := strconv.Atoi(r.URL.Query().Get("id"))
+	if err != nil {
+		resp.Error(w, 100, err.Error(), nil)
+		return
+	}
+
+	config, err := config.GetConfiguration(int64(id))
+	if iserror(w, err) {
+		return
+	}
+
+	w.Header().Set("Content-Disposition", "attachment; filename=\""+config.Name+".zip\"")
+	w.Header().Set("Content-Type", "application/zip")
+
+	if dlType == "1" {
+		err = instance.ZipConfiguration(config, w)
+	} else if dlType == "2" {
+		err = instance.ZipInstanceFiles(config, w)
+	} else {
+		resp.Error(w, 100, "Invalid download option", nil)
+		return
+	}
+
+	if iserror(w, err) {
+		return
+	}
+
+	success(w)
 }
 
 func GetAvailableTracks(w http.ResponseWriter, r *http.Request) {
