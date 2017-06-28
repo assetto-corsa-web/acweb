@@ -1,16 +1,16 @@
 package instance
 
 import (
-	"github.com/DeKugelschieber/go-util"
-	log "github.com/sirupsen/logrus"
 	"model"
 	"os"
 	"os/exec"
 	"path/filepath"
 	"settings"
-	"strings"
 	"sync"
 	"time"
+
+	"github.com/DeKugelschieber/go-util"
+	log "github.com/sirupsen/logrus"
 )
 
 var (
@@ -22,12 +22,12 @@ func GetAllInstances() []Instance {
 	return instances
 }
 
-func StartInstance(name string, configuration int64) error {
+func StartInstance(instanceName string, configuration int64) error {
 	// check input
-	name = util.Trim(name)
+	instanceName = util.Trim(instanceName)
 
-	if name == "" {
-		return util.OpError{1, "Name must be set"}
+	if instanceName == "" {
+		return util.OpError{1, "Instance name must be set"}
 	}
 
 	// create log dir
@@ -64,9 +64,10 @@ func StartInstance(name string, configuration int64) error {
 	// FIXME: s.Args has been  discarted. No real use so far?
 	// cmd := exec.Command(filepath.Join(s.Folder, s.Executable), strings.Split(cmdArgs, " ")...)
 	cmd := exec.Command(filepath.Join(s.Folder, s.Executable), "-c", iniServerCfg, "-e", iniEntryList)
-	now := strings.Replace(strings.Replace(time.Now().String(), ":", "", -1), " ", "_", -1)
+	now := time.Now().Format("20060102_150405")
 
-	logfile, err := os.Create(filepath.Join(os.Getenv("ACWEB_INSTANCE_LOGDIR"), now+"_"+config.Name+".log"))
+	logName := now + "_" + config.Id + "_" + instanceName + ".log"
+	logfile, err := os.Create(filepath.Join(os.Getenv("ACWEB_INSTANCE_LOGDIR"), logName))
 
 	if err != nil {
 		log.WithFields(log.Fields{"err": err}).Error("Error creating log file")
@@ -84,7 +85,7 @@ func StartInstance(name string, configuration int64) error {
 		return util.OpError{4, "Error starting instance"}
 	}
 
-	instance := Instance{cmd.Process.Pid, name, config.Id, cmd, logfile}
+	instance := Instance{cmd.Process.Pid, instanceName, config.Id, cmd, logfile}
 	m.Lock()
 	instances = append(instances, instance)
 	m.Unlock()
