@@ -160,6 +160,11 @@ input:focus, select:focus, textarea:focus{
 	border-color: $gray;
 }
 
+input[readonly] {
+    color: #ccc;
+    border-color: #ccc;
+}
+
 .full-width, textarea{
 	box-sizing: border-box;
 	width: 100%;

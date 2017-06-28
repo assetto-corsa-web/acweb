@@ -61,7 +61,6 @@ type Configuration struct {
 	RaceWaitTime          int    `db:"race_wait_time" json:"race_wait_time"`
 	RaceExtraLap          bool   `db:"race_extra_lap" json:"race_extra_lap"`
 	JoinType              int    `db:"join_type" json:"join_type"`
-	Time                  string `json:"time"`
 	SunAngle              int    `db:"sun_angle" json:"sun_angle"`
 	Track                 string `json:"track"`
 	TrackConfig           string `db:"track_config" json:"track_config"`
@@ -81,7 +80,6 @@ type Weather struct {
 	Configuration          int64  `json:"configuration"`
 	Weather                string `json:"weather"`
 	BaseAmbientTemp        int    `db:"base_ambient_temp" json:"base_ambient_temp"`
-	RealisticRoadTemp      int    `db:"realistic_road_temp" json:"realistic_road_temp"`
 	BaseRoadTemp           int    `db:"base_road_temp" json:"base_road_temp"`
 	AmbientVariation       int    `db:"ambient_variation" json:"ambient_variation"`
 	RoadVariation          int    `db:"road_variation" json:"road_variation"`
@@ -204,7 +202,6 @@ func (m *Configuration) saveConfiguration(tx *sqlx.Tx) error {
 			race_wait_time,
 			race_extra_lap,
 			join_type,
-			time,
 			sun_angle,
 			track,
 			track_config,
@@ -269,7 +266,6 @@ func (m *Configuration) saveConfiguration(tx *sqlx.Tx) error {
 			:race_wait_time,
 			:race_extra_lap,
 			:join_type,
-			:time,
 			:sun_angle,
 			:track,
 			:track_config,
@@ -350,7 +346,6 @@ func (m *Configuration) saveConfiguration(tx *sqlx.Tx) error {
 		race_wait_time = :race_wait_time,
 		race_extra_lap = :race_extra_lap,
 		join_type = :join_type,
-		time = :time,
 		sun_angle = :sun_angle,
 		track = :track,
 		track_config = :track_config,
@@ -376,7 +371,6 @@ func (m *Configuration) saveWeather(tx *sqlx.Tx) error {
 			_, err := tx.Exec(`INSERT INTO weather (configuration,
 				weather,
 				base_ambient_temp,
-				realistic_road_temp,
 				base_road_temp,
 				ambient_variation,
 				road_variation,
@@ -384,11 +378,10 @@ func (m *Configuration) saveWeather(tx *sqlx.Tx) error {
 				wind_base_speed_max,
 				wind_base_direction,
 				wind_variation_direction
-				) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,	?)`,
+				) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
 				m.Id,
 				weather.Weather,
 				weather.BaseAmbientTemp,
-				weather.RealisticRoadTemp,
 				weather.BaseRoadTemp,
 				weather.AmbientVariation,
 				weather.RoadVariation,
@@ -404,7 +397,6 @@ func (m *Configuration) saveWeather(tx *sqlx.Tx) error {
 		} else {
 			_, err := tx.Exec(`UPDATE weather SET weather = ?,
 				base_ambient_temp = ?,
-				realistic_road_temp = ?,
 				base_road_temp = ?,
 				ambient_variation = ?,
 				road_variation = ?,
@@ -415,7 +407,6 @@ func (m *Configuration) saveWeather(tx *sqlx.Tx) error {
 				WHERE id = ?`,
 				weather.Weather,
 				weather.BaseAmbientTemp,
-				weather.RealisticRoadTemp,
 				weather.BaseRoadTemp,
 				weather.AmbientVariation,
 				weather.RoadVariation,

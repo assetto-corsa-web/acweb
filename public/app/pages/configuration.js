@@ -96,6 +96,9 @@ Vue.component('Configuration', {
 	watch: {
 		condition: function (value) {
 			this.populateDynamicTrackWithPreset(value);
+		},
+		time: function (value) {
+			this.calculateSunAngleByTime(value);
 		}
 	},
 	methods: {
@@ -278,8 +281,8 @@ Vue.component('Configuration', {
 				this.race_wait_time = resp.data.race_wait_time;
 				this.race_extra_lap = resp.data.race_extra_lap;
 				this.join_type = resp.data.join_type;
-				this.time = resp.data.time;
 				this.sun_angle = resp.data.sun_angle;
+				this.time = this.calculateTimeBySunAngle(this.sun_angle);
 				this.legal_tyres = resp.data.legal_tyres;
 				this.udp_plugin_local_port = resp.data.udp_plugin_local_port;
 				this.udp_plugin_address = resp.data.udp_plugin_address;
@@ -347,7 +350,6 @@ Vue.component('Configuration', {
 		performAddEditConfig: function(){
 			for(var i = 0; i < this.weather.length; i++){
 				this.weather[i].base_ambient_temp = parseInt(this.weather[i].base_ambient_temp);
-				this.weather[i].realistic_road_temp = parseInt(this.weather[i].realistic_road_temp);
 				this.weather[i].base_road_temp = parseInt(this.weather[i].base_road_temp);
 				this.weather[i].ambient_variation = parseInt(this.weather[i].ambient_variation);
 				this.weather[i].road_variation = parseInt(this.weather[i].road_variation);
@@ -417,8 +419,8 @@ Vue.component('Configuration', {
 				race_wait_time: parseInt(this.race_wait_time),
 				race_extra_lap: this.race_extra_lap,
 				join_type: parseInt(this.join_type),
-				time: this.time,
 				sun_angle: parseInt(this.sun_angle),
+				time: this.calculateTimeBySunAngle(parseInt(this.sun_angle)),
 				weather: this.weather,
 				track: this.track.name,
 				track_config: this.track.config,
@@ -462,7 +464,6 @@ Vue.component('Configuration', {
 			this.weather.push({
 				weather: 'Clear',
 				base_ambient_temp: 20,
-				realistic_road_temp: 1,
 				base_road_temp: 18,
 				ambient_variation: 1,
 				road_variation: 1,
@@ -567,6 +568,34 @@ Vue.component('Configuration', {
 		},
 		generateCfgDownloadUrl: function (id) {
 			return '/api/configuration?id=' + id + '&dl=1';
+		},
+		calculateSunAngleByTime: function(time) {
+			var totalHours = parseInt(time.replace(':', ''), 10);
+
+			if (isNaN(totalHours) || totalHours < 800 || totalHours > 1800) {
+				// Invalid date, default to 0 (13:00)
+				this.sun_angle = 0;
+				return;
+			}
+
+			var timeParts = time.split(':');
+			var hours = parseInt(timeParts[0], 10);
+			var minutes = parseInt(timeParts[1], 10);
+
+			// Calculate the time in minutes and subtract 13 hours
+			// The sun angle can range from -80 to 80 in the time frame 08:00h - 18:00h
+			// e.g. 08:00 = 480min. - 780min. = -300 / 30 = -10 * 8 = -80
+			// e.g. 13:00 = 780min. - 780min. = 0 / 30 = 0 * 8 = 0
+			// e.g. 16:30 = 990min. - 780min. = 210 / 30 = 7 * 8 = 56
+			var totalMinutes = (hours * 60 + minutes) - 780;
+
+			this.sun_angle = Math.floor(totalMinutes / 30) * 8;
+		},
+		calculateTimeBySunAngle: function(sun_angle) {
+			var totalHours = ((sun_angle / 8) * 30 + 780) / 60;
+			var hrs = totalHours.toString();
+
+			return Math.floor(totalHours).toString() + ':' + (hrs[hrs.length - 1] === '5' ? '30' : '00');
 		}
 	}
 });
