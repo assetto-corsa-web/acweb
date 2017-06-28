@@ -3,15 +3,16 @@ package rest
 import (
 	"config"
 	"encoding/json"
-	"github.com/DeKugelschieber/go-resp"
-	"github.com/DeKugelschieber/go-session"
 	"instance"
-	"log"
 	"model"
 	"net/http"
 	"settings"
 	"strconv"
 	"user"
+
+	"github.com/DeKugelschieber/go-resp"
+	"github.com/DeKugelschieber/go-session"
+	log "github.com/sirupsen/logrus"
 )
 
 func UserHandler(w http.ResponseWriter, r *http.Request) {
@@ -45,7 +46,12 @@ func ConfigurationHandler(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Query().Get("id") == "" {
 			GetAllConfigurations(w, r)
 		} else {
-			GetConfiguration(w, r)
+			dl := r.URL.Query().Get("dl")
+			if dl != "" {
+				downloadConfigurationHandler(w, r, dl)
+			} else {
+				GetConfiguration(w, r)
+			}
 		}
 	}
 }
@@ -77,12 +83,14 @@ func CheckSession(w http.ResponseWriter, r *http.Request) {
 		var id int64
 
 		if err := s.Get("user_id", &id); err != nil {
-			log.Printf("Error reading user ID: %v", err)
+			log.WithFields(log.Fields{"err": err}).Error("Error reading user ID")
 			resp.Error(w, 1, "Error reading user ID", nil)
 			return
 		}
 
-		resp.Success(w, 0, "", loginRes{id})
+		resp.Success(w, 0, "", struct {
+			Id int64 `json:"user_id"`
+		}{id})
 	} else {
 		// don't log this
 		resp.Log = false
@@ -92,7 +100,10 @@ func CheckSession(w http.ResponseWriter, r *http.Request) {
 }
 
 func Login(w http.ResponseWriter, r *http.Request) {
-	var req loginReq
+	req := struct {
+		Login string `json:"login"`
+		Pwd   string `json:"pwd"`
+	}{}
 
 	if decode(w, r, &req) {
 		return
@@ -108,7 +119,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	s, err := session.NewSession(w, r)
 
 	if err != nil {
-		log.Printf("Error starting session on login: %v", err)
+		log.WithFields(log.Fields{"err": err}).Error("Error starting session on login")
 		resp.Error(w, 3, err.Error(), nil)
 		return
 	}
@@ -118,7 +129,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	s.Set("moderator", user.Moderator)
 
 	if err := s.Save(); err != nil {
-		log.Printf("Error saving session on login: %v", err)
+		log.WithFields(log.Fields{"err": err}).Error("Error saving session on login")
 		resp.Error(w, 4, err.Error(), nil)
 		return
 	}
@@ -130,13 +141,13 @@ func Logout(w http.ResponseWriter, r *http.Request) {
 	s, err := session.GetCurrentSession(r)
 
 	if !s.Active() {
-		log.Printf("Session not found on logout: %v", err)
+		log.WithFields(log.Fields{"err": err}).Error("Session not found on logout")
 		resp.Error(w, 1, "Session not found", err)
 		return
 	}
 
 	if err := s.Destroy(w, r); err != nil {
-		log.Printf("Error destroying user session on logout: %v", err)
+		log.WithFields(log.Fields{"err": err}).Error("Error destroying user session on logout")
 		resp.Error(w, 2, "Error destroying user session", nil)
 		return
 	}
@@ -150,7 +161,15 @@ func AddEditUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var req addEditUserReq
+	req := struct {
+		Id        int64  `json:"id"`
+		Login     string `json:"login"`
+		Email     string `json:"email"`
+		Pwd1      string `json:"pwd1"`
+		Pwd2      string `json:"pwd2"`
+		Admin     bool   `json:"admin"`
+		Moderator bool   `json:"moderator"`
+	}{}
 
 	if decode(w, r, &req) {
 		return
@@ -238,7 +257,11 @@ func SaveSettings(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var req saveSettingsReq
+	req := struct {
+		Folder     string `json:"folder"`
+		Executable string `json:"executable"`
+		Args       string `json:"args"`
+	}{}
 
 	if decode(w, r, &req) {
 		return
@@ -322,13 +345,43 @@ func GetConfiguration(w http.ResponseWriter, r *http.Request) {
 	}
 
 	config, err := config.GetConfiguration(int64(id))
-
 	if iserror(w, err) {
 		return
 	}
 
 	resp, _ := json.Marshal(config)
 	w.Write(resp)
+}
+
+func downloadConfigurationHandler(w http.ResponseWriter, r *http.Request, dlType string) {
+	id, err := strconv.Atoi(r.URL.Query().Get("id"))
+	if err != nil {
+		resp.Error(w, 100, err.Error(), nil)
+		return
+	}
+
+	config, err := config.GetConfiguration(int64(id))
+	if iserror(w, err) {
+		return
+	}
+
+	w.Header().Set("Content-Disposition", "attachment; filename=\""+config.Name+".zip\"")
+	w.Header().Set("Content-Type", "application/zip")
+
+	if dlType == "1" {
+		err = instance.ZipConfiguration(config, w)
+	} else if dlType == "2" {
+		err = instance.ZipInstanceFiles(config, w)
+	} else {
+		resp.Error(w, 100, "Invalid download option", nil)
+		return
+	}
+
+	if iserror(w, err) {
+		return
+	}
+
+	success(w)
 }
 
 func GetAvailableTracks(w http.ResponseWriter, r *http.Request) {
@@ -359,7 +412,10 @@ func StartInstance(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var req startInstanceReq
+	req := struct {
+		Name          string `json:"name"`
+		Configuration int64  `json:"config"`
+	}{}
 
 	if decode(w, r, &req) {
 		return

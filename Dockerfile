@@ -1,6 +1,7 @@
 FROM golang
 
 ADD . /app
+COPY config /config
 WORKDIR /app
 
 # install node and node-sass
@@ -24,6 +25,8 @@ RUN cd /app/public && ./minvue -config=minify.json
 # configure and run
 ENV ACWEB_HOST=:8080
 ENV ACWEB_LOGDIR=/logs
+ENV ACWEB_INSTANCE_LOGDIR=/instance_logs
+ENV ACWEB_CONFIG_DIR=/config
 ENV ACWEB_TLS_PRIVATE_KEY=
 ENV ACWEB_TLS_CERT=
 ENV ACWEB_DB_USER=root
@@ -32,7 +35,6 @@ ENV ACWEB_DB_HOST=
 ENV ACWEB_DB=acweb
 
 # expose Assetto Corsa folder
-VOLUME ["/ac", "/logs"]
+VOLUME ["/ac", "/logs", "/instance_logs", "/config"]
 
 CMD ["/app/main"]
-

@@ -2,7 +2,7 @@ package config
 
 import (
 	"github.com/DeKugelschieber/go-util"
-	"log"
+	log "github.com/sirupsen/logrus"
 	"model"
 )
 
@@ -29,12 +29,12 @@ func AddEditConfiguration(config *model.Configuration) error {
 		existing, err := model.GetConfigurationById(config.Id)
 
 		if err != nil {
-			log.Printf("Error reading configuration: %v", err)
+			log.WithFields(log.Fields{"err": err}).Error("Error reading configuration")
 			return util.OpError{4, "Error reading configuration"}
 		}
 
 		if err := existing.Join(); err != nil {
-			log.Printf("Error joining entities to configuration: %v", err)
+			log.WithFields(log.Fields{"err": err}).Error("Error joining entities to configuration")
 			return util.OpError{5, "Error joining entities to configuration"}
 		}
 
@@ -48,7 +48,7 @@ func AddEditConfiguration(config *model.Configuration) error {
 	}
 
 	if err := config.Save(); err != nil {
-		log.Printf("Error saving configuration: %v", err)
+		log.WithFields(log.Fields{"err": err}).Error("Error saving configuration")
 		return util.OpError{8, "Error saving configuration"}
 	}
 
@@ -106,7 +106,7 @@ func removeWeather(old, config *model.Configuration) error {
 
 		if !found {
 			if err := oldweather.Remove(); err != nil {
-				log.Printf("Error removing weather: %v", err)
+				log.WithFields(log.Fields{"err": err}).Error("Error removing weather")
 				return err
 			}
 		}
@@ -128,7 +128,7 @@ func removeCars(old, config *model.Configuration) error {
 
 		if !found {
 			if err := oldcar.Remove(); err != nil {
-				log.Printf("Error removing car: %v", err)
+				log.WithFields(log.Fields{"err": err}).Error("Error removing car")
 				return err
 			}
 		}

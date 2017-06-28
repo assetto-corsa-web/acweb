@@ -2,7 +2,7 @@ package instance
 
 import (
 	"github.com/DeKugelschieber/go-util"
-	"log"
+	log "github.com/sirupsen/logrus"
 	"model"
 	"os"
 	"os/exec"
@@ -11,10 +11,6 @@ import (
 	"strings"
 	"sync"
 	"time"
-)
-
-const (
-	log_dir = "server_log"
 )
 
 var (
@@ -35,8 +31,8 @@ func StartInstance(name string, configuration int64) error {
 	}
 
 	// create log dir
-	if err := os.MkdirAll(log_dir, 0755); err != nil {
-		log.Printf("Error creating server log folder: %v", err)
+	if err := os.MkdirAll(os.Getenv("ACWEB_INSTANCE_LOGDIR"), 0755); err != nil {
+		log.WithFields(log.Fields{"err": err}).Error("Error creating server log folder")
 		return util.OpError{5, "Error creating server log folder"}
 	}
 
@@ -44,12 +40,12 @@ func StartInstance(name string, configuration int64) error {
 	config, err := model.GetConfigurationById(configuration)
 
 	if err != nil {
-		log.Printf("Error reading configuration to start instance: %v", err)
+		log.WithFields(log.Fields{"err": err}).Error("Error reading configuration to start instance")
 		return util.OpError{2, "Error reading configuration"}
 	}
 
 	if err := config.Join(); err != nil {
-		log.Printf("Error joining entities to configuration to start instance: %v", err)
+		log.WithFields(log.Fields{"err": err}).Error("Error joining entities to configuration to start instance")
 		return util.OpError{2, "Error reading configuration"}
 	}
 
@@ -57,18 +53,23 @@ func StartInstance(name string, configuration int64) error {
 	s := settings.GetSettings()
 
 	// write config
-	if err := writeConfig(config); err != nil {
+	iniServerCfg, iniEntryList, err := writeConfig(config)
+
+	if err != nil {
 		return util.OpError{3, "Error writing configuration"}
 	}
 
+	// force server_cfg and entry_list ini paths
 	// start
-	cmd := exec.Command(filepath.Join(s.Folder, s.Executable), strings.Split(s.Args, " ")...)
-	now := strings.Replace(time.Now().String(), " ", "_", -1)
+	// FIXME: s.Args has been  discarted. No real use so far?
+	// cmd := exec.Command(filepath.Join(s.Folder, s.Executable), strings.Split(cmdArgs, " ")...)
+	cmd := exec.Command(filepath.Join(s.Folder, s.Executable), "-c", iniServerCfg, "-e", iniEntryList)
+	now := strings.Replace(strings.Replace(time.Now().String(), ":", "", -1), " ", "_", -1)
 
-	logfile, err := os.Create(filepath.Join(log_dir, now+"_"+config.Name+".log"))
+	logfile, err := os.Create(filepath.Join(os.Getenv("ACWEB_INSTANCE_LOGDIR"), now+"_"+config.Name+".log"))
 
 	if err != nil {
-		log.Printf("Error creating log file: %v", err)
+		log.WithFields(log.Fields{"err": err}).Error("Error creating log file")
 		return util.OpError{6, "Error creating log file"}
 	}
 
@@ -79,7 +80,7 @@ func StartInstance(name string, configuration int64) error {
 	cmd.Dir = s.Folder
 
 	if err := cmd.Start(); err != nil {
-		log.Printf("Error starting instance: %v", err)
+		log.WithFields(log.Fields{"err": err}).Error("Error starting instance")
 		return util.OpError{4, "Error starting instance"}
 	}
 
@@ -97,9 +98,9 @@ func observeProcess(cmd *exec.Cmd) {
 		exitErr, ok := err.(*exec.ExitError)
 
 		if !ok {
-			log.Printf("Error when instance stopped: %v", err)
+			log.WithFields(log.Fields{"err": err}).Error("Error when instance stopped")
 		} else {
-			log.Printf("Error when instance stopped: %v %v %v", exitErr.Error(), exitErr.ProcessState, string(exitErr.Stderr))
+			log.WithFields(log.Fields{"err": exitErr.Error(), "process_state": exitErr.ProcessState}).Error("Error when instance stopped")
 		}
 	}
 
@@ -110,11 +111,11 @@ func observeProcess(cmd *exec.Cmd) {
 	for i, instance := range instances {
 		if instance.PID == cmd.Process.Pid {
 			if err := instance.File.Close(); err != nil {
-				log.Printf("Error closing log file: %v", err)
+				log.WithFields(log.Fields{"err": err}).Error("Error closing log file")
 			}
 
 			instances = append(instances[:i], instances[i+1:]...)
-			log.Printf("Instance %v with PID %v removed", i, instance.PID)
+			log.WithFields(log.Fields{"instance": i, "pid": instance.PID}).Info("Instance removed")
 			return
 		}
 	}
@@ -137,7 +138,7 @@ func StopInstance(pid int) error {
 func stopProcess(instance *Instance) error {
 	// just kill it
 	if err := instance.Cmd.Process.Kill(); err != nil {
-		log.Printf("Error when stopping instance: %v", err)
+		log.WithFields(log.Fields{"err": err}).Error("Error when stopping instance")
 		return util.OpError{1, "Error stopping instance"}
 	}
 

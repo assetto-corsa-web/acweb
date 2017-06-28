@@ -1,0 +1,20 @@
+#!/bin/bash
+
+echo "Starting application..."
+DIR="`pwd`"
+export GOROOT=/usr/local/go
+export PATH=$PATH:$GOROOT/bin
+export GOPATH=$DIR
+
+export ACWEB_HOST=localhost:8080
+export ACWEB_LOGDIR=
+export ACWEB_INSTANCE_LOGDIR=instance_logs
+export ACWEB_CONFIG_DIR=config
+export ACWEB_TLS_PRIVATE_KEY=
+export ACWEB_TLS_CERT=
+export ACWEB_DB_USER=root
+export ACWEB_DB_PASSWORD=
+export ACWEB_DB_HOST=
+export ACWEB_DB=acweb
+
+go run src/main/main.go

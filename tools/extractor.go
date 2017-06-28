@@ -61,13 +61,18 @@ func extractTracks() {
 	}
 
 	for _, trackDir := range trackDirs {
+		// discart non-dir
+		if !trackDir.IsDir() {
+			continue
+		}
+
 		trackName := trackDir.Name()
 		trackConfig := ""
 		maxSlots := 0
 		trackConfigsFound := false
 
 		// read ui dir
-		uiDirs, err := ioutil.ReadDir(filepath.Join(ac_dir, "tracks", trackDir.Name(), "ui"))
+		uiDirs, err := ioutil.ReadDir(filepath.Join(ac_dir, "tracks", trackName, "ui"))
 
 		if err != nil {
 			log.Fatal(err)
@@ -77,7 +82,7 @@ func extractTracks() {
 		for _, uiDir := range uiDirs {
 			if uiDir.IsDir() {
 				trackConfig = uiDir.Name()
-				maxSlots = getMaxSlots(filepath.Join(ac_dir, "tracks", trackDir.Name(), "ui", uiDir.Name()))
+				maxSlots = getMaxSlots(filepath.Join(ac_dir, "tracks", trackName, "ui", uiDir.Name()))
 				trackConfigsFound = true
 				tracks = append(tracks, Track{trackName,
 					trackConfig,
