@@ -146,6 +146,9 @@ Vue.component('Instance', {
 				this.showLog = true;
 			});
 		},
+		generateConsoleLogDownloadUrl: function (file) {
+			return '/api/instance/log?file=' + file + '&dl=1';
+		},
 		generateInstanceDownloadUrl: function (id) {
 			return '/api/configuration?id=' + id + '&dl=2';
 		}

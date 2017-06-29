@@ -68,10 +68,15 @@ func InstanceHandler(w http.ResponseWriter, r *http.Request) {
 
 func InstanceLogHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
-		if r.URL.Query().Get("file") == "" {
+		fileName := r.URL.Query().Get("file")
+		if fileName == "" {
 			GetAllInstanceLogs(w, r)
 		} else {
-			GetInstanceLog(w, r)
+			if r.URL.Query().Get("dl") != "" {
+				downloadLogHandler(w, r, fileName)
+			} else {
+				GetInstanceLog(w, r, fileName)
+			}
 		}
 	}
 }
@@ -384,6 +389,18 @@ func downloadConfigurationHandler(w http.ResponseWriter, r *http.Request, dlType
 	success(w)
 }
 
+func downloadLogHandler(w http.ResponseWriter, r *http.Request, fileName string) {
+	w.Header().Set("Content-Disposition", "attachment; filename=\""+fileName+".zip\"")
+	w.Header().Set("Content-Type", "application/zip")
+
+	err := instance.ZipLogFile(fileName, w)
+	if iserror(w, err) {
+		return
+	}
+
+	success(w)
+}
+
 func GetAvailableTracks(w http.ResponseWriter, r *http.Request) {
 	tracks, err := config.GetAvailableTracks()
 
@@ -460,7 +477,6 @@ func GetAllInstances(w http.ResponseWriter, r *http.Request) {
 
 func GetAllInstanceLogs(w http.ResponseWriter, r *http.Request) {
 	logs, err := instance.GetAllInstanceLogs()
-
 	if iserror(w, err) {
 		return
 	}
@@ -469,10 +485,8 @@ func GetAllInstanceLogs(w http.ResponseWriter, r *http.Request) {
 	w.Write(resp)
 }
 
-func GetInstanceLog(w http.ResponseWriter, r *http.Request) {
-	file := r.URL.Query().Get("file")
+func GetInstanceLog(w http.ResponseWriter, r *http.Request, file string) {
 	log, err := instance.GetInstanceLog(file)
-
 	if iserror(w, err) {
 		return
 	}
