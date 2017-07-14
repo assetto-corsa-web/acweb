@@ -182,6 +182,14 @@
 							<td><input type="checkbox" name="disable_gas_cut_penality" v-model="disable_gas_cut_penality" /></td>
 						</tr>
 						<tr>
+							<td>Jump Start:</td>
+							<select name="start_rule" v-model="start_rule">
+								<option value="0">Car Locked</option>
+								<option value="1">Teleport To Pit</option>
+								<option value="2">Drive-through</option>
+							</select>
+						</tr>
+						<tr>
 							<td>Legal Tyres:</td>
 							<td><input type="text" name="legal_tyres" v-model="legal_tyres" /></td>
 						</tr>
@@ -349,6 +357,10 @@
 						<tr>
 							<td>Sun angle:</td>
 							<td><input type="number" name="sun_angle" v-model="sun_angle" readonly /></td>
+						</tr>
+						<tr>
+							<td>Multiplier:</td>
+							<td><input type="number" name="time_of_day_mult" v-model="time_of_day_mult" min="1" max="10" step="1" /></td>
 						</tr>
 						<tr>
 							<td colspan="2"><h3>Weather</h3></td>

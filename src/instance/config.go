@@ -94,8 +94,9 @@ func ServerConfigToIniString(config *model.Configuration) string {
 	ini += "ALLOWED_TYRES_OUT=" + intToStr(config.AllowedTiresOut) + sep
 	ini += "ABS_ALLOWED=" + intToStr(config.ABS) + sep
 	ini += "TC_ALLOWED=" + intToStr(config.TC) + sep
-	ini += "START_RULE=1" + sep
+	ini += "START_RULE=" + intToStr(config.StartRule) + sep
 	ini += "RACE_GAS_PENALTY_DISABLED=" + boolToStr(config.DisableGasCutPenality) + sep
+	ini += "TIME_OF_DAY_MULT=" + intToStr(config.TimeOfDayMult) + sep
 	ini += "RESULT_SCREEN_TIME=" + intToStr(config.ResultScreenTime) + sep
 	ini += "MAX_CONTACTS_PER_KM=" + intToStr(config.MaxCollisionsKm) + sep
 	ini += "STABILITY_ALLOWED=" + boolToStr(config.StabilityAid) + sep

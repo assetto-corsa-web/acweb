@@ -47,6 +47,7 @@ Vue.component('Configuration', {
 			tires_wear_rate: 100,
 			allowed_tires_out: 2,
 			max_ballast: 150,
+			start_rule: 1,
 			disable_gas_cut_penality: false,
 			dynamic_track: true,
 			condition: 'CUSTOM',
@@ -75,6 +76,7 @@ Vue.component('Configuration', {
 			join_type: 1,
 			time: '14:00',
 			sun_angle: 16,
+			time_of_day_mult: 1,
 			track: '',
 			legal_tyres: '',
 			udp_plugin_local_port: 0,
@@ -176,6 +178,7 @@ Vue.component('Configuration', {
 			this.tires_wear_rate = 100;
 			this.allowed_tires_out = 2;
 			this.max_ballast = 150;
+			this.start_rule = 1;
 			this.disable_gas_cut_penality = false;
 			this.dynamic_track = true;
 			this.condition = 'CUSTOM';
@@ -204,6 +207,7 @@ Vue.component('Configuration', {
 			this.join_type = 1;
 			this.time = '14:00';
 			this.sun_angle = 16;
+			this.time_of_day_mult = 1;
 			this.track = '';
 			this.legal_tyres = '';
 			this.udp_plugin_local_port = 0;
@@ -254,6 +258,7 @@ Vue.component('Configuration', {
 				this.tires_wear_rate = resp.data.tires_wear_rate;
 				this.allowed_tires_out = resp.data.allowed_tires_out;
 				this.max_ballast = resp.data.max_ballast;
+				this.start_rule = resp.data.start_rule;
 				this.disable_gas_cut_penality = resp.data.disable_gas_cut_penality;
 				this.result_screen_time = resp.data.result_screen_time;
 				this.dynamic_track = resp.data.dynamic_track;
@@ -282,6 +287,7 @@ Vue.component('Configuration', {
 				this.race_extra_lap = resp.data.race_extra_lap;
 				this.join_type = resp.data.join_type;
 				this.sun_angle = resp.data.sun_angle;
+				this.time_of_day_mult = resp.data.time_of_day_mult;
 				this.time = this.calculateTimeBySunAngle(this.sun_angle);
 				this.legal_tyres = resp.data.legal_tyres;
 				this.udp_plugin_local_port = resp.data.udp_plugin_local_port;
@@ -392,7 +398,9 @@ Vue.component('Configuration', {
 				tires_wear_rate: parseInt(this.tires_wear_rate),
 				allowed_tires_out: parseInt(this.allowed_tires_out),
 				max_ballast: parseInt(this.max_ballast),
+				start_rule: parseInt(this.start_rule),
 				disable_gas_cut_penality: this.disable_gas_cut_penality,
+				time_of_day_mult: parseInt(this.time_of_day_mult),
 				result_screen_time: parseInt(this.result_screen_time),
 				dynamic_track: this.dynamic_track,
 				condition: this.condition,

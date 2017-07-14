@@ -34,7 +34,9 @@ type Configuration struct {
 	TiresWearRate         int    `db:"tires_wear_rate" json:"tires_wear_rate"`
 	AllowedTiresOut       int    `db:"allowed_tires_out" json:"allowed_tires_out"`
 	MaxBallast            int    `db:"max_ballast" json:"max_ballast"`
+	StartRule             int    `db:"start_rule" json:"start_rule"`
 	DisableGasCutPenality bool   `db:"disable_gas_cut_penality" json:"disable_gas_cut_penality"`
+	TimeOfDayMult         int    `db:"time_of_day_mult" json:"time_of_day_mult"`
 	ResultScreenTime      int    `db:"result_screen_time" json:"result_screen_time"`
 	DynamicTrack          bool   `db:"dynamic_track" json:"dynamic_track"`
 	Condition             string `db:"track_condition" json:"condition"`
@@ -175,7 +177,9 @@ func (m *Configuration) saveConfiguration(tx *sqlx.Tx) error {
 			tires_wear_rate,
 			allowed_tires_out,
 			max_ballast,
+			start_rule,
 			disable_gas_cut_penality,
+			time_of_day_mult,
 			result_screen_time,
 			dynamic_track,
 			track_condition,
@@ -239,7 +243,9 @@ func (m *Configuration) saveConfiguration(tx *sqlx.Tx) error {
 			:tires_wear_rate,
 			:allowed_tires_out,
 			:max_ballast,
+			:start_rule,
 			:disable_gas_cut_penality,
+			:time_of_day_mult,
 			:result_screen_time,
 			:dynamic_track,
 			:track_condition,
@@ -319,7 +325,9 @@ func (m *Configuration) saveConfiguration(tx *sqlx.Tx) error {
 		tires_wear_rate = :tires_wear_rate,
 		allowed_tires_out = :allowed_tires_out,
 		max_ballast = :max_ballast,
+		start_rule = :start_rule,
 		disable_gas_cut_penality = :disable_gas_cut_penality,
+		time_of_day_mult = :time_of_day_mult,
 		result_screen_time = :result_screen_time,
 		dynamic_track = :dynamic_track,
 		track_condition = :track_condition,
