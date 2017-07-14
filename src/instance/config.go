@@ -113,6 +113,13 @@ func ServerConfigToIniString(config *model.Configuration) string {
 	ini += "RACE_EXTRA_LAP=" + boolToStr(config.RaceExtraLap) + sep
 	ini += "WELCOME_MESSAGE=" + config.Welcome + sep
 
+	if config.Booking {
+		ini += sep
+		ini += "[BOOK]" + sep
+		ini += "NAME=Booking" + sep
+		ini += "TIME=" + intToStr(config.BookingTime) + sep
+	}
+
 	if config.Practice {
 		ini += sep
 		ini += "[PRACTICE]" + sep
@@ -165,7 +172,7 @@ func ServerConfigToIniString(config *model.Configuration) string {
 
 	ini += sep
 	ini += "[DATA]" + sep
-	ini += "DESCRIPTION=" + sep
+	ini += "DESCRIPTION=" + config.Description + sep
 	ini += "EXSERVEREXE=" + sep
 	ini += "EXSERVERBAT=" + sep
 	ini += "EXSERVERHIDEWIN=0" + sep
