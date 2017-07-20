@@ -182,6 +182,14 @@
 							<td><input type="checkbox" name="disable_gas_cut_penality" v-model="disable_gas_cut_penality" /></td>
 						</tr>
 						<tr>
+							<td>Jump Start:</td>
+							<select name="start_rule" v-model="start_rule">
+								<option value="0">Car Locked</option>
+								<option value="1">Teleport To Pit</option>
+								<option value="2">Drive-through</option>
+							</select>
+						</tr>
+						<tr>
 							<td>Legal Tyres:</td>
 							<td><input type="text" name="legal_tyres" v-model="legal_tyres" /></td>
 						</tr>
@@ -349,6 +357,10 @@
 						<tr>
 							<td>Sun angle:</td>
 							<td><input type="number" name="sun_angle" v-model="sun_angle" readonly /></td>
+						</tr>
+						<tr>
+							<td>Multiplier:</td>
+							<td><input type="number" name="time_of_day_mult" v-model="time_of_day_mult" min="1" max="10" step="1" /></td>
 						</tr>
 						<tr>
 							<td colspan="2"><h3>Weather</h3></td>
@@ -553,12 +565,35 @@
 			</div>
 		</div>
 
+		<div class="box" v-if="importConfig">
+			<div class="wrapper">
+				<h2>Import Configuration</h2>
+				<p>Please select the following config files in the file upload dialog (you can select multiple files):</p>
+				<p>
+					<i class="fa fa-check-square-o" v-if="tmpSrvCfg !== null"></i>
+					<i class="fa fa-square-o" v-else></i>
+					<code>server_cfg.ini</code>
+					<br/>
+					<i class="fa fa-check-square-o" v-if="tmpEntryListCfg !== null"></i>
+					<i class="fa fa-square-o" v-else></i>
+					<code>entry_list.ini</code>
+				</p>
+
+				<p>
+					<input type="file" multiple @change="importConfigs($event.target.files)">
+				</p>
+
+				<button v-on:click="closeImportConfig()">Cancel</button>
+			</div>
+		</div>
+
 		<div class="box">
 			<div class="wrapper">
 				<msg :type="\'success\'" :msg="\'The configuration has been saved.\'" v-if="saved"></msg>
 				<msg :type="\'success\'" :msg="\'The configuration has been removed.\'" v-if="removed"></msg>
 
 				<button v-on:click="openAddEditConfig(0)">Add Configuration</button>
+				<button v-on:click="openImportConfig()">Import Configuration</button>
 
 				<table>
 					<thead>

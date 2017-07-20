@@ -94,8 +94,9 @@ func ServerConfigToIniString(config *model.Configuration) string {
 	ini += "ALLOWED_TYRES_OUT=" + intToStr(config.AllowedTiresOut) + sep
 	ini += "ABS_ALLOWED=" + intToStr(config.ABS) + sep
 	ini += "TC_ALLOWED=" + intToStr(config.TC) + sep
-	ini += "START_RULE=1" + sep
+	ini += "START_RULE=" + intToStr(config.StartRule) + sep
 	ini += "RACE_GAS_PENALTY_DISABLED=" + boolToStr(config.DisableGasCutPenality) + sep
+	ini += "TIME_OF_DAY_MULT=" + intToStr(config.TimeOfDayMult) + sep
 	ini += "RESULT_SCREEN_TIME=" + intToStr(config.ResultScreenTime) + sep
 	ini += "MAX_CONTACTS_PER_KM=" + intToStr(config.MaxCollisionsKm) + sep
 	ini += "STABILITY_ALLOWED=" + boolToStr(config.StabilityAid) + sep
@@ -111,6 +112,13 @@ func ServerConfigToIniString(config *model.Configuration) string {
 	ini += "LEGAL_TYRES=" + config.LegalTyres + sep
 	ini += "RACE_EXTRA_LAP=" + boolToStr(config.RaceExtraLap) + sep
 	ini += "WELCOME_MESSAGE=" + config.Welcome + sep
+
+	if config.Booking {
+		ini += sep
+		ini += "[BOOK]" + sep
+		ini += "NAME=Booking" + sep
+		ini += "TIME=" + intToStr(config.BookingTime) + sep
+	}
 
 	if config.Practice {
 		ini += sep
@@ -164,7 +172,7 @@ func ServerConfigToIniString(config *model.Configuration) string {
 
 	ini += sep
 	ini += "[DATA]" + sep
-	ini += "DESCRIPTION=" + sep
+	ini += "DESCRIPTION=" + config.Description + sep
 	ini += "EXSERVEREXE=" + sep
 	ini += "EXSERVERBAT=" + sep
 	ini += "EXSERVERHIDEWIN=0" + sep
