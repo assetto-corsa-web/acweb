@@ -8,7 +8,7 @@ import (
 	"time"
 
 	util "github.com/DeKugelschieber/go-util"
-	log "github.com/sirupsen/logrus"
+	logger "github.com/sirupsen/logrus"
 )
 
 func addDataToZip(zw *zip.Writer, filename string, dat []byte) bool {
@@ -20,13 +20,13 @@ func addDataToZip(zw *zip.Writer, filename string, dat []byte) bool {
 
 	fw, err := zw.CreateHeader(fh)
 	if err != nil {
-		log.Printf("Error creating zip header: %v", err)
+		logger.WithFields(logger.Fields{"err": err}).Error("Error creating zip header")
 		return false
 	}
 
 	_, err = fw.Write(dat)
 	if err != nil {
-		log.Printf("Error writing %s config to zip: %v", filename, err)
+		logger.WithFields(logger.Fields{"err": err, "config": filename}).Error("Error writing config to zip")
 		return false
 	}
 
@@ -36,7 +36,7 @@ func addDataToZip(zw *zip.Writer, filename string, dat []byte) bool {
 func addFileToZip(zw *zip.Writer, filename string, iniFilePath string) bool {
 	dat, err := ioutil.ReadFile(iniFilePath)
 	if err != nil {
-		log.Printf("Error reading file: %v", err)
+		logger.WithFields(logger.Fields{"err": err, "path": iniFilePath}).Error("Error reading file to add to zip")
 		return false
 	}
 	return addDataToZip(zw, filename, dat)
@@ -54,7 +54,7 @@ func ZipConfiguration(config *model.Configuration, w http.ResponseWriter) error 
 
 	entryList := EntryListToIniString(config)
 	if !addDataToZip(zw, EntryListIni, []byte(entryList)) {
-		return util.OpError{1, "Error writing entry_list.ini into zip archive"}
+		return util.OpError{2, "Error writing entry_list.ini into zip archive"}
 	}
 
 	return nil
@@ -72,7 +72,7 @@ func ZipInstanceFiles(config *model.Configuration, w http.ResponseWriter) error 
 
 	iniEntryList := GetEntryListPath(config)
 	if !addFileToZip(zw, EntryListIni, iniEntryList) {
-		return util.OpError{1, "Error writing entry list into zip archive"}
+		return util.OpError{2, "Error writing entry list into zip archive"}
 	}
 
 	return nil
@@ -82,7 +82,7 @@ func ZipInstanceFiles(config *model.Configuration, w http.ResponseWriter) error 
 func ZipLogFile(fileName string, w http.ResponseWriter) error {
 	log, err := GetInstanceLog(fileName)
 	if err != nil {
-		//log.WithFields(log.Fields{"err": err, "fileName": fileName}).Error("Error reading instance log file")
+		logger.WithFields(logger.Fields{"err": err, "fileName": fileName}).Error("Error reading instance log file")
 		return util.OpError{1, "Error reading instance log file"}
 	}
 
@@ -90,7 +90,8 @@ func ZipLogFile(fileName string, w http.ResponseWriter) error {
 	defer zw.Close()
 
 	if !addDataToZip(zw, fileName, []byte(log)) {
-		return util.OpError{1, "Error writing log file into zip archive"}
+		logger.WithFields(logger.Fields{"err": err, "fileName": fileName}).Error("Error writing log file into zip archive")
+		return util.OpError{2, "Error writing log file into zip archive"}
 	}
 
 	return nil
