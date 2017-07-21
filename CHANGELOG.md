@@ -1,6 +1,10 @@
 # Changelog
 
-## 1.0.4
+## 1.2.0
+
+* added configuration import
+
+## 1.1.0
 
 * fixed: some default config values
 * fixed: missing system and content directories for checksum calculation
