@@ -3,6 +3,7 @@
 ## 1.2.0
 
 * added configuration import
+* added windows build (can't be used with docker)
 
 ## 1.1.0
 
