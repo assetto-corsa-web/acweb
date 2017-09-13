@@ -1,11 +1,14 @@
 db/
 pkg/
 src/github.com/
-release/
 screenshots/
 tools/
 log/
 server_log/
+public/css/
+public/app.js
+public/build_app
+public/build_sass
 .git/
 .gitignore
 CHANGELOG.md

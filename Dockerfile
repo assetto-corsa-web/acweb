@@ -4,22 +4,20 @@ ADD . /app
 COPY config /config
 WORKDIR /app
 
-# install node and node-sass
-RUN apt-get update -qq && apt-get install -qq -y \
-	nodejs-legacy \
-	npm
-RUN npm install -g node-sass
+# install sass
+RUN apt-get update && \
+	apt-get upgrade -y && \
+	apt-get install -y \
+	build-essential \
+	ruby-dev
+RUN gem install sass
 
 # build backend
 ENV GOPATH=/app
-RUN go get github.com/DeKugelschieber/go-session \
-    github.com/DeKugelschieber/go-util \
-    github.com/DeKugelschieber/go-resp \
-    github.com/go-sql-driver/mysql
 RUN go build -ldflags "-s -w" src/main/main.go
 
 # build frontend
-RUN node-sass --output /app/public/css /app/public/scss/main.scss
+RUN cd /app/public && mkdir ./css && sass ./scss/main.scss ./css/main.css
 RUN cd /app/public && ./minvue -config=minify.json
 
 # configure and run
