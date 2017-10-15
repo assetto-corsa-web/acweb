@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.2.1
+
+* fixed: -1 value for tires out
+* added: acweb now creates a default user when non exists "root" "root"
+* added: license information on about page
+
 ## 1.2.0
 
 * added configuration import

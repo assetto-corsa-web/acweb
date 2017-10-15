@@ -23,14 +23,7 @@ docker pull kugel/acweb
 ```
 
 3. install MySQL on your server or use a docker image
-4. create the database schema (db/schema.sql + all migration scripts in appropriate order) and create the first user:
-
-```
-INSERT INTO `user` (`id`, `login`, `email`, `password`, `admin`, `moderator`) VALUES (NULL, 'username', 'user@email.com', 'SHA256_HASH', '1', '0');
-```
-
-Note that the user password must be a SHA256 hash. You can find tools online to create one from a clear password.
-
+4. create the database schema (db/schema.sql + all migration scripts in appropriate order)
 5. start the Docker container (adjust the parameters to your needs):
 
 ```
@@ -58,14 +51,7 @@ This instruction supposes you to use Linux. On Windows you basically need to per
 
 1. download the latest release of acweb
 2. upload it to your server and unzip it
-3. create the database schema (db/schema.sql + all migration scripts in appropriate order) and create the first user:
-
-```
-INSERT INTO `user` (`id`, `login`, `email`, `password`, `admin`, `moderator`) VALUES (NULL, 'username', 'user@email.com', 'SHA256_HASH', '1', '0');
-```
-
-Note that the user password must be a SHA256 hash. You can find tools online to create one from a clear password.
-
+3. create the database schema (db/schema.sql + all migration scripts in appropriate order)
 4. set the environment variables to configure your server:
 
 ```
@@ -104,6 +90,10 @@ export ACWEB_DB=acweb
 4. start it
 
 For Docker pull the latest release, execute the migration script(s) and start it.
+
+## Login
+
+On first startup, acweb creates a default user called "root" with password "root". **Please change the password right after your first login!**
 
 ## Adding tracks and cars
 

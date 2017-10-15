@@ -7,8 +7,6 @@ import (
 	"time"
 )
 
-// TODO renew function
-
 // Session provides access to user context related data.
 // Generic data can be set and obtained and will be available
 // on page switch. Call Save() to make sure the data is stored.

@@ -10,6 +10,7 @@ import (
 	"time"
 
 	"github.com/DeKugelschieber/go-session"
+	"github.com/DeKugelschieber/go-util"
 	log "github.com/sirupsen/logrus"
 )
 
@@ -53,6 +54,21 @@ func init() {
 		log.SetLevel(log.InfoLevel)
 	} else {
 		log.SetLevel(log.WarnLevel)
+	}
+}
+
+func createDefaultUser() {
+	users, _ := model.GetAllUser()
+
+	if users == nil || len(users) == 0 {
+		user := &model.User{Login: "root",
+			Email: "root@root.com",
+			Pwd:   util.Sha256base64("root"),
+			Admin: true}
+
+		if err := user.Save(); err != nil {
+			log.WithFields(log.Fields{"err": err}).Fatal("Error creating first user")
+		}
 	}
 }
 
@@ -106,6 +122,9 @@ func main() {
 	// start session manager
 	sessionProvider := session.NewMemProvider()
 	session.New(session_cookie_name, session_cookie_lifetime, sessionProvider)
+
+	// create default user on startup if non exists
+	createDefaultUser()
 
 	// and go
 	startServer()
