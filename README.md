@@ -132,6 +132,8 @@ The files can be found within the config directory. To modify them using Docker,
 
 To contribute please open issues and pull requests. The frontend is build using VueJs, [minvue](https://github.com/DeKugelschieber/vuejs-minify) and sass. The backend is build on Go (golang) and MySQL. For details please view the provided scripts within the main directory.
 
+All Go code must be run through go fmt. The frontend and backend changes must be (manually) tested on your system. If you have issues running it locally open an issue. Unit tests are not required yet, but that's something I'll may add in the future.
+
 ### Contributors (alphabetical)
 
 macedot, vinyii
