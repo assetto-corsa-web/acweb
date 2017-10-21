@@ -17,18 +17,15 @@ const (
 )
 
 func GetConfigPath(config *model.Configuration) string {
-	configPath := filepath.Join(os.Getenv("ACWEB_CONFIG_DIR"), int64ToStr(config.Id))
-	return configPath
+	return filepath.Join(os.Getenv("ACWEB_CONFIG_DIR"), int64ToStr(config.Id))
 }
 
 func GetServerCfgPath(config *model.Configuration) string {
-	iniFile := filepath.Join(GetConfigPath(config), ServerIni)
-	return iniFile
+	return filepath.Join(GetConfigPath(config), ServerIni)
 }
 
 func GetEntryListPath(config *model.Configuration) string {
-	iniFile := filepath.Join(GetConfigPath(config), EntryListIni)
-	return iniFile
+	return filepath.Join(GetConfigPath(config), EntryListIni)
 }
 
 func writeIniFile(config *model.Configuration, ini, filename string) error {
