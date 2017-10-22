@@ -14,9 +14,20 @@ export ACWEB_INSTANCE_LOGDIR=instance_logs
 export ACWEB_CONFIG_DIR=config
 export ACWEB_TLS_PRIVATE_KEY=
 export ACWEB_TLS_CERT=
-export ACWEB_DB_USER=root
-export ACWEB_DB_PASSWORD=root
-export ACWEB_DB_HOST=
+
+# mysql connection
+#export ACWEB_DB_USER=postgres
+#export ACWEB_DB_PASSWORD=postgres
+#export ACWEB_DB_HOST=
+#export ACWEB_DB=acweb
+
+# postgres connection
+export ACWEB_DB_TYPE=postgres
+export ACWEB_DB_USER=postgres
+export ACWEB_DB_PASSWORD=postgres
+export ACWEB_DB_HOST=localhost
 export ACWEB_DB=acweb
+export ACWEB_DB_PORT=5432
+export ACWEB_DB_SSLMODE=disable
 
 go run src/main/main.go

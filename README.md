@@ -6,10 +6,15 @@ This tool provides monitoring and management for your Assetto Corsa server insta
 
 **Screenshots at the bottom of this page!**
 
+## System requirements
+
+* 64bit Linux or Windows server
+* MySQL or Postgres database
+
 ## Install
 
-Note that the scripts within the main directory are not used to start or install the server. They're for development only and not shipped with the release. Download releases from the [GitHub release page](https://github.com/DeKugelschieber/acweb/releases) instead of the release/ directory. If you find any issues installing the server or bugs, please open an issue in the issue section on GitHub.
-These instructions do not provide information on how to install the Assetto Corsa server itself. On Linux, you basically install steam, login to your account and download **the Windows version** of the game, which also includes the Linux server.
+Note that the scripts within the main directory are not used to start or install the server. They're for development only and not shipped with the release. Download releases from the [GitHub release page](https://github.com/DeKugelschieber/acweb/releases) instead of the repository. If you find any issues installing the server or bugs, please open an issue in the issue section on GitHub.
+These instructions do not provide information on how to install the Assetto Corsa server itself. On Linux, you basically install steam, login to your account and download **the Windows version** of the game, which also includes the Linux binary.
 
 ### Install using Docker
 
@@ -23,12 +28,13 @@ docker pull kugel/acweb
 ```
 
 3. install MySQL on your server or use a docker image
-4. create the database schema (db/schema.sql + all migration scripts in appropriate order)
+4. create the database schema (schema/mysql/schema.sql + all migration scripts in appropriate order)
 5. start the Docker container (adjust the parameters to your needs):
 
 ```
 # expose the same port you start the server on: -p PORT:${ACWEB_HOST}
 sudo docker run -d -p 80:8080 --name acweb \
+    -e ACWEB_DB_TYPE=mysql \
     -e ACWEB_DB_USER=root \
     -e ACWEB_DB_PASSWORD=password \
     -e ACWEB_DB_HOST="tcp(127.0.0.1:3306)" \
@@ -41,7 +47,7 @@ sudo docker run -d -p 80:8080 --name acweb \
 sudo docker ps acweb
 ```
 
-This will use a MySQL database installed on your host machine. To use a MySQL database running in a container, please rever to the official [MySQL image](https://hub.docker.com/_/mysql/). You have to use Dockers --link option to access it, if you don't expose the MySQL port.
+This will use a MySQL database installed on your host machine. To use a MySQL database running in a container, please rever to the official [MySQL image](https://hub.docker.com/_/mysql/). You have to use Dockers --link option to access it, if you don't expose the MySQL port. Alternatively you can use Postgres.
 To start the server, you can also use a [docker-compose file](https://docs.docker.com/compose/). I recommend to enable SSL using [letsencrypt](https://letsencrypt.org/) and a reverse proxy.
 To run server instances, you need to mount the Assetto Corsa installation directory (containing the binary) to /ac. In the UI set the execution path (Settings -> AC server folder) to /ac. To save the instance logs outside the Docker container, you can mount /instance_logs.
 
@@ -51,7 +57,7 @@ This instruction supposes you to use Linux. On Windows you basically need to per
 
 1. download the latest release of acweb
 2. upload it to your server and unzip it
-3. create the database schema (db/schema.sql + all migration scripts in appropriate order)
+3. create the database schema (schema/mysql/schema.sql + all migration scripts in appropriate order)
 4. set the environment variables to configure your server:
 
 ```
@@ -69,6 +75,8 @@ export ACWEB_CONFIG_DIR=
 export ACWEB_TLS_PRIVATE_KEY=
 # path to TLS cert file
 export ACWEB_TLS_CERT=
+# database type mysql or postgres, default is mysql
+export ACWEB_DB_TYPE=mysql
 # database user
 export ACWEB_DB_USER=root
 # database password
@@ -77,6 +85,12 @@ export ACWEB_DB_PASSWORD=
 export ACWEB_DB_HOST=
 # database name:
 export ACWEB_DB=acweb
+# additional variables for postgres only:
+export ACWEB_DB_PORT=5432
+export ACWEB_DB_SSLMODE=disable
+export ACWEB_DB_SSL_CERT=
+export ACWEB_DB_SSL_KEY=
+export ACWEB_DB_ROOT_CERT=
 ```
 
 5. start it ./acweb
@@ -86,7 +100,7 @@ export ACWEB_DB=acweb
 
 1. download the latest release
 2. upload it to your server and unzip it
-3. update your MySQL database (migration scripts can be found in db/mig_FROMVERSION_TOVERSION.sql)
+3. update your MySQL database (migration scripts can be found in schema/mysql mig_FROMVERSION_TOVERSION.sql)
 4. start it
 
 For Docker pull the latest release, execute the migration script(s) and start it.

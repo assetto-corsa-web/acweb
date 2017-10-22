@@ -61,6 +61,8 @@ func createDefaultUser() {
 	users, _ := model.GetAllUser()
 
 	if users == nil || len(users) == 0 {
+		log.Info("Creating default user")
+
 		user := &model.User{Login: "root",
 			Email: "root@root.com",
 			Pwd:   util.Sha256base64("root"),
