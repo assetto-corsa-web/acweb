@@ -93,7 +93,9 @@ CREATE TABLE configurations (
   udp_plugin_address character varying(100) NOT NULL,
   race_pit_window_start integer NOT NULL,
   race_pit_window_end integer NOT NULL,
-  reversed_grid_race_positions integer NOT NULL
+  reversed_grid_race_positions integer NOT NULL,
+  server_cfg_ini text NOT NULL,
+  entry_list_ini text NOT NULL
 );
 
 ALTER SEQUENCE configurations_id_seq OWNED BY configurations.id;

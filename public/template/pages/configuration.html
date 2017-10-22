@@ -540,6 +540,23 @@
 								</table>
 							</td>
 						</tr>
+						<tr>
+							<td colspan="2"><hr /></td>
+						</tr>
+						<tr>
+							<td>
+								Custom server_cfg.ini:<br />
+								(will be appended to the end of server_cfg.ini)
+							</td>
+							<td><textarea v-model="server_cfg_ini"></textarea></td>
+						</tr>
+						<tr>
+							<td>
+								Custom entry_list.ini:<br />
+								(will be appended to the end of entry_list.ini)
+							</td>
+							<td><textarea v-model="entry_list_ini"></textarea></td>
+						</tr>
 					</table>
 
 					<msg :type="\'error\'" :msg="\'The name must be set.\'" v-if="err == 1"></msg>

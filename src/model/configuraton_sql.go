@@ -65,7 +65,9 @@ const (
 		udp_plugin_address,
 		race_pit_window_start,
 		race_pit_window_end,
-		reversed_grid_race_positions
+		reversed_grid_race_positions,
+		server_cfg_ini,
+		entry_list_ini
 		) VALUES (
 		:name,
 		:pwd,
@@ -131,7 +133,9 @@ const (
 		:udp_plugin_address,
 		:race_pit_window_start,
 		:race_pit_window_end,
-		:reversed_grid_race_positions)`
+		:reversed_grid_race_positions,
+		:server_cfg_ini,
+		:entry_list_ini)`
 	mysql_configuration_update = `UPDATE configurations SET name = :name,
 		pwd = :pwd,
 		admin_pwd = :admin_pwd,
@@ -196,7 +200,9 @@ const (
 		udp_plugin_address = :udp_plugin_address,
 		race_pit_window_start = :race_pit_window_start,
 		race_pit_window_end = :race_pit_window_end,
-		reversed_grid_race_positions = :reversed_grid_race_positions
+		reversed_grid_race_positions = :reversed_grid_race_positions,
+		server_cfg_ini = :server_cfg_ini,
+		entry_list_ini = :entry_list_ini
 		WHERE id = :id`
 	mysql_weather_save = `INSERT INTO weather (configuration,
 		weather,
@@ -311,7 +317,9 @@ const (
 		udp_plugin_address,
 		race_pit_window_start,
 		race_pit_window_end,
-		reversed_grid_race_positions
+		reversed_grid_race_positions,
+		server_cfg_ini,
+		entry_list_ini
 		) VALUES (
 		:name,
 		:pwd,
@@ -377,7 +385,9 @@ const (
 		:udp_plugin_address,
 		:race_pit_window_start,
 		:race_pit_window_end,
-		:reversed_grid_race_positions) RETURNING id`
+		:reversed_grid_race_positions,
+		:server_cfg_ini,
+		:entry_list_ini) RETURNING id`
 	postgres_configuration_update = `UPDATE configurations SET name = :name,
 		pwd = :pwd,
 		admin_pwd = :admin_pwd,
@@ -442,7 +452,9 @@ const (
 		udp_plugin_address = :udp_plugin_address,
 		race_pit_window_start = :race_pit_window_start,
 		race_pit_window_end = :race_pit_window_end,
-		reversed_grid_race_positions = :reversed_grid_race_positions
+		reversed_grid_race_positions = :reversed_grid_race_positions,
+		server_cfg_ini = :server_cfg_ini,
+		entry_list_ini = :entry_list_ini
 		WHERE id = :id`
 	postgres_weather_save = `INSERT INTO "weather" (configuration,
 		weather,

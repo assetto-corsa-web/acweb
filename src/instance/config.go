@@ -176,6 +176,10 @@ func ServerConfigToIniString(config *model.Configuration) string {
 	ini += "WEBLINK=" + sep
 	ini += "WELCOME_PATH=" + sep
 
+	// add custom configuration
+	ini += sep
+	ini += config.ServerCfgIni + sep
+
 	return ini
 }
 
@@ -194,6 +198,9 @@ func EntryListToIniString(config *model.Configuration) string {
 		ini += "FIXED_SETUP=" + car.FixedSetup + sep
 		ini += sep
 	}
+
+	// add custom configuration
+	ini += config.EntryListIni + sep
 
 	return ini
 }

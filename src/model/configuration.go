@@ -72,6 +72,8 @@ type Configuration struct {
 	RacePitWindowStart    int    `db:"race_pit_window_start" json:"race_pit_window_start"`
 	RacePitWindowEnd      int    `db:"race_pit_window_end" json:"race_pit_window_end"`
 	ReversedGridRacePos   int    `db:"reversed_grid_race_positions" json:"reversed_grid_race_positions"`
+	ServerCfgIni          string `db:"server_cfg_ini" json:"server_cfg_ini"`
+	EntryListIni          string `db:"entry_list_ini" json:"entry_list_ini"`
 
 	Weather []Weather `db:"-" json:"weather"`
 	Cars    []Car     `db:"-" json:"cars"`

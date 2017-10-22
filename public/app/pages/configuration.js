@@ -84,6 +84,8 @@ Vue.component('Configuration', {
 			race_pit_window_start: 0,
 			race_pit_window_end: 0,
 			reversed_grid_race_positions: 0,
+			server_cfg_ini: '',
+			entry_list_ini: '',
 			// ---
 			err: 0,
 			addEditConfig: false,
@@ -219,6 +221,8 @@ Vue.component('Configuration', {
 			this.race_pit_window_start = 0;
 			this.race_pit_window_end = 0;
 			this.reversed_grid_race_positions = 0;
+			this.server_cfg_ini = '';
+			this.entry_list_ini = '';
 			
 			this.err = 0;
 			this.addEditConfig = false;
@@ -300,6 +304,8 @@ Vue.component('Configuration', {
 				this.race_pit_window_start = resp.data.race_pit_window_start;
 				this.race_pit_window_end = resp.data.race_pit_window_end;
 				this.reversed_grid_race_positions = resp.data.reversed_grid_race_positions;
+				this.server_cfg_ini = resp.data.server_cfg_ini;
+				this.entry_list_ini = resp.data.entry_list_ini;
 
 				if(copy){
 					this.name += ' (copy)';
@@ -648,6 +654,8 @@ Vue.component('Configuration', {
 				race_pit_window_start: parseInt(this.race_pit_window_start),
 				race_pit_window_end: parseInt(this.race_pit_window_end),
 				reversed_grid_race_positions: parseInt(this.reversed_grid_race_positions),
+				server_cfg_ini: this.server_cfg_ini,
+				entry_list_ini: this.entry_list_ini,
 				cars: this.selectedCars
 			};
 
