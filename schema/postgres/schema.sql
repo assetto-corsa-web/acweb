@@ -14,7 +14,8 @@ CREATE TABLE cars (
   driver character varying(40) NOT NULL,
   team character varying(40) NOT NULL,
   guid character varying(100) NOT NULL,
-  position integer NOT NULL
+  position integer NOT NULL,
+  fixed_setup character varying(100) NOT NULL
 );
 
 ALTER SEQUENCE cars_id_seq OWNED BY cars.id;
@@ -55,7 +56,9 @@ CREATE TABLE configurations (
   tires_wear_rate integer NOT NULL,
   allowed_tires_out integer NOT NULL,
   max_ballast integer NOT NULL,
+  start_rule integer NOT NULL,
   disable_gas_cut_penality boolean NOT NULL,
+  time_of_day_mult integer NOT NULL,
   result_screen_time integer NOT NULL,
   dynamic_track boolean NOT NULL,
   track_condition character varying(40) NOT NULL,
@@ -82,10 +85,15 @@ CREATE TABLE configurations (
   race_wait_time integer NOT NULL,
   race_extra_lap boolean NOT NULL,
   join_type character varying(40) NOT NULL,
-  time character varying(20) NOT NULL,
   sun_angle integer NOT NULL,
   track character varying(100) NOT NULL,
-  track_config character varying(100) NOT NULL
+  track_config character varying(100) NOT NULL,
+  legal_tyres character varying(100) NOT NULL,
+  udp_plugin_local_port integer NOT NULL,
+  udp_plugin_address character varying(100) NOT NULL,
+  race_pit_window_start integer NOT NULL,
+  race_pit_window_end integer NOT NULL,
+  reversed_grid_race_positions integer NOT NULL
 );
 
 ALTER SEQUENCE configurations_id_seq OWNED BY configurations.id;
@@ -136,10 +144,13 @@ CREATE TABLE weather (
   configuration integer NOT NULL,
   weather character varying(40) NOT NULL,
   base_ambient_temp integer NOT NULL,
-  realistic_road_temp integer NOT NULL,
   base_road_temp integer NOT NULL,
   ambient_variation integer NOT NULL,
-  road_variation integer NOT NULL
+  road_variation integer NOT NULL,
+  wind_base_speed_min integer NOT NULL,
+  wind_base_speed_max integer NOT NULL,
+  wind_base_direction integer NOT NULL,
+  wind_variation_direction integer NOT NULL
 );
 
 ALTER SEQUENCE weather_id_seq OWNED BY weather.id;
