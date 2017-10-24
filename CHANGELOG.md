@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.3.0
+
+* added: Postgres support
+* added: textfields for custom server_cfg/entry_list ini
+
 ## 1.2.1
 
 * fixed: -1 value for tires out
