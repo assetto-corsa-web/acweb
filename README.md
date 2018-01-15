@@ -33,7 +33,8 @@ docker pull kugel/acweb
 
 ```
 # expose the same port you start the server on: -p PORT:${ACWEB_HOST}
-sudo docker run -d -p 80:8080 --name acweb \
+# and the ports used by Assetto Corsa (9600 TCP/UPD and 8081 for example)
+sudo docker run -d -p 80:8080 -p 9600:9600/tcp -p 9600:9600/udp -p 8081:8081 --name acweb \
     -e ACWEB_DB_TYPE=mysql \
     -e ACWEB_DB_USER=root \
     -e ACWEB_DB_PASSWORD=password \
