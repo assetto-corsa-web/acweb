@@ -517,6 +517,26 @@
         ]
     },
     {
+        "name": "ks_alfa_33_stradale",
+        "description": "Alfa Romeo 33 Stradale",
+        "paintings": [
+            "00_rosso"
+        ]
+    },
+    {
+        "name": "ks_alfa_giulia_qv",
+        "description": "Alfa Romeo Giulia Quadrifoglio",
+        "paintings": [
+            "00_Rosso_Competizione",
+            "01_Bianco_Trofeo",
+            "02_Blu_Montecarlo",
+            "03_Grigio_Silverstone",
+            "04_Grigio_Vesuvio",
+            "05_Nero_Vulcano",
+            "06_Rosso_Alfa"
+        ]
+    },
+    {
         "name": "ks_alfa_mito_qv",
         "description": "Alfa Romeo Mito QV",
         "paintings": [
@@ -637,6 +657,15 @@
         ]
     },
     {
+        "name": "ks_audi_r18_etron_quattro",
+        "description": "Audi R18 e-tron quattro 2014",
+        "paintings": [
+            "00_lm1",
+            "01_lm2",
+            "02_lm3"
+        ]
+    },
+    {
         "name": "ks_audi_r8_lms",
         "description": "Audi R8 LMS Ultra",
         "paintings": [
@@ -652,6 +681,36 @@
             "factory_grey",
             "factory_matte",
             "factory_white"
+        ]
+    },
+    {
+        "name": "ks_audi_r8_lms_2016",
+        "description": "Audi R8 LMS 2016",
+        "paintings": [
+            "00_racing_06",
+            "01_2016",
+            "02_racing_01",
+            "03_racing_04",
+            "04_racing_28",
+            "05_racing_29",
+            "06_racing_01",
+            "07_racing_32",
+            "08_racing_33",
+            "09_racing_34",
+            "10_racing_35",
+            "11_racing_36",
+            "12_racing_37",
+            "13_racing_10",
+            "14_racing_11",
+            "15_racing_12",
+            "16_racing_13",
+            "17_racing_118",
+            "18_racing_119",
+            "19_racing_220",
+            "20_racing_221",
+            "21_racing_222",
+            "22_racing_223",
+            "23_racing_224"
         ]
     },
     {
@@ -723,6 +782,62 @@
             "06_alpine_white_rings",
             "07_copenhagen_blue",
             "08_malachite_green_rings"
+        ]
+    },
+    {
+        "name": "ks_audi_tt_cup",
+        "description": "Audi TT Cup",
+        "paintings": [
+            "00_racing_02",
+            "01_racing_03",
+            "02_racing_04",
+            "03_racing_05",
+            "04_racing_06",
+            "05_racing_07",
+            "06_racing_11",
+            "07_racing_12",
+            "08_racing_14",
+            "09_racing_23",
+            "10_racing_27",
+            "11_racing_31",
+            "12_racing_33",
+            "13_racing_42",
+            "14_racing_76",
+            "15_racing_91",
+            "16_racing_96",
+            "17_racing_97",
+            "18_racing_98",
+            "19_racing_99"
+        ]
+    },
+    {
+        "name": "ks_audi_tt_vln",
+        "description": "Audi TT RS (VLN)",
+        "paintings": [
+            "00_racing_125",
+            "01_racing_126",
+            "02_racing_256",
+            "04_racing_14",
+            "05_racing_15",
+            "06_racing_16",
+            "07_racing_17",
+            "08_racing_18",
+            "09_racing_19",
+            "10_racing_20",
+            "11_racing_43",
+            "12_racing_44",
+            "13_racing_45",
+            "14_racing_46",
+            "15_racing_47",
+            "16_racing_48",
+            "17_racing_50",
+            "18_racing_52",
+            "19_racing_53",
+            "20_racing_54",
+            "21_racing_55",
+            "22_racing_56",
+            "23_racing_57",
+            "24_racing_58"
         ]
     },
     {
@@ -842,6 +957,95 @@
         ]
     },
     {
+        "name": "ks_ferrari_250_gto",
+        "description": "Ferrari 250 GTO",
+        "paintings": [
+            "00_rosso",
+            "01_racing_19",
+            "02_racing_24",
+            "03_racing_25",
+            "04_racing_32",
+            "05_racing_112",
+            "06_racing_20",
+            "07_racing_172",
+            "08_racing_17",
+            "09_racing_10",
+            "10_racing_22",
+            "11_racing_11",
+            "12_racing_20b",
+            "13_racing_11b",
+            "14_racing_24b",
+            "15_racing_08",
+            "16_racing_86",
+            "17_racing_15",
+            "18_racing_23",
+            "20_rosso_stripe",
+            "21_blu_stripe",
+            "25_blu",
+            "26_grigio",
+            "27_nero"
+        ]
+    },
+    {
+        "name": "ks_ferrari_288_gto",
+        "description": "Ferrari GTO",
+        "paintings": [
+            "00_rosso",
+            "01_giallo"
+        ]
+    },
+    {
+        "name": "ks_ferrari_312_67",
+        "description": "Ferrari 312/67",
+        "paintings": [
+            "00_racing_20",
+            "racing_1",
+            "racing_10",
+            "racing_12",
+            "racing_18",
+            "racing_19",
+            "racing_2",
+            "racing_20b",
+            "racing_21",
+            "racing_22",
+            "racing_23",
+            "racing_24",
+            "racing_26",
+            "racing_2b",
+            "racing_3",
+            "racing_5",
+            "racing_6",
+            "racing_7",
+            "racing_8",
+            "racing_8b",
+            "racing_8c",
+            "racing_9",
+            "racing_9b",
+            "racing_9c"
+        ]
+    },
+    {
+        "name": "ks_ferrari_330_p4",
+        "description": "Ferrari 330 P4",
+        "paintings": [
+            "00_rosso",
+            "racing_19",
+            "racing_20",
+            "racing_21",
+            "racing_22",
+            "racing_224",
+            "racing_23",
+            "racing_24",
+            "racing_24d",
+            "racing_3",
+            "racing_4",
+            "racing_6",
+            "racing_7",
+            "racing_8",
+            "racing_9"
+        ]
+    },
+    {
         "name": "ks_ferrari_488_gt3",
         "description": "Ferrari 488 GT3",
         "paintings": [
@@ -855,6 +1059,7 @@
             "07_racing_501",
             "08_racing_490",
             "09_racing_491",
+            "0_kaspersky_55",
             "10_racing_492",
             "11_racing_493",
             "12_racing_494",
@@ -892,12 +1097,51 @@
         ]
     },
     {
+        "name": "ks_ferrari_812_superfast",
+        "description": "Ferrari 812 Superfast",
+        "paintings": [
+            "00_rosso_scuderia",
+            "01_rosso_corsa",
+            "02_rosso_mugello",
+            "03_giallo_modena",
+            "04_avorio",
+            "05_bianco_avus",
+            "06_blu_abu_dhabi",
+            "07_grigio_ferro",
+            "08_rosso_dino",
+            "09_rosso_fiorano",
+            "10_grigio_ingrid",
+            "11_grigio_alloy",
+            "12_argento_nurburgring",
+            "13_grigio_titano_metallizzato",
+            "14_grigio_silverstone",
+            "16_nero_daytona",
+            "17_grigio_scuro",
+            "18_verde_british",
+            "19_nero_ds_1250",
+            "20_blu_pozzi",
+            "21_blu_scozia",
+            "22_blu_mirabeu",
+            "23_azzurro_california",
+            "24_blu_tour_de_france"
+        ]
+    },
+    {
         "name": "ks_ferrari_f138",
         "description": "Ferrari F138",
         "paintings": [
             "00_official",
             "01_ferrari_3",
             "02_ferrari_4"
+        ]
+    },
+    {
+        "name": "ks_ferrari_f2004",
+        "description": "Ferrari F2004",
+        "paintings": [
+            "00_official",
+            "01_ferrari_1",
+            "02_ferrari_2"
         ]
     },
     {
@@ -917,6 +1161,15 @@
     {
         "name": "ks_ferrari_sf15t",
         "description": "Ferrari SF15-T",
+        "paintings": [
+            "00_default",
+            "01_ferrari_5",
+            "02_ferrari_7"
+        ]
+    },
+    {
+        "name": "ks_ferrari_sf70h",
+        "description": "Ferrari SF70H",
         "paintings": [
             "00_default",
             "01_ferrari_5",
@@ -1070,7 +1323,7 @@
         "name": "ks_lamborghini_countach_s1",
         "description": "Lamborghini Countach S1",
         "paintings": [
-            "0_oro_sahara_metal",
+            "0_rosso_siviglia_gold",
             "WalterWolf_black",
             "WalterWolf_blue",
             "WalterWolf_green",
@@ -1082,8 +1335,8 @@
             "canna_fucile_metal",
             "nero_tenebre",
             "nero_tenebre_gold",
-            "rosso_siviglia",
-            "rosso_siviglia_gold"
+            "oro_sahara_metal",
+            "rosso_siviglia"
         ]
     },
     {
@@ -1148,6 +1401,37 @@
         ]
     },
     {
+        "name": "ks_lamborghini_huracan_performante",
+        "description": "Lamborghini Huracan Performante",
+        "paintings": [
+            "00_arancio_anthaeus",
+            "01_verde_scandal",
+            "arancio_borealis",
+            "bianco_canopus",
+            "bianco_icarus",
+            "bianco_monocerus",
+            "blu_cepheus",
+            "blu_nethuns",
+            "giallo_horus",
+            "giallo_inti",
+            "grigio_lynx",
+            "grigio_nimbus",
+            "grigio_thalasso",
+            "grigio_titans",
+            "nero_helene",
+            "nero_nemesis",
+            "nero_noctis",
+            "oro_elios",
+            "rosso_efesto",
+            "rosso_mars",
+            "verde_arthemis",
+            "verde_hydra",
+            "verde_mantis",
+            "viola_ophelia",
+            "viola_se_30th"
+        ]
+    },
+    {
         "name": "ks_lamborghini_huracan_st",
         "description": "Lamborghini Huracan ST",
         "paintings": [
@@ -1201,6 +1485,13 @@
         ]
     },
     {
+        "name": "ks_lamborghini_sesto_elemento",
+        "description": "Lamborghini Sesto Elemento",
+        "paintings": [
+            "00_carbono"
+        ]
+    },
+    {
         "name": "ks_lotus_25",
         "description": "Lotus Type 25",
         "paintings": [
@@ -1225,6 +1516,25 @@
             "racing_19",
             "racing_20",
             "racing_21"
+        ]
+    },
+    {
+        "name": "ks_lotus_3_eleven",
+        "description": "Lotus 3-Eleven",
+        "paintings": [
+            "00_green_yellow",
+            "01_metallic_orange",
+            "02_solid_yellow",
+            "03_metallic_black",
+            "04_metallic_grey",
+            "05_metallic_green",
+            "06_metallic_blue",
+            "07_metallic_silver",
+            "08_metallic_white",
+            "09_red_gold",
+            "10_black_gold",
+            "11_solid_red",
+            "12_matte_black"
         ]
     },
     {
@@ -1292,6 +1602,13 @@
         ]
     },
     {
+        "name": "ks_maserati_alfieri",
+        "description": "Maserati Alfieri",
+        "paintings": [
+            "01_grigio"
+        ]
+    },
+    {
         "name": "ks_maserati_gt_mc_gt4",
         "description": "Maserati GranTurismo MC GT4",
         "paintings": [
@@ -1330,6 +1647,34 @@
             "10_bianco_alpi",
             "11_nero",
             "12_verde_ossido"
+        ]
+    },
+    {
+        "name": "ks_maserati_mc12_gt1",
+        "description": "Maserati MC12 GT1",
+        "paintings": [
+            "00_racing_00",
+            "01_racing_09",
+            "02_racing_10",
+            "03_racing_35",
+            "04_racing_36"
+        ]
+    },
+    {
+        "name": "ks_maserati_quattroporte",
+        "description": "Maserati Quattroporte GTS",
+        "paintings": [
+            "00_champagne",
+            "01_nero_ribelle",
+            "02_bronzo_siena",
+            "03_grigio",
+            "04_rosso_folgore",
+            "05_grigio_metallo",
+            "06_nero",
+            "07_grigio_maratea",
+            "08_blu_passione",
+            "09_bianco",
+            "10_bianco_alpi"
         ]
     },
     {
@@ -1448,6 +1793,31 @@
         ]
     },
     {
+        "name": "ks_mclaren_570s",
+        "description": "McLaren 570S",
+        "paintings": [
+            "00_mclaren_orange",
+            "01_blade_silver",
+            "02_blue",
+            "03_vermillion_red",
+            "04_fire_black",
+            "05_ice_silver",
+            "06_mantis_green",
+            "07_onyx_black",
+            "08_pearl_white",
+            "09_volcano_yellow",
+            "10_silver",
+            "11_storm_grey",
+            "12_ventura_orange",
+            "13_bourbon",
+            "14_volcano_orange",
+            "15_silica_white",
+            "16_white",
+            "17_cobalt_violet",
+            "18_pacific"
+        ]
+    },
+    {
         "name": "ks_mclaren_650_gt3",
         "description": "McLaren 650S GT3",
         "paintings": [
@@ -1482,7 +1852,7 @@
     },
     {
         "name": "ks_mclaren_p1",
-        "description": "McLaren P1",
+        "description": "McLaren P1â¢",
         "paintings": [
             "0_mclaren_orange",
             "azure_blue",
@@ -1494,6 +1864,14 @@
             "volcano_red",
             "volcano_yellow",
             "yellow"
+        ]
+    },
+    {
+        "name": "ks_mclaren_p1_gtr",
+        "description": "McLaren P1â¢ GTR",
+        "paintings": [
+            "00_livery_01",
+            "01_livery_02"
         ]
     },
     {
@@ -1604,6 +1982,30 @@
             "07_midnight_purple_ii",
             "08_millennium_jade",
             "09_silica_breath"
+        ]
+    },
+    {
+        "name": "ks_pagani_huayra_bc",
+        "description": "Pagani Huayra BC",
+        "paintings": [
+            "00_silver_carbon_white_a",
+            "blue_carbon_orange",
+            "blue_carbon_silver",
+            "blue_carbon_white",
+            "bordeaux_carbon",
+            "carbon_blue_special",
+            "carbon_carbon_blue",
+            "carbon_carbon_red",
+            "carbon_carbon_yellow",
+            "carbon_gold_red",
+            "carbon_italy",
+            "purple_special",
+            "red_carbon_red",
+            "red_carbon_silver",
+            "silver_carbon_white_3",
+            "silver_carbon_white_b",
+            "white_carbon_blue",
+            "white_carbon_red"
         ]
     },
     {
@@ -1747,6 +2149,7 @@
             "07_racing_914",
             "08_racing_920",
             "09_racing_921",
+            "0_cup_b",
             "10_racing_918",
             "11_racing_923",
             "12_racing_924",
@@ -1767,7 +2170,8 @@
             "00_gt3",
             "01_racing_912",
             "02_racing_911",
-            "03_racing_910"
+            "03_racing_910",
+            "0_racing_911b"
         ]
     },
     {
@@ -1798,7 +2202,9 @@
         "paintings": [
             "00_rsr",
             "01_racing_911",
-            "02_racing_912"
+            "02_racing_912",
+            "03_racing_91",
+            "04_racing_92"
         ]
     },
     {
@@ -2167,6 +2573,17 @@
         ]
     },
     {
+        "name": "ks_toyota_celica_st185",
+        "description": "Toyota Celica ST185 4WD Turbo",
+        "paintings": [
+            "00_racing_3",
+            "01_racing_6",
+            "02_racing_2",
+            "03_racing_4",
+            "04_racing_5"
+        ]
+    },
+    {
         "name": "ks_toyota_gt86",
         "description": "Toyota GT86",
         "paintings": [
@@ -2228,6 +2645,14 @@
             "11_black_stripe",
             "12_blue_stripe",
             "13_white_stripe"
+        ]
+    },
+    {
+        "name": "ks_toyota_ts040",
+        "description": "Toyota TS040 Hybrid 2014",
+        "paintings": [
+            "00_lm_7",
+            "01_lm_8"
         ]
     },
     {

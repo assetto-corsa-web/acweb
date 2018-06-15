@@ -108,6 +108,12 @@
         "max_slots": 24
     },
     {
+        "name": "ks_laguna_seca",
+        "config": "",
+        "description": "Ks_laguna_seca",
+        "max_slots": 24
+    },
+    {
         "name": "ks_monza66",
         "config": "full",
         "description": "Ks_monza66 - Full",
