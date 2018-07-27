@@ -1,7 +1,7 @@
 FROM golang
 
 ADD . /app
-COPY config /config
+COPY configs /config
 WORKDIR /app
 
 # install sass

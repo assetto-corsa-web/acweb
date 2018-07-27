@@ -141,7 +141,7 @@ To add tracks and cars, from a mod for instance, you must add them to the cars.j
     // ...
 ```
 
-The files can be found within the config directory. To modify them using Docker, mount a volume to /config and copy the original files into it, then modify them.
+The files can be found within the configs directory. To modify them using Docker, mount a volume to /config and copy the original files into it, then modify them.
 
 ## Contribute
 
