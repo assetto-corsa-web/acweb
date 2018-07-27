@@ -64,28 +64,40 @@ This instruction supposes you to use Linux. On Windows you basically need to per
 ```
 # acweb host, to make it accessible from the outside use 0.0.0.0:PORT
 export ACWEB_HOST=localhost:8080
+
 # optional log file location (will be created if it doesn't exist)
 export ACWEB_LOGDIR=
+
 # optional log level (debug, info or empty for warnings and higher)
 export ACWEB_LOGLEVEL=info
+
 # log directory for server instances, must be set
 export ACWEB_INSTANCE_LOGDIR=instance_logs
-# config file directory for tracks.json and cars.json
-export ACWEB_CONFIG_DIR=
+
+# config file directory for tracks.json and cars.json, default is configs (config for Docker)
+export ACWEB_CONFIG_DIR=configs
+
 # path to TLS private key file
 export ACWEB_TLS_PRIVATE_KEY=
+
 # path to TLS cert file
 export ACWEB_TLS_CERT=
+
 # database type mysql or postgres, default is mysql
 export ACWEB_DB_TYPE=mysql
+
 # database user
 export ACWEB_DB_USER=root
+
 # database password
 export ACWEB_DB_PASSWORD=
+
 # database host (most likely tcp(localhost:3306))
 export ACWEB_DB_HOST=
+
 # database name:
 export ACWEB_DB=acweb
+
 # additional variables for postgres only:
 export ACWEB_DB_PORT=5432
 export ACWEB_DB_SSLMODE=disable
