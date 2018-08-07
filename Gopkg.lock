@@ -2,6 +2,12 @@
 
 
 [[projects]]
+  branch = "v1.4"
+  name = "github.com/Kugelschieber/acweb"
+  packages = ["api","config","instance","model","resp","session","settings","user","util"]
+  revision = "efe00cad5f7d920dd28150066f59237438289c0f"
+
+[[projects]]
   name = "github.com/go-sql-driver/mysql"
   packages = ["."]
   revision = "d523deb1b23d913de5bdada721a6071e71283618"
@@ -10,19 +16,13 @@
 [[projects]]
   branch = "master"
   name = "github.com/jmoiron/sqlx"
-  packages = [
-    ".",
-    "reflectx"
-  ]
+  packages = [".","reflectx"]
   revision = "0dae4fefe7c0e190f7b5a78dac28a1c82cc8d849"
 
 [[projects]]
   branch = "master"
   name = "github.com/lib/pq"
-  packages = [
-    ".",
-    "oid"
-  ]
+  packages = [".","oid"]
   revision = "90697d60dd844d5ef6ff15135d0203f65d2f53b8"
 
 [[projects]]
@@ -40,10 +40,7 @@
 [[projects]]
   branch = "master"
   name = "golang.org/x/sys"
-  packages = [
-    "unix",
-    "windows"
-  ]
+  packages = ["unix","windows"]
   revision = "e072cadbbdc8dd3d3ffa82b8b4b9304c261d9311"
 
 [[projects]]
@@ -55,6 +52,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "f890b1c78e105e064c0b99d0a83e53bff8e174af439efb5a54e923cbfd788986"
+  inputs-digest = "e8c248acd47afddcd10e5d4dbea55c6e14fb2da570863ac908e3c4fa72dd5fae"
   solver-name = "gps-cdcl"
   solver-version = 1
