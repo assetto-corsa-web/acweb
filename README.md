@@ -1,5 +1,8 @@
 ![AC](aclogo.png)
 
+[![CircleCI](https://circleci.com/gh/assetto-corsa-web/acweb.svg?style=svg)](https://circleci.com/gh/assetto-corsa-web/acweb)
+[![Go Report Card](https://goreportcard.com/badge/github.com/assetto-corsa-web/acweb)](https://goreportcard.com/report/github.com/assetto-corsa-web/acweb)
+
 # Assetto Corsa server web interface
 
 This tool provides monitoring and management for your Assetto Corsa server instances. You can create multiple configuration profiles, start/stop server instances and watch the status of them.
