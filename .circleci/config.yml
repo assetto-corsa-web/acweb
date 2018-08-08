@@ -10,7 +10,7 @@ jobs:
       - run: go build .
   frontend:
     docker:
-      - image: node
+      - image: circleci/node
     working_directory: /go/src/github.com/assetto-corsa-web/acweb/public
     steps:
       - checkout
