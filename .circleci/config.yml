@@ -14,8 +14,8 @@ jobs:
     working_directory: /go/src/github.com/assetto-corsa-web/acweb/public
     steps:
       - checkout
-      - run: cd /go/src/github.com/assetto-corsa-web/acweb/public && npm i
-      - run: cd /go/src/github.com/assetto-corsa-web/acweb/public && npm run build
+      - run: npm i
+      - run: npm run build
 workflows:
   version: 2
   build_and_test:
