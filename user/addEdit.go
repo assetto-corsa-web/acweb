@@ -3,8 +3,8 @@ package user
 import (
 	log "github.com/sirupsen/logrus"
 
-	"github.com/Kugelschieber/acweb/model"
-	"github.com/Kugelschieber/acweb/util"
+	"github.com/assetto-corsa-web/acweb/model"
+	"github.com/assetto-corsa-web/acweb/util"
 )
 
 func AddEditUser(id int64, login, email, pwd1, pwd2 string, admin, moderator bool) error {

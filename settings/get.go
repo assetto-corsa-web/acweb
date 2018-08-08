@@ -3,7 +3,7 @@ package settings
 import (
 	log "github.com/sirupsen/logrus"
 
-	"github.com/Kugelschieber/acweb/model"
+	"github.com/assetto-corsa-web/acweb/model"
 )
 
 func GetSettings() *model.Settings {

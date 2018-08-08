@@ -6,9 +6,9 @@ import (
 
 	log "github.com/sirupsen/logrus"
 
-	"github.com/Kugelschieber/acweb/resp"
-	"github.com/Kugelschieber/acweb/session"
-	"github.com/Kugelschieber/acweb/util"
+	"github.com/assetto-corsa-web/acweb/resp"
+	"github.com/assetto-corsa-web/acweb/session"
+	"github.com/assetto-corsa-web/acweb/util"
 )
 
 func decode(w http.ResponseWriter, r *http.Request, req interface{}) bool {

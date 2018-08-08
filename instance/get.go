@@ -7,7 +7,7 @@ import (
 
 	log "github.com/sirupsen/logrus"
 
-	"github.com/Kugelschieber/acweb/util"
+	"github.com/assetto-corsa-web/acweb/util"
 )
 
 func GetAllInstanceLogs() ([]Log, error) {

@@ -8,8 +8,8 @@ import (
 
 	logger "github.com/sirupsen/logrus"
 
-	"github.com/Kugelschieber/acweb/model"
-	"github.com/Kugelschieber/acweb/util"
+	"github.com/assetto-corsa-web/acweb/model"
+	"github.com/assetto-corsa-web/acweb/util"
 )
 
 func addDataToZip(zw *zip.Writer, filename string, dat []byte) bool {

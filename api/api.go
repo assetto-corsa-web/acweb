@@ -7,13 +7,13 @@ import (
 
 	log "github.com/sirupsen/logrus"
 
-	"github.com/Kugelschieber/acweb/config"
-	"github.com/Kugelschieber/acweb/instance"
-	"github.com/Kugelschieber/acweb/model"
-	"github.com/Kugelschieber/acweb/resp"
-	"github.com/Kugelschieber/acweb/session"
-	"github.com/Kugelschieber/acweb/settings"
-	"github.com/Kugelschieber/acweb/user"
+	"github.com/assetto-corsa-web/acweb/config"
+	"github.com/assetto-corsa-web/acweb/instance"
+	"github.com/assetto-corsa-web/acweb/model"
+	"github.com/assetto-corsa-web/acweb/resp"
+	"github.com/assetto-corsa-web/acweb/session"
+	"github.com/assetto-corsa-web/acweb/settings"
+	"github.com/assetto-corsa-web/acweb/user"
 )
 
 func UserHandler(w http.ResponseWriter, r *http.Request) {
