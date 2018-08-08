@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build:
+  backend:
     docker:
       - image: golang
     working_directory: /go/src/github.com/assetto-corsa-web/acweb
@@ -8,3 +8,11 @@ jobs:
       - checkout
       - run: go test .
       - run: go build .
+  frontend:
+    docker:
+      - image: node
+    working_directory: /go/src/github.com/assetto-corsa-web/acweb/public
+    steps:
+      - checkout
+      - run: npm i
+      - run: npm run build

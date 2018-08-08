@@ -8,6 +8,8 @@ import * as pages from "./pages";
 
 Vue.use(VueRouter);
 Vue.use(Vuex);
+Vue.config.productionTip = false;
+Vue.config.devtools = false;
 
 // token interceptor for every request
 axios.interceptors.request.use((config) => {
