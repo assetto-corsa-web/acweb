@@ -1,25 +1,34 @@
 <template>
 	<div class="menu">
-		<router-link to="/">Home</router-link>
-		<router-link to="/notfound">404</router-link>
+		<div class="wrapper">
+			<div class="logo"></div>
+			<router-link to="/instance">Instances</router-link>
+			<router-link to="/configuration">Configurations</router-link>
+			<router-link to="/settings">Settings</router-link>
+			<router-link to="/user">User</router-link>
+			<router-link to="/about">About</router-link>
+
+			<a href="#" class="right" v-on:click="performLogout()"><i class="fa fa-sign-out" aria-hidden="true" title="Logout"></i></a>
+		</div>
 	</div>
 </template>
 
 <script>
+import * as global from "../global.js";
+
 export default {
-	
-}
+	data: function(){
+		return {
+			version: global.VERSION
+		}
+	},
+	methods: {
+		performLogout: function(){
+			SessionService.logout(this.$router);
+		}
+	}
+};
 </script>
 
 <style lang="scss">
-.menu{
-	padding: 10px;
-	background: #000;
-	margin: 0 0 20px 0;
-
-	a{
-		color: #fff;
-		margin: 0 10px 0 0;
-	}
-}
 </style>
