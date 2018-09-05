@@ -9,9 +9,8 @@
 				<div class="wrapper">
 					Assetto Corsa Server Web Interface<br />
 					Version {{version}}<br />
-					&copy; 2017 Marvin Blum<br />
-					<br />
-					<a href="https://github.com/DeKugelschieber/acweb" target="_blank">View on GitHub</a>
+					<span v-html="copyright"></span><br />
+					View on <span v-html="github"></span>
 				</div>
 			</div>
 
@@ -47,6 +46,7 @@
 </template>
 
 <script>
+import {VERSION, COPYRIGHT, GITHUB_LINK} from "../global.js";
 import {hmenu} from "../components";
 
 export default {
@@ -55,7 +55,9 @@ export default {
 	},
 	data: function(){
 		return {
-			version: VERSION
+			version: VERSION,
+			copyright: COPYRIGHT,
+			github: GITHUB_LINK
 		}
 	}
 }

@@ -50,6 +50,7 @@
 </template>
 
 <script>
+import axios from "axios";
 import {hmenu} from "../components";
 
 export default {
@@ -70,7 +71,7 @@ export default {
 	},
 	methods: {
 		_load: function(){
-			this.$http.get('/api/settings')
+			axios.get('/api/settings')
 			.then(function(resp){
 				if(resp.data.code){
 					console.log(resp.data.code+': '+resp.data.msg);
@@ -85,7 +86,7 @@ export default {
 		performSave: function(){
 			this.saved = false;
 
-			this.$http.post('/api/settings', {folder: this.folder,
+			axios.post('/api/settings', {folder: this.folder,
 				executable: this.executable,
 				args: this.args})
 			.then(function(resp){

@@ -646,6 +646,7 @@
 </template>
 
 <script>
+import axios from "axios";
 import {hmenu} from "../components";
 
 export default {
@@ -763,7 +764,7 @@ export default {
 	},
 	methods: {
 		_load: function(){
-			this.$http.get('/api/configuration')
+			axios.get('/api/configuration')
 			.then(function(resp){
 				if(resp.data.code){
 					console.log(resp.data.code+': '+resp.data.msg);
@@ -773,7 +774,7 @@ export default {
 				this.configs = resp.data;
 			});
 
-			this.$http.get('/api/tracks')
+			axios.get('/api/tracks')
 			.then(function(resp){
 				if(resp.data.code){
 					console.log(resp.data.code+': '+resp.data.msg);
@@ -783,7 +784,7 @@ export default {
 				this.tracks = resp.data;
 			});
 
-			this.$http.get('/api/cars')
+			axios.get('/api/cars')
 			.then(function(resp){
 				if(resp.data.code){
 					console.log(resp.data.code+': '+resp.data.msg);
@@ -884,7 +885,7 @@ export default {
 			this.removed = false;
 		},
 		_openConfig: function(id, copy){
-			this.$http.get('/api/configuration', {params: {id: id}})
+			axios.get('/api/configuration', {params: {id: id}})
 			.then(function(resp){
 				if(resp.data.code){
 					console.log(resp.data.code+': '+resp.data.msg);
@@ -1311,7 +1312,7 @@ export default {
 				cars: this.selectedCars
 			};
 
-			this.$http.post('/api/configuration', data)
+			axios.post('/api/configuration', data)
 			.then(function(resp){
 				if(resp.data.code){
 					console.log(resp.data.code+': '+resp.data.msg);
@@ -1325,7 +1326,7 @@ export default {
 			});
 		},
 		performRemoveConfig: function(){
-			this.$http.delete('/api/configuration', {params: {id: this._id}})
+			axios.delete('/api/configuration', {params: {id: this._id}})
 			.then(function(resp){
 				if(resp.data.code){
 					console.log(resp.data.code+': '+resp.data.msg);

@@ -114,6 +114,7 @@
 </template>
 
 <script>
+import axios from "axios";
 import {hmenu} from "../components";
 
 export default {
@@ -142,7 +143,7 @@ export default {
 	},
 	methods: {
 		_load: function(){
-			this.$http.get('/api/user')
+			axios.get('/api/user')
 			.then(function(resp){
 				if(resp.data.code){
 					console.log(resp.data.code+': '+resp.data.msg);
@@ -172,7 +173,7 @@ export default {
 			if(id){
 				this._id = id;
 
-				this.$http.get('/api/user', {params: {id: id}})
+				axios.get('/api/user', {params: {id: id}})
 				.then(function(resp){
 					if(resp.data.code){
 						console.log(resp.data.code+': '+resp.data.msg);
@@ -201,7 +202,7 @@ export default {
 			this.removeUser = true;
 		},
 		performAddEditUser: function(){
-			this.$http.post('/api/user', {id: this._id,
+			axios.post('/api/user', {id: this._id,
 				login: this.login,
 				email: this.email,
 				pwd1: this.pwd1,
@@ -221,7 +222,7 @@ export default {
 			});
 		},
 		performRemoveUser: function(){
-			this.$http.delete('/api/user', {params: {id: this._id}})
+			axios.delete('/api/user', {params: {id: this._id}})
 			.then(function(resp){
 				if(resp.data.code){
 					console.log(resp.data.code+': '+resp.data.msg);

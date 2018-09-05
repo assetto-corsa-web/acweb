@@ -1,8 +1,6 @@
-@import "roboto.scss";
-@import "fa/font-awesome.scss";
 @import "shadow.scss";
 
-$font_family: "Roboto";
+$font_family: "Roboto", sans-serif;
 $font_size_large: 20px;
 $font_size: 16px;
 $font_size_small: 12px;
@@ -49,8 +47,8 @@ html, body{
 // messages
 
 .msg{
-	padding: 20px;
-	margin: 20px 0 20px 0;
+	padding: 10px;
+	margin: 10px 0 10px 0;
 	background: #fff;
 	border-style: solid;
 	border-width: 1px 1px 1px 5px;

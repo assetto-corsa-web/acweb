@@ -4,6 +4,7 @@ import Vuex from "vuex";
 import axios from "axios";
 
 import "../static/main.scss";
+import "./global.js";
 import * as pages from "./pages";
 
 Vue.use(VueRouter);
@@ -11,53 +12,23 @@ Vue.use(Vuex);
 Vue.config.productionTip = false;
 Vue.config.devtools = false;
 
-// token interceptor for every request
-axios.interceptors.request.use((config) => {
-	const token = window.localStorage.getItem("token");
-
-	if(token){
-		config.headers.Authorization = `Bearer ${token}`;
-	}
-
-	return config;
-}, (err) => {
-	return Promise.reject(err);
-});
-
-// storage
-// ...
-
 // router
 const routes = [
-	{path: '/', component: Vue.component('Login')},
-	{path: '/instance', component: Vue.component('Instance')},
-	{path: '/configuration', component: Vue.component('Configuration')},
-	{path: '/settings', component: Vue.component('Settings')},
-	{path: '/user', component: Vue.component('User')},
-	{path: '/about', component: Vue.component('About')},
-	{path: '*', component: Vue.component('Dashboard')}
+	{path: '/', component: pages.Login},
+	{path: '/instance', component: pages.Instance},
+	{path: '/configuration', component: pages.Configuration},
+	{path: '/settings', component: pages.Settings},
+	{path: '/user', component: pages.User},
+	{path: '/about', component: pages.About},
+	{path: '*', component: pages.Instance}
 ];
 
 let router = new VueRouter({routes, mode: "history"});
 
-// router interceptor to check token for protected pages
-/*router.beforeEach((to, from, next) => {
-	if(to.meta.protected){
-		axios.get("http://localhost/auth/token") // TODO
-		.then((r) => {
-			next();
-		})
-		.catch((e) => {
-			next("/");
-		});
-	}
-	else{
-		next();
-	}
-});
+// router interceptor to check session for protected pages
 router.beforeEach(function(to, from, next){
-	Vue.http.get('/api/session')
-	.then(function(resp){
+	axios.get('/api/session')
+	.then(resp => {
 		// if not logged in and not on login page, redirect to login
 		if(resp.data.code && to.path != '/'){
 			next('/');
@@ -70,10 +41,10 @@ router.beforeEach(function(to, from, next){
 			return;
 		}
 
-		SessionService.init(resp.data.data);
+		//SessionService.init(resp.data.data);
 		next();
 	});
-});*/
+});
 
 // main component
 new Vue({

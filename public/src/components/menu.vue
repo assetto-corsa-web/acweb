@@ -24,7 +24,8 @@ export default {
 	},
 	methods: {
 		performLogout: function(){
-			SessionService.logout(this.$router);
+			// TODO
+			//SessionService.logout(this.$router);
 		}
 	}
 };

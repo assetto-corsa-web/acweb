@@ -1,4 +1,4 @@
-export default {
+export var SessionService = {
 	data: {
 		userId: 0
 	},

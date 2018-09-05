@@ -1,13 +1,12 @@
 <template>
 	<div class="login">
 		<div class="center">
-			<img src="img/aclogo.png" alt="" />
+			<img src="static/aclogo.png" alt="" />
 		</div>
 
 		<div class="box">
 			<div class="wrapper">
 				<h1>Login</h1>
-
 				<msg :type="'error'" :msg="'The login and/or password was wrong.'" v-if="err != 0"></msg>
 
 				<form v-on:submit.prevent="performLogin()">
@@ -31,17 +30,26 @@
 
 		<div class="version">
 			<div class="wrapper">
-				Version {{version}} | &copy; 2017 Marvin Blum | <a href="https://github.com/DeKugelschieber/acweb" target="_blank">GitHub</a>
+				Version {{version}} | <span v-html="copyright"></span> | <span v-html="github"></span>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script>
+import axios from "axios";
+import {VERSION, COPYRIGHT, GITHUB_LINK} from "../global.js";
+import {msg} from "../components";
+
 export default {
+	components: {
+		msg
+	},
 	data: function(){
 		return {
 			version: VERSION,
+			copyright: COPYRIGHT,
+			github: GITHUB_LINK,
 			err: 0,
 			login: '',
 			pwd: ''
@@ -49,14 +57,15 @@ export default {
 	},
 	methods: {
 		performLogin: function(){
-			this.$http.post('/api/login', {login: this.login, pwd: this.pwd})
-			.then(function(resp){
+			axios.post('/api/login', {login: this.login, pwd: this.pwd})
+			.then(resp => {
 				if(resp.data.code){
 					this.err = resp.data.code;
 					return;
 				}
 
-				SessionService.login(this.$router, resp.data);
+				// TODO
+				//SessionService.login(this.$router, resp.data);
 			});
 		}
 	}

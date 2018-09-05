@@ -134,6 +134,7 @@
 </template>
 
 <script>
+import axios from "axios";
 import {hmenu} from "../components";
 
 export default {
@@ -162,7 +163,7 @@ export default {
 	},
 	methods: {
 		_load: function(){
-			this.$http.get('/api/configuration')
+			axios.get('/api/configuration')
 			.then(function(resp){
 				if(resp.data.code){
 					console.log(resp.data.code+': '+resp.data.msg);
@@ -173,7 +174,7 @@ export default {
 				this._loadInstances();
 			});
 
-			this.$http.get('/api/instance/log')
+			axios.get('/api/instance/log')
 			.then(function(resp){
 				if(resp.data.code){
 					console.log(resp.data.code+': '+resp.data.msg);
@@ -199,7 +200,7 @@ export default {
 			});
 		},
 		_loadInstances: function(){
-			this.$http.get('/api/instance')
+			axios.get('/api/instance')
 			.then(function(resp){
 				if(resp.data.code){
 					console.log(resp.data.code+': '+resp.data.msg);
@@ -234,7 +235,7 @@ export default {
 			this.stopInstance = false;
 		},
 		performStart: function(){
-			this.$http.post('/api/instance', {name: this.name, config: this.config})
+			axios.post('/api/instance', {name: this.name, config: this.config})
 			.then(function(resp){
 				if(resp.data.code){
 					console.log(resp.data.code+': '+resp.data.msg);
@@ -258,7 +259,7 @@ export default {
 			this.stopInstance = true;
 		},
 		performStop: function(){
-			this.$http.delete('/api/instance', {params: {pid: this._pid}})
+			axios.delete('/api/instance', {params: {pid: this._pid}})
 			.then(function(resp){
 				if(resp.data.code){
 					console.log(resp.data.code+': '+resp.data.msg);
@@ -274,7 +275,7 @@ export default {
 		openLog: function(file){
 			this._reset();
 
-			this.$http.get('/api/instance/log', {params: {file: file}})
+			axios.get('/api/instance/log', {params: {file: file}})
 			.then(function(resp){
 				if(resp.data.code){
 					console.log(resp.data.code+': '+resp.data.msg);
