@@ -41,11 +41,8 @@
 			<div class="box" v-if="stopInstance">
 				<div class="wrapper">
 					<h2>Stop Instance</h2>
-
 					<msg :type="'error'" :msg="'You have no permission to do this.'" v-if="err == 200"></msg>
-
 					<p>Do you really want to stop this server instance?</p>
-
 					<button v-on:click="performStop()">Yes, stop instance</button>
 					<button v-on:click="stopInstance = false">Cancel</button>
 				</div>
@@ -54,9 +51,8 @@
 			<div class="box" v-if="showLog">
 				<div class="wrapper">
 					<h2>Log Output</h2>
-
+					<small>(showing the last 256kb)</small>
 					<textarea v-model="log"></textarea>
-
 					<button v-on:click="showLog = false">Close</button>
 				</div>
 			</div>

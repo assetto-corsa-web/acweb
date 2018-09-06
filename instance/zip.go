@@ -4,6 +4,8 @@ import (
 	"archive/zip"
 	"io/ioutil"
 	"net/http"
+	"os"
+	"path/filepath"
 	"time"
 
 	logger "github.com/sirupsen/logrus"
@@ -81,7 +83,8 @@ func ZipInstanceFiles(config *model.Configuration, w http.ResponseWriter) error 
 
 // ZipLogFile creates zip stream with a given log file and write it into a http.ResponseWriter
 func ZipLogFile(fileName string, w http.ResponseWriter) error {
-	log, err := GetInstanceLog(fileName)
+	log, err := ioutil.ReadFile(filepath.Join(os.Getenv("ACWEB_INSTANCE_LOGDIR"), fileName))
+
 	if err != nil {
 		logger.WithFields(logger.Fields{"err": err, "fileName": fileName}).Error("Error reading instance log file")
 		return util.OpError{1, "Error reading instance log file"}
