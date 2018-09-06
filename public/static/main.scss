@@ -118,7 +118,14 @@ html, body{
 		width: 40px;
 		height: 40px;
 		margin: 0 20px 0 0;
-		background: url("aclogo_small.png");
+		
+		img{
+			margin: 0;
+			padding: 0;
+			border-width: 0;
+			width: 40px;
+			height: 40px;
+		}
 	}
 
 	a{

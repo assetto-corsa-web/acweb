@@ -140,7 +140,11 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	success(w)
+	resp := struct {
+		UserId int64 `json:"user_id"`
+	}{user.Id}
+	respJson, _ := json.Marshal(resp)
+	w.Write(respJson)
 }
 
 func Logout(w http.ResponseWriter, r *http.Request) {

@@ -56,7 +56,7 @@ export default {
 		}
 	},
 	methods: {
-		performLogin: function(){
+		performLogin() {
 			axios.post('/api/login', {login: this.login, pwd: this.pwd})
 			.then(resp => {
 				if(resp.data.code){
@@ -64,8 +64,8 @@ export default {
 					return;
 				}
 
-				// TODO
-				//SessionService.login(this.$router, resp.data);
+				this.$store.commit("login", resp.data);
+				this.$router.push('/instance');
 			});
 		}
 	}

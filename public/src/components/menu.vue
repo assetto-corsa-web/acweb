@@ -1,7 +1,7 @@
 <template>
 	<div class="menu">
 		<div class="wrapper">
-			<div class="logo"></div>
+			<div class="logo"><img src="static/aclogo_small.png" alt="" /></div>
 			<router-link to="/instance">Instances</router-link>
 			<router-link to="/configuration">Configurations</router-link>
 			<router-link to="/settings">Settings</router-link>
@@ -23,9 +23,9 @@ export default {
 		}
 	},
 	methods: {
-		performLogout: function(){
-			// TODO
-			//SessionService.logout(this.$router);
+		performLogout() {
+			this.$store.commit("logout");
+			this.$router.push('/');
 		}
 	}
 };

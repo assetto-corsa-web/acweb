@@ -16,8 +16,13 @@ import (
 )
 
 const (
-	public_dir = "public"
-	robots_txt = "robots.txt"
+	static_dir        = "public/static"
+	static_dir_prefix = "/static/"
+	build_js          = "public/dist/build.js"
+	build_js_prefix   = "/dist/build.js"
+	index_file        = "public/index.html"
+	root_dir_prefix   = "/"
+	robots_txt        = "robots.txt"
 
 	session_cookie_name     = "acweb-session"
 	session_cookie_lifetime = 60 * 60 * 24
@@ -70,18 +75,17 @@ func createDefaultUser() {
 			Admin: true}
 
 		if err := user.Save(); err != nil {
-			log.WithFields(log.Fields{"err": err}).Fatal("Error creating first user")
+			log.WithFields(log.Fields{"err": err}).Fatal("Error creating default user")
 		}
 	}
 }
 
-// Starts the RESTful server.
 func startServer() {
 	log.Info("Starting server on ", os.Getenv("ACWEB_HOST"))
 
 	mux := http.NewServeMux()
-	mux.Handle("/robots.txt", http.HandlerFunc(returnRobotsTxt))
-	mux.Handle("/", http.FileServer(http.Dir(public_dir)))
+
+	// REST endpoints
 	mux.HandleFunc("/api/session", http.HandlerFunc(api.CheckSession))
 	mux.HandleFunc("/api/login", http.HandlerFunc(api.Login))
 	mux.HandleFunc("/api/logout", http.HandlerFunc(api.Logout))
@@ -92,6 +96,16 @@ func startServer() {
 	mux.Handle("/api/cars", session.AccessMiddleware(http.HandlerFunc(api.GetAvailableCars), returnSessionErr))
 	mux.Handle("/api/instance", session.AccessMiddleware(http.HandlerFunc(api.InstanceHandler), returnSessionErr))
 	mux.Handle("/api/instance/log", session.AccessMiddleware(http.HandlerFunc(api.InstanceLogHandler), returnSessionErr))
+
+	// files
+	mux.Handle("/robots.txt", http.HandlerFunc(returnRobotsTxt))
+	mux.Handle(static_dir_prefix, http.StripPrefix("/static/", http.FileServer(http.Dir(static_dir))))
+	mux.HandleFunc(build_js_prefix, func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, build_js)
+	})
+	mux.HandleFunc(root_dir_prefix, func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, index_file)
+	})
 
 	if os.Getenv("ACWEB_TLS_PRIVATE_KEY") == "" || os.Getenv("ACWEB_TLS_CERT") == "" {
 		if err := http.ListenAndServe(os.Getenv("ACWEB_HOST"), mux); err != nil {
