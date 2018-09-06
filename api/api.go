@@ -79,6 +79,8 @@ func InstanceLogHandler(w http.ResponseWriter, r *http.Request) {
 				GetInstanceLog(w, r, fileName)
 			}
 		}
+	} else if r.Method == "DELETE" {
+		deleteLogHandler(w, r)
 	}
 }
 
@@ -401,6 +403,22 @@ func downloadLogHandler(w http.ResponseWriter, r *http.Request, fileName string)
 	err := instance.ZipLogFile(fileName, w)
 	if iserror(w, err) {
 		return
+	}
+
+	success(w)
+}
+
+func deleteLogHandler(w http.ResponseWriter, r *http.Request) {
+	filename := r.URL.Query().Get("filename")
+
+	if filename != "" {
+		if err := instance.DeleteLogFile(filename); iserror(w, err) {
+			return
+		}
+	} else {
+		if err := instance.DeleteAllLogFiles(); iserror(w, err) {
+			return
+		}
 	}
 
 	success(w)

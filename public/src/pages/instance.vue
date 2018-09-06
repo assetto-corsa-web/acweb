@@ -57,6 +57,24 @@
 				</div>
 			</div>
 
+			<div class="box" v-if="showDeleteLog">
+				<div class="wrapper">
+					<h2>Delete Log File</h2>
+					<p>Do you really want to delete the log file "{{activeLogFilename}}"?</p>
+					<button v-on:click="deleteLogfile">Yes, delete log file</button>
+					<button v-on:click="showDeleteLog = false">Close</button>
+				</div>
+			</div>
+
+			<div class="box" v-if="showDeleteAllLogs">
+				<div class="wrapper">
+					<h2>Delete All Logs</h2>
+					<p>Do you really want to delete all log files?</p>
+					<button v-on:click="deleteAllLogs">Yes, delete all logs</button>
+					<button v-on:click="showDeleteAllLogs = false">Close</button>
+				</div>
+			</div>
+
 			<div class="box">
 				<div class="wrapper">
 					<h2>Active Server Instances</h2>
@@ -100,6 +118,8 @@
 				<div class="wrapper">
 					<h2>Log Files</h2>
 
+					<button v-on:click="showDeleteAllLogs = true">Delete All Logs</button>
+
 					<table>
 						<thead>
 							<tr>
@@ -119,6 +139,7 @@
 										<i class="fa fa-cloud-download" aria-hidden="true" title="Download console output"></i>
 									</a>
 									<i class="fa fa-terminal" aria-hidden="true" title="Show console output" v-on:click="openLog(log.file)"></i>
+									<i class="fa fa-trash" aria-hidden="true" title="Delete log file" v-on:click="openDeleteLog(log.file)"></i>
 								</td>
 							</tr>
 						</tbody>
@@ -148,7 +169,10 @@ export default {
 			name: '',
 			config: 0,
 			log: '',
+			activeLogFilename: '',
 			showLog: false,
+			showDeleteLog: false,
+			showDeleteAllLogs: false,
 			started: false,
 			stopped: false,
 			startInstance: false,
@@ -160,6 +184,10 @@ export default {
 	},
 	methods: {
 		_load() {
+			this._loadConfiguration();
+			this._loadLogs();
+		},
+		_loadConfiguration() {
 			axios.get('/api/configuration')
 			.then(resp => {
 				if(resp.data.code){
@@ -170,7 +198,8 @@ export default {
 				this.configs = resp.data;
 				this._loadInstances();
 			});
-
+		},
+		_loadLogs() {
 			axios.get('/api/instance/log')
 			.then(resp => {
 				if(resp.data.code){
@@ -181,8 +210,8 @@ export default {
 				this.logs = resp.data;
 
 				// reverse
-				for(var i = this.logs.length-1; i >= 0; i--){
-					this.logs[i].date = new Date(this.logs[i].date).formatDE();
+				for(let i = this.logs.length-1; i >= 0; i--){
+					this.logs[i].date = new Date(this.logs[i].date).toString();
 
 					if(this.logs[i].size > 1024*1024){
 						this.logs[i].size = Math.round(this.logs[i].size/1024/1024*100)/100+' MB';
@@ -269,7 +298,7 @@ export default {
 				this.stopped = true;
 			});
 		},
-		openLog: function(file){
+		openLog(file) {
 			this._reset();
 
 			axios.get('/api/instance/log', {params: {file: file}})
@@ -284,11 +313,30 @@ export default {
 				this.showLog = true;
 			});
 		},
-		generateConsoleLogDownloadUrl: function (file) {
+		generateConsoleLogDownloadUrl(file) {
 			return '/api/instance/log?file=' + file + '&dl=1';
 		},
-		generateInstanceDownloadUrl: function (id) {
+		generateInstanceDownloadUrl(id) {
 			return '/api/configuration?id=' + id + '&dl=2';
+		},
+		openDeleteLog(filename) {
+			this.activeLogFilename = filename;
+			this.showDeleteLog = true;
+		},
+		deleteLogfile() {
+			axios.delete('/api/instance/log', {params: {filename: this.activeLogFilename}})
+			.then(resp => {
+				this.activeLogFilename = '';
+				this.showDeleteLog = false;
+				this._loadLogs();
+			});
+		},
+		deleteAllLogs() {
+			axios.delete('/api/instance/log')
+			.then(resp => {
+				this.showDeleteAllLogs = false;
+				this._loadLogs();
+			});
 		}
 	}
 }
