@@ -45,7 +45,7 @@ export default {
 	components: {
 		msg
 	},
-	data: function(){
+	data() {
 		return {
 			version: VERSION,
 			copyright: COPYRIGHT,

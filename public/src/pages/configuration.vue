@@ -647,13 +647,14 @@
 
 <script>
 import axios from "axios";
-import {hmenu} from "../components";
+import {hmenu, msg} from "../components";
 
 export default {
 	components: {
-		hmenu
+		hmenu,
+		msg
 	},
-	data: function(){
+	data() { 
 		return {
 			configs: [],
 			tracks: [],
@@ -751,7 +752,7 @@ export default {
 			tmpEntryListCfg: null
 		}
 	},
-	mounted: function(){
+	mounted() { 
 		this._load();
 	},
 	watch: {
@@ -763,9 +764,9 @@ export default {
 		}
 	},
 	methods: {
-		_load: function(){
+		_load() { 
 			axios.get('/api/configuration')
-			.then(function(resp){
+			.then(resp => {
 				if(resp.data.code){
 					console.log(resp.data.code+': '+resp.data.msg);
 					return;
@@ -775,7 +776,7 @@ export default {
 			});
 
 			axios.get('/api/tracks')
-			.then(function(resp){
+			.then(resp => {
 				if(resp.data.code){
 					console.log(resp.data.code+': '+resp.data.msg);
 					return;
@@ -785,7 +786,7 @@ export default {
 			});
 
 			axios.get('/api/cars')
-			.then(function(resp){
+			.then(resp => {
 				if(resp.data.code){
 					console.log(resp.data.code+': '+resp.data.msg);
 					return;
@@ -798,7 +799,7 @@ export default {
 				}
 			});
 		},
-		_reset: function(){
+		_reset() { 
 			this.spectator = false;
 			this.driver = '';
 			this.team = '';
@@ -886,7 +887,7 @@ export default {
 		},
 		_openConfig: function(id, copy){
 			axios.get('/api/configuration', {params: {id: id}})
-			.then(function(resp){
+			.then(resp => {
 				if(resp.data.code){
 					console.log(resp.data.code+': '+resp.data.msg);
 					return;
@@ -1222,7 +1223,7 @@ export default {
 		copyConfig: function(id){
 			this._openConfig(id, true);
 		},
-		performAddEditConfig: function(){
+		performAddEditConfig() { 
 			for(var i = 0; i < this.weather.length; i++){
 				this.weather[i].base_ambient_temp = parseInt(this.weather[i].base_ambient_temp);
 				this.weather[i].base_road_temp = parseInt(this.weather[i].base_road_temp);
@@ -1313,7 +1314,7 @@ export default {
 			};
 
 			axios.post('/api/configuration', data)
-			.then(function(resp){
+			.then(resp => {
 				if(resp.data.code){
 					console.log(resp.data.code+': '+resp.data.msg);
 					this.err = resp.data.code;
@@ -1325,9 +1326,9 @@ export default {
 				this.saved = true;
 			});
 		},
-		performRemoveConfig: function(){
+		performRemoveConfig() { 
 			axios.delete('/api/configuration', {params: {id: this._id}})
-			.then(function(resp){
+			.then(resp => {
 				if(resp.data.code){
 					console.log(resp.data.code+': '+resp.data.msg);
 					this.err = resp.data.code;
@@ -1339,7 +1340,7 @@ export default {
 				this.removed = true;
 			});
 		},
-		addWeather: function(){
+		addWeather() { 
 			this.weather.push({
 				weather: 'Clear',
 				base_ambient_temp: 20,
@@ -1377,7 +1378,7 @@ export default {
 		selectPainting: function(i){
 			this.selectedPainting = i;
 		},
-		addCar: function(){
+		addCar() { 
 			var car = this.cars[this.selectedCar];
 			this.selectedCars.push({
 				car: car.name,

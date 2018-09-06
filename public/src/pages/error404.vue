@@ -23,7 +23,7 @@
 import {VERSION, COPYRIGHT, GITHUB_LINK} from "../global.js";
 
 export default {
-	data: function(){
+	data() {
 		return {
 			version: VERSION,
 			copyright: COPYRIGHT,

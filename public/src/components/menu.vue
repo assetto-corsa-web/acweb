@@ -17,7 +17,7 @@
 import * as global from "../global.js";
 
 export default {
-	data: function(){
+	data() {
 		return {
 			version: global.VERSION
 		}

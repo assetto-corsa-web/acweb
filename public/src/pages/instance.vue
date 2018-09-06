@@ -135,13 +135,14 @@
 
 <script>
 import axios from "axios";
-import {hmenu} from "../components";
+import {hmenu, msg} from "../components";
 
 export default {
 	components: {
-		hmenu
+		hmenu,
+		msg
 	},
-	data: function(){
+	data() {
 		return {
 			_pid: 0,
 			instances: [],
@@ -158,13 +159,13 @@ export default {
 			stopInstance: false
 		}
 	},
-	mounted: function(){
+	mounted() {
 		this._load();
 	},
 	methods: {
-		_load: function(){
+		_load() {
 			axios.get('/api/configuration')
-			.then(function(resp){
+			.then(resp => {
 				if(resp.data.code){
 					console.log(resp.data.code+': '+resp.data.msg);
 					return;
@@ -175,7 +176,7 @@ export default {
 			});
 
 			axios.get('/api/instance/log')
-			.then(function(resp){
+			.then(resp => {
 				if(resp.data.code){
 					console.log(resp.data.code+': '+resp.data.msg);
 					return;
@@ -199,9 +200,9 @@ export default {
 				}
 			});
 		},
-		_loadInstances: function(){
+		_loadInstances() {
 			axios.get('/api/instance')
-			.then(function(resp){
+			.then(resp => {
 				if(resp.data.code){
 					console.log(resp.data.code+': '+resp.data.msg);
 					return;
@@ -223,7 +224,7 @@ export default {
 
 			return null;
 		},
-		_reset: function(){
+		_reset() {
 			this.err = 0;
 			this.name = '';
 			this.config = 0;
@@ -234,9 +235,9 @@ export default {
 			this.startInstance = false;
 			this.stopInstance = false;
 		},
-		performStart: function(){
+		performStart() {
 			axios.post('/api/instance', {name: this.name, config: this.config})
-			.then(function(resp){
+			.then(resp => {
 				if(resp.data.code){
 					console.log(resp.data.code+': '+resp.data.msg);
 					this.err = resp.data.code;
@@ -258,9 +259,9 @@ export default {
 			this._pid = pid;
 			this.stopInstance = true;
 		},
-		performStop: function(){
+		performStop() {
 			axios.delete('/api/instance', {params: {pid: this._pid}})
-			.then(function(resp){
+			.then(resp => {
 				if(resp.data.code){
 					console.log(resp.data.code+': '+resp.data.msg);
 					this.err = resp.data.code;
@@ -276,7 +277,7 @@ export default {
 			this._reset();
 
 			axios.get('/api/instance/log', {params: {file: file}})
-			.then(function(resp){
+			.then(resp => {
 				if(resp.data.code){
 					console.log(resp.data.code+': '+resp.data.msg);
 					return;

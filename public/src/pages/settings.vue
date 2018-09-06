@@ -51,13 +51,14 @@
 
 <script>
 import axios from "axios";
-import {hmenu} from "../components";
+import {hmenu, msg} from "../components";
 
 export default {
 	components: {
-		hmenu
+		hmenu,
+		msg
 	},
-	data: function(){
+	data() {
 		return {
 			err: 0,
 			folder: '',
@@ -66,13 +67,13 @@ export default {
 			saved: false
 		}
 	},
-	mounted: function(){
+	mounted() {
 		this._load();
 	},
 	methods: {
-		_load: function(){
+		_load() {
 			axios.get('/api/settings')
-			.then(function(resp){
+			.then(resp => {
 				if(resp.data.code){
 					console.log(resp.data.code+': '+resp.data.msg);
 					return;
@@ -83,13 +84,15 @@ export default {
 				this.args = resp.data.args;
 			});
 		},
-		performSave: function(){
+		performSave() {
 			this.saved = false;
 
-			axios.post('/api/settings', {folder: this.folder,
+			axios.post('/api/settings', {
+				folder: this.folder,
 				executable: this.executable,
-				args: this.args})
-			.then(function(resp){
+				args: this.args
+			})
+			.then(resp => {
 				if(resp.data.code){
 					console.log(resp.data.code+': '+resp.data.msg);
 					this.err = resp.data.code;

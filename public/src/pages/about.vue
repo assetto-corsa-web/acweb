@@ -53,7 +53,7 @@ export default {
 	components: {
 		hmenu
 	},
-	data: function(){
+	data() {
 		return {
 			version: VERSION,
 			copyright: COPYRIGHT,

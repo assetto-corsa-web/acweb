@@ -115,13 +115,14 @@
 
 <script>
 import axios from "axios";
-import {hmenu} from "../components";
+import {hmenu, msg} from "../components";
 
 export default {
 	components: {
-		hmenu
+		hmenu,
+		msg
 	},
-	data: function(){
+	data() {
 		return {
 			user: [],
 			_id: 0,
@@ -138,13 +139,13 @@ export default {
 			userRemoved: false
 		}
 	},
-	mounted: function(){
+	mounted() {
 		this._load();
 	},
 	methods: {
-		_load: function(){
+		_load() {
 			axios.get('/api/user')
-			.then(function(resp){
+			.then(resp => {
 				if(resp.data.code){
 					console.log(resp.data.code+': '+resp.data.msg);
 					return;
@@ -153,7 +154,7 @@ export default {
 				this.user = resp.data;
 			});
 		},
-		_reset: function(){
+		_reset() {
 			this._id = 0;
 			this.login = '';
 			this.email = '';
@@ -167,14 +168,14 @@ export default {
 			this.userSaved = false;
 			this.userRemoved = false;
 		},
-		openAddEditUser: function(id){
+		openAddEditUser(id) {
 			this._reset();
 			
 			if(id){
 				this._id = id;
 
 				axios.get('/api/user', {params: {id: id}})
-				.then(function(resp){
+				.then(resp => {
 					if(resp.data.code){
 						console.log(resp.data.code+': '+resp.data.msg);
 						return;
@@ -191,7 +192,7 @@ export default {
 				this.addEditUser = true;
 			}
 		},
-		openRemoveUser: function(id){
+		openRemoveUser(id) {
 			this._reset();
 
 			if(!id){
@@ -201,7 +202,7 @@ export default {
 			this._id = id;
 			this.removeUser = true;
 		},
-		performAddEditUser: function(){
+		performAddEditUser() {
 			axios.post('/api/user', {id: this._id,
 				login: this.login,
 				email: this.email,
@@ -209,7 +210,7 @@ export default {
 				pwd2: this.pwd2,
 				admin: this.admin,
 				moderator: this.moderator})
-			.then(function(resp){
+			.then(resp => {
 				if(resp.data.code){
 					console.log(resp.data.code+': '+resp.data.msg);
 					this.err = resp.data.code;
@@ -221,9 +222,9 @@ export default {
 				this.userSaved = true;
 			});
 		},
-		performRemoveUser: function(){
+		performRemoveUser() {
 			axios.delete('/api/user', {params: {id: this._id}})
-			.then(function(resp){
+			.then(resp => {
 				if(resp.data.code){
 					console.log(resp.data.code+': '+resp.data.msg);
 					this.err = resp.data.code;
