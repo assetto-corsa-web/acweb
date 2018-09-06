@@ -8,3 +8,4 @@ tools/*.json
 tools/*.exe
 main
 *.log
+main.exe
