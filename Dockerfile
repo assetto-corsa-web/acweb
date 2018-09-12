@@ -1,24 +1,22 @@
 FROM golang
 
-ADD . /app
+ADD . /go/src/github.com/assetto-corsa-web/acweb/
 COPY configs /config
-WORKDIR /app
+WORKDIR /go/src/github.com/assetto-corsa-web/acweb/
 
-# install sass
+# install node
 RUN apt-get update && \
 	apt-get upgrade -y && \
-	apt-get install -y \
-	build-essential \
-	ruby-dev
-RUN gem install sass
+	apt-get install -y curl
+RUN curl -sL https://deb.nodesource.com/setup_8.x -o nodesource_setup.sh && bash nodesource_setup.sh
+RUN apt-get install -y nodejs
 
 # build backend
-ENV GOPATH=/app
-RUN go build -ldflags "-s -w" src/main/main.go
+ENV GOPATH=/go
+RUN go build -ldflags "-s -w" main.go
 
 # build frontend
-RUN cd /app/public && mkdir ./css && sass ./scss/main.scss ./css/main.css
-RUN cd /app/public && ./minvue -config=minify.json
+RUN cd /go/src/github.com/assetto-corsa-web/acweb/public && npm install && npm run build
 
 # configure and run
 ENV ACWEB_HOST=:8080
@@ -41,4 +39,4 @@ ENV ACWEB_DB_ROOT_CERT=
 # expose Assetto Corsa folder
 VOLUME ["/ac", "/logs", "/instance_logs", "/config"]
 
-CMD ["/app/main"]
+CMD ["/go/src/github.com/assetto-corsa-web/acweb/main"]
