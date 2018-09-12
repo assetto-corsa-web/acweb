@@ -17,12 +17,6 @@ jobs:
       - run: cd public && ls
       - run: cd public && npm i
       - run: cd public && npm run build
-  docker_image:
-    machine: true
-    working_directory: /go/src/github.com/assetto-corsa-web/acweb
-    steps:
-      - checkout
-      - run: docker build -t acweb .
 workflows:
   version: 2
   build_and_test:
