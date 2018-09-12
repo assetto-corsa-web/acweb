@@ -18,8 +18,7 @@ jobs:
       - run: cd public && npm i
       - run: cd public && npm run build
   docker_image:
-    docker:
-      - image: docker:18-git
+    machine: true
     working_directory: /go/src/github.com/assetto-corsa-web/acweb
     steps:
       - checkout
