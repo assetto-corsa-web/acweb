@@ -87,6 +87,7 @@ func StartInstance(instanceName string, configuration int64) error {
 	}
 
 	instance := Instance{cmd.Process.Pid, instanceName, config.Id, cmd, logfile}
+	log.WithFields(log.Fields{"instance": instance}).Debug("Adding new instance")
 	m.Lock()
 	instances = append(instances, instance)
 	m.Unlock()

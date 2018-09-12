@@ -235,13 +235,13 @@ export default {
 
 				this.instances = resp.data;
 
-				for(var i = 0; i < this.instances.length; i++){
+				for(let i = 0; i < this.instances.length; i++){
 					this.instances[i].configuration = this._getConfigName(this.instances[i].configuration);
 				}
 			});
 		},
 		_getConfigName: function(id){
-			for(i in this.configs){
+			for(let i = 0; i < this.configs.length; i++){
 				if(id == this.configs[i].id){
 					return this.configs[i];
 				}
