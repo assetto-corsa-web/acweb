@@ -23,4 +23,3 @@ workflows:
     jobs:
       - backend
       - frontend
-      - docker_image
