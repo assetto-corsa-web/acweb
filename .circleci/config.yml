@@ -23,7 +23,7 @@ jobs:
     working_directory: /go/src/github.com/assetto-corsa-web/acweb
     steps:
       - checkout
-      - docker build -t acweb .
+      - run: docker build -t acweb .
 workflows:
   version: 2
   build_and_test:
