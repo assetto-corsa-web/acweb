@@ -6,7 +6,7 @@ cd ..
 
 # build backend
 go build -ldflags "-s -w" main.go
-mkdir -p release/
+mkdir -p release
 mv main release/acweb
 
 # build frontend
@@ -14,12 +14,16 @@ cd public
 npm install
 npm run build
 
+cd ..
+
 # copy frontend files
 cp -r configs release/config
 cp -r schema release/schema
 cp README.md release/README.md
 cp LICENSE release/LICENSE
-cp -a public/dist/ release/public/dist/
-cp -a public/static/ release/public/static/
+mkdir release/public
+cp public/index.html release/public/index.html
+cp -a public/dist release/public/dist
+cp -a public/static release/public/static
 
 echo "done"

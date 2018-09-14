@@ -4,6 +4,7 @@ cfg/
 src/github.com/
 log/
 instance_logs/
+release/
 tools/*.json
 tools/*.exe
 main
