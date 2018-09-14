@@ -5,6 +5,7 @@ src/github.com/
 log/
 instance_logs/
 release/
+configs/1/
 tools/*.json
 tools/*.exe
 main
