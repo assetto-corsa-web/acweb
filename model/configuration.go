@@ -24,6 +24,7 @@ type Configuration struct {
 	LoopMode              bool   `db:"loop_mode" json:"loop_mode"`
 	ShowInLobby           bool   `db:"show_in_lobby" json:"show_in_lobby"`
 	Threads               int    `json:"threads"`
+	AuthPluginAddress     int    `db:"auth_plugin_address" json:"auth_plugin_address"`
 	ABS                   int    `json:"abs"`
 	TC                    int    `json:"tc"`
 	StabilityAid          bool   `db:"stability_aid" json:"stability_aid"`

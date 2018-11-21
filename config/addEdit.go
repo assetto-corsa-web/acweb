@@ -1,6 +1,8 @@
 package config
 
 import (
+	"strings"
+
 	log "github.com/sirupsen/logrus"
 
 	"github.com/assetto-corsa-web/acweb/model"
@@ -19,7 +21,7 @@ func AddEditConfiguration(config *model.Configuration) error {
 		return util.OpError{2, "There must be at least one weather defined"}
 	}
 
-	if len(config.Cars) < 1 {
+	if len(config.Cars) == 0 && strings.TrimSpace(config.EntryListIni) == "" {
 		return util.OpError{3, "There must be at least one car defined"}
 	}
 

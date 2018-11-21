@@ -9,11 +9,11 @@
 				<div class="wrapper">
 					<h2>Create/Edit User</h2>
 
-					<msg :type="'error'" :msg="'Login, E-Mail and password must be set.'" v-if="err == 1"></msg>
-					<msg :type="'error'" :msg="'The passwords must be at least 8 characters long.'" v-if="err == 2"></msg>
-					<msg :type="'error'" :msg="'The passwords must be equal.'" v-if="err == 3"></msg>
-					<msg :type="'error'" :msg="'The Login and/or E-Mail is in use already.'" v-if="err == 4"></msg>
-					<msg :type="'error'" :msg="'You have no permission to do this.'" v-if="err == 200"></msg>
+					<msg :type="'error'" :msg="'Login, E-Mail and password must be set.'" v-if="err == 1" v-on:close="closeMsg"></msg>
+					<msg :type="'error'" :msg="'The passwords must be at least 8 characters long.'" v-if="err == 2" v-on:close="closeMsg"></msg>
+					<msg :type="'error'" :msg="'The passwords must be equal.'" v-if="err == 3" v-on:close="closeMsg"></msg>
+					<msg :type="'error'" :msg="'The Login and/or E-Mail is in use already.'" v-if="err == 4" v-on:close="closeMsg"></msg>
+					<msg :type="'error'" :msg="'You have no permission to do this.'" v-if="err == 200" v-on:close="closeMsg"></msg>
 
 					<form v-on:submit.prevent="performAddEditUser()">
 						<table>
@@ -57,7 +57,7 @@
 				<div class="wrapper">
 					<h2>Remove User</h2>
 
-					<msg :type="'error'" :msg="'You have no permission to do this.'" v-if="err == 200"></msg>
+					<msg :type="'error'" :msg="'You have no permission to do this.'" v-if="err == 200" v-on:close="closeMsg"></msg>
 
 					<p>Do you really want to remove this user?</p>
 
@@ -68,8 +68,8 @@
 
 			<div class="box">
 				<div class="wrapper">
-					<msg :type="'success'" :msg="'The user has been saved.'" v-if="userSaved"></msg>
-					<msg :type="'success'" :msg="'The user has been removed.'" v-if="userRemoved"></msg>
+					<msg :type="'success'" :msg="'The user has been saved.'" v-if="userSaved" v-on:close="userSaved = false"></msg>
+					<msg :type="'success'" :msg="'The user has been removed.'" v-if="userRemoved" v-on:close="userRemoved = false"></msg>
 
 					<button v-on:click="openAddEditUser(0)">Add User</button>
 
@@ -235,6 +235,9 @@ export default {
 				this._load();
 				this.userRemoved = true;
 			});
+		},
+		closeMsg() {
+			this.err = 0;
 		}
 	}
 };
