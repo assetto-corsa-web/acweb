@@ -17,6 +17,7 @@ const (
 		loop_mode,
 		show_in_lobby,
 		threads,
+		auth_plugin_address,
 		abs,
 		tc,
 		stability_aid,
@@ -85,6 +86,7 @@ const (
 		:loop_mode,
 		:show_in_lobby,
 		:threads,
+		:auth_plugin_address,
 		:abs,
 		:tc,
 		:stability_aid,
@@ -152,6 +154,7 @@ const (
 		loop_mode = :loop_mode,
 		show_in_lobby = :show_in_lobby,
 		threads = :threads,
+		auth_plugin_address = :auth_plugin_address,
 		abs = :abs,
 		tc = :tc,
 		stability_aid = :stability_aid,
@@ -233,8 +236,10 @@ const (
 		team,
 		guid,
 		position,
-		fixed_setup
-		) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`
+		fixed_setup,
+		ballast,
+		restrictor
+		) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
 	mysql_cars_update = `UPDATE cars SET car = ?,
 		painting = ?,
 		spectator = ?,
@@ -242,7 +247,9 @@ const (
 		team = ?,
 		guid = ?,
 		position = ?,
-		fixed_setup = ? WHERE id = ?`
+		fixed_setup = ?,
+		ballast = ?,
+		restrictor = ? WHERE id = ?`
 	mysql_weather_delete_configuration = "DELETE FROM weather WHERE configuration = :id"
 	mysql_cars_delete_configuration    = "DELETE FROM cars WHERE configuration = :id"
 	mysql_configuration_delete         = "DELETE FROM configurations WHERE id = :id"
@@ -269,6 +276,7 @@ const (
 		loop_mode,
 		show_in_lobby,
 		threads,
+		auth_plugin_address,
 		abs,
 		tc,
 		stability_aid,
@@ -337,6 +345,7 @@ const (
 		:loop_mode,
 		:show_in_lobby,
 		:threads,
+		:auth_plugin_address,
 		:abs,
 		:tc,
 		:stability_aid,
@@ -404,6 +413,7 @@ const (
 		loop_mode = :loop_mode,
 		show_in_lobby = :show_in_lobby,
 		threads = :threads,
+		auth_plugin_address = :auth_plugin_address,
 		abs = :abs,
 		tc = :tc,
 		stability_aid = :stability_aid,
@@ -485,8 +495,10 @@ const (
 		team,
 		guid,
 		position,
-		fixed_setup
-		) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`
+		fixed_setup,
+		ballast,
+		restrictor
+		) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)`
 	postgres_cars_update = `UPDATE "cars" SET car = $1,
 		painting = $2,
 		spectator = $3,
@@ -494,7 +506,9 @@ const (
 		team = $5,
 		guid = $6,
 		position = $7,
-		fixed_setup = $8 WHERE id = $9`
+		fixed_setup = $8,
+		ballast = $10,
+		restrictor = $11 WHERE id = $9`
 	postgres_weather_delete_configuration = "DELETE FROM \"weather\" WHERE configuration = :id"
 	postgres_cars_delete_configuration    = "DELETE FROM \"cars\" WHERE configuration = :id"
 	postgres_configuration_delete         = "DELETE FROM \"configurations\" WHERE id = :id"

@@ -107,10 +107,15 @@ func ServerConfigToIniString(config *model.Configuration) string {
 	ini += "NUM_THREADS=" + intToStr(config.Threads) + sep
 	ini += "UDP_PLUGIN_LOCAL_PORT=" + intToStr(config.UdpPluginPort) + sep
 	ini += "UDP_PLUGIN_ADDRESS=" + config.UdpPluginAddr + sep
-	ini += "AUTH_PLUGIN_ADDRESS=" + sep
 	ini += "LEGAL_TYRES=" + config.LegalTyres + sep
 	ini += "RACE_EXTRA_LAP=" + boolToStr(config.RaceExtraLap) + sep
 	ini += "WELCOME_MESSAGE=" + config.Welcome + sep
+
+	if config.AuthPluginAddress != 0 {
+		ini += "AUTH_PLUGIN_ADDRESS=" + intToStr(config.AuthPluginAddress) + sep
+	} else {
+		ini += "AUTH_PLUGIN_ADDRESS=" + sep
+	}
 
 	if config.Booking {
 		ini += sep

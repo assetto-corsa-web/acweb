@@ -9,538 +9,610 @@
 				<div class="wrapper">
 					<h2>Create/Edit Configuration</h2>
 
-					<msg :type="'error'" :msg="'The name must be set.'" v-if="err == 1"></msg>
-					<msg :type="'error'" :msg="'At least one weather configuration must be added.'" v-if="err == 2"></msg>
-					<msg :type="'error'" :msg="'At least one car must be added.'" v-if="err == 3"></msg>
-					<msg :type="'error'" :msg="'You have no permission to do this.'" v-if="err == 200"></msg>
+					<msg :type="'error'" :msg="'The name must be set.'" v-if="err == 1" v-on:close="closeMsg"></msg>
+					<msg :type="'error'" :msg="'At least one weather configuration must be added.'" v-if="err == 2" v-on:close="closeMsg"></msg>
+					<msg :type="'error'" :msg="'At least one car must be added.'" v-if="err == 3" v-on:close="closeMsg"></msg>
+					<msg :type="'error'" :msg="'You have no permission to do this.'" v-if="err == 200" v-on:close="closeMsg"></msg>
 
 					<form v-on:submit.prevent="performAddEditConfig()">
-						<table>
-							<tr>
-								<td colspan="2"><h3>Basic Settings</h3></td>
-							</tr>
-							<tr>
-								<td class="w20">Name:</td>
-								<td><input type="text" name="name" class="full-width" v-model="name" /></td>
-							</tr>
-							<tr>
-								<td>Password:</td>
-								<td><input type="text" name="pwd" class="full-width" v-model="pwd" /></td>
-							</tr>
-							<tr>
-								<td>Admin password:</td>
-								<td><input type="text" name="admin_pwd" class="full-width" v-model="admin_pwd" /></td>
-							</tr>
-							<tr>
-								<td>Pickup mode:</td>
-								<td><input type="checkbox" name="pickup_mode" v-model="pickup_mode" /></td>
-							</tr>
-							<tr>
-								<td>Lock entry list:</td>
-								<td><input type="checkbox" name="lock_entry_list" v-model="lock_entry_list" /></td>
-							</tr>
-							<tr>
-								<td>Race Pit Window Start:</td>
-								<td><input type="number" name="race_pit_window_start" v-model="race_pit_window_start" /></td>
-							</tr>
-							<tr>
-								<td>Race Pit Window End:</td>
-								<td><input type="number" name="race_pit_window_end" v-model="race_pit_window_end" /></td>
-							</tr>
-							<tr>
-								<td>Reversed Grid Race Postion:</td>
-								<td><input type="number" name="reversed_grid_race_positions" v-model="reversed_grid_race_positions" /></td>
-							</tr>
-							<tr>
-								<td>Loop mode:</td>
-								<td><input type="checkbox" name="loop_mode" v-model="loop_mode" /></td>
-							</tr>
-							<tr>
-								<td>Show on lobby:</td>
-								<td><input type="checkbox" name="show_in_lobby" v-model="show_in_lobby" /></td>
-							</tr>
-							<tr>
-								<td>Max. slots:</td>
-								<td><input type="number" name="max_slots" v-model="max_slots" /></td>
-							</tr>
-							<tr>
-								<td>Result screen time:</td>
-								<td><input type="number" name="result_screen_time" v-model="result_screen_time" /></td>
-							</tr>
-							<tr>
-								<td>Welcome message:</td>
-								<td><input type="text" name="welcome" class="full-width" v-model="welcome" /></td>
-							</tr>
-							<tr>
-								<td>Description:</td>
-								<td><textarea name="description" v-model="description"></textarea></td>
-							</tr>
-							<tr>
-								<td colspan="2"><h3>Advanced Settings</h3></td>
-							</tr>
-							<tr>
-								<td>UDP port:</td>
-								<td><input type="number" name="udp" v-model="udp" /></td>
-							</tr>
-							<tr>
-								<td>TCP port:</td>
-								<td><input type="number" name="tcp" v-model="tcp" /></td>
-							</tr>
-							<tr>
-								<td>HTTP port:</td>
-								<td><input type="number" name="http" v-model="http" /></td>
-							</tr>
-							<tr>
-								<td>Packets Hz:</td>
-								<td><input type="number" name="packets_hz" v-model="packets_hz" /></td>
-							</tr>
-							<tr>
-								<td>Threads:</td>
-								<td>
-									<select name="threads" v-model="threads">
-										<option>2</option>
-										<option>3</option>
-										<option>4</option>
-										<option>5</option>
-										<option>6</option>
-										<option>7</option>
-										<option>8</option>
+						<div class="box no-border">
+							<div class="collapse" v-on:click="collapseBasic = !collapseBasic">
+								<h3><i class="fa fa-plus" aria-hidden="true"></i> Basic Settings</h3>
+							</div>
+							<table v-if="!collapseBasic">
+								<tr>
+									<td class="w20">Name:</td>
+									<td><input type="text" name="name" class="full-width" v-model="name" /></td>
+								</tr>
+								<tr>
+									<td>Password:</td>
+									<td><input type="text" name="pwd" class="full-width" v-model="pwd" /></td>
+								</tr>
+								<tr>
+									<td>Admin password:</td>
+									<td><input type="text" name="admin_pwd" class="full-width" v-model="admin_pwd" /></td>
+								</tr>
+								<tr>
+									<td>Pickup mode:</td>
+									<td><input type="checkbox" name="pickup_mode" v-model="pickup_mode" /></td>
+								</tr>
+								<tr>
+									<td>Lock entry list:</td>
+									<td><input type="checkbox" name="lock_entry_list" v-model="lock_entry_list" /></td>
+								</tr>
+								<tr>
+									<td>Race Pit Window Start:</td>
+									<td><input type="number" name="race_pit_window_start" v-model="race_pit_window_start" /></td>
+								</tr>
+								<tr>
+									<td>Race Pit Window End:</td>
+									<td><input type="number" name="race_pit_window_end" v-model="race_pit_window_end" /></td>
+								</tr>
+								<tr>
+									<td>Reversed Grid Race Postion:</td>
+									<td><input type="number" name="reversed_grid_race_positions" v-model="reversed_grid_race_positions" /></td>
+								</tr>
+								<tr>
+									<td>Loop mode:</td>
+									<td><input type="checkbox" name="loop_mode" v-model="loop_mode" /></td>
+								</tr>
+								<tr>
+									<td>Show on lobby:</td>
+									<td><input type="checkbox" name="show_in_lobby" v-model="show_in_lobby" /></td>
+								</tr>
+								<tr>
+									<td>Max. slots:</td>
+									<td><input type="number" name="max_slots" v-model="max_slots" /></td>
+								</tr>
+								<tr>
+									<td>Result screen time:</td>
+									<td><input type="number" name="result_screen_time" v-model="result_screen_time" /></td>
+								</tr>
+								<tr>
+									<td>Welcome message:</td>
+									<td><input type="text" name="welcome" class="full-width" v-model="welcome" /></td>
+								</tr>
+								<tr>
+									<td>Description:</td>
+									<td><textarea name="description" v-model="description"></textarea></td>
+								</tr>
+							</table>
+						</div>
+						<div class="box no-border">
+							<div class="collapse" v-on:click="collapseAdvanced = !collapseAdvanced">
+								<h3><i class="fa fa-plus" aria-hidden="true"></i> Advanced Settings</h3>
+							</div>
+							<table v-if="!collapseAdvanced">
+								<tr>
+									<td>UDP port:</td>
+									<td><input type="number" name="udp" v-model="udp" /></td>
+								</tr>
+								<tr>
+									<td>TCP port:</td>
+									<td><input type="number" name="tcp" v-model="tcp" /></td>
+								</tr>
+								<tr>
+									<td>HTTP port:</td>
+									<td><input type="number" name="http" v-model="http" /></td>
+								</tr>
+								<tr>
+									<td>Packets Hz:</td>
+									<td><input type="number" name="packets_hz" v-model="packets_hz" /></td>
+								</tr>
+								<tr>
+									<td>Threads:</td>
+									<td>
+										<select name="threads" v-model="threads">
+											<option>2</option>
+											<option>3</option>
+											<option>4</option>
+											<option>5</option>
+											<option>6</option>
+											<option>7</option>
+											<option>8</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>Auth plugin address:</td>
+									<td><input type="number" name="auth_plugin_address" v-model="auth_plugin_address" /></td>
+								</tr>
+							</table>
+						</div>
+						<div class="box no-border">
+							<div class="collapse" v-on:click="collapseAssists = !collapseAssists">
+								<h3><i class="fa fa-plus" aria-hidden="true"></i> Assists</h3>
+							</div>
+							<table v-if="!collapseAssists">
+								<tr>
+									<td>ABS:</td>
+									<td>
+										<select name="abs" v-model="abs">
+											<option value="0">Denied</option>
+											<option value="1">Factory</option>
+											<option value="2">Forced</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>TC:</td>
+									<td>
+										<select name="tc" v-model="tc">
+											<option value="0">Denied</option>
+											<option value="1">Factory</option>
+											<option value="2">Forced</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>Stability aid:</td>
+									<td><input type="checkbox" name="stability_aid" v-model="stability_aid" /></td>
+								</tr>
+								<tr>
+									<td>Auto clutch:</td>
+									<td><input type="checkbox" name="auto_clutch" v-model="auto_clutch" /></td>
+								</tr>
+								<tr>
+									<td>Tyre blankets:</td>
+									<td><input type="checkbox" name="tyre_blankets" v-model="tyre_blankets" /></td>
+								</tr>
+								<tr>
+									<td>Force virtual mirror:</td>
+									<td><input type="checkbox" name="force_virtual_mirror" v-model="force_virtual_mirror" /></td>
+								</tr>
+							</table>
+						</div>
+						<div class="box no-border">
+							<div class="collapse" v-on:click="collapseRealism = !collapseRealism">
+								<h3><i class="fa fa-plus" aria-hidden="true"></i> Realism</h3>
+							</div>
+							<table v-if="!collapseRealism">
+								<tr>
+									<td>Fuel rate:</td>
+									<td><input type="number" name="fuel_rate" v-model="fuel_rate" /></td>
+								</tr>
+								<tr>
+									<td>Damage rate:</td>
+									<td><input type="number" name="damage_rate" v-model="damage_rate" /></td>
+								</tr>
+								<tr>
+									<td>Tires wear rate:</td>
+									<td><input type="number" name="tires_wear_rate" v-model="tires_wear_rate" /></td>
+								</tr>
+								<tr>
+									<td>Allowed tires out:</td>
+									<td>
+										<select name="allowed_tires_out" v-model="allowed_tires_out">
+											<option value="-1">-1 (disabled)</option>
+											<option>0</option>
+											<option>1</option>
+											<option>2</option>
+											<option>3</option>
+											<option>4</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>Max ballast:</td>
+									<td><input type="number" name="max_ballast" v-model="max_ballast" /></td>
+								</tr>
+								<tr>
+									<td>Disable gas cut penality:</td>
+									<td><input type="checkbox" name="disable_gas_cut_penality" v-model="disable_gas_cut_penality" /></td>
+								</tr>
+								<tr>
+									<td>Jump Start:</td>
+									<select name="start_rule" v-model="start_rule">
+										<option value="0">Car Locked</option>
+										<option value="1">Teleport To Pit</option>
+										<option value="2">Drive-through</option>
 									</select>
-								</td>
-							</tr>
-							<tr>
-								<td colspan="2"><h3>Assists</h3></td>
-							</tr>
-							<tr>
-								<td>ABS:</td>
-								<td>
-									<select name="abs" v-model="abs">
-										<option value="0">Denied</option>
-										<option value="1">Factory</option>
-										<option value="2">Forced</option>
-									</select>
-								</td>
-							</tr>
-							<tr>
-								<td>TC:</td>
-								<td>
-									<select name="tc" v-model="tc">
-										<option value="0">Denied</option>
-										<option value="1">Factory</option>
-										<option value="2">Forced</option>
-									</select>
-								</td>
-							</tr>
-							<tr>
-								<td>Stability aid:</td>
-								<td><input type="checkbox" name="stability_aid" v-model="stability_aid" /></td>
-							</tr>
-							<tr>
-								<td>Auto clutch:</td>
-								<td><input type="checkbox" name="auto_clutch" v-model="auto_clutch" /></td>
-							</tr>
-							<tr>
-								<td>Tyre blankets:</td>
-								<td><input type="checkbox" name="tyre_blankets" v-model="tyre_blankets" /></td>
-							</tr>
-							<tr>
-								<td>Force virtual mirror:</td>
-								<td><input type="checkbox" name="force_virtual_mirror" v-model="force_virtual_mirror" /></td>
-							</tr>
-							<tr>
-								<td colspan="2"><h3>Realism</h3></td>
-							</tr>
-							<tr>
-								<td>Fuel rate:</td>
-								<td><input type="number" name="fuel_rate" v-model="fuel_rate" /></td>
-							</tr>
-							<tr>
-								<td>Damage rate:</td>
-								<td><input type="number" name="damage_rate" v-model="damage_rate" /></td>
-							</tr>
-							<tr>
-								<td>Tires wear rate:</td>
-								<td><input type="number" name="tires_wear_rate" v-model="tires_wear_rate" /></td>
-							</tr>
-							<tr>
-								<td>Allowed tires out:</td>
-								<td>
-									<select name="allowed_tires_out" v-model="allowed_tires_out">
-										<option value="-1">-1 (disabled)</option>
-										<option>0</option>
-										<option>1</option>
-										<option>2</option>
-										<option>3</option>
-										<option>4</option>
-									</select>
-								</td>
-							</tr>
-							<tr>
-								<td>Max ballast:</td>
-								<td><input type="number" name="max_ballast" v-model="max_ballast" /></td>
-							</tr>
-							<tr>
-								<td>Disable gas cut penality:</td>
-								<td><input type="checkbox" name="disable_gas_cut_penality" v-model="disable_gas_cut_penality" /></td>
-							</tr>
-							<tr>
-								<td>Jump Start:</td>
-								<select name="start_rule" v-model="start_rule">
-									<option value="0">Car Locked</option>
-									<option value="1">Teleport To Pit</option>
-									<option value="2">Drive-through</option>
-								</select>
-							</tr>
-							<tr>
-								<td>Legal Tyres:</td>
-								<td><input type="text" name="legal_tyres" v-model="legal_tyres" /></td>
-							</tr>
-							<tr>
-								<td>UDP Plugin Local Port:</td>
-								<td><input type="number" name="udp_plugin_local_port" v-model="udp_plugin_local_port" /></td>
-							</tr>
-							<tr>
-								<td>UDP Plugin Address:</td>
-								<td><input type="text" name="udp_plugin_address" v-model="udp_plugin_address" /></td>
-							</tr>
-							<tr>
-								<td colspan="2"><h3>Dynamic Track</h3></td>
-							</tr>
-							<tr>
-								<td>Dynamic track:</td>
-								<td><input type="checkbox" name="dynamic_track" v-model="dynamic_track" /></td>
-							</tr>
-							<tr>
-								<td>Condition:</td>
-								<td>
-									<select name="condition" v-model="condition">
-										<option>CUSTOM</option>
-										<option>DUSTY</option>
-										<option>OLD</option>
-										<option>SLOW</option>
-										<option>GREEN</option>
-										<option>FAST</option>
-										<option>OPTIMUM</option>
-									</select>
-								</td>
-							</tr>
-							<tr>
-								<td>Start value:</td>
-								<td><input type="number" name="start_value" v-model="start_value" /></td>
-							</tr>
-							<tr>
-								<td>Randomness:</td>
-								<td><input type="number" name="randomness" v-model="randomness" /></td>
-							</tr>
-							<tr>
-								<td>Transferred grip:</td>
-								<td><input type="number" name="transferred_grip" v-model="transferred_grip" /></td>
-							</tr>
-							<tr>
-								<td>Laps to improve grip:</td>
-								<td><input type="number" name="laps_to_improve_grip" v-model="laps_to_improve_grip" /></td>
-							</tr>
-							<tr>
-								<td colspan="2"><h3>Voting</h3></td>
-							</tr>
-							<tr>
-								<td>Kick vote quorum:</td>
-								<td><input type="number" name="kick_vote_quorum" v-model="kick_vote_quorum" /></td>
-							</tr>
-							<tr>
-								<td>Session vote quorum:</td>
-								<td><input type="number" name="session_vote_quorum" v-model="session_vote_quorum" /></td>
-							</tr>
-							<tr>
-								<td>Vote duration:</td>
-								<td><input type="number" name="vote_duration" v-model="vote_duration" /></td>
-							</tr>
-							<tr>
-								<td>Blacklist:</td>
-								<td>
-									<select name="blacklist" v-model="blacklist">
-										<option value="0">Kick Player</option>
-										<option value="1">Kick Until Restart</option>
-									</select>
-								</td>
-							</tr>
-							<tr>
-								<td>Max. collisions per KM:</td>
-								<td><input type="number" name="max_collisions_km" v-model="max_collisions_km" /></td>
-							</tr>
-							<tr>
-								<td colspan="2"><h3>Booking</h3></td>
-							</tr>
-							<tr>
-								<td>Booking:</td>
-								<td><input type="checkbox" name="booking" v-model="booking" /></td>
-							</tr>
-							<tr>
-								<td>Booking time:</td>
-								<td><input type="number" name="booking_time" v-model="booking_time" /></td>
-							</tr>
-							<tr>
-								<td colspan="2"><h3>Practice</h3></td>
-							</tr>
-							<tr>
-								<td>Practice:</td>
-								<td><input type="checkbox" name="practice" v-model="practice" /></td>
-							</tr>
-							<tr>
-								<td>Practice time:</td>
-								<td><input type="number" name="practice_time" v-model="practice_time" /></td>
-							</tr>
-							<tr>
-								<td>Can join:</td>
-								<td><input type="checkbox" name="can_join_practice" v-model="can_join_practice" /></td>
-							</tr>
-							<tr>
-								<td colspan="2"><h3>Qualify</h3></td>
-							</tr>
-							<tr>
-								<td>Qualify:</td>
-								<td><input type="checkbox" name="qualify" v-model="qualify" /></td>
-							</tr>
-							<tr>
-								<td>Qualify time:</td>
-								<td><input type="number" name="qualify_time" v-model="qualify_time" /></td>
-							</tr>
-							<tr>
-								<td>Can join:</td>
-								<td><input type="checkbox" name="can_join_qualify" v-model="can_join_qualify" /></td>
-							</tr>
-							<tr>
-								<td colspan="2"><h3>Race</h3></td>
-							</tr>
-							<tr>
-								<td>Race:</td>
-								<td><input type="checkbox" name="race" v-model="race" /></td>
-							</tr>
-							<tr>
-								<td>Race laps:</td>
-								<td><input type="number" name="race_laps" v-model="race_laps" /></td>
-							</tr>
-							<tr>
-								<td>Race time:</td>
-								<td><input type="number" name="race_time" v-model="race_time" /></td>
-							</tr>
-							<tr>
-								<td>Race overtime:</td>
-								<td><input type="number" name="race_overtime" v-model="race_overtime" /></td>
-							</tr>
-							<tr>
-								<td>Race wait time:</td>
-								<td><input type="number" name="race_wait_time" v-model="race_wait_time" /></td>
-							</tr>
-							<tr>
-								<td>Race extra lap:</td>
-								<td><input type="checkbox" name="race_extra_lap" v-model="race_extra_lap" /></td>
-							</tr>
-							<tr>
-								<td>Join type:</td>
-								<td>
-									<select name="join_type" v-model="join_type">
-										<option value="0">Close</option>
-										<option value="1">Open</option>
-										<option value="2">Close at Start</option>
-									</select>
-								</td>
-							</tr>
-							<tr>
-								<td colspan="2"><h3>Time</h3></td>
-							</tr>
-							<tr>
-								<td>Time:</td>
-								<td>
-									<input type="time" name="time" v-model="time" step="1800" min="08:00" max="18:00" />
-									(08:00 - 18:00, 30 minute steps)
-								</td>
-							</tr>
-							<tr>
-								<td>Sun angle:</td>
-								<td><input type="number" name="sun_angle" v-model="sun_angle" readonly /></td>
-							</tr>
-							<tr>
-								<td>Multiplier:</td>
-								<td><input type="number" name="time_of_day_mult" v-model="time_of_day_mult" min="1" max="10" step="1" /></td>
-							</tr>
-							<tr>
-								<td colspan="2"><h3>Weather</h3></td>
-							</tr>
-							<tr v-for="(w, i) in weather">
-								<td colspan="2">
-									<table>
-										<tr>
-											<td>Weather:</td>
-											<td>
-												<select name="weather" v-model="w.weather">
-													<option value="3_clear">Clear</option>
-													<option value="7_heavy_clouds">Heavy Clouds</option>
-													<option value="1_heavy_fog">Heavy Fog</option>
-													<option value="5_light_clouds">Light Clouds</option>
-													<option value="2_light_fog">Light Fog</option>
-													<option value="4_mid_clear">Mid Clear</option>
-													<option value="6_mid_clouds">Mid Clouds</option>
-												</select>
-											</td>
-											<td>
-												<button v-on:click.prevent="removeWeather(i)">Remove Weather Panel</button>
-											</td>
-										</tr>
-										<tr>
-											<td>Base ambient temp:</td>
-											<td><input type="number" name="base_ambient_temp" v-model="w.base_ambient_temp" /></td>
-											<td></td>
-										</tr>
-										<tr>
-											<td>Base road temp:</td>
-											<td><input type="number" name="base_road_temp" v-model="w.base_road_temp" /></td>
-											<td></td>
-										</tr>
-										<tr>
-											<td>Ambient variation:</td>
-											<td><input type="number" name="ambient_variation" v-model="w.ambient_variation" /></td>
-											<td></td>
-										</tr>
-										<tr>
-											<td>Road variation:</td>
-											<td><input type="number" name="road_variation" v-model="w.road_variation" /></td>
-											<td></td>
-										</tr>
-										<tr>
-											<td>Wind Base Speed Min:</td>
-											<td><input type="number" name="wind_base_speed_min" v-model="w.wind_base_speed_min" /></td>
-											<td></td>
-										</tr>
-										<tr>
-											<td>Wind Base Speed Max:</td>
-											<td><input type="number" name="wind_base_speed_max" v-model="w.wind_base_speed_max" /></td>
-											<td></td>
-										</tr>
-										<tr>
-											<td>Wind Base Direction:</td>
-											<td><input type="number" name="wind_base_direction" v-model="w.wind_base_direction" /></td>
-											<td></td>
-										</tr>
-										<tr>
-											<td>Wind Variation Direction:</td>
-											<td><input type="number" name="wind_variation_direction" v-model="w.wind_variation_direction" /></td>
-											<td></td>
-										</tr>
-									</table>
-								</td>
-							</tr>
-							<tr>
-								<td colspan="2"><button v-on:click.prevent="addWeather()">Add Weather Panel</button></td>
-							</tr>
-							<tr>
-								<td colspan="2"><h3>Track</h3></td>
-							</tr>
-							<tr>
-								<td colspan="2">
-									<div class="select">
-										<div class="option" v-for="(track, i) in tracks" v-on:click="selectTrack(i)" v-bind:class="{selected: selectedTrack == i}">
-											<strong>{{track.name}}</strong>
-											({{track.max_slots}})
-											{{track.description}}
-										</div>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td colspan="2"><h3>Cars/Entry List</h3></td>
-							</tr>
-							<tr>
-								<td colspan="2">
-									<table>
-										<tr>
-											<td class="w33">
-												<strong>Car</strong>
-
-												<div class="select">
-													<div class="option" v-for="(car, i) in cars" v-on:click="selectCar(i)" v-bind:class="{selected: selectedCar == i}">
-														<strong>{{car.name}}</strong>
-														{{car.description}}
-													</div>
-												</div>
-											</td>
-											<td class="w33">
-												<strong>Painting</strong>
-
-												<div class="select">
-													<div class="option" v-for="(painting, i) in activePaintings" v-on:click="selectPainting(i)" v-bind:class="{selected: selectedPainting == i}">
-														<strong>{{painting}}</strong>
-													</div>
-												</div>
-											</td>
-											<td class="w33 top">
-												<strong>Slot Settings</strong>
-
-												<table>
-													<tr>
-														<td class="w20">Spectator:</td>
-														<td><input type="checkbox" name="spectator" v-model="spectator" /></td>
-													</tr>
-													<tr>
-														<td>Driver:</td>
-														<td><input type="text" name="driver" v-model="driver" /></td>
-													</tr>
-													<tr>
-														<td>Team:</td>
-														<td><input type="text" name="team" v-model="team" /></td>
-													</tr>
-													<tr>
-														<td>GUID:</td>
-														<td><input type="text" name="guid" v-model="guid" /></td>
-													</tr>
-													<tr>
-														<td>Fixed Setup:</td>
-														<td><input type="text" name="fixed_setup" v-model="fixed_setup" /></td>
-													</tr>
-													<tr>
-														<td></td>
-														<td><button v-on:click.prevent="addCar()">Add Car</button></td>
-													</tr>
-												</table>
-											</td>
-										</tr>
-									</table>
-								</td>
-							</tr>
-							<tr>
-								<td colspan="2">
-									<table>
-										<thead>
+								</tr>
+								<tr>
+									<td>Legal Tyres:</td>
+									<td><input type="text" name="legal_tyres" v-model="legal_tyres" /></td>
+								</tr>
+								<tr>
+									<td>UDP Plugin Local Port:</td>
+									<td><input type="number" name="udp_plugin_local_port" v-model="udp_plugin_local_port" /></td>
+								</tr>
+								<tr>
+									<td>UDP Plugin Address:</td>
+									<td><input type="text" name="udp_plugin_address" v-model="udp_plugin_address" /></td>
+								</tr>
+							</table>
+						</div>
+						<div class="box no-border">
+							<div class="collapse" v-on:click="collapseDynamicTrack = !collapseDynamicTrack">
+								<h3><i class="fa fa-plus" aria-hidden="true"></i> Dynamic Track</h3>
+							</div>
+							<table v-if="!collapseDynamicTrack">
+								<tr>
+									<td>Dynamic track:</td>
+									<td><input type="checkbox" name="dynamic_track" v-model="dynamic_track" /></td>
+								</tr>
+								<tr>
+									<td>Condition:</td>
+									<td>
+										<select name="condition" v-model="condition">
+											<option>CUSTOM</option>
+											<option>DUSTY</option>
+											<option>OLD</option>
+											<option>SLOW</option>
+											<option>GREEN</option>
+											<option>FAST</option>
+											<option>OPTIMUM</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>Start value:</td>
+									<td><input type="number" name="start_value" v-model="start_value" /></td>
+								</tr>
+								<tr>
+									<td>Randomness:</td>
+									<td><input type="number" name="randomness" v-model="randomness" /></td>
+								</tr>
+								<tr>
+									<td>Transferred grip:</td>
+									<td><input type="number" name="transferred_grip" v-model="transferred_grip" /></td>
+								</tr>
+								<tr>
+									<td>Laps to improve grip:</td>
+									<td><input type="number" name="laps_to_improve_grip" v-model="laps_to_improve_grip" /></td>
+								</tr>
+							</table>
+						</div>
+						<div class="box no-border">
+							<div class="collapse" v-on:click="collapseVoting = !collapseVoting">
+								<h3><i class="fa fa-plus" aria-hidden="true"></i> Voting</h3>
+							</div>
+							<table v-if="!collapseVoting">
+								<tr>
+									<td>Kick vote quorum:</td>
+									<td><input type="number" name="kick_vote_quorum" v-model="kick_vote_quorum" /></td>
+								</tr>
+								<tr>
+									<td>Session vote quorum:</td>
+									<td><input type="number" name="session_vote_quorum" v-model="session_vote_quorum" /></td>
+								</tr>
+								<tr>
+									<td>Vote duration:</td>
+									<td><input type="number" name="vote_duration" v-model="vote_duration" /></td>
+								</tr>
+								<tr>
+									<td>Blacklist:</td>
+									<td>
+										<select name="blacklist" v-model="blacklist">
+											<option value="0">Kick Player</option>
+											<option value="1">Kick Until Restart</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>Max. collisions per KM:</td>
+									<td><input type="number" name="max_collisions_km" v-model="max_collisions_km" /></td>
+								</tr>
+							</table>
+						</div>
+						<div class="box no-border">
+							<div class="collapse" v-on:click="collapseBooking = !collapseBooking">
+								<h3><i class="fa fa-plus" aria-hidden="true"></i> Booking</h3>
+							</div>
+							<table v-if="!collapseBooking">
+								<tr>
+									<td>Booking:</td>
+									<td><input type="checkbox" name="booking" v-model="booking" /></td>
+								</tr>
+								<tr>
+									<td>Booking time:</td>
+									<td><input type="number" name="booking_time" v-model="booking_time" /></td>
+								</tr>
+							</table>
+						</div>
+						<div class="box no-border">
+							<div class="collapse" v-on:click="collapsePractice = !collapsePractice">
+								<h3><i class="fa fa-plus" aria-hidden="true"></i> Practice</h3>
+							</div>
+							<table v-if="!collapsePractice">
+								<tr>
+									<td>Practice:</td>
+									<td><input type="checkbox" name="practice" v-model="practice" /></td>
+								</tr>
+								<tr>
+									<td>Practice time:</td>
+									<td><input type="number" name="practice_time" v-model="practice_time" /></td>
+								</tr>
+								<tr>
+									<td>Can join:</td>
+									<td><input type="checkbox" name="can_join_practice" v-model="can_join_practice" /></td>
+								</tr>
+							</table>
+						</div>
+						<div class="box no-border">
+							<div class="collapse" v-on:click="collapseQualify = !collapseQualify">
+								<h3><i class="fa fa-plus" aria-hidden="true"></i> Qualify</h3>
+							</div>
+							<table v-if="!collapseQualify">
+								<tr>
+									<td>Qualify:</td>
+									<td><input type="checkbox" name="qualify" v-model="qualify" /></td>
+								</tr>
+								<tr>
+									<td>Qualify time:</td>
+									<td><input type="number" name="qualify_time" v-model="qualify_time" /></td>
+								</tr>
+								<tr>
+									<td>Can join:</td>
+									<td><input type="checkbox" name="can_join_qualify" v-model="can_join_qualify" /></td>
+								</tr>
+							</table>
+						</div>
+						<div class="box no-border">
+							<div class="collapse" v-on:click="collapseRace = !collapseRace">
+								<h3><i class="fa fa-plus" aria-hidden="true"></i> Race</h3>
+							</div>
+							<table v-if="!collapseRace">
+								<tr>
+									<td>Race:</td>
+									<td><input type="checkbox" name="race" v-model="race" /></td>
+								</tr>
+								<tr>
+									<td>Race laps:</td>
+									<td><input type="number" name="race_laps" v-model="race_laps" /></td>
+								</tr>
+								<tr>
+									<td>Race time:</td>
+									<td><input type="number" name="race_time" v-model="race_time" /></td>
+								</tr>
+								<tr>
+									<td>Race overtime:</td>
+									<td><input type="number" name="race_overtime" v-model="race_overtime" /></td>
+								</tr>
+								<tr>
+									<td>Race wait time:</td>
+									<td><input type="number" name="race_wait_time" v-model="race_wait_time" /></td>
+								</tr>
+								<tr>
+									<td>Race extra lap:</td>
+									<td><input type="checkbox" name="race_extra_lap" v-model="race_extra_lap" /></td>
+								</tr>
+								<tr>
+									<td>Join type:</td>
+									<td>
+										<select name="join_type" v-model="join_type">
+											<option value="0">Close</option>
+											<option value="1">Open</option>
+											<option value="2">Close at Start</option>
+										</select>
+									</td>
+								</tr>
+							</table>
+						</div>
+						<div class="box no-border">
+							<div class="collapse" v-on:click="collapseTime = !collapseTime">
+								<h3><i class="fa fa-plus" aria-hidden="true"></i> Time</h3>
+							</div>
+							<table v-if="!collapseTime">
+								<tr>
+									<td>Time:</td>
+									<td>
+										<input type="time" name="time" v-model="time" step="1800" min="08:00" max="18:00" />
+										(08:00 - 18:00, 30 minute steps)
+									</td>
+								</tr>
+								<tr>
+									<td>Sun angle:</td>
+									<td><input type="number" name="sun_angle" v-model="sun_angle" readonly /></td>
+								</tr>
+								<tr>
+									<td>Multiplier:</td>
+									<td><input type="number" name="time_of_day_mult" v-model="time_of_day_mult" min="1" max="10" step="1" /></td>
+								</tr>
+							</table>
+						</div>
+						<div class="box no-border">
+							<div class="collapse" v-on:click="collapseWeather = !collapseWeather">
+								<h3><i class="fa fa-plus" aria-hidden="true"></i> Weather</h3>
+							</div>
+							<table v-if="!collapseWeather">
+								<tr v-for="(w, i) in weather">
+									<td colspan="2">
+										<table>
 											<tr>
-												<td class="w20">Car</td>
-												<td class="w20">Painting</td>
-												<td class="w5">Spectator</td>
-												<td class="w10">Driver</td>
-												<td class="w10">Team</td>
-												<td class="w20">GUID</td>
-												<td class="w20">Fixed Setup</td>
-												<td></td>
-											</tr>
-										</thead>
-										<tbody>
-											<tr v-for="(car, i) in selectedCars">
-												<td>{{car.car}}</td>
-												<td>{{car.painting}}</td>
-												<td>{{car.spectator}}</td>
-												<td>{{car.driver}}</td>
-												<td>{{car.team}}</td>
-												<td>{{car.guid}}</td>
-												<td>{{car.fixed_setup}}</td>
+												<td>Weather:</td>
 												<td>
-													<i class="fa fa-angle-up" aria-hidden="true" title="Move up" v-on:click.prevent="carUp(i)"></i>
-													<i class="fa fa-angle-down" aria-hidden="true" title="Move down" v-on:click.prevent="carDown(i)"></i>
-													<i class="fa fa-trash" aria-hidden="true" title="Remove car" v-on:click.prevent="removeCar(i)"></i>
+													<select name="weather" v-model="w.weather">
+														<option value="3_clear">Clear</option>
+														<option value="7_heavy_clouds">Heavy Clouds</option>
+														<option value="1_heavy_fog">Heavy Fog</option>
+														<option value="5_light_clouds">Light Clouds</option>
+														<option value="2_light_fog">Light Fog</option>
+														<option value="4_mid_clear">Mid Clear</option>
+														<option value="6_mid_clouds">Mid Clouds</option>
+													</select>
+												</td>
+												<td>
+													<button v-on:click.prevent="removeWeather(i)">Remove Weather Panel</button>
 												</td>
 											</tr>
-										</tbody>
-									</table>
-								</td>
-							</tr>
+											<tr>
+												<td>Base ambient temp:</td>
+												<td><input type="number" name="base_ambient_temp" v-model="w.base_ambient_temp" /></td>
+												<td></td>
+											</tr>
+											<tr>
+												<td>Base road temp:</td>
+												<td><input type="number" name="base_road_temp" v-model="w.base_road_temp" /></td>
+												<td></td>
+											</tr>
+											<tr>
+												<td>Ambient variation:</td>
+												<td><input type="number" name="ambient_variation" v-model="w.ambient_variation" /></td>
+												<td></td>
+											</tr>
+											<tr>
+												<td>Road variation:</td>
+												<td><input type="number" name="road_variation" v-model="w.road_variation" /></td>
+												<td></td>
+											</tr>
+											<tr>
+												<td>Wind Base Speed Min:</td>
+												<td><input type="number" name="wind_base_speed_min" v-model="w.wind_base_speed_min" /></td>
+												<td></td>
+											</tr>
+											<tr>
+												<td>Wind Base Speed Max:</td>
+												<td><input type="number" name="wind_base_speed_max" v-model="w.wind_base_speed_max" /></td>
+												<td></td>
+											</tr>
+											<tr>
+												<td>Wind Base Direction:</td>
+												<td><input type="number" name="wind_base_direction" v-model="w.wind_base_direction" /></td>
+												<td></td>
+											</tr>
+											<tr>
+												<td>Wind Variation Direction:</td>
+												<td><input type="number" name="wind_variation_direction" v-model="w.wind_variation_direction" /></td>
+												<td></td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2"><button v-on:click.prevent="addWeather()">Add Weather Panel</button></td>
+								</tr>
+							</table>
+						</div>
+						<div class="box no-border">
+							<div class="collapse" v-on:click="collapseTrack = !collapseTrack">
+								<h3><i class="fa fa-plus" aria-hidden="true"></i> Track</h3>
+							</div>
+							<table v-if="!collapseTrack">
+								<tr>
+									<td colspan="2">
+										<div class="select">
+											<div class="option" v-for="(track, i) in tracks" v-on:click="selectTrack(i)" v-bind:class="{selected: selectedTrack == i}">
+												<strong>{{track.name}}</strong>
+												({{track.max_slots}})
+												{{track.description}}
+											</div>
+										</div>
+									</td>
+								</tr>
+							</table>
+						</div>
+						<div class="box no-border">
+							<div class="collapse" v-on:click="collapseCars = !collapseCars">
+								<h3><i class="fa fa-plus" aria-hidden="true"></i> Cars/Entry List</h3>
+							</div>
+							<table v-if="!collapseCars">
+								<tr>
+									<td colspan="2">
+										<table>
+											<tr>
+												<td class="w33">
+													<strong>Car</strong>
+
+													<div class="select">
+														<div class="option" v-for="(car, i) in cars" v-on:click="selectCar(i)" v-bind:class="{selected: selectedCar == i}">
+															<strong>{{car.name}}</strong>
+															{{car.description}}
+														</div>
+													</div>
+												</td>
+												<td class="w33">
+													<strong>Painting</strong>
+
+													<div class="select">
+														<div class="option" v-for="(painting, i) in activePaintings" v-on:click="selectPainting(i)" v-bind:class="{selected: selectedPainting == i}">
+															<strong>{{painting}}</strong>
+														</div>
+													</div>
+												</td>
+												<td class="w33 top">
+													<strong>Slot Settings</strong>
+
+													<table>
+														<tr>
+															<td class="w20">Spectator:</td>
+															<td><input type="checkbox" name="spectator" v-model="spectator" /></td>
+														</tr>
+														<tr>
+															<td>Driver:</td>
+															<td><input type="text" name="driver" v-model="driver" /></td>
+														</tr>
+														<tr>
+															<td>Team:</td>
+															<td><input type="text" name="team" v-model="team" /></td>
+														</tr>
+														<tr>
+															<td>GUID:</td>
+															<td><input type="text" name="guid" v-model="guid" /></td>
+														</tr>
+														<tr>
+															<td>Fixed Setup:</td>
+															<td><input type="text" name="fixed_setup" v-model="fixed_setup" /></td>
+														</tr>
+														<tr>
+															<td>Ballast (kg):</td>
+															<td><input type="text" name="ballast" v-model="ballast" /></td>
+														</tr>
+														<tr>
+															<td>Restrictor (0-100, %):</td>
+															<td><input type="text" name="restrictor" v-model="restrictor" /></td>
+														</tr>
+														<tr>
+															<td></td>
+															<td><button v-on:click.prevent="addCar()">Add Car</button></td>
+														</tr>
+													</table>
+												</td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2">
+										<table>
+											<thead>
+												<tr>
+													<td class="w20">Car</td>
+													<td class="w20">Painting</td>
+													<td class="w5">Spectator</td>
+													<td class="w10">Driver</td>
+													<td class="w10">Team</td>
+													<td class="w10">GUID</td>
+													<td class="w20">Fixed Setup</td>
+													<td class="w10">Ballast</td>
+													<td class="w10">Restrictor</td>
+													<td></td>
+												</tr>
+											</thead>
+											<tbody>
+												<tr v-for="(car, i) in selectedCars">
+													<td>{{car.car}}</td>
+													<td>{{car.painting}}</td>
+													<td>{{car.spectator}}</td>
+													<td>{{car.driver}}</td>
+													<td>{{car.team}}</td>
+													<td>{{car.guid}}</td>
+													<td>{{car.fixed_setup}}</td>
+													<td>{{car.ballast}}kg</td>
+													<td>{{car.restrictor}}%</td>
+													<td>
+														<i class="fa fa-angle-up" aria-hidden="true" title="Move up" v-on:click.prevent="carUp(i)"></i>
+														<i class="fa fa-angle-down" aria-hidden="true" title="Move down" v-on:click.prevent="carDown(i)"></i>
+														<i class="fa fa-trash" aria-hidden="true" title="Remove car" v-on:click.prevent="removeCar(i)"></i>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</td>
+								</tr>
+							</table>
+						</div>
+						<table>
 							<tr>
 								<td colspan="2"><hr /></td>
 							</tr>
@@ -560,10 +632,10 @@
 							</tr>
 						</table>
 
-						<msg :type="'error'" :msg="'The name must be set.'" v-if="err == 1"></msg>
-						<msg :type="'error'" :msg="'At least one weather configuration must be added.'" v-if="err == 2"></msg>
-						<msg :type="'error'" :msg="'At least one car must be added.'" v-if="err == 3"></msg>
-						<msg :type="'error'" :msg="'You have no permission to do this.'" v-if="err == 200"></msg>
+						<msg :type="'error'" :msg="'The name must be set.'" v-if="err == 1" v-on:close="closeMsg"></msg>
+						<msg :type="'error'" :msg="'At least one weather configuration must be added.'" v-if="err == 2" v-on:close="closeMsg"></msg>
+						<msg :type="'error'" :msg="'At least one car must be added.'" v-if="err == 3" v-on:close="closeMsg"></msg>
+						<msg :type="'error'" :msg="'You have no permission to do this.'" v-if="err == 200" v-on:close="closeMsg"></msg>
 
 						<input type="submit" value="Save" />
 						<button v-on:click.prevent="addEditConfig = false">Cancel</button>
@@ -575,7 +647,7 @@
 				<div class="wrapper">
 					<h2>Remove Configuration</h2>
 
-					<msg :type="'error'" :msg="'You have no permission to do this.'" v-if="err == 200"></msg>
+					<msg :type="'error'" :msg="'You have no permission to do this.'" v-if="err == 200" v-on:close="closeMsg"></msg>
 
 					<p>Do you really want to remove this configuration? This won't stop any instances currently running.</p>
 
@@ -608,8 +680,8 @@
 
 			<div class="box">
 				<div class="wrapper">
-					<msg :type="'success'" :msg="'The configuration has been saved.'" v-if="saved"></msg>
-					<msg :type="'success'" :msg="'The configuration has been removed.'" v-if="removed"></msg>
+					<msg :type="'success'" :msg="'The configuration has been saved.'" v-if="saved" v-on:close="saved = false"></msg>
+					<msg :type="'success'" :msg="'The configuration has been removed.'" v-if="removed" v-on:close="removed = false"></msg>
 
 					<button v-on:click="openAddEditConfig(0)">Add Configuration</button>
 					<button v-on:click="openImportConfig()">Import Configuration</button>
@@ -656,6 +728,21 @@ export default {
 	},
 	data() { 
 		return {
+			collapseBasic: true,
+			collapseAdvanced: true,
+			collapseAssists: true,
+			collapseRealism: true,
+			collapseDynamicTrack: true,
+			collapseVoting: true,
+			collapseBooking: true,
+			collapsePractice: true,
+			collapseQualify: true,
+			collapseRace: true,
+			collapseTime: true,
+			collapseWeather: true,
+			collapseTrack: true,
+			collapseCars: true,
+			// ---
 			configs: [],
 			tracks: [],
 			cars: [],
@@ -668,6 +755,8 @@ export default {
 			team: '',
 			guid: '',
 			fixed_setup: '',
+			ballast: 0,
+			restrictor: 0,
 			// ---
 			selectedCars: [],
 			weather: [],
@@ -690,6 +779,7 @@ export default {
 			loop_mode: true,
 			show_in_lobby: true,
 			threads: 2,
+			auth_plugin_address: 0,
 			abs: 1,
 			tc: 1,
 			stability_aid: false,
@@ -805,6 +895,8 @@ export default {
 			this.team = '';
 			this.guid = '';
 			this.fixed_setup = '';
+			this.ballast = 0;
+			this.restrictor = 0;
 
 			this.selectedCars = [];
 			this.weather = [];
@@ -1170,6 +1262,8 @@ export default {
 							team: this.tmpEntryListCfg[car_idx].TEAM,
 							guid: this.tmpEntryListCfg[car_idx].GUID,
 							fixed_setup: this.tmpEntryListCfg[car_idx].FIXED_SETUP,
+							ballast: this.tmpEntryListCfg[car_dx].BALLAST,
+							restrictor: this.tmpEntryListCfg[car_dx].RESTRICTOR,
 							position: this.selectedCars.length
 						});
 
@@ -1237,6 +1331,8 @@ export default {
 
 			for(var i = 0; i < this.selectedCars.length; i++){
 				this.selectedCars[i].position = i;
+				this.selectedCars[i].ballast = parseInt(this.selectedCars[i].ballast);
+				this.selectedCars[i].restrictor = parseInt(this.selectedCars[i].restrictor);
 			}
 
 			var data = {
@@ -1388,7 +1484,9 @@ export default {
 				team: this.team,
 				guid: this.guid,
 				position: this.selectedCars.length,
-				fixed_setup: this.fixed_setup
+				fixed_setup: this.fixed_setup,
+				ballast: this.ballast,
+				restrictor: this.restrictor
 			});
 
 			// only reset driver and GUID in case user wants to add multiple similar slots
@@ -1486,10 +1584,20 @@ export default {
 			var hrs = totalHours.toString();
 
 			return Math.floor(totalHours).toString() + ':' + (hrs[hrs.length - 1] === '5' ? '30' : '00');
+		},
+		closeMsg() {
+			this.err = 0;
 		}
 	}
 };
 </script>
 
 <style lang="scss">
+.no-border{
+	box-shadow: none;
+}
+
+.collapse:hover{
+	cursor: pointer;
+}
 </style>

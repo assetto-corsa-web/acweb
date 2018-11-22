@@ -7,7 +7,7 @@
 		<div class="box">
 			<div class="wrapper">
 				<h1>Login</h1>
-				<msg :type="'error'" :msg="'The login and/or password was wrong.'" v-if="err != 0"></msg>
+				<msg :type="'error'" :msg="'The login and/or password was wrong.'" v-if="err != 0" v-on:close="closeMsg"></msg>
 
 				<form v-on:submit.prevent="performLogin()">
 					<table>
@@ -67,6 +67,9 @@ export default {
 				this.$store.commit("login", resp.data);
 				this.$router.push('/instance');
 			});
+		},
+		closeMsg() {
+			this.err = 0;
 		}
 	}
 }

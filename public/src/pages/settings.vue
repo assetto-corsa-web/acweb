@@ -9,9 +9,9 @@
 				<div class="wrapper">
 					<h2>Server Settings</h2>
 
-					<msg :type="'success'" :msg="'The settings have been saved.'" v-if="saved"></msg>
-					<msg :type="'error'" :msg="'The AC folder and the executable must be set.'" v-if="err == 1"></msg>
-					<msg :type="'error'" :msg="'You have no permission to do this.'" v-if="err == 200"></msg>
+					<msg :type="'success'" :msg="'The settings have been saved.'" v-if="saved" v-on:close="closeMsg"></msg>
+					<msg :type="'error'" :msg="'The AC folder and the executable must be set.'" v-if="err == 1" v-on:close="closeMsg"></msg>
+					<msg :type="'error'" :msg="'You have no permission to do this.'" v-if="err == 200" v-on:close="closeMsg"></msg>
 
 					<form v-on:submit.prevent="performSave()">
 						<table>
@@ -101,6 +101,9 @@ export default {
 
 				this.saved = true;
 			});
+		},
+		closeMsg() {
+			this.err = 0;
 		}
 	}
 };

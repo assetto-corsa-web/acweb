@@ -9,8 +9,8 @@
 				<div class="wrapper">
 					<h2>Start New Instance</h2>
 
-					<msg :type="'error'" :msg="'Error starting server instance.'" v-if="err != 0 && err != 200"></msg>
-					<msg :type="'error'" :msg="'You have no permission to do this.'" v-if="err == 200"></msg>
+					<msg :type="'error'" :msg="'Error starting server instance.'" v-if="err != 0 && err != 200" v-on:close="closeMsg"></msg>
+					<msg :type="'error'" :msg="'You have no permission to do this.'" v-if="err == 200" v-on:close="closeMsg"></msg>
 
 					<form v-on:submit.prevent="performStart()">
 						<table>
@@ -41,7 +41,7 @@
 			<div class="box" v-if="stopInstance">
 				<div class="wrapper">
 					<h2>Stop Instance</h2>
-					<msg :type="'error'" :msg="'You have no permission to do this.'" v-if="err == 200"></msg>
+					<msg :type="'error'" :msg="'You have no permission to do this.'" v-if="err == 200" v-on:close="closeMsg"></msg>
 					<p>Do you really want to stop this server instance?</p>
 					<button v-on:click="performStop()">Yes, stop instance</button>
 					<button v-on:click="stopInstance = false">Cancel</button>
@@ -79,8 +79,8 @@
 				<div class="wrapper">
 					<h2>Active Server Instances</h2>
 
-					<msg :type="'success'" :msg="'The server instance has been started.'" v-if="started"></msg>
-					<msg :type="'success'" :msg="'The server instance has been stopped.'" v-if="stopped"></msg>
+					<msg :type="'success'" :msg="'The server instance has been started.'" v-if="started" v-on:close="started = false"></msg>
+					<msg :type="'success'" :msg="'The server instance has been stopped.'" v-if="stopped" v-on:close="stopped = false"></msg>
 
 					<button v-on:click="startInstance = true">Start New Instance</button>
 
@@ -337,6 +337,9 @@ export default {
 				this.showDeleteAllLogs = false;
 				this._loadLogs();
 			});
+		},
+		closeMsg() {
+			this.err = 0;
 		}
 	}
 }
