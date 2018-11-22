@@ -555,6 +555,14 @@
 															<td><input type="text" name="fixed_setup" v-model="fixed_setup" /></td>
 														</tr>
 														<tr>
+															<td>Ballast (kg):</td>
+															<td><input type="text" name="ballast" v-model="ballast" /></td>
+														</tr>
+														<tr>
+															<td>Restrictor (0-100, %):</td>
+															<td><input type="text" name="restrictor" v-model="restrictor" /></td>
+														</tr>
+														<tr>
 															<td></td>
 															<td><button v-on:click.prevent="addCar()">Add Car</button></td>
 														</tr>
@@ -574,8 +582,10 @@
 													<td class="w5">Spectator</td>
 													<td class="w10">Driver</td>
 													<td class="w10">Team</td>
-													<td class="w20">GUID</td>
+													<td class="w10">GUID</td>
 													<td class="w20">Fixed Setup</td>
+													<td class="w10">Ballast</td>
+													<td class="w10">Restrictor</td>
 													<td></td>
 												</tr>
 											</thead>
@@ -588,6 +598,8 @@
 													<td>{{car.team}}</td>
 													<td>{{car.guid}}</td>
 													<td>{{car.fixed_setup}}</td>
+													<td>{{car.ballast}}kg</td>
+													<td>{{car.restrictor}}%</td>
 													<td>
 														<i class="fa fa-angle-up" aria-hidden="true" title="Move up" v-on:click.prevent="carUp(i)"></i>
 														<i class="fa fa-angle-down" aria-hidden="true" title="Move down" v-on:click.prevent="carDown(i)"></i>
@@ -743,6 +755,8 @@ export default {
 			team: '',
 			guid: '',
 			fixed_setup: '',
+			ballast: 0,
+			restrictor: 0,
 			// ---
 			selectedCars: [],
 			weather: [],
@@ -881,6 +895,8 @@ export default {
 			this.team = '';
 			this.guid = '';
 			this.fixed_setup = '';
+			this.ballast = 0;
+			this.restrictor = 0;
 
 			this.selectedCars = [];
 			this.weather = [];
@@ -1246,6 +1262,8 @@ export default {
 							team: this.tmpEntryListCfg[car_idx].TEAM,
 							guid: this.tmpEntryListCfg[car_idx].GUID,
 							fixed_setup: this.tmpEntryListCfg[car_idx].FIXED_SETUP,
+							ballast: this.tmpEntryListCfg[car_dx].BALLAST,
+							restrictor: this.tmpEntryListCfg[car_dx].RESTRICTOR,
 							position: this.selectedCars.length
 						});
 
@@ -1313,6 +1331,8 @@ export default {
 
 			for(var i = 0; i < this.selectedCars.length; i++){
 				this.selectedCars[i].position = i;
+				this.selectedCars[i].ballast = parseInt(this.selectedCars[i].ballast);
+				this.selectedCars[i].restrictor = parseInt(this.selectedCars[i].restrictor);
 			}
 
 			var data = {
@@ -1464,7 +1484,9 @@ export default {
 				team: this.team,
 				guid: this.guid,
 				position: this.selectedCars.length,
-				fixed_setup: this.fixed_setup
+				fixed_setup: this.fixed_setup,
+				ballast: this.ballast,
+				restrictor: this.restrictor
 			});
 
 			// only reset driver and GUID in case user wants to add multiple similar slots

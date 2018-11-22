@@ -106,6 +106,8 @@ type Car struct {
 	GUID          string `json:"guid"`
 	Position      int    `json:"position"`
 	FixedSetup    string `db:"fixed_setup" json:"fixed_setup"`
+	Ballast       int    `json:"ballast"`
+	Restrictor    int    `json:"restrictor"`
 }
 
 // Joins weather and cars.
@@ -293,7 +295,9 @@ func (m *Configuration) saveCars(tx *sqlx.Tx) error {
 					car.Team,
 					car.GUID,
 					car.Position,
-					car.FixedSetup)
+					car.FixedSetup,
+					car.Ballast,
+					car.Restrictor)
 			} else {
 				_, err = tx.Exec(postgres_cars_save,
 					m.Id,
@@ -304,7 +308,9 @@ func (m *Configuration) saveCars(tx *sqlx.Tx) error {
 					car.Team,
 					car.GUID,
 					car.Position,
-					car.FixedSetup)
+					car.FixedSetup,
+					car.Ballast,
+					car.Restrictor)
 			}
 
 			if err != nil {
@@ -324,6 +330,8 @@ func (m *Configuration) saveCars(tx *sqlx.Tx) error {
 					car.GUID,
 					car.Position,
 					car.FixedSetup,
+					car.Ballast,
+					car.Restrictor,
 					car.Id)
 			} else {
 				_, err = tx.Exec(postgres_cars_update,
@@ -335,6 +343,8 @@ func (m *Configuration) saveCars(tx *sqlx.Tx) error {
 					car.GUID,
 					car.Position,
 					car.FixedSetup,
+					car.Ballast,
+					car.Restrictor,
 					car.Id)
 			}
 
