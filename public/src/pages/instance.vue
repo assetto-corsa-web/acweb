@@ -27,6 +27,22 @@
 								</td>
 							</tr>
 							<tr>
+								<td>Run script/executable before start:</td>
+								<td>
+									<input type="text" name="script_before" class="full-width" v-model="script_before">
+									<br />
+									(full path, or leave empty)
+								</td>
+							</tr>
+							<tr>
+								<td>Run script/executable after start:</td>
+								<td>
+									<input type="text" name="script_after" class="full-width" v-model="script_after">
+									<br />
+									(full path, or leave empty)
+								</td>
+							</tr>
+							<tr>
 								<td></td>
 								<td>
 									<input type="submit" value="Start" />
@@ -169,6 +185,8 @@ export default {
 			err: 0,
 			name: '',
 			config: 0,
+			script_before: '',
+			script_after: '',
 			log: '',
 			activeLogFilename: '',
 			showLog: false,
@@ -264,7 +282,14 @@ export default {
 			this.logFile = '';
 		},
 		performStart() {
-			axios.post('/api/instance', {name: this.name, config: this.config})
+			let config = {
+				name: this.name,
+				config: this.config,
+				script_before: this.script_before,
+				script_after: this.script_after
+			};
+			
+			axios.post('/api/instance', config)
 			.then(resp => {
 				if(resp.data.code){
 					console.log(resp.data.code+': '+resp.data.msg);

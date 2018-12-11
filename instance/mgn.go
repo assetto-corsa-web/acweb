@@ -24,9 +24,10 @@ func GetAllInstances() []Instance {
 	return instances
 }
 
-func StartInstance(instanceName string, configuration int64) error {
-	// check input
+func StartInstance(instanceName string, configuration int64, scriptBefore, scriptAfter string) error {
 	instanceName = util.Trim(instanceName)
+	scriptBefore = util.Trim(scriptBefore)
+	scriptAfter = util.Trim(scriptAfter)
 
 	if instanceName == "" {
 		return util.OpError{1, "Instance name must be set"}
@@ -61,10 +62,8 @@ func StartInstance(instanceName string, configuration int64) error {
 		return util.OpError{3, "Error writing configuration"}
 	}
 
-	// force server_cfg and entry_list ini paths
-	cmd := exec.Command(filepath.Join(s.Folder, s.Executable), "-c", iniServerCfg, "-e", iniEntryList)
+	// create log file
 	now := time.Now().Format("20060102_150405")
-
 	logName := now + "_" + int64ToStr(config.Id) + "_" + instanceName + ".log"
 	logfile, err := os.Create(filepath.Join(os.Getenv("ACWEB_INSTANCE_LOGDIR"), logName))
 
@@ -73,17 +72,28 @@ func StartInstance(instanceName string, configuration int64) error {
 		return util.OpError{6, "Error creating log file"}
 	}
 
+	// run script before server start (without process ID)
+	if scriptBefore != "" {
+		runScript(scriptBefore, 0, logfile)
+	}
+
+	// force server_cfg and entry_list ini paths
+	cmd := exec.Command(filepath.Join(s.Folder, s.Executable), "-c", iniServerCfg, "-e", iniEntryList)
 	cmd.Stdout = logfile
 	cmd.Stderr = logfile
-
-	// run acServer from its folder so track and car data will be read for checksum;
-	cmd.Dir = s.Folder
+	cmd.Dir = s.Folder // run acServer from its folder so track and car data will be read for checksum
 
 	if err := cmd.Start(); err != nil {
 		log.WithFields(log.Fields{"err": err}).Error("Error starting instance")
 		return util.OpError{4, "Error starting instance"}
 	}
 
+	// run script after server start (with process ID)
+	if scriptAfter != "" {
+		runScript(scriptAfter, cmd.Process.Pid, logfile)
+	}
+
+	// add instance to list of running instances
 	instance := Instance{cmd.Process.Pid, instanceName, config.Id, cmd, logfile}
 	log.WithFields(log.Fields{"instance": instance}).Debug("Adding new instance")
 	m.Lock()
@@ -103,6 +113,8 @@ func runScript(scriptPath string, processId int, logfile *os.File) {
 
 	if err := cmd.Start(); err != nil {
 		log.WithFields(log.Fields{"err": err, "script_path": scriptPath, "process_id": processId}).Error("Error starting script")
+	} else {
+		log.WithFields(log.Fields{"script_path": scriptPath, "process_id": processId}).Debug("Run script")
 	}
 }
 

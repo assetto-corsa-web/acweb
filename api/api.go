@@ -455,13 +455,15 @@ func StartInstance(w http.ResponseWriter, r *http.Request) {
 	req := struct {
 		Name          string `json:"name"`
 		Configuration int64  `json:"config"`
+		ScriptBefore  string `json:"script_before"`
+		ScriptAfter   string `json:"script_after"`
 	}{}
 
 	if decode(w, r, &req) {
 		return
 	}
 
-	err := instance.StartInstance(req.Name, req.Configuration)
+	err := instance.StartInstance(req.Name, req.Configuration, req.ScriptBefore, req.ScriptAfter)
 
 	if iserror(w, err) {
 		return
