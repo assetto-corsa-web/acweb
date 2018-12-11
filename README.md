@@ -125,6 +125,14 @@ For Docker pull the latest release, execute the database migration script(s) and
 
 On first startup, acweb creates a default user called "root" with password "root". **Please change the password right after your first login!**
 
+## Configuration
+
+After your first login, you have to configure your server. To do that, switch to the "Settings" page and enter the Assetto Corsa server folder as well as the server executable (acServer for example).
+
+## Start a new server instance
+
+Server instances can be started on the "Instances" page. You need to add configurations before and have your server configured on the "Settings" page. If you like to use plugins/tools which need additional script calls, like stracker or minorating, you can run a script before and after the actual execution of the Assetto Corsa server by adding the full script paths when starting a new instance. Note that only the script executed after the server has access to the server process ID. The pid is passed as the first argument to the script.
+
 ## Adding tracks and cars
 
 To add tracks and cars, from a mod for instance, you must add them to the cars.json and tracks.json configuration files to make them appear in the web interface:
