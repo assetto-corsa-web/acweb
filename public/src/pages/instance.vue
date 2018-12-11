@@ -51,8 +51,9 @@
 			<div class="box" v-if="showLog">
 				<div class="wrapper">
 					<h2>Log Output</h2>
+					<button v-on:click="refreshLog">Refresh</button>
 					<small>(showing the last 256kb)</small>
-					<textarea v-model="log"></textarea>
+					<textarea v-model="log" style="min-height: 300px;"></textarea>
 					<button v-on:click="showLog = false">Close</button>
 				</div>
 			</div>
@@ -176,7 +177,8 @@ export default {
 			started: false,
 			stopped: false,
 			startInstance: false,
-			stopInstance: false
+			stopInstance: false,
+			logFile: ''
 		}
 	},
 	mounted() {
@@ -259,6 +261,7 @@ export default {
 			this.stopped = false;
 			this.startInstance = false;
 			this.stopInstance = false;
+			this.logFile = '';
 		},
 		performStart() {
 			axios.post('/api/instance', {name: this.name, config: this.config})
@@ -300,8 +303,9 @@ export default {
 		},
 		openLog(file) {
 			this._reset();
+			this.logFile = file;
 
-			axios.get('/api/instance/log', {params: {file: file}})
+			axios.get('/api/instance/log', {params: {file}})
 			.then(resp => {
 				if(resp.data.code){
 					console.log(resp.data.code+': '+resp.data.msg);
@@ -340,6 +344,18 @@ export default {
 		},
 		closeMsg() {
 			this.err = 0;
+		},
+		refreshLog() {
+			axios.get('/api/instance/log', {params: {file: this.logFile}})
+			.then(resp => {
+				if(resp.data.code){
+					console.log(resp.data.code+': '+resp.data.msg);
+					return;
+				}
+
+				var log = resp.data.substr(1, resp.data.length-2).split('\\n');
+				this.log = log.join('\n');
+			});
 		}
 	}
 }

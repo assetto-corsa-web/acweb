@@ -4,6 +4,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"strconv"
 	"sync"
 	"time"
 
@@ -61,9 +62,6 @@ func StartInstance(instanceName string, configuration int64) error {
 	}
 
 	// force server_cfg and entry_list ini paths
-	// start
-	// FIXME: s.Args has been  discarted. No real use so far?
-	// cmd := exec.Command(filepath.Join(s.Folder, s.Executable), strings.Split(cmdArgs, " ")...)
 	cmd := exec.Command(filepath.Join(s.Folder, s.Executable), "-c", iniServerCfg, "-e", iniEntryList)
 	now := time.Now().Format("20060102_150405")
 
@@ -94,6 +92,18 @@ func StartInstance(instanceName string, configuration int64) error {
 	go observeProcess(cmd)
 
 	return nil
+}
+
+func runScript(scriptPath string, processId int, logfile *os.File) {
+	// pass the process ID of the server instance (or 0 if not set) and log output to the log file
+	cmd := exec.Command(scriptPath, strconv.Itoa(processId))
+	cmd.Stdout = logfile
+	cmd.Stderr = logfile
+	cmd.Dir = filepath.Dir(scriptPath)
+
+	if err := cmd.Start(); err != nil {
+		log.WithFields(log.Fields{"err": err, "script_path": scriptPath, "process_id": processId}).Error("Error starting script")
+	}
 }
 
 func observeProcess(cmd *exec.Cmd) {
