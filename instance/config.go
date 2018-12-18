@@ -201,7 +201,8 @@ func EntryListToIniString(config *model.Configuration) string {
 		ini += "DRIVERNAME=" + car.Driver + sep
 		ini += "TEAM=" + car.Team + sep
 		ini += "GUID=" + car.GUID + sep
-		ini += "BALLAST=0" + sep
+		ini += "BALLAST=" + intToStr(car.Ballast) + sep
+		ini += "RESTRICTOR=" + intToStr(car.Restrictor) + sep
 		ini += "FIXED_SETUP=" + car.FixedSetup + sep
 		ini += sep
 	}
