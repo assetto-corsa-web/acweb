@@ -6,6 +6,7 @@ log/
 instance_logs/
 release/
 configs/1/
+.idea/
 tools/*.json
 tools/*.exe
 main
