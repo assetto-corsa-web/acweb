@@ -699,7 +699,10 @@
 							<tr v-for="config in configs">
 								<td>{{config.id}}</td>
 								<td>{{config.name}}</td>
-								<td>{{config.track}}</td>
+								<td>
+									{{config.track}}<br />
+									Ports: {{config.tcp}} TCP/{{config.udp}} UDP
+								</td>
 								<td>
 									<i class="fa fa-pencil" aria-hidden="true" title="Edit configuration" v-on:click="openAddEditConfig(config.id)"></i>
 									<i class="fa fa-files-o" aria-hidden="true" title="Copy configuration" v-on:click="copyConfig(config.id)"></i>
