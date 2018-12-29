@@ -7,7 +7,7 @@ WORKDIR /go/src/github.com/assetto-corsa-web/acweb/
 # install node
 RUN apt-get update && \
 	apt-get upgrade -y && \
-	apt-get install -y curl
+	apt-get install -y curl libc6-i386 lib32z1 lib32gcc1
 RUN curl -sL https://deb.nodesource.com/setup_8.x -o nodesource_setup.sh && bash nodesource_setup.sh
 RUN apt-get install -y nodejs
 
