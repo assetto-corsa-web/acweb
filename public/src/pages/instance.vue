@@ -117,7 +117,7 @@
 								<td>
 									{{instance.configuration.name}}<br />
 									{{instance.configuration.track}}<br />
-									TCP: {{instance.configuration.tcp}} UPD: {{instance.configuration.udp}}
+									TCP: {{instance.configuration.tcp}} UDP: {{instance.configuration.udp}}
 								</td>
 								<td>
 									<a class="icon-link" v-bind:href="generateInstanceDownloadUrl(instance.configuration.id)">
