@@ -78,7 +78,7 @@ export ACWEB_LOGLEVEL=info
 export ACWEB_INSTANCE_LOGDIR=instance_logs
 
 # config file directory for tracks.json and cars.json, default is configs (config for Docker)
-export ACWEB_CONFIG_DIR=configs
+export ACWEB_CONFIG_DIR=config
 
 # path to TLS private key file
 export ACWEB_TLS_PRIVATE_KEY=
