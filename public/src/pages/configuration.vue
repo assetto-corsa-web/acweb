@@ -1149,7 +1149,7 @@ export default {
 
 			this.openAddEditConfig(0);
 
-			sToB = function (s) { return s === '1' };
+			var sToB = function (s) { return s === '1' };
 
 			this.name = this.tmpSrvCfg.SERVER.NAME;
 			this.pwd = this.tmpSrvCfg.SERVER.PASSWORD;
